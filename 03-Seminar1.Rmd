@@ -45,7 +45,7 @@ Let us try this in R using an example. Here, we will look at the results of a co
 ```{r}
 library(readr)
 
-urlfile = "https://raw.githubusercontent.com/SCJBruinsma/QTA/master/reliability_results.csv"
+urlfile = "https://raw.githubusercontent.com/SCJBruinsma/qta-book/master/reliability_results.csv"
 reliability_results <- read_csv(url(urlfile))
 ```
 
