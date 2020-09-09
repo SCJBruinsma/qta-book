@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bayesian Linear Model</title>
-  <meta name="description" content="This is my note of Bayesian linear model, advised by Dr. Gyuhyeong Goh">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Automated Content Analysis</title>
+  <meta name="description" content="An overview of all the workshops for the course." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bayesian Linear Model" />
+  <meta property="og:title" content="Automated Content Analysis" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is my note of Bayesian linear model, advised by Dr. Gyuhyeong Goh" />
+  <meta property="og:description" content="An overview of all the workshops for the course." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bayesian Linear Model" />
+  <meta name="twitter:title" content="Automated Content Analysis" />
   
-  <meta name="twitter:description" content="This is my note of Bayesian linear model, advised by Dr. Gyuhyeong Goh" />
-  
-
-<meta name="author" content="Caleb Jin">
-
-
-<meta name="date" content="2019-05-09">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  
+  <meta name="twitter:description" content="An overview of all the workshops for the course." />
   
 
-<link rel="next" href="intro.html">
+<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+
+
+<meta name="date" content="2020-02-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="coding-reliability.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -50,6 +50,70 @@
 
 
 
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -64,25 +128,58 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Intro to Bayesian Linear Model</a></li>
+<li><a href="./">Winter School on Quantitative Content Analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#linear-model"><i class="fa fa-check"></i><b>1.1</b> Linear model</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#maximum-likelihood-estimation-mle-approach"><i class="fa fa-check"></i><b>1.2</b> Maximum likelihood estimation (MLE) approach</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#distribution-of-hatboldsymbol-beta"><i class="fa fa-check"></i><b>1.2.1</b> Distribution of <span class="math inline">\(\hat{\boldsymbol \beta}\)</span></a></li>
-<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#distribution-of-hatsigma2"><i class="fa fa-check"></i><b>1.2.2</b> Distribution of <span class="math inline">\(\hat\sigma^2\)</span></a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#r-on-windows"><i class="fa fa-check"></i><b>1.0.1</b> R on Windows</a></li>
+<li class="chapter" data-level="1.0.2" data-path="index.html"><a href="index.html#r-on-linux"><i class="fa fa-check"></i><b>1.0.2</b> R on Linux</a></li>
+<li class="chapter" data-level="1.0.3" data-path="index.html"><a href="index.html#r-on-os-x"><i class="fa fa-check"></i><b>1.0.3</b> R on OS X</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#a-note-about-packages"><i class="fa fa-check"></i><b>1.1</b> A Note about Packages</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#for-mac-os"><i class="fa fa-check"></i><b>1.1.1</b> For Mac OS</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#for-windows"><i class="fa fa-check"></i><b>1.1.2</b> For Windows</a></li>
+<li class="chapter" data-level="1.1.3" data-path="index.html"><a href="index.html#for-linux"><i class="fa fa-check"></i><b>1.1.3</b> For Linux</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#bayesian-approach"><i class="fa fa-check"></i><b>1.3</b> Bayesian approach</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#sigma2-is-known"><i class="fa fa-check"></i><b>1.3.1</b> <span class="math inline">\(\sigma^2\)</span> is known</a></li>
-<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#sigma2-is-unknown"><i class="fa fa-check"></i><b>1.3.2</b> <span class="math inline">\(\sigma^2\)</span> is unknown</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#more-on-installing-packages"><i class="fa fa-check"></i><b>1.2</b> More on Installing Packages</a></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="coding-reliability.html"><a href="coding-reliability.html"><i class="fa fa-check"></i><b>2</b> Coding Reliability</a><ul>
+<li class="chapter" data-level="2.1" data-path="coding-reliability.html"><a href="coding-reliability.html#reliability-and-validity"><i class="fa fa-check"></i><b>2.1</b> Reliability and Validity</a></li>
+<li class="chapter" data-level="2.2" data-path="coding-reliability.html"><a href="coding-reliability.html#sensitivity-analysis-on-inter-coder-agreement-in-r"><i class="fa fa-check"></i><b>2.2</b> Sensitivity analysis on inter-coder agreement in R</a></li>
+<li class="chapter" data-level="2.3" data-path="coding-reliability.html"><a href="coding-reliability.html#sensitivity-analysis-on-inter-coder-agreement-outside-r"><i class="fa fa-check"></i><b>2.3</b> Sensitivity analysis on inter-coder agreement outside R</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>2</b> Monte Carlo Simulation</a></li>
+<li class="chapter" data-level="3" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html"><i class="fa fa-check"></i><b>3</b> Pre-Processing and Dictionaries</a><ul>
+<li class="chapter" data-level="3.1" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#texts-in-r"><i class="fa fa-check"></i><b>3.1</b> Texts in R</a></li>
+<li class="chapter" data-level="3.2" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#installing-quanteda"><i class="fa fa-check"></i><b>3.2</b> Installing Quanteda</a></li>
+<li class="chapter" data-level="3.3" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#importing-the-texts"><i class="fa fa-check"></i><b>3.3</b> Importing the Texts</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#using-jfreq-optional"><i class="fa fa-check"></i><b>3.3.1</b> Using JFreq (Optional)</a></li>
+<li class="chapter" data-level="3.3.2" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#using-.pdf-files"><i class="fa fa-check"></i><b>3.3.2</b> Using .pdf files</a></li>
+<li class="chapter" data-level="3.3.3" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#using-.txt-files"><i class="fa fa-check"></i><b>3.3.3</b> Using .txt files</a></li>
+<li class="chapter" data-level="3.3.4" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#cleaning-the-texts"><i class="fa fa-check"></i><b>3.3.4</b> Cleaning the texts</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#keywords-in-context"><i class="fa fa-check"></i><b>3.4</b> Keywords in Context</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#other-interesting-tools"><i class="fa fa-check"></i><b>3.4.1</b> Other Interesting Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#dictionary-analysis"><i class="fa fa-check"></i><b>3.5</b> Dictionary analysis</a></li>
+<li class="chapter" data-level="3.6" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#dictionaries-using-yoshikoder-optional"><i class="fa fa-check"></i><b>3.6</b> Dictionaries using Yoshikoder (Optional)</a></li>
+<li class="chapter" data-level="3.7" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#sentiment-analysis-using-movie-reviews"><i class="fa fa-check"></i><b>3.7</b> Sentiment analysis using movie reviews</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#importing-the-files-with-web-scraping"><i class="fa fa-check"></i><b>3.7.1</b> Importing the files with Web Scraping</a></li>
+<li class="chapter" data-level="3.7.2" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#importing-the-files-manually"><i class="fa fa-check"></i><b>3.7.2</b> Importing the files manually</a></li>
+<li class="chapter" data-level="3.7.3" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#running-a-sentiment-analysis"><i class="fa fa-check"></i><b>3.7.3</b> Running a sentiment analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="pre-processing-and-dictionaries.html"><a href="pre-processing-and-dictionaries.html#uncertainty-measures-in-dictionary-analyses"><i class="fa fa-check"></i><b>3.8</b> Uncertainty measures in dictionary analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="scaling-methods.html"><a href="scaling-methods.html"><i class="fa fa-check"></i><b>4</b> Scaling Methods</a><ul>
+<li class="chapter" data-level="4.1" data-path="scaling-methods.html"><a href="scaling-methods.html#wordscores"><i class="fa fa-check"></i><b>4.1</b> Wordscores</a></li>
+<li class="chapter" data-level="4.2" data-path="scaling-methods.html"><a href="scaling-methods.html#wordfish"><i class="fa fa-check"></i><b>4.2</b> Wordfish</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>5</b> Supervised Methods</a><ul>
+<li class="chapter" data-level="5.1" data-path="supervised-methods.html"><a href="supervised-methods.html#classifying-movies"><i class="fa fa-check"></i><b>5.1</b> Classifying Movies</a></li>
+<li class="chapter" data-level="5.2" data-path="supervised-methods.html"><a href="supervised-methods.html#example-using-manifesto-project-data"><i class="fa fa-check"></i><b>5.2</b> Example using Manifesto Project data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>6</b> Unsupervised Methods</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li><a href="https://www.sjin.name" target="blank">Caleb Jin|金时强</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -93,7 +190,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Model</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Automated Content Analysis</a>
           </h1>
         </div>
 
@@ -102,15 +199,78 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Bayesian Linear Model</h1>
-<p class="author"><em>Caleb Jin</em></p>
-<p class="date"><em>2019-05-09</em></p>
+<h1 class="title">Automated Content Analysis</h1>
+<p class="author"><em>Kostas Gemenis &amp; Bastiaan Bruinsma</em></p>
+<p class="date"><em>2020-02-21</em></p>
 </div>
-<div id="Foreword" class="section level1 unnumbered">
-<h1>Foreword</h1>
-<p>I am Caleb Jin. This is my note of Bayesian linear regression model under the guidance of <a href="https://sites.google.com/site/bayesiangoh/">Dr. Gyuhyeong Goh</a>. It includes both derivative details, proof of lemma, ggplot and Rshiny to illustrate Bayesian linear regression model. In this way, I can organize my thought and benefit readers hopefully. Due to my very limited statistics knowledge, if making any mistakes, I sincerely expect you guys can email to me. My email address is <a href="mailto:jinsq@ksu.edu" class="email">jinsq@ksu.edu</a>. Appreicate!</p>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<p>Throughout these seminars we will use R. R is an open-source programme that allows you to carry out a wide variety of statistical tasks. At its core, it is a modification of the programming languages S and Scheme, making it not only flexible but fast as well. R is available for Windows, Linux and OS X and receives regular updates. In its basic version, R uses a simple command line interface. To give it a friendlier look, environments such as RStudio and RCommander are available. Apart from looking better, these environments also provide some extra practical features. For this course, we will use RStudio. How to install R depends on your system.</p>
+<div id="r-on-windows" class="section level3">
+<h3><span class="header-section-number">1.0.1</span> R on Windows</h3>
+<p>To download R for Windows, go to the website (<a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a>), download, double-click it and run it. Whilst installing, it is best to leave standard options (such as the installation folder) unchanged. This makes it easier for other programmes to know where to find R. Once installed, you will find two shortcuts for R on your desktop. These refer to each of the two versions of R that come with the installation - the 32-bit and the 64-bit version. Which version you need depends on your version of Windows. To see which version of Windows you have, go to This PC (or My Computer, right-click it, and select Properties. Here you should find the version of Windows installed on your PC. If you have the 64-bit version of Windows, you can use both versions. Yet, it is best to use the 64-bit version as this makes better use of the memory of your computer and thus runs smoother. If you have the 32-bit version of Windows, you have to use the 32-bit version of R.</p>
+<p>To install RStudio, again go to the website (<a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>), and download the free version of R studio at the bottom of the page. Make sure to choose <em>Installers for Supported Platforms</em> and pick the option for Windows. Once downloaded, install the programme, leaving all settings unchanged. If everything works out fine, RStudio will have found your installation of R and placed a shortcut on the desktop. Whether you have the 32-bit or 64-bit version of Windows or R does not matter for RStudio. What does matter are slashes. R uses forward slashes (/) instead of the backslashes (<code>\</code>) that Windows uses. Thus, whenever you specify a folder or file within R, make sure to invert the slashes. So, you should refer to a file which in Windows has the address <strong>C:\Users\Desktop\data.csv</strong> as <strong>C:/Users/Desktop/data.csv</strong>.</p>
+</div>
+<div id="r-on-linux" class="section level3">
+<h3><span class="header-section-number">1.0.2</span> R on Linux</h3>
+<p>As there are many flavours of Linux, these instructions are rather general and depend on exactly what type of OS you are running. In most cases, R is already part of your Linux distribution. You can check this by opening a terminal and typing <code>R</code>. If installed, R will launch in the terminal. If R is not part of your system, you can use the Synaptic Package Manager and look for the <strong>r-base-dev</strong> and <strong>r-base</strong> packages. Select them, and install them. To install RStudio, go to <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>. At the bottom of the page, pick the installer that corresponds to your OS. The installer file is a .deb file that should install as soon as you double-click it. After running the launcher, you can find RStudio in the Dash.</p>
+</div>
+<div id="r-on-os-x" class="section level3">
+<h3><span class="header-section-number">1.0.3</span> R on OS X</h3>
+<p>With OS X it is important that you have OS X 10.6 (Snow Leopard) or above[^12]. Installing R otherwise is still possible, but you cannot use a certain number of packages (such as some we use here. To check this, click on the Apple icon in the top-left of your screen. Then, click on the “About This Mac” options. A window should then appear that tells you which version of OS X (or macOS as it is called now) you have.). To install R, go to <a href="https://cran.r-project.org/index.html" class="uri">https://cran.r-project.org/index.html</a> and click <strong>Download R for (Mac) OS X</strong>. Once there, download the .pkg file that corresponds to your version of OS X. Besides, download the <strong>XQuartz</strong> file listed next to the package. Install both and leave the selected options as they are. After the installation, check if R works by launching the programme. If so, go to <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a> and download the OSX version at the bottom of the page. Download, install and check whether the programme works. If so, you are set up to go.</p>
+</div>
+<div id="a-note-about-packages" class="section level2">
+<h2><span class="header-section-number">1.1</span> A Note about Packages</h2>
+<p>Before we move on, a quick word about the packages R uses. All of the packages we have used so far have been “officially” released. This means that the package has been released on CRAN - the Comprehensive R Archive Network. This network is nothing more than a website that collects and hosts all the material R needs, such as the different distributions, packages, and more. Any package released on CRAN has gone through a sort-of vetting process to ensure that the package does not contain any major bugs, has README and NEWS files, and has a clear version number. Not only does this ensure that the package will work out-of-the-box, having a package hosted on CRAN also allows us to easily install the package using the <em>install.packages</em> command, or the <strong>Packages</strong> tab in RStudio (as these are linked to CRAN). Also, having a package hosted on CRAN means that the package is regularly updated and will keep functioning even as other packages it might use, are changed or updated. Packages that are no longer maintained are removed from CRAN after a while and - if installed anyway - might not work anymore due to the packages it depended on being changed. This is the main reason that we stopped using the - rather well-written - <strong>RTextTools</strong> package to carry out supervised methods as it was not maintained anymore and kept crashing on the latest builds of R.</p>
+<p>An alternative for CRAN is Github (<a href="https://github.com/" class="uri">https://github.com/</a>). Here, developers can upload packages that are still in development and thus are not yet eligible to be released on CRAN. The advantage of Github is that it allows us to download the latest packages and newest functions, though at the price of the packages being generally unstable. Also, it is slightly more complicated to install Github packages. To do so, we require a package known as <strong>devtools</strong>. This package then allows us to install packages hosted on Github:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a></code></pre></div>
+<p>Note that <strong>devtools</strong> can be a difficult package to install. This is because the package was conceived for developers who are most often aware of how to tackle most installation problems. Yet, most often the problems that come with the installtion can be easily solved, depending on the system we are working with.</p>
+<div id="for-mac-os" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> For Mac OS</h3>
+<p>To run on OSX (or macOS), <strong>devtools</strong> requires the <em>XCode</em> package to be installed on the computer. To do this, follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Launch the Terminal (which you can find in /Applications/Utilities/)</li>
+<li>In the Terminal, type: <strong>xcode-select –install</strong></li>
+<li>A software update window should pop up. If correct, it will ask you something like: “The xcode-select command requires the command line developer tools. Would you like to install the tools now?”. Respond to this by clicking “Install” and agree to the Terms of Service.</li>
+<li>Wait for the download to be complete. If everything goes as it should, the installer should go away when everything is done.</li>
+<li>Then, go to R and run the <strong>install.packages(“devtools”)</strong> command</li>
+</ol>
+<p>Besides this, <em>XCode</em> also allows you to build and maintain all kinds of other software and programming languages from macOS outside of R, such as C++, Java, Python, Ruby, etc. If interested, just open the <em>XCode</em> program in the Terminal to see what you can do with it.</p>
+</div>
+<div id="for-windows" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> For Windows</h3>
+<p>For Windows, the only software <strong>devtools</strong> requires is knows as <em>RTools</em>. To install this, simply go to their website (<a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>), download the latest <em>recommended</em> version (in green), and install it. Then re-open R again and install <strong>devtools</strong>.</p>
+</div>
+<div id="for-linux" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> For Linux</h3>
+<p>Whether and how <strong>devtools</strong> installs on Linux is dependent on the version of Linux that you have. Most often, you will be fine and R will simply ask you whether you wish to install any missing packages that <strong>devtools</strong> requires. Other times, the installation will fail and an error message (in red) will appear telling you which packages you are missing. Sometimes installing these packages manually and trying to install <strong>devtools</strong> again solves the problem. When this still fails, there are two options you can try. The first is to install a certain number of dependencies through the <em>Terminal</em>. To do so, open it, and type: <strong>sudo apt install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev</strong>. Then, close the terminal, open R again, and try the installation of <strong>devtools</strong>. A simpler option is to use the Synaptic Package Manager (which makes installing packages in Ubuntu that much easier) and searching for <em>cran-devtools</em> or just <em>devtools</em>. Then simply select the package, click install, and wait until everything is done. When you then return to R, <strong>devtools</strong> should be installed.</p>
+</div>
+</div>
+<div id="more-on-installing-packages" class="section level2">
+<h2><span class="header-section-number">1.2</span> More on Installing Packages</h2>
+<p>In this example, we will use a method known as <em>Support Vector Machines</em>. This method is not (yet) included in <strong>quanteda</strong>, but is included in <strong>quanteda.classifiers</strong>, a future extension of <strong>quanteda</strong> that is currently under development. As such, it is not hosted on CRAN yet and we have to download it from Github. To do so, type:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(quanteda)</a></code></pre></div>
+<pre><code>## Package version: 1.5.2</code></pre>
+<pre><code>## Parallel computing: 2 of 8 threads used.</code></pre>
+<pre><code>## See https://quanteda.io for tutorials and examples.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;quanteda&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:utils&#39;:
+## 
+##     View</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(devtools)</a></code></pre></div>
+<pre><code>## Loading required package: usethis</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">install_github</span>(<span class="st">&quot;quanteda/quanteda.classifiers&quot;</span>)</a></code></pre></div>
+<p>Besides this standard way of installation, there is an alternative way we can install these packages. This is by using the “::”, or double colons, operators:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;quanteda/quanteda.classifiers&quot;</span>)</a></code></pre></div>
+<p>Not only does this make the code shorter (which is most often a plus), it also prevents R from loading the <strong>devtools</strong> package as a whole. Instead, what “::” does is call from the <strong>devtools</strong> package the <em>install_github</em> function directly and carry it out, without loading the <strong>devtools</strong> package. This might come in handy when we want to be very clear of which function we are using. The reason for this is that often different packages in R use the same commands. For example, both the <strong>quanteda</strong> and the <strong>utils</strong> package have a function called <em>View</em>. When this happens, we see the following message when we load the package: “The following objects are masked from ‘package:utils’: View”. This means that the new package we just loaded contains several functions whose names are similar to functions in packages we have already loaded. The warning is there to inform us that from then on, refer to these functions makes R look at the new package and not at the previous ones. To see which packages you have loaded, type:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">(<span class="kw">.packages</span>())</a></code></pre></div>
+<pre><code>##  [1] &quot;devtools&quot;  &quot;usethis&quot;   &quot;quanteda&quot;  &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot;
+##  [7] &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;   &quot;base&quot;</code></pre>
+<p>Here you see the order in which you loaded the packages, with the latest package occuring first. As <strong>quanteda</strong> was one of the packages we loaded last, when we would now use the <em>View()</em> command, R will carry out the version of this command as available in <strong>quanteda</strong>. In order to use the version in <strong>utils</strong>, we would have to type <strong>utils::View()</strong>.</p>
+<p>Thus, using the colons not only prevents accidents from happening, it also allows you to not load packages you do not want, and it makes it clearer for people reading your code with which packages you are working, increasing not only clarity, but also preventing misunderstanding.</p>
 
-
+</div>
 </div>
             </section>
 
@@ -118,16 +278,18 @@
         </div>
       </div>
 
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="coding-reliability.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -135,12 +297,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -155,7 +316,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bayeslm.pdf", "bayeslm.epub"],
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Book.pdf", "Book.epub"],
 "toc": {
 "collapse": "subsection"
 }
@@ -170,8 +335,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
