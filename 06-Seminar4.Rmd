@@ -109,7 +109,12 @@ Here, the table shows the prediction of the algorithm from top to bottom and the
 
 For the NB example, we will use data from the Manifesto Project [@Volkens2019a], also known as the Comparative Manifesto Project (CMP), Manifesto Research Group (MRG), and MARPOR (Manifesto Research on Political Representation)). After you have signed up and downloaded the API key, load the package and set the key:
 
-```{r, message=FALSE, results=FALSE}
+```{r, include=FALSE}
+library(manifestoR)
+mp_setapikey("/home/bastiaan/Dropbox/manifesto_apikey.txt")
+```
+
+```{r, message=FALSE, results=FALSE, eval=FALSE}
 library(manifestoR)
 mp_setapikey("manifesto_apikey.txt")
 ```
