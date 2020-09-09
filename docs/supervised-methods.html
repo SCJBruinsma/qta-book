@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Supervised Methods | Quantitative Text Analysis</title>
+  <title>Chapter 7 Supervised Methods | Quantitative Text Analysis</title>
   <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Supervised Methods | Quantitative Text Analysis" />
+  <meta property="og:title" content="Chapter 7 Supervised Methods | Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Supervised Methods | Quantitative Text Analysis" />
+  <meta name="twitter:title" content="Chapter 7 Supervised Methods | Quantitative Text Analysis" />
   
   <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
   
@@ -118,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -130,7 +131,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li><a href="./">Intro to Quantitative Text Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
 <li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="getting-ready.html"><a href="getting-ready.html#r-on-windows"><i class="fa fa-check"></i><b>2.1.1</b> R on Windows</a></li>
@@ -175,6 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#correspondence-analysis"><i class="fa fa-check"></i><b>8.2</b> Correspondence Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="bruinsma@soz.uni-frankfurt.de" target="blank">Bastiaan Bruinsma</a></li>
+
 </ul>
 
       </nav>
@@ -193,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="supervised-methods" class="section level1">
-<h1><span class="header-section-number">7</span> Supervised Methods</h1>
+<h1><span class="header-section-number">Chapter 7</span> Supervised Methods</h1>
 <p>While with scaling we try to place our texts on a scale, with supervised methods we go back to what we did with dictionary analysis: classification. Within <code>quanteda</code> there are many different models for supervised methods, of which we will cover two. These are Support Vector Machines (SVM) and Naive Bayes (NB). The first classifies texts by looking at their position on a hyperplane, the second by their (Bayesian) probabilities. To show how they work, we will look at an example of SVM in <code>quanteda</code> and one in <code>RTextTools</code>, and an example of NB in <code>quanteda</code>.</p>
 <div id="support-vector-machines" class="section level2">
 <h2><span class="header-section-number">7.1</span> Support Vector Machines</h2>
@@ -396,7 +403,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb156-6"><a href="supervised-methods.html#cb156-6"></a>    <span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb156-7"><a href="supervised-methods.html#cb156-7"></a><span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb156-8"><a href="supervised-methods.html#cb156-8"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="fl">0.4</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
 <p>Now, we can see that some parties dominate some categories, while for others the spread is more even. For example, UKIP dominates the categories 406 and 407 - dealing with positive and negative mentions of protectionism, while the Conservatives do the same with category 103 (<em>Anti-Imperialism</em>). Note though, that these are percentages. This means that the reason the Conservatives dominate category 103 is as they have two (quasi)-sentences with that category. The others do not have the category at all (702 on <em>Negative Mentioning of Labour Groups</em> has the same issue). Other categories, such as 403 (<em>Market Regulation</em>) and 502 (<em>Positive Mentions of Culture</em>) are way better spread out over all the parties.</p>
 <p>Another thing we can look at is what part of a party’s manifesto belongs to any of the codes. This can help us answer the question: “what are the parties talking about?” To see this, we have to calculate the column percentages:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="supervised-methods.html#cb157-1"></a>prop_col &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>((<span class="kw">prop.table</span>(<span class="kw">table</span>(manifesto_data<span class="op">$</span>cmp_code, </span>
@@ -423,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb159-2"><a href="supervised-methods.html#cb159-2"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, </span>
 <span id="cb159-3"><a href="supervised-methods.html#cb159-3"></a>    <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb159-4"><a href="supervised-methods.html#cb159-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="fl">0.4</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 <p>Here, we see that the Domain of <em>Welfare and Quality of Life</em> was the most dominant in all the manifestos, with <em>Economy</em> coming second. Also, especially UKIP paid a lot of attention to <em>External Relations</em>, while the Green party paid little attention to the <em>Fabric of Society</em>. In all, this gives us a good idea of what type of data we are actually dealing with.</p>
 <p>Now let’s get back to the classification. For this, we need to transform the corpus from the <code>manifestoR</code> package into a corpus for the <code>quanteda</code> package. To do so, we first have to transform the former into a data frame, and then turn it into a corpus. We then look at the first 10 entries:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="supervised-methods.html#cb160-1"></a>corpus_data &lt;-<span class="st"> </span><span class="kw">mp_corpus</span>(manifestos) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -466,7 +473,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb168-6"><a href="supervised-methods.html#cb168-6"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Actual Class&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_discrete</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb168-7"><a href="supervised-methods.html#cb168-7"></a><span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb168-8"><a href="supervised-methods.html#cb168-8"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">vjust =</span> <span class="fl">0.4</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>Here, we can see that a high number of cases are on the diagonal, which indicates that the algorithm did a good job. Yet, it also classified a large number of sentences into the 503 and 504 categories, while they belonged to any of the other categories.</p>
 <p>Besides this, we can also summarize how good the algorithm is by means of Krippendorff’s <span class="math inline">\(\alpha\)</span>. To do so, we take the predicted codes, transform them from factors to numeric values, and store them in an object. Then, we bind them together with the actual codes and place them into a data frame. Finally, we transpose the data frame (so that rows are now columns) and make it into a matrix:</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="supervised-methods.html#cb169-1"></a>predict &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(predicted_class))</span>
@@ -537,7 +544,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["Quantitative Text Analysis.pdf", "Quantitative Text Analysis.epub"],
 "toc": {
 "collapse": "subsection"
 },

@@ -1,14 +1,21 @@
----
+--- 
 title: "Quantitative Text Analysis"
 author: "Kostas Gemenis & Bastiaan Bruinsma"
 date: "`r Sys.Date()`"
-bibliography: [library.bib]
-description: This is the book for the Quantitative Text Analysis course.
-documentclass: book
-link-citations: yes
-site: bookdown::bookdown_site
+bibliography: library.bib
 biblio-style: apalike
+link-citations: yes
+description: Theory and Methods for Quantitative Text Analysis
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    config:
+      toolbar:
+        position: static
+documentclass: book
 ---
 
-# Foreword {-#Foreword}
-Welcome to the online version of the exercises and slides for the Quantitative Text Analysis course. Please note that this book is constantly being updated. If you have any suggestions or comments, please contact us via: bruinsma@soz.uni-frankfurt.de
+# Foreword
+
+Welcome to the Quantitative Content Analysis Textbook. This book was originally written as a collection of assignments and slides for the ECPR Winter and Summer Schools. Note that the book is still in active development.
+

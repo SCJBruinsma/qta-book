@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Scaling | Quantitative Text Analysis</title>
+  <title>Chapter 6 Scaling | Quantitative Text Analysis</title>
   <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Scaling | Quantitative Text Analysis" />
+  <meta property="og:title" content="Chapter 6 Scaling | Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Scaling | Quantitative Text Analysis" />
+  <meta name="twitter:title" content="Chapter 6 Scaling | Quantitative Text Analysis" />
   
   <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
   
@@ -118,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -130,7 +131,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li><a href="./">Intro to Quantitative Text Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
 <li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="getting-ready.html"><a href="getting-ready.html#r-on-windows"><i class="fa fa-check"></i><b>2.1.1</b> R on Windows</a></li>
@@ -175,6 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#correspondence-analysis"><i class="fa fa-check"></i><b>8.2</b> Correspondence Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="bruinsma@soz.uni-frankfurt.de" target="blank">Bastiaan Bruinsma</a></li>
+
 </ul>
 
       </nav>
@@ -193,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="scaling" class="section level1">
-<h1><span class="header-section-number">6</span> Scaling</h1>
+<h1><span class="header-section-number">Chapter 6</span> Scaling</h1>
 <p>With a dictionary, we aimed to classify our texts into different categories based on the words they contain. While practical, there is no real way to compare these categories: one category is no better or worse than the other. If we do want to compare texts, we have to place them on some sort of scale. Here, we will look at two ways in which we can do so: <em>Wordscores</em> <span class="citation">(Laver, Benoit, and Garry <a href="#ref-Laver2003a" role="doc-biblioref">2003</a>)</span> and <em>Wordfish</em> <span class="citation">(Slapin and Proksch <a href="#ref-Slapin2008a" role="doc-biblioref">2008</a>)</span>. Both methods used to be part of the main <code>quanteda</code> package, but have now moved to the <code>quanteda.textmodels</code> package. For both, we will use again the data from the 2001 and 2005 party manifestos of the five largest parties in the United Kingdom. So, we load this data, make the subset, transform it into a dfm, and clean it:</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="scaling.html#cb96-1"></a><span class="kw">library</span>(quanteda)</span>
 <span id="cb96-2"><a href="scaling.html#cb96-2"></a><span class="kw">library</span>(quanteda.corpora)</span>
@@ -329,15 +336,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb113-11"><a href="scaling.html#cb113-11"></a><span class="st"> </span><span class="kw">scale_shape_manual</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>, <span class="dt">values=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="op">+</span></span>
 <span id="cb113-12"><a href="scaling.html#cb113-12"></a><span class="st"> </span><span class="kw">scale_linetype_manual</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>,<span class="dt">values=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="op">+</span></span>
 <span id="cb113-13"><a href="scaling.html#cb113-13"></a><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>This graph allows us to spot the problem. That is that while we gave the manifesto for Plaid Cymru (PCy) a reference score of 3.20, Wordscores gave it 1.91. Removing this manifesto from our data-set would thus improve our estimates.</p>
 <p>Apart from positioning the texts, we can also have a look at the words themselves. We can do this with the <code>textplot_scale1d</code> command, for which we also specify some words to highlight:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="scaling.html#cb114-1"></a><span class="kw">textplot_scale1d</span>(ws, <span class="dt">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="dt">highlighted =</span> <span class="kw">c</span>(<span class="st">&quot;british&quot;</span>, </span>
 <span id="cb114-2"><a href="scaling.html#cb114-2"></a>    <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;taxes&quot;</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p>Finally, we can have a look at the confidence intervals around the scores we created. For this, we use the same command as above, though instead of specifying <code>features</code> (referring to the words), we specify <code>texts</code>. Note that we can only do this for the MV scores, as only here we also calculated the standard errors:</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="scaling.html#cb115-1"></a><span class="kw">textplot_scale1d</span>(pred_mv, <span class="dt">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 </div>
 <div id="wordfish" class="section level2">
 <h2><span class="header-section-number">6.2</span> Wordfish</h2>
@@ -390,9 +397,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As with Wordscores, we can also plot graphs for Wordfish, using the same commands:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="scaling.html#cb122-1"></a><span class="kw">textplot_scale1d</span>(wordfish, <span class="dt">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="dt">highlighted =</span> <span class="kw">c</span>(<span class="st">&quot;british&quot;</span>, </span>
 <span id="cb122-2"><a href="scaling.html#cb122-2"></a>    <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;election&quot;</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="scaling.html#cb123-1"></a><span class="kw">textplot_scale1d</span>(wordfish, <span class="dt">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-86-2.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-86-2.png" width="672" /></p>
 
 </div>
 </div>
@@ -462,7 +469,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["Quantitative Text Analysis.pdf", "Quantitative Text Analysis.epub"],
 "toc": {
 "collapse": "subsection"
 },

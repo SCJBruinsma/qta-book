@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Unsupervised Methods | Quantitative Text Analysis</title>
+  <title>Chapter 8 Unsupervised Methods | Quantitative Text Analysis</title>
   <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Unsupervised Methods | Quantitative Text Analysis" />
+  <meta property="og:title" content="Chapter 8 Unsupervised Methods | Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Unsupervised Methods | Quantitative Text Analysis" />
+  <meta name="twitter:title" content="Chapter 8 Unsupervised Methods | Quantitative Text Analysis" />
   
   <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
   
@@ -118,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -130,7 +131,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li><a href="./">Intro to Quantitative Text Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
 <li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="getting-ready.html"><a href="getting-ready.html#r-on-windows"><i class="fa fa-check"></i><b>2.1.1</b> R on Windows</a></li>
@@ -175,6 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#correspondence-analysis"><i class="fa fa-check"></i><b>8.2</b> Correspondence Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="bruinsma@soz.uni-frankfurt.de" target="blank">Bastiaan Bruinsma</a></li>
+
 </ul>
 
       </nav>
@@ -193,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="unsupervised-methods" class="section level1">
-<h1><span class="header-section-number">8</span> Unsupervised Methods</h1>
+<h1><span class="header-section-number">Chapter 8</span> Unsupervised Methods</h1>
 <p>While supervised models often work fine for text classification, one disadvantage is that we need to set specifics for the model. As an alternative, we can not specify anything and have R find out which classifications work. There are various algorithms to do so, and we will focus on two: Latent Dirichlet Allocation and Correspondence Analysis.</p>
 <div id="latent-dirichlet-allocation" class="section level2">
 <h2><span class="header-section-number">8.1</span> Latent Dirichlet Allocation</h2>
@@ -262,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="unsupervised-methods.html#cb178-1"></a>British_lda10_topterms <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">reorder</span>(term, beta)) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb178-2"><a href="unsupervised-methods.html#cb178-2"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(term, beta, <span class="dt">fill =</span> <span class="kw">factor</span>(topic))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_col</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb178-3"><a href="unsupervised-methods.html#cb178-3"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>topic, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
 <p>What is clear here is that looking at only the words in each topic only says so much. In the first topic, the term “meps” is more important than anything else, and so is “eu” in topic number 10. Also, in topic number six, we see that a bullet symbol causes the highest beta value - which indicates how important it is that we remove this kind of clutter (which we forgot about here).</p>
 <p>Another question we can ask is how much of each topic is in each of the documents. Put in another way: do certain documents talk more about certain topics than others? To see this, we first generate a new data frame with this information, known as the <em>gamma</em> value for each document:</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="unsupervised-methods.html#cb179-1"></a>British_lda10_documents &lt;-<span class="st"> </span><span class="kw">tidy</span>(British_lda10, <span class="dt">matrix =</span> <span class="st">&quot;gamma&quot;</span>)</span></code></pre></div>
@@ -275,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb180-6"><a href="unsupervised-methods.html#cb180-6"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, </span>
 <span id="cb180-7"><a href="unsupervised-methods.html#cb180-7"></a>        <span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>document, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb180-8"><a href="unsupervised-methods.html#cb180-8"></a><span class="st">    </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <p>Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.</p>
 </div>
 <div id="correspondence-analysis" class="section level2">
@@ -304,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="unsupervised-methods.html#cb186-1"></a>tweets_mat&lt;-tweets[,<span class="dv">2</span><span class="op">:</span><span class="dv">65</span>]</span></code></pre></div>
 <p>We can then run the MCA with the <code>FactoMineR</code> package. For this, we have to give the data-set and the number of dimensions we think are in the data. We can set the latter either by establishing the dimensions as in a regular PCA (for example through a scree plot) or based on theory. Here we combine both and use the 5 dimensions established in the article. In addition, we set a supplementary quantitative variable as <code>quanti.sup=1</code>. As this is a quantitative variable, it is not taken into consideration by the MCA, but does allow us to assess later on how it correlates with each of the five dimensions:</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="unsupervised-methods.html#cb187-1"></a>mca_tweets &lt;-<span class="st"> </span><span class="kw">MCA</span>(tweets_mat, <span class="dt">ncp=</span><span class="dv">5</span>, <span class="dt">quanti.sup=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-132-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-132-2.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-132-3.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-132-4.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-132-1.png" width="672" /><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-132-2.png" width="672" /><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-132-3.png" width="672" /><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-132-4.png" width="672" /></p>
 <p>First, let’s start by looking at the association of the wordlength with the five dimensions:</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="unsupervised-methods.html#cb188-1"></a>mca_tweets<span class="op">$</span>quanti.sup</span></code></pre></div>
 <pre><code>## $coord
@@ -316,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb190-3"><a href="unsupervised-methods.html#cb190-3"></a>             <span class="dt">geom =</span> <span class="kw">c</span>(<span class="st">&quot;point&quot;</span>),</span>
 <span id="cb190-4"><a href="unsupervised-methods.html#cb190-4"></a>             <span class="dt">axes =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),             </span>
 <span id="cb190-5"><a href="unsupervised-methods.html#cb190-5"></a>             <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>())</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p>Here, we only plot the points as adding the labels as well will make the picture quite cluttered. In the article, Dimension 2 is identified as “Conversational Style” and Dimension 3 as “Campaigning Style”. The plot thus nicely shows us that some categories belong to one of these dimensions and not to the other. To see for which cases this is mostly the case (the ones that have the most extreme positions), we can have a look at their coordinates:</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="unsupervised-methods.html#cb191-1"></a>var &lt;-<span class="st"> </span><span class="kw">get_mca_var</span>(mca_tweets)</span>
 <span id="cb191-2"><a href="unsupervised-methods.html#cb191-2"></a>coordinates &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(var<span class="op">$</span>coord)</span>
@@ -397,7 +404,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["Quantitative Text Analysis.pdf", "Quantitative Text Analysis.epub"],
 "toc": {
 "collapse": "subsection"
 },
