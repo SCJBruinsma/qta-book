@@ -198,7 +198,12 @@ The Manifesto Project collects the electoral manifestos that have been released 
 
 Before you can use the API, you first need to register with the Manifesto Project. For this, go to their website (https://manifesto-project.wzb.eu/), click on the *Login/Sign-up* button, and choose *Register*. As soon as you then have confirmed your account using the confirmation e-mail, you can then login to your account and go to your profile page. Here you can see your API key, which you can download. Do so, and save the file in your Working Directory. If you have forgotten where that is, type ``getwd()`` into the console and R will tell you. To load the manifestos into R we then first have to load the package and set the API key:
 
-```{r, message=FALSE, results=FALSE, warning=FALSE}
+```{r, include=FALSE}
+library(manifestoR)
+mp_setapikey("/home/bastiaan/Dropbox/manifesto_apikey.txt")
+```
+
+```{r, message=FALSE, results=FALSE, eval=FALSE}
 library(manifestoR)
 mp_setapikey("manifesto_apikey.txt")
 ```

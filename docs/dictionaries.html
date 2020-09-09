@@ -252,16 +252,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb70-3"><a href="dictionaries.html#cb70-3"></a><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>term, <span class="dt">y=</span>frequency)) <span class="op">+</span></span>
 <span id="cb70-4"><a href="dictionaries.html#cb70-4"></a><span class="st"> </span><span class="kw">theme_classic</span>()<span class="op">+</span></span>
 <span id="cb70-5"><a href="dictionaries.html#cb70-5"></a><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p>We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 40 times. We can do this with the <code>dfm_trim</code> function. Then, we can use this newly trimmed dfm to generate the word cloud:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="dictionaries.html#cb71-1"></a>wordcloud_dfm_trim &lt;-<span class="st"> </span><span class="kw">dfm_trim</span>(data_manifestos_dfm, <span class="dt">min_termfreq =</span> <span class="dv">40</span>)</span>
 <span id="cb71-2"><a href="dictionaries.html#cb71-2"></a><span class="kw">textplot_wordcloud</span>(wordcloud_dfm_trim)</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>If we would want to, we can also split up this word cloud based on which words belong to which parties. For this, we have to generate a new dfm and within it, specify the groups that well which words belong to which party:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="dictionaries.html#cb72-1"></a>wordcloud_dfm_comp &lt;-<span class="st"> </span><span class="kw">dfm</span>(corpus_manifestos, <span class="dt">groups =</span> <span class="st">&quot;Party&quot;</span>)</span>
 <span id="cb72-2"><a href="dictionaries.html#cb72-2"></a><span class="kw">textplot_wordcloud</span>(<span class="kw">dfm_trim</span>(wordcloud_dfm_comp, <span class="dt">min_termfreq =</span> <span class="dv">20</span>, </span>
 <span id="cb72-3"><a href="dictionaries.html#cb72-3"></a>    <span class="dt">max_words =</span> <span class="dv">40</span>), <span class="dt">comparison =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 <div id="standard-dictionary-analysis" class="section level2">
 <h2><span class="header-section-number">5.2</span> Standard Dictionary Analysis</h2>
@@ -316,37 +316,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The next step is to convert the results to a data frame and view them:</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="dictionaries.html#cb81-1"></a>sentiment &lt;-<span class="st"> </span><span class="kw">convert</span>(results_dfm, <span class="dt">to=</span><span class="st">&quot;data.frame&quot;</span>)</span>
 <span id="cb81-2"><a href="dictionaries.html#cb81-2"></a>sentiment</span></code></pre></div>
-<pre><code>##                   doc_id negative positive neg_positive neg_negative
-## 1    train/neg/895_3.txt       16       36            0            0
-## 2    test/pos/5378_7.txt        3       19            0            0
-## 3   train/neg/1815_2.txt       37       38            0            0
-## 4  train/neg/10694_1.txt        1        2            0            0
-## 5     test/neg/164_2.txt       31       21            0            0
-## 6  train/pos/10930_8.txt       24       38            0            0
-## 7   train/neg/7538_2.txt        4        8            0            0
-## 8   train/neg/3290_1.txt       14        2            0            0
-## 9    test/pos/1275_7.txt        1        3            0            0
-## 10 train/pos/12463_8.txt        2       16            0            0
-## 11   test/pos/6640_9.txt       15        7            0            0
-## 12 train/neg/10884_2.txt       17       10            0            0
-## 13  train/neg/7890_1.txt        5        7            0            0
-## 14    train/neg/53_3.txt       22       16            0            0
-## 15  train/neg/3796_1.txt        2        2            0            0
-## 16   test/neg/4366_1.txt       11        8            0            0
-## 17  train/neg/1080_2.txt       10        4            0            0
-## 18  train/neg/6678_2.txt        8        6            0            0
-## 19 train/pos/1538_10.txt        1        7            0            0
-## 20  train/pos/7124_8.txt        3        9            0            0
-## 21  train/pos/813_10.txt       41       34            0            0
-## 22 train/neg/10394_3.txt        8        5            0            0
-## 23  train/pos/9638_8.txt        5        5            0            0
-## 24  train/neg/7118_3.txt       12        6            0            0
-## 25  train/neg/8285_1.txt       10       15            0            0
-## 26  train/pos/3874_9.txt        0       10            0            0
-## 27  train/neg/8101_1.txt        7        7            0            0
-## 28   test/pos/8124_8.txt        1        5            0            0
-## 29 train/neg/11476_3.txt       17       40            0            0
-## 30 train/pos/4428_10.txt        8        5            0            0</code></pre>
+<pre><code>##                    doc_id negative positive neg_positive neg_negative
+## 1    test/neg/11956_2.txt       45       34            0            0
+## 2    train/neg/9421_1.txt        5        5            0            0
+## 3     test/pos/2311_9.txt        2        8            0            0
+## 4     train/neg/509_3.txt       15        4            0            0
+## 5   train/neg/10459_2.txt        9        8            0            0
+## 6    test/pos/12277_7.txt       30       21            0            0
+## 7    train/pos/9659_8.txt        5        6            0            0
+## 8     test/neg/4344_1.txt        5        5            0            0
+## 9    train/neg/1048_4.txt       46       77            0            0
+## 10   test/pos/10325_9.txt        4        9            0            0
+## 11 train/pos/11970_10.txt        1        8            0            0
+## 12    test/neg/7501_3.txt       14       11            0            0
+## 13    test/neg/1660_1.txt       29       17            0            0
+## 14   test/pos/12427_8.txt        7       12            0            0
+## 15    test/neg/8076_1.txt        5        0            0            0
+## 16   test/pos/11312_9.txt        5        7            0            0
+## 17  train/pos/8793_10.txt        2        3            0            0
+## 18    test/neg/6674_2.txt        4        3            0            0
+## 19    test/neg/7509_1.txt       10        8            0            0
+## 20  test/pos/10207_10.txt        2       12            0            0
+## 21   test/pos/1590_10.txt        1        9            0            0
+## 22   train/neg/5397_4.txt       14        7            0            0
+## 23    test/pos/3785_8.txt       43       13            0            0
+## 24   test/neg/11232_2.txt       11        2            0            0
+## 25  train/pos/4560_10.txt       14       33            0            0
+## 26      test/pos/72_8.txt       15       21            0            0
+## 27   test/pos/1377_10.txt        3       16            0            0
+## 28    test/neg/9225_1.txt        6        4            0            0
+## 29    test/neg/1244_1.txt        9        4            0            0
+## 30   train/neg/6783_2.txt        8       15            0            0</code></pre>
 <p>Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="dictionaries.html#cb83-1"></a>star_data &lt;-<span class="st"> </span>reviews_dfm<span class="op">@</span>docvars<span class="op">$</span>rating</span>
 <span id="cb83-2"><a href="dictionaries.html#cb83-2"></a>stargraph &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(star_data, sentiment<span class="op">$</span>negative, sentiment<span class="op">$</span>positive))</span>
@@ -362,12 +362,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb85-3"><a href="dictionaries.html#cb85-3"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb85-4"><a href="dictionaries.html#cb85-4"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Positive minus Negative&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="dictionaries.html#cb87-1"></a><span class="kw">ggplot</span>(stargraph, <span class="kw">aes</span>(<span class="dt">x =</span> sentiment_ratio, <span class="dt">y =</span> stars)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb87-2"><a href="dictionaries.html#cb87-2"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Ratio of Positive to Total&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb87-3"><a href="dictionaries.html#cb87-3"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 <p>Finally, we would like to illustrate how one can make inferences by using the output of a dictionary analysis, by estimating confidence intervals around the point estimates. To do so, again the first step is to add a column which will be the total of positive and negative words scored by the dictionary. We do so by copying the data frame to a new data frame and adding a new column filled with NA values:</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="dictionaries.html#cb89-1"></a>reviews_bootstrap &lt;-<span class="st"> </span>sentiment</span>
 <span id="cb89-2"><a href="dictionaries.html#cb89-2"></a>reviews_bootstrap<span class="op">$</span>n &lt;-<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
@@ -410,7 +410,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb95-7"><a href="dictionaries.html#cb95-7"></a><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Percent positive/negative with 95% CIs&quot;</span>) <span class="op">+</span></span>
 <span id="cb95-8"><a href="dictionaries.html#cb95-8"></a><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;review&quot;</span>)<span class="op">+</span></span>
 <span id="cb95-9"><a href="dictionaries.html#cb95-9"></a><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>As can be seen in this particular example, the fact that some documents are much less lengthier than others introduces a lot of uncertainty in the estimates. As evident from the overlapping confidence intervals in the figure, for most reviews, the percentage of negative words is not much different from the percentage of positive words. In other words: the sentiment for these reviews is rather mixed.</p>
 
 </div>

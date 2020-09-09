@@ -578,7 +578,7 @@ We can also choose not to import the texts into R in a direct fashion, but impor
 
 To use JFreq, open the programme and drag and drop all the documents you want to process into the window of the programme. Once you do this, the document file names will appear in the document window. Then, you can choose from several pre-processing options. Amongst these are options to make all words lowercase or remove numbers, currency symbols, or stop words. The latter are words that often appear in texts which do not carry an important meaning. These are words such as \texttt{and\textquotesingle{}\textquotesingle{},}or'' and ``but''. As stop words are language-specific and often context-specific as well, we need to tell JFreq what words are stop words. We can do so by putting all the stop words in a separate .txt file and load it in JFreq. You can also find many lists of stopwords for different languages online. For instance, many different lists of stopwords in English are available in this GitHub page: \url{https://github.com/igorbrigadir/stopwords} Finally, we can apply a stemmer which reduces words such as Europe and European to a single Europ* stem. JFreq allows us to use pre-defined stemmers by choosing the relevant language from a drop-down menu. In the following screenshot, you can see the JFreq at work importing the .txt files of a number of election manifestos.
 
-\begin{center}\includegraphics[width=0.75\linewidth]{Figures/jfreq} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth]{figures/jfreq} \end{center}
 
 Note that here the encoding is UTF-8 while the locale is English (UK). Once we have specified all the options we want, we give a name for the output folder and press \emph{Process}. Now we go to that folder we named and copy-paste the ``data.csv'' file into your Working Directory. In R, we then run the following:
 
@@ -717,7 +717,7 @@ Hayes and Krippendorff (\protect\hyperlink{ref-Hayes2007a}{2007}, 79) argue that
 
 With these criteria in mind, we see that popular methods, such as \% agreement or Pearson's \emph{r}, can be misleading. Especially for the latter - as it is a quite popular method - this often leads to problems, as this figure by Krippendorff (\protect\hyperlink{ref-Krippendorff2004a}{2004}) shows:
 
-\begin{center}\includegraphics[width=0.75\linewidth]{Figures/observers} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth]{figures/observers} \end{center}
 
 Here, the figure on the left shows two coders: A and B. The dots in the figure show the choices both coders made, while the dotted line shows the line of perfect agreement. If a dot is on this line, it means that both Coder A and Coder B made the same choice. In this case, they disagreed in all cases. When Coder A chose \emph{a}, Coder B chose \emph{e}, when Coder A chose \emph{b}, Coder B chose \emph{a}, and so on. Yet, when we would calculate Pearson's \emph{r} for this, we would find a result as shown in the right-hand side of the figure. Seen this way, the agreement between both coders does not seem a problem at all. The reason for this is that Pearson's \emph{r} works with the distances between the categories \emph{without} taking into account their location. So, for a positive relationship, the only thing Pearson's \emph{r} requires is that for every increase or decrease for one coder, there is a similar increase or decrease for the other. This happens here with four of the five categories. The result is thus a high Pearson's \emph{r}, though the actual agreement should be 0.
 
@@ -725,7 +725,7 @@ Pearson's \emph{r} thus cannot fulfil all our criteria. A measure that can is Kr
 
 Despite this, Krippendorff's \(\alpha\) is not free of problems. One main problem occurs when coders agree on only a few categories and use these categories a considerable number of times. This leads to an inflation of \(\alpha\), making it is higher than it should be (Krippendorff \protect\hyperlink{ref-Krippendorff2004a}{2004}), as in the following example:
 
-\begin{center}\includegraphics[width=0.75\linewidth]{Figures/kripp} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth]{figures/kripp} \end{center}
 
 Here, in the left-most figure, we see coders A and B who have to code into three categories: 0, 1, or 2. In this example, the categories 1 and 2 carry a certain meaning, while category 0 means that the coders did not know what to assign the case to. Of the 86 cases, both coders code 80 cases in the 0 category. This means that there are only 6 cases on which they can agree or disagree about a code that carries some meaning. Yet, if we calculate \(\alpha\), the result - 0.686 - takes into account all the categories. One solution for this is to add up the categories 1 and 2, as the figure in the middle shows. Here, the coders agree in 84 of the 86 cases (on the diagonal line) and disagree in only 2 of them. Calculating \(\alpha\) now shows that it would increase to 0.789. Finally, we can remove the 0 category and again view 1 and 2 as separate categories (as the most right-hand figure shows). Yet, the result of this is quite disastrous. While the coders agree in 3 of the 4 cases, the resulting \(\alpha\) equals 0.000, as coder B did not use category 1 at all.
 
@@ -985,7 +985,7 @@ Finally, we generate the graphs for each individual category:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-45-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-46-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -995,7 +995,7 @@ Finally, we generate the graphs for each individual category:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-46-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-47-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1005,7 +1005,7 @@ Finally, we generate the graphs for each individual category:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 Each figure shows the percentage that each of the coders coded in the respective category of the coding scheme. We thus use the confidence intervals around the estimates to look at the degree of uncertainty around each estimate. We can read the plots by looking if the dashed line is within the confidence intervals for each coder. The larger the coders deviate from the benchmark or standard, the less likely that they understood the coding scheme in the same way. It also means that it is more likely that a coder would have coded the work programme much different from the benchmark coder. Thus, such a sensitivity analysis is like having a single reliability coefficient for each coding category.
 
@@ -1108,7 +1108,7 @@ Then we can plot the results:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-54-1.pdf}
 
 We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 40 times. We can do this with the \texttt{dfm\_trim} function. Then, we can use this newly trimmed dfm to generate the word cloud:
 
@@ -1119,7 +1119,7 @@ We can also generate word clouds. As these show all the words we have, we will t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-54-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-55-1.pdf}
 
 If we would want to, we can also split up this word cloud based on which words belong to which parties. For this, we have to generate a new dfm and within it, specify the groups that well which words belong to which party:
 
@@ -1131,7 +1131,7 @@ If we would want to, we can also split up this word cloud based on which words b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-55-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-56-1.pdf}
 
 \hypertarget{standard-dictionary-analysis}{%
 \section{Standard Dictionary Analysis}\label{standard-dictionary-analysis}}
@@ -1239,37 +1239,37 @@ The next step is to convert the results to a data frame and view them:
 \end{Shaded}
 
 \begin{verbatim}
-##                   doc_id negative positive neg_positive neg_negative
-## 1   train/pos/1860_9.txt        1        6            0            0
-## 2   test/pos/3946_10.txt       14       15            0            0
-## 3     test/pos/896_8.txt       28       30            0            0
-## 4    test/neg/8788_2.txt       18       16            0            0
-## 5  train/neg/10761_4.txt       18       13            0            0
-## 6   train/neg/7017_4.txt       15       25            0            0
-## 7   train/neg/3952_1.txt        3        3            0            0
-## 8   test/neg/10573_3.txt        3       11            0            0
-## 9   test/pos/4800_10.txt        7       10            0            0
-## 10  train/neg/9280_1.txt        7        8            0            0
-## 11   test/pos/9279_8.txt        4       11            0            0
-## 12  train/neg/1433_4.txt        2        7            0            0
-## 13   test/neg/2462_2.txt       19       25            0            0
-## 14  test/pos/3152_10.txt        5        7            0            0
-## 15   train/pos/71_10.txt        8        8            0            0
-## 16  test/pos/11336_9.txt       19       15            0            0
-## 17   test/neg/9257_4.txt       11        3            0            0
-## 18 train/neg/10742_1.txt       13        4            0            0
-## 19  train/pos/5657_9.txt        0        3            0            0
-## 20  train/pos/8580_9.txt        0        4            0            0
-## 21  train/pos/8496_7.txt       10        8            0            0
-## 22   test/neg/1914_2.txt       13        6            0            0
-## 23 train/pos/1015_10.txt        5        9            0            0
-## 24  train/neg/7265_1.txt        9        6            0            0
-## 25    test/neg/148_1.txt       13        3            0            0
-## 26  test/pos/2197_10.txt        2        7            0            0
-## 27 test/pos/10136_10.txt        3        6            0            0
-## 28  train/pos/567_10.txt        9       14            0            0
-## 29  train/neg/2009_4.txt       17       10            0            0
-## 30  train/pos/8031_9.txt        2        4            0            0
+##                    doc_id negative positive neg_positive neg_negative
+## 1    train/neg/5626_1.txt        9        5            0            0
+## 2    train/pos/3764_8.txt        9       19            0            0
+## 3   train/pos/2195_10.txt        5       11            0            0
+## 4    train/pos/8087_8.txt       18        9            0            0
+## 5    test/pos/3221_10.txt        2        5            0            0
+## 6     test/pos/6637_8.txt       14        6            0            0
+## 7    train/neg/4709_2.txt       39       37            0            0
+## 8   test/pos/11737_10.txt        3        8            0            0
+## 9     test/pos/180_10.txt        1       19            0            0
+## 10   test/neg/11498_1.txt        6        5            0            0
+## 11   train/pos/7775_8.txt        6       14            0            0
+## 12  train/pos/10079_8.txt        1       12            0            0
+## 13   train/neg/7183_1.txt        7        6            0            0
+## 14   train/pos/5064_8.txt        2        8            0            0
+## 15    test/neg/7374_2.txt       12        3            0            0
+## 16   train/neg/9301_1.txt       25       16            0            0
+## 17  test/pos/11259_10.txt        3       10            0            0
+## 18   train/neg/7759_3.txt       32       12            0            0
+## 19    test/neg/9094_4.txt       10        1            0            0
+## 20 train/pos/11266_10.txt        1       11            0            0
+## 21   train/neg/2867_1.txt        6        5            0            0
+## 22    train/neg/543_2.txt       12       12            0            0
+## 23  train/pos/12350_9.txt        4       24            0            0
+## 24   test/pos/12187_8.txt        0        6            0            0
+## 25   train/pos/1486_7.txt        8       16            0            0
+## 26    test/neg/8884_3.txt       19       24            0            0
+## 27   test/neg/11686_2.txt        9        3            0            0
+## 28  train/pos/11635_8.txt       25       24            0            0
+## 29   test/pos/4157_10.txt       24       45            0            0
+## 30   test/neg/10849_2.txt       23       12            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -1308,7 +1308,7 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-65-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-66-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1322,7 +1322,7 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-66-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-67-1.pdf}
 
 Finally, we would like to illustrate how one can make inferences by using the output of a dictionary analysis, by estimating confidence intervals around the point estimates. To do so, again the first step is to add a column which will be the total of positive and negative words scored by the dictionary. We do so by copying the data frame to a new data frame and adding a new column filled with NA values:
 
@@ -1408,7 +1408,7 @@ Finally, we can then make the graph. Here, we plot each of the positive and nega
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-73-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-74-1.pdf}
 
 As can be seen in this particular example, the fact that some documents are much less lengthier than others introduces a lot of uncertainty in the estimates. As evident from the overlapping confidence intervals in the figure, for most reviews, the percentage of negative words is not much different from the percentage of positive words. In other words: the sentiment for these reviews is rather mixed.
 
@@ -1633,7 +1633,7 @@ The result here is not bad, though the confidence intervals are rather large. We
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-80-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-81-1.pdf}
 
 This graph allows us to spot the problem. That is that while we gave the manifesto for Plaid Cymru (PCy) a reference score of 3.20, Wordscores gave it 1.91. Removing this manifesto from our data-set would thus improve our estimates.
 
@@ -1646,7 +1646,7 @@ Apart from positioning the texts, we can also have a look at the words themselve
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-81-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-82-1.pdf}
 
 Finally, we can have a look at the confidence intervals around the scores we created. For this, we use the same command as above, though instead of specifying \texttt{features} (referring to the words), we specify \texttt{texts}. Note that we can only do this for the MV scores, as only here we also calculated the standard errors:
 
@@ -1656,7 +1656,7 @@ Finally, we can have a look at the confidence intervals around the scores we cre
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-82-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-83-1.pdf}
 
 \hypertarget{wordfish}{%
 \section{Wordfish}\label{wordfish}}
@@ -1743,7 +1743,7 @@ As with Wordscores, we can also plot graphs for Wordfish, using the same command
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-86-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-87-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1751,7 +1751,7 @@ As with Wordscores, we can also plot graphs for Wordfish, using the same command
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-86-2.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-87-2.pdf}
 
 \hypertarget{supervised-methods}{%
 \chapter{Supervised Methods}\label{supervised-methods}}
@@ -2098,7 +2098,7 @@ While we can look at the results by looking at the \texttt{prop\_row} object, it
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-106-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-108-1.pdf}
 
 Now, we can see that some parties dominate some categories, while for others the spread is more even. For example, UKIP dominates the categories 406 and 407 - dealing with positive and negative mentions of protectionism, while the Conservatives do the same with category 103 (\emph{Anti-Imperialism}). Note though, that these are percentages. This means that the reason the Conservatives dominate category 103 is as they have two (quasi)-sentences with that category. The others do not have the category at all (702 on \emph{Negative Mentioning of Labour Groups} has the same issue). Other categories, such as 403 (\emph{Market Regulation}) and 502 (\emph{Positive Mentions of Culture}) are way better spread out over all the parties.
 
@@ -2145,7 +2145,7 @@ We then construct a plot as we did above:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-109-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-111-1.pdf}
 
 Here, we see that the Domain of \emph{Welfare and Quality of Life} was the most dominant in all the manifestos, with \emph{Economy} coming second. Also, especially UKIP paid a lot of attention to \emph{External Relations}, while the Green party paid little attention to the \emph{Fabric of Society}. In all, this gives us a good idea of what type of data we are actually dealing with.
 
@@ -2243,7 +2243,7 @@ While this is already better (we have to pay attention to the diagonal), the lar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-117-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-119-1.pdf}
 
 Here, we can see that a high number of cases are on the diagonal, which indicates that the algorithm did a good job. Yet, it also classified a large number of sentences into the 503 and 504 categories, while they belonged to any of the other categories.
 
@@ -2388,7 +2388,7 @@ If we now look at the data-set, we see that it is much smaller and has the topic
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-126-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 What is clear here is that looking at only the words in each topic only says so much. In the first topic, the term ``meps'' is more important than anything else, and so is ``eu'' in topic number 10. Also, in topic number six, we see that a bullet symbol causes the highest beta value - which indicates how important it is that we remove this kind of clutter (which we forgot about here).
 
@@ -2415,7 +2415,7 @@ We then go through similar steps to make the data-set ready for use and prepare 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-130-1.pdf}
 
 Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.
 
@@ -2477,7 +2477,7 @@ We can then run the MCA with the \texttt{FactoMineR} package. For this, we have 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-132-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-132-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-132-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-132-4.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-4.pdf}
 
 First, let's start by looking at the association of the wordlength with the five dimensions:
 
@@ -2505,7 +2505,7 @@ As we can see, the word length has a strong correlation with Dimension 1. This b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-1.pdf}
 
 Here, we only plot the points as adding the labels as well will make the picture quite cluttered. In the article, Dimension 2 is identified as ``Conversational Style'' and Dimension 3 as ``Campaigning Style''. The plot thus nicely shows us that some categories belong to one of these dimensions and not to the other. To see for which cases this is mostly the case (the ones that have the most extreme positions), we can have a look at their coordinates:
 

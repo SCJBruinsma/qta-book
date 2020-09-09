@@ -336,15 +336,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb113-11"><a href="scaling.html#cb113-11"></a><span class="st"> </span><span class="kw">scale_shape_manual</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>, <span class="dt">values=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="op">+</span></span>
 <span id="cb113-12"><a href="scaling.html#cb113-12"></a><span class="st"> </span><span class="kw">scale_linetype_manual</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>,<span class="dt">values=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="op">+</span></span>
 <span id="cb113-13"><a href="scaling.html#cb113-13"></a><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p>This graph allows us to spot the problem. That is that while we gave the manifesto for Plaid Cymru (PCy) a reference score of 3.20, Wordscores gave it 1.91. Removing this manifesto from our data-set would thus improve our estimates.</p>
 <p>Apart from positioning the texts, we can also have a look at the words themselves. We can do this with the <code>textplot_scale1d</code> command, for which we also specify some words to highlight:</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="scaling.html#cb114-1"></a><span class="kw">textplot_scale1d</span>(ws, <span class="dt">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="dt">highlighted =</span> <span class="kw">c</span>(<span class="st">&quot;british&quot;</span>, </span>
 <span id="cb114-2"><a href="scaling.html#cb114-2"></a>    <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;taxes&quot;</span>))</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 <p>Finally, we can have a look at the confidence intervals around the scores we created. For this, we use the same command as above, though instead of specifying <code>features</code> (referring to the words), we specify <code>texts</code>. Note that we can only do this for the MV scores, as only here we also calculated the standard errors:</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="scaling.html#cb115-1"></a><span class="kw">textplot_scale1d</span>(pred_mv, <span class="dt">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 </div>
 <div id="wordfish" class="section level2">
 <h2><span class="header-section-number">6.2</span> Wordfish</h2>
@@ -397,9 +397,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As with Wordscores, we can also plot graphs for Wordfish, using the same commands:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="scaling.html#cb122-1"></a><span class="kw">textplot_scale1d</span>(wordfish, <span class="dt">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="dt">highlighted =</span> <span class="kw">c</span>(<span class="st">&quot;british&quot;</span>, </span>
 <span id="cb122-2"><a href="scaling.html#cb122-2"></a>    <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;election&quot;</span>))</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="scaling.html#cb123-1"></a><span class="kw">textplot_scale1d</span>(wordfish, <span class="dt">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
-<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-86-2.png" width="672" /></p>
+<p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-87-2.png" width="672" /></p>
 
 </div>
 </div>
