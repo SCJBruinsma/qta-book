@@ -16,7 +16,7 @@ I should also say here, that the three types of validity are not interchangeable
 With these criteria in mind, we see that popular methods, such as % agreement or Pearson's *r*, can be misleading. Especially for the latter - as it is a quite popular method - this often leads to problems, as this figure by @Krippendorff2004a shows:
 
 ```{r out.width = "75%", fig.align = "center", echo=FALSE}
-knitr::include_graphics("Figures/observers.png") 
+knitr::include_graphics("figures/observers.png") 
 ``` 
 
 Here, the figure on the left shows two coders: A and B. The dots in the figure show the choices both coders made, while the dotted line shows the line of perfect agreement. If a dot is on this line, it means that both Coder A and Coder B made the same choice. In this case, they disagreed in all cases. When Coder A chose *a*, Coder B chose *e*, when Coder A chose *b*, Coder B chose *a*, and so on. Yet, when we would calculate Pearson's *r* for this, we would find a result as shown in the right-hand side of the figure. Seen this way, the agreement between both coders does not seem a problem at all. The reason for this is that Pearson's *r* works with the distances between the categories *without* taking into account their location. So, for a positive relationship, the only thing Pearson's *r* requires is that for every increase or decrease for one coder, there is a similar increase or decrease for the other. This happens here with four of the five categories. The result is thus a high Pearson's *r*, though the actual agreement should be 0. 
@@ -26,7 +26,7 @@ Pearson's *r* thus cannot fulfil all our criteria. A measure that can is Krippen
 Despite this, Krippendorff's $\alpha$ is not free of problems. One main problem occurs when coders agree on only a few categories and use these categories a considerable number of times. This leads to an inflation of $\alpha$, making it is higher than it should be [@Krippendorff2004a], as in the following example:
 
 ```{r out.width = "75%", fig.align = "center", echo=FALSE}
-knitr::include_graphics("Figures/kripp.png") 
+knitr::include_graphics("figures/kripp.png") 
 ``` 
 
 Here, in the left-most figure, we see coders A and B who have to code into three categories: 0, 1, or 2. In this example, the categories 1 and 2 carry a certain meaning, while category 0 means that the coders did not know what to assign the case to. Of the 86 cases, both coders code 80 cases in the 0 category. This means that there are only 6 cases on which they can agree or disagree about a code that carries some meaning. Yet, if we calculate $\alpha$, the result - 0.686 - takes into account all the categories. One solution for this is to add up the categories 1 and 2, as the figure in the middle shows. Here, the coders agree in 84 of the 86 cases (on the diagonal line) and disagree in only 2 of them. Calculating $\alpha$ now shows that it would increase to 0.789. Finally, we can remove the 0 category and again view 1 and 2 as separate categories (as the most right-hand figure shows). Yet, the result of this is quite disastrous. While the coders agree in 3 of the 4 cases, the resulting $\alpha$ equals 0.000, as coder B did not use category 1 at all.
