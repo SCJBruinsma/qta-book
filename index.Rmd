@@ -1,15 +1,14 @@
---- 
-title: "Quantitative Text Analysis"
-author: "Kostas Gemenis & Bastiaan Bruinsma"
+---
+title: "Bayesian Linear Model"
+author: "Caleb Jin"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+bibliography: book.bib
+description: This is my note of Bayesian linear model, advised by [Dr. Gyuhyeong Goh](https://sites.google.com/site/bayesiangoh/)
 documentclass: book
-bibliography: [library.bib]
-biblio-style: apalike
 link-citations: yes
-description: "Theory and Methods for Quantitative Text Analysis"
-output_dir: "docs"
-output:
-  bookdown::gitbook: default
+site: bookdown::bookdown_site
+biblio-style: apalike
 ---
 
+# Foreword {-#Foreword}
+I am Caleb Jin. This is my note of Bayesian linear regression model. It includes both derivative details, proof of lemma, ggplot and Rshiny to illustrate Bayesian linear regression model. In this way, I can organize my thought and benefit readers hopefully. Due to my very limited statistics knowledge, if making any mistakes, I sincerely expect you guys can email to me. My email address is jinsq@ksu.edu. Appreicate! 
