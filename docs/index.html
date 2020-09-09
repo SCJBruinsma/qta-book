@@ -2,49 +2,63 @@
 <html lang="" xml:lang="">
 <head>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Quantitative Text Analysis" />
-<meta property="og:type" content="book" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Quantitative Text Analysis</title>
+  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
+  <meta property="og:title" content="Quantitative Text Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
 
-<meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
-
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Quantitative Text Analysis" />
+  
+  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
 
 <meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
 
+
 <meta name="date" content="2020-09-09" />
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
 
-<meta name="description" content="Theory and Methods for Quantitative Text Analysis">
+<link rel="next" href="getting-ready.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
-<title>Quantitative Text Analysis</title>
 
-<script src="libs/jquery-1.11.3/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+
+
+
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -103,119 +117,164 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
-
-<link rel="stylesheet" href="toc.css" type="text/css" />
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container-fluid main-container">
 
 
-<div class="row">
-<div class="col-sm-12">
-<div id="TOC">
-<ul>
-<li><a href="index.html#index"><span class="toc-section-number">1</span> Index</a></li>
-<li class="has-sub"><a href="2-getting-ready.html#getting-ready"><span class="toc-section-number">2</span> Getting Ready</a><ul>
-<li class="has-sub"><a href="2-1-installing-r.html#installing-r"><span class="toc-section-number">2.1</span> Installing R</a><ul>
-<li><a href="2-1-installing-r.html#r-on-windows"><span class="toc-section-number">2.1.1</span> R on Windows</a></li>
-<li><a href="2-1-installing-r.html#r-on-linux"><span class="toc-section-number">2.1.2</span> R on Linux</a></li>
-<li><a href="2-1-installing-r.html#r-on-macos"><span class="toc-section-number">2.1.3</span> R on macOS</a></li>
-<li><a href="2-1-installing-r.html#r-in-the-cloud"><span class="toc-section-number">2.1.4</span> R in the Cloud</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a><ul>
+<li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-ready.html"><a href="getting-ready.html#r-on-windows"><i class="fa fa-check"></i><b>2.1.1</b> R on Windows</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-ready.html"><a href="getting-ready.html#r-on-linux"><i class="fa fa-check"></i><b>2.1.2</b> R on Linux</a></li>
+<li class="chapter" data-level="2.1.3" data-path="getting-ready.html"><a href="getting-ready.html#r-on-macos"><i class="fa fa-check"></i><b>2.1.3</b> R on macOS</a></li>
+<li class="chapter" data-level="2.1.4" data-path="getting-ready.html"><a href="getting-ready.html#r-in-the-cloud"><i class="fa fa-check"></i><b>2.1.4</b> R in the Cloud</a></li>
 </ul></li>
-<li class="has-sub"><a href="2-2-packages.html#packages"><span class="toc-section-number">2.2</span> Packages</a><ul>
-<li><a href="2-2-packages.html#installing-from-cran"><span class="toc-section-number">2.2.1</span> Installing from CRAN</a></li>
-<li><a href="2-2-packages.html#installing-from-github"><span class="toc-section-number">2.2.2</span> Installing from GitHub</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-ready.html"><a href="getting-ready.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-from-cran"><i class="fa fa-check"></i><b>2.2.1</b> Installing from CRAN</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-ready.html"><a href="getting-ready.html#installing-from-github"><i class="fa fa-check"></i><b>2.2.2</b> Installing from GitHub</a></li>
 </ul></li>
-<li><a href="2-3-quanteda.html#quanteda"><span class="toc-section-number">2.3</span> Quanteda</a></li>
-<li><a href="2-4-issues-bugs-and-errors.html#issues-bugs-and-errors"><span class="toc-section-number">2.4</span> Issues, Bugs and Errors</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-ready.html"><a href="getting-ready.html#quanteda"><i class="fa fa-check"></i><b>2.3</b> Quanteda</a></li>
+<li class="chapter" data-level="2.4" data-path="getting-ready.html"><a href="getting-ready.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
 </ul></li>
-<li class="has-sub"><a href="3-preparing-the-data.html#preparing-the-data"><span class="toc-section-number">3</span> Preparing the Data</a><ul>
-<li><a href="3-1-text-in-r.html#text-in-r"><span class="toc-section-number">3.1</span> Text in R</a></li>
-<li><a href="3-2-import-pdf-files.html#import-.pdf-files"><span class="toc-section-number">3.2</span> Import .pdf Files</a></li>
-<li><a href="3-3-import-txt-files.html#import-.txt-files"><span class="toc-section-number">3.3</span> Import .txt Files</a></li>
-<li><a href="3-4-import-csv-files.html#import-.csv-files"><span class="toc-section-number">3.4</span> Import .csv Files</a></li>
-<li><a href="3-5-import-using-web-scraping.html#import-using-web-scraping"><span class="toc-section-number">3.5</span> Import using Web Scraping</a></li>
-<li><a href="3-6-import-from-an-api.html#import-from-an-api"><span class="toc-section-number">3.6</span> Import from an API</a></li>
+<li class="chapter" data-level="3" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i><b>3</b> Preparing the Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="preparing-the-data.html"><a href="preparing-the-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
+<li class="chapter" data-level="3.2" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.2</b> Import .pdf Files</a></li>
+<li class="chapter" data-level="3.3" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.3</b> Import .txt Files</a></li>
+<li class="chapter" data-level="3.4" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
+<li class="chapter" data-level="3.5" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.5</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="3.6" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.6</b> Import from an API</a></li>
 </ul></li>
-<li class="has-sub"><a href="4-reliability-and-validity.html#reliability-and-validity"><span class="toc-section-number">4</span> Reliability and validity</a><ul>
-<li><a href="4-1-measuring-inter-coder-agreement.html#measuring-inter-coder-agreement"><span class="toc-section-number">4.1</span> Measuring inter-coder agreement</a></li>
-<li><a href="4-2-visualizing-the-quality-of-coding.html#visualizing-the-quality-of-coding"><span class="toc-section-number">4.2</span> Visualizing the quality of coding</a></li>
+<li class="chapter" data-level="4" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and validity</a><ul>
+<li class="chapter" data-level="4.1" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html#measuring-inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Measuring inter-coder agreement</a></li>
+<li class="chapter" data-level="4.2" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html#visualizing-the-quality-of-coding"><i class="fa fa-check"></i><b>4.2</b> Visualizing the quality of coding</a></li>
 </ul></li>
-<li class="has-sub"><a href="5-dictionaries.html#dictionaries"><span class="toc-section-number">5</span> Dictionaries</a><ul>
-<li><a href="5-1-working-with-a-corpus.html#working-with-a-corpus"><span class="toc-section-number">5.1</span> Working with a Corpus</a></li>
-<li><a href="5-2-standard-dictionary-analysis.html#standard-dictionary-analysis"><span class="toc-section-number">5.2</span> Standard Dictionary Analysis</a></li>
-<li><a href="5-3-sentiment-analysis.html#sentiment-analysis"><span class="toc-section-number">5.3</span> Sentiment Analysis</a></li>
+<li class="chapter" data-level="5" data-path="dictionaries.html"><a href="dictionaries.html"><i class="fa fa-check"></i><b>5</b> Dictionaries</a><ul>
+<li class="chapter" data-level="5.1" data-path="dictionaries.html"><a href="dictionaries.html#working-with-a-corpus"><i class="fa fa-check"></i><b>5.1</b> Working with a Corpus</a></li>
+<li class="chapter" data-level="5.2" data-path="dictionaries.html"><a href="dictionaries.html#standard-dictionary-analysis"><i class="fa fa-check"></i><b>5.2</b> Standard Dictionary Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="dictionaries.html"><a href="dictionaries.html#sentiment-analysis"><i class="fa fa-check"></i><b>5.3</b> Sentiment Analysis</a></li>
 </ul></li>
-<li class="has-sub"><a href="6-scaling.html#scaling"><span class="toc-section-number">6</span> Scaling</a><ul>
-<li><a href="6-1-wordscores.html#wordscores"><span class="toc-section-number">6.1</span> Wordscores</a></li>
-<li><a href="6-2-wordfish.html#wordfish"><span class="toc-section-number">6.2</span> Wordfish</a></li>
+<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling</a><ul>
+<li class="chapter" data-level="6.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>6.1</b> Wordscores</a></li>
+<li class="chapter" data-level="6.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>6.2</b> Wordfish</a></li>
 </ul></li>
-<li class="has-sub"><a href="7-supervised-methods.html#supervised-methods"><span class="toc-section-number">7</span> Supervised Methods</a><ul>
-<li><a href="7-1-support-vector-machines.html#support-vector-machines"><span class="toc-section-number">7.1</span> Support Vector Machines</a></li>
-<li><a href="7-2-naive-bayes.html#naive-bayes"><span class="toc-section-number">7.2</span> Naive Bayes</a></li>
+<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a><ul>
+<li class="chapter" data-level="7.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>7.1</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="7.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>7.2</b> Naive Bayes</a></li>
 </ul></li>
-<li class="has-sub"><a href="8-unsupervised-methods.html#unsupervised-methods"><span class="toc-section-number">8</span> Unsupervised Methods</a><ul>
-<li><a href="8-1-latent-dirichlet-allocation.html#latent-dirichlet-allocation"><span class="toc-section-number">8.1</span> Latent Dirichlet Allocation</a></li>
-<li><a href="8-2-correspondence-analysis.html#correspondence-analysis"><span class="toc-section-number">8.2</span> Correspondence Analysis</a></li>
+<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a><ul>
+<li class="chapter" data-level="8.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>8.1</b> Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="8.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#correspondence-analysis"><i class="fa fa-check"></i><b>8.2</b> Correspondence Analysis</a></li>
 </ul></li>
-<li><a href="references.html#references">References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantitative Text Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Quantitative Text Analysis</h1>
-<h4 class="author"><em>Kostas Gemenis &amp; Bastiaan Bruinsma</em></h4>
-<h4 class="date"><em>2020-09-09</em></h4>
+<p class="author"><em>Kostas Gemenis &amp; Bastiaan Bruinsma</em></p>
+<p class="date"><em>2020-09-09</em></p>
 </div>
 <div id="index" class="section level1">
 <h1><span class="header-section-number">1</span> Index</h1>
-<p>Welcome to the Quantitative Content Analysis Textbook. This book was orginally written as a collection of assignments and slides for the ECPR Winter and Summer Schools. Note that the book is still in active development.</p>
+<p>Welcome to the Quantitative Content Analysis Textbook. This book was originally written as a collection of assignments and slides for the ECPR Winter and Summer Schools. Note that the book is still in active development.</p>
 
 </div>
-<p style="text-align: center;">
-<a href="2-getting-ready.html"><button class="btn btn-default">Next</button></a>
-</p>
-</div>
-</div>
+            </section>
 
+          </div>
+        </div>
+      </div>
 
-</div>
-
+<a href="getting-ready.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
-
-// add bootstrap table styles to pandoc tables
-$(document).ready(function () {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
 });
-
+});
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
+
 </html>
