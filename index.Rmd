@@ -1,0 +1,15 @@
+--- 
+title: "Quantitative Text Analysis"
+author: "Kostas Gemenis & Bastiaan Bruinsma"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [library.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Theory and Methods for Quantitative Text Analysis"
+output_dir: "docs"
+output:
+  bookdown::gitbook: default
+---
+
