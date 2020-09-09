@@ -751,7 +751,7 @@ Let us try this in R using an example. Here, we will look at the results of a co
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readr)}
 
-\NormalTok{urlfile =}\StringTok{ "https://raw.githubusercontent.com/SCJBruinsma/QTA/master/reliability_results.csv"}
+\NormalTok{urlfile =}\StringTok{ "https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/reliability_results.csv"}
 \NormalTok{reliability_results <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\KeywordTok{url}\NormalTok{(urlfile))}
 \end{Highlighting}
 \end{Shaded}
@@ -1240,36 +1240,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                   doc_id negative positive neg_positive neg_negative
-## 1   train/neg/9235_4.txt        1        1            0            0
-## 2   train/pos/5422_9.txt       21       35            0            0
-## 3  train/pos/3861_10.txt        3        9            0            0
-## 4   test/pos/1125_10.txt        2       10            0            0
-## 5     test/pos/287_8.txt        6       12            0            0
-## 6    test/pos/5262_8.txt        5       19            0            0
-## 7   train/pos/2368_8.txt       10       14            0            0
-## 8  test/pos/11978_10.txt       17       25            0            0
-## 9   train/neg/1125_3.txt        2        3            0            0
-## 10   train/neg/722_4.txt       11        8            0            0
-## 11   train/neg/528_1.txt        8        9            0            0
-## 12   test/neg/7105_1.txt       11        2            0            0
-## 13 train/pos/1164_10.txt        2        6            0            0
-## 14   train/neg/261_4.txt        3        2            0            0
-## 15  train/pos/316_10.txt        6        9            0            0
-## 16   test/neg/3357_4.txt       23        8            0            0
-## 17   test/pos/6641_9.txt       18       16            0            0
-## 18  train/neg/9304_1.txt       12        6            0            0
-## 19  train/neg/7291_2.txt        2        3            0            0
-## 20   test/neg/7780_2.txt        4        5            0            0
-## 21    test/pos/234_7.txt        6       34            0            0
-## 22 train/neg/10518_1.txt       15        2            0            0
-## 23  train/pos/3786_9.txt       22       24            0            0
-## 24  test/neg/12007_2.txt       14        1            0            0
-## 25     test/pos/17_8.txt        0        1            0            0
-## 26   test/pos/5439_8.txt        4        5            0            0
-## 27  train/neg/6040_1.txt       12        3            0            0
-## 28  train/neg/2830_3.txt       10       11            0            0
-## 29 train/pos/4328_10.txt        5        7            0            0
-## 30  train/neg/6658_3.txt       30       35            0            0
+## 1   train/pos/1860_9.txt        1        6            0            0
+## 2   test/pos/3946_10.txt       14       15            0            0
+## 3     test/pos/896_8.txt       28       30            0            0
+## 4    test/neg/8788_2.txt       18       16            0            0
+## 5  train/neg/10761_4.txt       18       13            0            0
+## 6   train/neg/7017_4.txt       15       25            0            0
+## 7   train/neg/3952_1.txt        3        3            0            0
+## 8   test/neg/10573_3.txt        3       11            0            0
+## 9   test/pos/4800_10.txt        7       10            0            0
+## 10  train/neg/9280_1.txt        7        8            0            0
+## 11   test/pos/9279_8.txt        4       11            0            0
+## 12  train/neg/1433_4.txt        2        7            0            0
+## 13   test/neg/2462_2.txt       19       25            0            0
+## 14  test/pos/3152_10.txt        5        7            0            0
+## 15   train/pos/71_10.txt        8        8            0            0
+## 16  test/pos/11336_9.txt       19       15            0            0
+## 17   test/neg/9257_4.txt       11        3            0            0
+## 18 train/neg/10742_1.txt       13        4            0            0
+## 19  train/pos/5657_9.txt        0        3            0            0
+## 20  train/pos/8580_9.txt        0        4            0            0
+## 21  train/pos/8496_7.txt       10        8            0            0
+## 22   test/neg/1914_2.txt       13        6            0            0
+## 23 train/pos/1015_10.txt        5        9            0            0
+## 24  train/neg/7265_1.txt        9        6            0            0
+## 25    test/neg/148_1.txt       13        3            0            0
+## 26  test/pos/2197_10.txt        2        7            0            0
+## 27 test/pos/10136_10.txt        3        6            0            0
+## 28  train/pos/567_10.txt        9       14            0            0
+## 29  train/neg/2009_4.txt       17       10            0            0
+## 30  train/pos/8031_9.txt        2        4            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -2439,7 +2439,7 @@ Then, we import the data. You can do so either by downloading the replication da
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{urlfile =}\StringTok{ "https://raw.githubusercontent.com/SCJBruinsma/QTA/master/TRUMP_DATA.txt"}
+\NormalTok{urlfile =}\StringTok{ "https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/TRUMP_DATA.txt"}
 \NormalTok{tweets <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\KeywordTok{url}\NormalTok{(urlfile))}
 \end{Highlighting}
 \end{Shaded}

@@ -227,7 +227,7 @@ I should also say here, that the three types of validity are not interchangeable
 <p>Let us try this in R using an example. Here, we will look at the results of a coding reliability test where 12 coders assigned the sentences of the 1997 European Commission work programme in the 20 categories of a policy areas coding scheme. We can find the results for this on GitHub. To get the data, we tell R where to find it, then to read that file as a .csv file and write is to a new object:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="reliability-and-validity.html#cb48-1"></a><span class="kw">library</span>(readr)</span>
 <span id="cb48-2"><a href="reliability-and-validity.html#cb48-2"></a></span>
-<span id="cb48-3"><a href="reliability-and-validity.html#cb48-3"></a>urlfile =<span class="st"> &quot;https://raw.githubusercontent.com/SCJBruinsma/QTA/master/reliability_results.csv&quot;</span></span>
+<span id="cb48-3"><a href="reliability-and-validity.html#cb48-3"></a>urlfile =<span class="st"> &quot;https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/reliability_results.csv&quot;</span></span>
 <span id="cb48-4"><a href="reliability-and-validity.html#cb48-4"></a>reliability_results &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">url</span>(urlfile))</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
