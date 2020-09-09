@@ -3,9 +3,9 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Intro to Bayesian Linear Model</a></li>
+        <li><a href="./">Intro to Quantitative Text Analysis</a></li>
       after: |
-        <li><a href="https://www.sjin.name" target="blank">Caleb Jin|金时强</a></li>
+        <li><a href="bruinsma@soz.uni-frankfurt.de" target="blank">Bastiaan Bruinsma</a></li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:

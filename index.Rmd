@@ -1,9 +1,9 @@
 ---
-title: "Bayesian Linear Model"
-author: "Caleb Jin"
+title: "Quantitative Text Analysis"
+author: "Kostas Gemenis & Bastiaan Bruinsma"
 date: "`r Sys.Date()`"
-bibliography: book.bib
-description: This is my note of Bayesian linear model, advised by [Dr. Gyuhyeong Goh](https://sites.google.com/site/bayesiangoh/)
+bibliography: [library.bib]
+description: This is the book for the Quantitative Text Analysis course.
 documentclass: book
 link-citations: yes
 site: bookdown::bookdown_site
@@ -11,4 +11,4 @@ biblio-style: apalike
 ---
 
 # Foreword {-#Foreword}
-I am Caleb Jin. This is my note of Bayesian linear regression model. It includes both derivative details, proof of lemma, ggplot and Rshiny to illustrate Bayesian linear regression model. In this way, I can organize my thought and benefit readers hopefully. Due to my very limited statistics knowledge, if making any mistakes, I sincerely expect you guys can email to me. My email address is jinsq@ksu.edu. Appreicate! 
+Welcome to the online version of the exercises and slides for the Quantitative Text Analysis course. Please note that this book is constantly being updated. If you have any suggestions or comments, please contact us via: bruinsma@soz.uni-frankfurt.de
