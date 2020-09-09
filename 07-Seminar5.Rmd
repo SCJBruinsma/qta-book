@@ -126,7 +126,7 @@ library(factoextra)
 Then, we import the data. You can do so either by downloading the replication data yourselves, or use the file we already put up on GitHub:
 
 ```{r}
-urlfile = "https://raw.githubusercontent.com/SCJBruinsma/qta-book/master/TRUMP_DATA.txt"
+urlfile = "https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/TRUMP_DATA.txt"
 tweets <- read_csv(url(urlfile))
 ```
 
