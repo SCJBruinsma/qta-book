@@ -80,6 +80,7 @@ This graph allows us to spot the problem. That is that while we gave the manifes
 Apart from positioning the texts, we can also have a look at the words themselves. We can do this with the `textplot_scale1d` command, for which we also specify some words to highlight:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
+library(quanteda.textplots)
 textplot_scale1d(ws, margin = "features", highlighted =c("british","vote", "europe", "taxes"))
 ```
 

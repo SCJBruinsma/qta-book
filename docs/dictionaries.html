@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Dictionaries | Quantitative Text Analysis</title>
   <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Dictionaries | Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
 
 
-<meta name="date" content="2020-09-09" />
+<meta name="date" content="2021-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -238,9 +238,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="dictionaries.html#cb66-1"></a>corpus_manifestos &lt;-<span class="st"> </span><span class="kw">corpus_subset</span>(data_corpus_ukmanifestos, Year <span class="op">==</span><span class="st"> </span><span class="dv">2001</span> <span class="op">|</span><span class="st"> </span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2005</span>)</span>
 <span id="cb66-2"><a href="dictionaries.html#cb66-2"></a>corpus_manifestos &lt;-<span class="st"> </span><span class="kw">corpus_subset</span>(corpus_manifestos, Party<span class="op">==</span><span class="st">&quot;Lab&quot;</span> <span class="op">|</span><span class="st"> </span>Party<span class="op">==</span><span class="st">&quot;LD&quot;</span> <span class="op">|</span><span class="st"> </span>Party <span class="op">==</span><span class="st"> &quot;Con&quot;</span> <span class="op">|</span><span class="st"> </span>Party<span class="op">==</span><span class="st"> &quot;SNP&quot;</span> <span class="op">|</span><span class="st"> </span>Party<span class="op">==</span><span class="st"> &quot;PCy&quot;</span>)</span></code></pre></div>
 <p>Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the data frequency matrix (dfm). This is a matrix which contains the documents in the rows and the word counts for each word in the columns. To convert the corpus into a dfm, we can use the <code>dfm</code> command. Besides, within this command, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters. We can also remove certain stopwords so that words like “and” or “the” do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type <code>stopwords("english")</code> in the console. To make the dfm, run:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="dictionaries.html#cb67-1"></a>data_manifestos_dfm &lt;-<span class="st"> </span><span class="kw">dfm</span>(corpus_manifestos, <span class="dt">remove =</span> <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>), </span>
-<span id="cb67-2"><a href="dictionaries.html#cb67-2"></a>    <span class="dt">remove_punct =</span> <span class="ot">TRUE</span>, <span class="dt">remove_numbers =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb67-3"><a href="dictionaries.html#cb67-3"></a>data_manifestos_dfm &lt;-<span class="st"> </span><span class="kw">dfm_tolower</span>(data_manifestos_dfm, <span class="dt">keep_acronyms =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="dictionaries.html#cb67-1"></a>data_manifestos_dfm &lt;-<span class="st"> </span><span class="kw">dfm</span>(corpus_manifestos, <span class="dt">remove =</span> <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="dt">remove_punct =</span> <span class="ot">TRUE</span>, <span class="dt">remove_numbers =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb67-2"><a href="dictionaries.html#cb67-2"></a>data_manifestos_dfm &lt;-<span class="st"> </span><span class="kw">dfm_tolower</span>(data_manifestos_dfm, <span class="dt">keep_acronyms =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p>One thing we can do with this dfm is to generate a frequency graph using the <code>topfeatures</code> function. For this, we first have to save the 50 most frequently occurring words in our texts:</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="dictionaries.html#cb68-1"></a>features &lt;-<span class="st"> </span><span class="kw">topfeatures</span>(data_manifestos_dfm, <span class="dv">50</span>)</span></code></pre></div>
 <p>We then have to transform this object into a data frame, and sort it by decreasing frequency:</p>
@@ -259,8 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>If we would want to, we can also split up this word cloud based on which words belong to which parties. For this, we have to generate a new dfm and within it, specify the groups that well which words belong to which party:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="dictionaries.html#cb72-1"></a>wordcloud_dfm_comp &lt;-<span class="st"> </span><span class="kw">dfm</span>(corpus_manifestos, <span class="dt">groups =</span> <span class="st">&quot;Party&quot;</span>)</span>
-<span id="cb72-2"><a href="dictionaries.html#cb72-2"></a><span class="kw">textplot_wordcloud</span>(<span class="kw">dfm_trim</span>(wordcloud_dfm_comp, <span class="dt">min_termfreq =</span> <span class="dv">20</span>, </span>
-<span id="cb72-3"><a href="dictionaries.html#cb72-3"></a>    <span class="dt">max_words =</span> <span class="dv">40</span>), <span class="dt">comparison =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<span id="cb72-2"><a href="dictionaries.html#cb72-2"></a><span class="kw">textplot_wordcloud</span>(<span class="kw">dfm_trim</span>(wordcloud_dfm_comp, <span class="dt">min_termfreq =</span> <span class="dv">20</span>, <span class="dt">max_words =</span> <span class="dv">40</span>), <span class="dt">comparison =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 <div id="standard-dictionary-analysis" class="section level2">
@@ -273,11 +271,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-3"><a href="dictionaries.html#cb74-3"></a>dictionary_results</span></code></pre></div>
 <p>Apart from off-the-shelf dictionaries, it is also possible to create our own which could suit our research question better. One approach in dictionary construction is to use prior theory deductively to come up with different categories and their associated words. Another approach is to use reference texts in order to come up with categories and words inductively. We can also combine different dictionaries as illustrated by <span class="citation">Young and Soroka (<a href="#ref-Young2012" role="doc-biblioref">2012</a>)</span>, or different dictionaries and keywords from categories in manual coding scheme (<span class="citation">Lind et al. (<a href="#ref-Lind2019" role="doc-biblioref">2019</a>)</span>). Finally, one can use expert or crowdcoding assessments to determine the words that best match different categories in a dictionary (<span class="citation">Haselmayer and Jenny (<a href="#ref-Haselmayer2017" role="doc-biblioref">2017</a>)</span>).</p>
 <p>If we want to create our own dictionary in <code>quanteda</code> we use the same commands as above, but we first have to create the dictionary. To do so, we specify the words in a named list. This list contains keys (the words we want to look for) and the categories to which they belong. We then transform this list into a dictionary. Here, we choose some words which we believe will allow us to easily identify the different parties:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="dictionaries.html#cb75-1"></a>dic_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">economy =</span> <span class="kw">c</span>(<span class="st">&quot;tax*&quot;</span>, <span class="st">&quot;vat&quot;</span>, <span class="st">&quot;trade&quot;</span>), <span class="dt">social =</span> <span class="kw">c</span>(<span class="st">&quot;NHS&quot;</span>, </span>
-<span id="cb75-2"><a href="dictionaries.html#cb75-2"></a>    <span class="st">&quot;GP&quot;</span>, <span class="st">&quot;health&quot;</span>), <span class="dt">devolution =</span> <span class="kw">c</span>(<span class="st">&quot;referendum&quot;</span>, <span class="st">&quot;leave&quot;</span>, <span class="st">&quot;independence&quot;</span>), </span>
-<span id="cb75-3"><a href="dictionaries.html#cb75-3"></a>    <span class="dt">europe =</span> <span class="kw">c</span>(<span class="st">&quot;Brussels&quot;</span>, <span class="st">&quot;remain&quot;</span>, <span class="st">&quot;EU&quot;</span>))</span>
-<span id="cb75-4"><a href="dictionaries.html#cb75-4"></a>dic_created &lt;-<span class="st"> </span><span class="kw">dictionary</span>(dic_list, <span class="dt">tolower =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb75-5"><a href="dictionaries.html#cb75-5"></a>dic_created</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="dictionaries.html#cb75-1"></a>dic_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">economy =</span><span class="kw">c</span>(<span class="st">&quot;tax*&quot;</span>, <span class="st">&quot;vat&quot;</span>, <span class="st">&quot;trade&quot;</span>), <span class="dt">social =</span><span class="kw">c</span>(<span class="st">&quot;NHS&quot;</span>, <span class="st">&quot;GP&quot;</span>, <span class="st">&quot;health&quot;</span>), <span class="dt">devolution =</span> <span class="kw">c</span>(<span class="st">&quot;referendum&quot;</span>,<span class="st">&quot;leave&quot;</span>,<span class="st">&quot;independence&quot;</span>), <span class="dt">europe =</span> <span class="kw">c</span>(<span class="st">&quot;Brussels&quot;</span>,<span class="st">&quot;remain&quot;</span>,<span class="st">&quot;EU&quot;</span>))</span>
+<span id="cb75-2"><a href="dictionaries.html#cb75-2"></a>dic_created &lt;-<span class="st"> </span><span class="kw">dictionary</span>(dic_list, <span class="dt">tolower =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb75-3"><a href="dictionaries.html#cb75-3"></a>dic_created</span></code></pre></div>
 <pre><code>## Dictionary object with 4 key entries.
 ## - [economy]:
 ##   - tax*, vat, trade
@@ -317,55 +313,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="dictionaries.html#cb81-1"></a>sentiment &lt;-<span class="st"> </span><span class="kw">convert</span>(results_dfm, <span class="dt">to=</span><span class="st">&quot;data.frame&quot;</span>)</span>
 <span id="cb81-2"><a href="dictionaries.html#cb81-2"></a>sentiment</span></code></pre></div>
 <pre><code>##                    doc_id negative positive neg_positive neg_negative
-## 1    test/neg/11956_2.txt       45       34            0            0
-## 2    train/neg/9421_1.txt        5        5            0            0
-## 3     test/pos/2311_9.txt        2        8            0            0
-## 4     train/neg/509_3.txt       15        4            0            0
-## 5   train/neg/10459_2.txt        9        8            0            0
-## 6    test/pos/12277_7.txt       30       21            0            0
-## 7    train/pos/9659_8.txt        5        6            0            0
-## 8     test/neg/4344_1.txt        5        5            0            0
-## 9    train/neg/1048_4.txt       46       77            0            0
-## 10   test/pos/10325_9.txt        4        9            0            0
-## 11 train/pos/11970_10.txt        1        8            0            0
-## 12    test/neg/7501_3.txt       14       11            0            0
-## 13    test/neg/1660_1.txt       29       17            0            0
-## 14   test/pos/12427_8.txt        7       12            0            0
-## 15    test/neg/8076_1.txt        5        0            0            0
-## 16   test/pos/11312_9.txt        5        7            0            0
-## 17  train/pos/8793_10.txt        2        3            0            0
-## 18    test/neg/6674_2.txt        4        3            0            0
-## 19    test/neg/7509_1.txt       10        8            0            0
-## 20  test/pos/10207_10.txt        2       12            0            0
-## 21   test/pos/1590_10.txt        1        9            0            0
-## 22   train/neg/5397_4.txt       14        7            0            0
-## 23    test/pos/3785_8.txt       43       13            0            0
-## 24   test/neg/11232_2.txt       11        2            0            0
-## 25  train/pos/4560_10.txt       14       33            0            0
-## 26      test/pos/72_8.txt       15       21            0            0
-## 27   test/pos/1377_10.txt        3       16            0            0
-## 28    test/neg/9225_1.txt        6        4            0            0
-## 29    test/neg/1244_1.txt        9        4            0            0
-## 30   train/neg/6783_2.txt        8       15            0            0</code></pre>
+## 1     test/pos/875_10.txt        6        6            0            0
+## 2    train/neg/6543_1.txt        6        6            0            0
+## 3    train/pos/107_10.txt        3        5            0            0
+## 4    train/neg/5118_1.txt       18       11            0            0
+## 5     test/pos/6775_9.txt       13       12            0            0
+## 6    train/pos/4452_8.txt        9        4            0            0
+## 7    train/neg/4780_1.txt        2        3            0            0
+## 8  train/pos/10574_10.txt        0        7            0            0
+## 9   train/pos/8692_10.txt        0        5            0            0
+## 10  train/pos/5884_10.txt        2        6            0            0
+## 11 train/pos/11859_10.txt        2        4            0            0
+## 12   test/pos/11772_7.txt        5        5            0            0
+## 13    test/pos/2999_9.txt        4        9            0            0
+## 14    test/neg/7425_1.txt        7       13            0            0
+## 15   train/neg/3347_3.txt       25       19            0            0
+## 16   train/neg/1151_1.txt       18       12            0            0
+## 17   train/pos/2349_9.txt        2       18            0            0
+## 18   test/pos/10218_7.txt        6       11            0            0
+## 19    test/neg/8200_2.txt        6       21            0            0
+## 20 train/pos/12451_10.txt       10       13            0            0
+## 21   train/neg/5078_2.txt        4        5            0            0
+## 22   test/pos/3569_10.txt        8       15            0            0
+## 23    test/neg/7132_3.txt       28       14            0            0
+## 24   train/neg/1021_1.txt       13       14            0            0
+## 25    test/pos/2479_9.txt        5        5            0            0
+## 26   test/neg/12213_1.txt        8       11            0            0
+## 27   train/neg/6875_2.txt       11        6            0            0
+## 28   train/neg/2824_2.txt        8        7            0            0
+## 29  train/pos/2889_10.txt        5       11            0            0
+## 30     test/pos/590_7.txt       11       21            0            0</code></pre>
 <p>Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="dictionaries.html#cb83-1"></a>star_data &lt;-<span class="st"> </span>reviews_dfm<span class="op">@</span>docvars<span class="op">$</span>rating</span>
 <span id="cb83-2"><a href="dictionaries.html#cb83-2"></a>stargraph &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(star_data, sentiment<span class="op">$</span>negative, sentiment<span class="op">$</span>positive))</span>
 <span id="cb83-3"><a href="dictionaries.html#cb83-3"></a><span class="kw">names</span>(stargraph) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;stars&quot;</span>,<span class="st">&quot;negative&quot;</span>,<span class="st">&quot;positive&quot;</span>)</span></code></pre></div>
 <p>To compare the sentiment with the stars, we first have to combine the senitments into a scale. Of the many ways to do so, the simplest is to take the difference between the positive and negative words (positive – negative). Another option is to take the ratio of positive words against both positive and negative (positive/positive+negative). Here, we do both:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="dictionaries.html#cb84-1"></a>sentiment_difference &lt;-<span class="st"> </span>stargraph<span class="op">$</span>positive <span class="op">-</span><span class="st"> </span>stargraph<span class="op">$</span>negative</span>
-<span id="cb84-2"><a href="dictionaries.html#cb84-2"></a>sentiment_ratio &lt;-<span class="st"> </span>(stargraph<span class="op">$</span>positive<span class="op">/</span>(stargraph<span class="op">$</span>positive <span class="op">+</span><span class="st"> </span></span>
-<span id="cb84-3"><a href="dictionaries.html#cb84-3"></a><span class="st">    </span>stargraph<span class="op">$</span>negative))</span>
-<span id="cb84-4"><a href="dictionaries.html#cb84-4"></a>stargraph &lt;-<span class="st"> </span><span class="kw">cbind</span>(stargraph, sentiment_difference, sentiment_ratio)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="dictionaries.html#cb84-1"></a>sentiment_difference &lt;-<span class="st"> </span>stargraph<span class="op">$</span>positive<span class="op">-</span>stargraph<span class="op">$</span>negative</span>
+<span id="cb84-2"><a href="dictionaries.html#cb84-2"></a>sentiment_ratio &lt;-<span class="st"> </span>(stargraph<span class="op">$</span>positive<span class="op">/</span><span class="st"> </span>(stargraph<span class="op">$</span>positive <span class="op">+</span><span class="st"> </span>stargraph<span class="op">$</span>negative))</span>
+<span id="cb84-3"><a href="dictionaries.html#cb84-3"></a>stargraph &lt;-<span class="st"> </span><span class="kw">cbind</span>(stargraph, sentiment_difference,sentiment_ratio)</span></code></pre></div>
 <p>Then, we can plot the ratings and the scaled sentiment measures together with a linear regression line:</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="dictionaries.html#cb85-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb85-2"><a href="dictionaries.html#cb85-2"></a><span class="kw">ggplot</span>(stargraph, <span class="kw">aes</span>(<span class="dt">x =</span> sentiment_difference, <span class="dt">y =</span> stars)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb85-3"><a href="dictionaries.html#cb85-3"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb85-4"><a href="dictionaries.html#cb85-4"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Positive minus Negative&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<span id="cb85-2"><a href="dictionaries.html#cb85-2"></a><span class="kw">ggplot</span>(stargraph,<span class="kw">aes</span>(<span class="dt">x =</span> sentiment_difference, <span class="dt">y =</span> stars)) <span class="op">+</span></span>
+<span id="cb85-3"><a href="dictionaries.html#cb85-3"></a><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb85-4"><a href="dictionaries.html#cb85-4"></a><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb85-5"><a href="dictionaries.html#cb85-5"></a><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Positive minus Negative&quot;</span>) <span class="op">+</span></span>
+<span id="cb85-6"><a href="dictionaries.html#cb85-6"></a><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="op">+</span></span>
+<span id="cb85-7"><a href="dictionaries.html#cb85-7"></a><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="dictionaries.html#cb87-1"></a><span class="kw">ggplot</span>(stargraph, <span class="kw">aes</span>(<span class="dt">x =</span> sentiment_ratio, <span class="dt">y =</span> stars)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb87-2"><a href="dictionaries.html#cb87-2"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Ratio of Positive to Total&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb87-3"><a href="dictionaries.html#cb87-3"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="dictionaries.html#cb87-1"></a><span class="kw">ggplot</span>(stargraph,<span class="kw">aes</span>(<span class="dt">x =</span> sentiment_ratio, <span class="dt">y =</span> stars)) <span class="op">+</span></span>
+<span id="cb87-2"><a href="dictionaries.html#cb87-2"></a><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb87-3"><a href="dictionaries.html#cb87-3"></a><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb87-4"><a href="dictionaries.html#cb87-4"></a><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Ratio of Positive to Total&quot;</span>) <span class="op">+</span></span>
+<span id="cb87-5"><a href="dictionaries.html#cb87-5"></a><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="op">+</span></span>
+<span id="cb87-6"><a href="dictionaries.html#cb87-6"></a><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 <p>Finally, we would like to illustrate how one can make inferences by using the output of a dictionary analysis, by estimating confidence intervals around the point estimates. To do so, again the first step is to add a column which will be the total of positive and negative words scored by the dictionary. We do so by copying the data frame to a new data frame and adding a new column filled with NA values:</p>
@@ -374,32 +375,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We then again specify the number of reviews, the replications that we want and change the data frame into an array:</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="dictionaries.html#cb90-1"></a><span class="kw">library</span>(combinat)</span>
 <span id="cb90-2"><a href="dictionaries.html#cb90-2"></a></span>
-<span id="cb90-3"><a href="dictionaries.html#cb90-3"></a>nman &lt;-<span class="st"> </span><span class="kw">nrow</span>(reviews_bootstrap)</span>
+<span id="cb90-3"><a href="dictionaries.html#cb90-3"></a>nman &lt;-<span class="kw">nrow</span>(reviews_bootstrap)</span>
 <span id="cb90-4"><a href="dictionaries.html#cb90-4"></a>nrepl &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb90-5"><a href="dictionaries.html#cb90-5"></a>manifBSn &lt;-<span class="st"> </span>manifBSnRand &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">as.matrix</span>(reviews_bootstrap[, </span>
-<span id="cb90-6"><a href="dictionaries.html#cb90-6"></a>    <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]), <span class="kw">c</span>(nman, <span class="dv">2</span>, nrepl <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span>nman, <span class="kw">names</span>(reviews_bootstrap[, </span>
-<span id="cb90-7"><a href="dictionaries.html#cb90-7"></a>    <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]), <span class="dv">0</span><span class="op">:</span>nrepl))</span></code></pre></div>
+<span id="cb90-5"><a href="dictionaries.html#cb90-5"></a>manifBSn &lt;-<span class="st"> </span>manifBSnRand &lt;-<span class="kw">array</span>(<span class="kw">as.matrix</span>(reviews_bootstrap[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]),<span class="kw">c</span>(nman, <span class="dv">2</span>, nrepl <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">dimnames =</span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span>nman,<span class="kw">names</span>(reviews_bootstrap[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]), <span class="dv">0</span><span class="op">:</span>nrepl))</span></code></pre></div>
 <p>Then, we bootstrap the word counts for each movie review and compute percentages for each category using a multinomial draw:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="dictionaries.html#cb91-1"></a>n &lt;-<span class="st"> </span><span class="kw">apply</span>(manifBSn[<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(manifBSn), , <span class="dv">1</span>], <span class="dv">1</span>, sum)</span>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="dictionaries.html#cb91-1"></a>n &lt;-<span class="kw">apply</span>(manifBSn[<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(manifBSn), , <span class="dv">1</span>], <span class="dv">1</span>, sum)</span>
 <span id="cb91-2"><a href="dictionaries.html#cb91-2"></a>p &lt;-<span class="st"> </span>manifBSn[, , <span class="dv">1</span>]<span class="op">/</span>n</span>
 <span id="cb91-3"><a href="dictionaries.html#cb91-3"></a></span>
-<span id="cb91-4"><a href="dictionaries.html#cb91-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nrepl) {</span>
-<span id="cb91-5"><a href="dictionaries.html#cb91-5"></a>    manifBSn[, , i] &lt;-<span class="st"> </span><span class="kw">rmultinomial</span>(n, p)</span>
-<span id="cb91-6"><a href="dictionaries.html#cb91-6"></a>}</span></code></pre></div>
+<span id="cb91-4"><a href="dictionaries.html#cb91-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nrepl) {</span>
+<span id="cb91-5"><a href="dictionaries.html#cb91-5"></a> manifBSn[, , i] &lt;-<span class="kw">rmultinomial</span>(n, p)</span>
+<span id="cb91-6"><a href="dictionaries.html#cb91-6"></a> }</span></code></pre></div>
 <p>We can then ask R to compute the quantities of interest. These are standard errors for each category, as well as the percentage coded for each category.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="dictionaries.html#cb92-1"></a>NegativeSE &lt;-<span class="st"> </span><span class="kw">apply</span>(manifBSn[, <span class="st">&quot;negative&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
-<span id="cb92-2"><a href="dictionaries.html#cb92-2"></a>PositiveSE &lt;-<span class="st"> </span><span class="kw">apply</span>(manifBSn[, <span class="st">&quot;positive&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
-<span id="cb92-3"><a href="dictionaries.html#cb92-3"></a>perNegative &lt;-<span class="st"> </span><span class="kw">apply</span>(manifBSn[, <span class="st">&quot;negative&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
-<span id="cb92-4"><a href="dictionaries.html#cb92-4"></a>perPositive &lt;-<span class="st"> </span><span class="kw">apply</span>(manifBSn[, <span class="st">&quot;positive&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="dictionaries.html#cb92-1"></a>NegativeSE &lt;-<span class="kw">apply</span>(manifBSn[, <span class="st">&quot;negative&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb92-2"><a href="dictionaries.html#cb92-2"></a>PositiveSE &lt;-<span class="kw">apply</span>(manifBSn[, <span class="st">&quot;positive&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb92-3"><a href="dictionaries.html#cb92-3"></a>perNegative &lt;-<span class="kw">apply</span>(manifBSn[, <span class="st">&quot;negative&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb92-4"><a href="dictionaries.html#cb92-4"></a>perPositive &lt;-<span class="kw">apply</span>(manifBSn[, <span class="st">&quot;positive&quot;</span>, ]<span class="op">/</span>n <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span></code></pre></div>
 <p>We then save these quantities of interest in a new data frame:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="dictionaries.html#cb93-1"></a>dataBS &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">cbind</span>(reviews_bootstrap[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], NegativeSE, </span>
-<span id="cb93-2"><a href="dictionaries.html#cb93-2"></a>    PositiveSE, perNegative, perPositive))</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="dictionaries.html#cb93-1"></a>dataBS &lt;-<span class="kw">data.frame</span>(<span class="kw">cbind</span>(reviews_bootstrap[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], NegativeSE,PositiveSE, perNegative, perPositive))</span></code></pre></div>
 <p>Then, we first calculate the confidence intervals and add these:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="dictionaries.html#cb94-1"></a>pos_hi &lt;-<span class="st"> </span>dataBS<span class="op">$</span>perPositive <span class="op">+</span><span class="st"> </span>(<span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>dataBS<span class="op">$</span>PositiveSE)</span>
 <span id="cb94-2"><a href="dictionaries.html#cb94-2"></a>pos_lo &lt;-<span class="st"> </span>dataBS<span class="op">$</span>perPositive <span class="op">-</span><span class="st"> </span>(<span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>dataBS<span class="op">$</span>PositiveSE)</span>
 <span id="cb94-3"><a href="dictionaries.html#cb94-3"></a>neg_lo &lt;-<span class="st"> </span>dataBS<span class="op">$</span>perNegative <span class="op">-</span><span class="st"> </span>(<span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>dataBS<span class="op">$</span>NegativeSE)</span>
 <span id="cb94-4"><a href="dictionaries.html#cb94-4"></a>neg_hi &lt;-<span class="st"> </span>dataBS<span class="op">$</span>perNegative <span class="op">+</span><span class="st"> </span>(<span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>dataBS<span class="op">$</span>NegativeSE)</span>
-<span id="cb94-5"><a href="dictionaries.html#cb94-5"></a>dataBS &lt;-<span class="st"> </span><span class="kw">cbind</span>(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)</span></code></pre></div>
+<span id="cb94-5"><a href="dictionaries.html#cb94-5"></a>dataBS &lt;-<span class="kw">cbind</span>(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)</span></code></pre></div>
 <p>Finally, we can then make the graph. Here, we plot each of the positive and negative points and then overlay them with their error bars:</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dictionaries.html#cb95-1"></a><span class="kw">library</span>(ggplot2)</span>
 <span id="cb95-2"><a href="dictionaries.html#cb95-2"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>

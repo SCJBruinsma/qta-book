@@ -111,7 +111,7 @@
 
 \title{Quantitative Text Analysis}
 \author{Kostas Gemenis \& Bastiaan Bruinsma}
-\date{2020-09-09}
+\date{2021-03-19}
 
 \begin{document}
 \maketitle
@@ -253,6 +253,7 @@ To install the package, type:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"quanteda"}\NormalTok{, }\DataTypeTok{dependencies=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"quanteda.textplots"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -321,7 +322,7 @@ R sees any form of text as a type of characters vector. In their simplest form, 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector1 <-}\StringTok{ "This is an example of a character vector"}
+\NormalTok{vector1 <-}\StringTok{ 'This is an example of a character vector'}
 \KeywordTok{nchar}\NormalTok{(vector1)}
 \end{Highlighting}
 \end{Shaded}
@@ -344,7 +345,7 @@ This example also shows the logic of R. First, we assign the text we have to a c
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector2 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"This is an example"}\NormalTok{, }\StringTok{"This is another"}\NormalTok{, }\StringTok{"And so we can go on."}\NormalTok{)}
+\NormalTok{vector2 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'This is an example'}\NormalTok{, }\StringTok{'This is another'}\NormalTok{, }\StringTok{'And so we can go on.'}\NormalTok{)}
 \KeywordTok{length}\NormalTok{(vector2)}
 \end{Highlighting}
 \end{Shaded}
@@ -377,7 +378,7 @@ Another thing we can do is extract certain words from a sentence. For this, we u
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector3 <-}\StringTok{ "This is yet another sentence"}
+\NormalTok{vector3 <-}\StringTok{ 'This is yet another sentence'}
 \KeywordTok{substr}\NormalTok{(vector3, }\DecValTok{4}\NormalTok{, }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -390,8 +391,8 @@ We can also split a character vector into smaller parts. We often do this when w
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector3 <-}\StringTok{ "Here is a sentence - And a second"}
-\NormalTok{parts1 <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(vector3, }\StringTok{"-"}\NormalTok{)}
+\NormalTok{vector3 <-}\StringTok{ 'Here is a sentence - And a second'}
+\NormalTok{parts1 <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(vector3, }\StringTok{'-'}\NormalTok{)}
 \NormalTok{parts1}
 \end{Highlighting}
 \end{Shaded}
@@ -405,8 +406,8 @@ If we now look in the Environment window, we will see that R calls \texttt{parts
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector4 <-}\StringTok{ "Here is another sentence - And one more"}
-\NormalTok{parts2 <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(vector4, }\StringTok{"-"}\NormalTok{)}
+\NormalTok{vector4 <-}\StringTok{ 'Here is another sentence - And one more'}
+\NormalTok{parts2 <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(vector4, }\StringTok{'-'}\NormalTok{)}
 \NormalTok{parts3 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(parts1, parts2)}
 \end{Highlighting}
 \end{Shaded}
@@ -415,7 +416,7 @@ We can now look at this new list in the Environment and check that it indeed has
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fruits <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"oranges"}\NormalTok{, }\StringTok{"lemons"}\NormalTok{, }\StringTok{"pears"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{"-"}\NormalTok{)}
+\NormalTok{fruits <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{'oranges'}\NormalTok{,}\StringTok{'lemons'}\NormalTok{,}\StringTok{'pears'}\NormalTok{, }\DataTypeTok{sep =} \StringTok{'-'}\NormalTok{)}
 \NormalTok{fruits}
 \end{Highlighting}
 \end{Shaded}
@@ -428,8 +429,8 @@ Note that we can also use this command that paste objects that we made earlier t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sentences <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(vector3, vector4, }\DataTypeTok{sep =} \StringTok{"."}\NormalTok{)}
-\NormalTok{sentences}
+\NormalTok{sentences <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(vector3, vector4, }\DataTypeTok{sep =} \StringTok{'.'}\NormalTok{)}
+\NormalTok{sentences }
 \end{Highlighting}
 \end{Shaded}
 
@@ -504,8 +505,8 @@ Then, we go to our working directory (to see where this is, type \texttt{getwd()
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pdf_directory <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\KeywordTok{getwd}\NormalTok{(), }\StringTok{"/PDF"}\NormalTok{)}
-\NormalTok{txt_directory <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\KeywordTok{getwd}\NormalTok{(), }\StringTok{"/Texts"}\NormalTok{)}
+\NormalTok{pdf_directory <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\KeywordTok{getwd}\NormalTok{(),}\StringTok{"/PDF"}\NormalTok{)}
+\NormalTok{txt_directory <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\KeywordTok{getwd}\NormalTok{(),}\StringTok{"/Texts"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -513,8 +514,7 @@ Then, we ask R for a list of all the files in the .pdf directory. This is both t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{files <-}\StringTok{ }\KeywordTok{list.files}\NormalTok{(pdf_directory, }\DataTypeTok{pattern =} \StringTok{".pdf"}\NormalTok{, }\DataTypeTok{recursive =} \OtherTok{FALSE}\NormalTok{, }
-    \DataTypeTok{full.names =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{files <-}\KeywordTok{list.files}\NormalTok{(pdf_directory, }\DataTypeTok{pattern =} \StringTok{".pdf"}\NormalTok{, }\DataTypeTok{recursive =} \OtherTok{FALSE}\NormalTok{,}\DataTypeTok{full.names =} \OtherTok{TRUE}\NormalTok{)}
 
 \NormalTok{files}
 \end{Highlighting}
@@ -525,12 +525,10 @@ While we could convert a single document at a time, more often we have to deal w
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{extract <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(filename) \{}
-    \KeywordTok{print}\NormalTok{(filename)}
-    \KeywordTok{try}\NormalTok{(\{}
-\NormalTok{        text <-}\StringTok{ }\KeywordTok{pdf_text}\NormalTok{(filename)}
-\NormalTok{    \})}
-\NormalTok{    f <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"(.*)/([^/]*).pdf"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{2"}\NormalTok{, filename)}
-    \KeywordTok{write}\NormalTok{(text, }\KeywordTok{file.path}\NormalTok{(txt_directory, }\KeywordTok{paste0}\NormalTok{(f, }\StringTok{".txt"}\NormalTok{)))}
+ \KeywordTok{print}\NormalTok{(filename)}
+ \KeywordTok{try}\NormalTok{(\{text <-}\KeywordTok{pdf_text}\NormalTok{(filename)\})}
+\NormalTok{ f <-}\KeywordTok{gsub}\NormalTok{(}\StringTok{"(.*)/([^/]*).pdf"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{2"}\NormalTok{, filename)}
+ \KeywordTok{write}\NormalTok{(text,}\KeywordTok{file.path}\NormalTok{(txt_directory,}\KeywordTok{paste0}\NormalTok{(f, }\StringTok{".txt"}\NormalTok{)))}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -539,8 +537,8 @@ We then use this function to extract all the pdf files in the \texttt{pdf\_direc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ (file }\ControlFlowTok{in}\NormalTok{ files) \{}
-    \KeywordTok{extract}\NormalTok{(file)}
+\ControlFlowTok{for}\NormalTok{(file }\ControlFlowTok{in}\NormalTok{ files) \{}
+ \KeywordTok{extract}\NormalTok{(file)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -551,7 +549,7 @@ Assuming our texts are in UTF-8 encoding, we run:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_texts <-}\StringTok{ }\KeywordTok{readtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(txt_directory, }\StringTok{"*"}\NormalTok{), }\DataTypeTok{encoding =} \StringTok{"UTF-8"}\NormalTok{)}
+\NormalTok{data_texts <-}\KeywordTok{readtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(txt_directory, }\StringTok{"*"}\NormalTok{), }\DataTypeTok{encoding =} \StringTok{"UTF-8"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -566,8 +564,8 @@ In case that we already have the .txt files somewhere, we can make the above pro
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readtext)}
 
-\NormalTok{directory <-}\StringTok{ }\KeywordTok{getwd}\NormalTok{()}
-\NormalTok{data_texts <-}\StringTok{ }\KeywordTok{readtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(txt_directory, }\StringTok{"*"}\NormalTok{), }\DataTypeTok{encoding =} \StringTok{"UTF-8"}\NormalTok{)}
+\NormalTok{directory <-}\KeywordTok{getwd}\NormalTok{()}
+\NormalTok{data_texts <-}\KeywordTok{readtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(txt_directory, }\StringTok{"*"}\NormalTok{), }\DataTypeTok{encoding =} \StringTok{"UTF-8"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -757,7 +755,8 @@ Let us try this in R using an example. Here, we will look at the results of a co
 \end{Shaded}
 
 \begin{verbatim}
-## Parsed with column specification:
+## 
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   coder1 = col_double(),
 ##   coder2 = col_double(),
@@ -823,36 +822,31 @@ In the following example we perform the sensitivity analysis on the coded senten
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{coderid <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"coder1"}\NormalTok{, }\StringTok{"coder2"}\NormalTok{, }\StringTok{"coder3"}\NormalTok{, }\StringTok{"coder4"}\NormalTok{, }\StringTok{"coder5"}\NormalTok{, }
-    \StringTok{"coder6"}\NormalTok{, }\StringTok{"coder7"}\NormalTok{, }\StringTok{"coder8"}\NormalTok{, }\StringTok{"coder9"}\NormalTok{, }\StringTok{"coder10"}\NormalTok{, }\StringTok{"coder11"}\NormalTok{, }
-    \StringTok{"coder12"}\NormalTok{)}
-\NormalTok{c0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{14}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{0}\NormalTok{)}
-\NormalTok{c01 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{0}\NormalTok{)}
-\NormalTok{c02 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{)}
-\NormalTok{c03 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{21}\NormalTok{)}
-\NormalTok{c04 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{)}
-\NormalTok{c05 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
-\NormalTok{c06 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{20}\NormalTok{)}
-\NormalTok{c07 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\NormalTok{c08 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\NormalTok{c09 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{6}\NormalTok{)}
-\NormalTok{c10 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{22}\NormalTok{)}
-\NormalTok{c11 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{31}\NormalTok{)}
-\NormalTok{c12 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
-\NormalTok{c13 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\NormalTok{c14 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{13}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{14}\NormalTok{)}
-\NormalTok{c15 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{7}\NormalTok{)}
-\NormalTok{c16 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
-\NormalTok{c17 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
-\NormalTok{c18 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{16}\NormalTok{)}
-\NormalTok{c19 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
-\NormalTok{c20 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
-\NormalTok{n <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{163}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{155}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }
-    \DecValTok{164}\NormalTok{)}
+\NormalTok{coderid <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"coder1"}\NormalTok{,}\StringTok{"coder2"}\NormalTok{,}\StringTok{"coder3"}\NormalTok{,}\StringTok{"coder4"}\NormalTok{,}\StringTok{"coder5"}\NormalTok{,}\StringTok{"coder6"}\NormalTok{,}\StringTok{"coder7"}\NormalTok{,}\StringTok{"coder8"}\NormalTok{,}\StringTok{"coder9"}\NormalTok{,}\StringTok{"coder10"}\NormalTok{,}\StringTok{"coder11"}\NormalTok{,}\StringTok{"coder12"}\NormalTok{)}
+\NormalTok{c0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{14}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{29}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{c01 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{c02 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{c03 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{21}\NormalTok{)}
+\NormalTok{c04 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{c05 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{c06 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{20}\NormalTok{)}
+\NormalTok{c07 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{c08 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{c09 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{c10 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{22}\NormalTok{)}
+\NormalTok{c11 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{,}\DecValTok{31}\NormalTok{,}\DecValTok{33}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{31}\NormalTok{)}
+\NormalTok{c12 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{c13 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{c14 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{13}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{14}\NormalTok{)}
+\NormalTok{c15 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+\NormalTok{c16 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{c17 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{c18 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{,}\DecValTok{33}\NormalTok{,}\DecValTok{27}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{28}\NormalTok{,}\DecValTok{31}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{28}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{16}\NormalTok{)}
+\NormalTok{c19 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{c20 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{163}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{155}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{)}
 
-\NormalTok{data_uncertainty <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(coderid, c0, c01, c02, c03, c04, }
-\NormalTok{    c05, c06, c07, c08, c09, c10, c11, c12, c13, c14, c15, c16, }
-\NormalTok{    c17, c18, c19, c20, n, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{data_uncertainty <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(coderid, c0,c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,n, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -860,11 +854,11 @@ We then tell R how many coders we have. As this number is equal to the number of
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nman <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(data_uncertainty)}
+\NormalTok{nman <-}\KeywordTok{nrow}\NormalTok{(data_uncertainty)}
 \NormalTok{nrepl <-}\StringTok{ }\DecValTok{1000}
-\NormalTok{manifBSn <-}\StringTok{ }\NormalTok{manifBSnRand <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(data_uncertainty[, }
-    \DecValTok{2}\OperatorTok{:}\DecValTok{21}\NormalTok{]), }\KeywordTok{c}\NormalTok{(nman, }\DecValTok{20}\NormalTok{, nrepl }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{), }\DataTypeTok{dimnames =} \KeywordTok{list}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{nman, }\KeywordTok{names}\NormalTok{(data_uncertainty[, }
-    \DecValTok{2}\OperatorTok{:}\DecValTok{21}\NormalTok{]), }\DecValTok{0}\OperatorTok{:}\NormalTok{nrepl))}
+\NormalTok{manifBSn <-}\StringTok{ }\NormalTok{manifBSnRand <-}\KeywordTok{array}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(data_uncertainty[,}\DecValTok{2}\OperatorTok{:}\DecValTok{21}\NormalTok{]),}
+ \KeywordTok{c}\NormalTok{(nman, }\DecValTok{20}\NormalTok{, nrepl}\OperatorTok{+}\DecValTok{1}\NormalTok{),}
+ \DataTypeTok{dimnames=}\KeywordTok{list}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{nman,}\KeywordTok{names}\NormalTok{(data_uncertainty[,}\DecValTok{2}\OperatorTok{:}\DecValTok{21}\NormalTok{]), }\DecValTok{0}\OperatorTok{:}\NormalTok{nrepl))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -872,11 +866,11 @@ We then bootstrap the sentence counts for each coder and compute percentages for
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p <-}\StringTok{ }\NormalTok{manifBSn[, , }\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{n}
+\NormalTok{p <-}\StringTok{ }\NormalTok{manifBSn[,,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{n}
 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nrepl) \{}
-\NormalTok{    manifBSn[, , i] <-}\StringTok{ }\KeywordTok{rmultinomial}\NormalTok{(n, p)}
-\NormalTok{\}}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nrepl) \{}
+\NormalTok{ manifBSn[,,i] <-}\KeywordTok{rmultinomial}\NormalTok{(n, p)}
+\NormalTok{ \}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -884,47 +878,47 @@ With this data, we can then ask R to compute the quantities of interest. These a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{c0SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c0"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c01SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c01"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c02SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c02"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c03SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c03"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c04SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c04"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c05SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c05"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c06SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c06"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c07SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c07"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c08SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c08"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c09SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c09"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c10SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c10"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c11SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c11"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c12SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c12"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c13SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c13"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c14SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c14"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c15SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c15"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c16SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c16"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c17SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c17"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c18SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c18"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c19SE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c19"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c0SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c0"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c01SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c01"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c02SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c02"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c03SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c03"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c04SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c04"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c05SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c05"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c06SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c06"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c07SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c07"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c08SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c08"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c09SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c09"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd) }
+\NormalTok{c10SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c10"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c11SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c11"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c12SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c12"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c13SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c13"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c14SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c14"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c15SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c15"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c16SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c16"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c17SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c17"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c18SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c18"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c19SE <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c19"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
 
-\NormalTok{per0 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c0"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per01 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c01"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per02 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c02"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per03 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c03"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per04 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c04"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per05 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c05"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per06 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c06"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per07 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c07"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per08 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c08"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per09 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c09"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per10 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c10"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per11 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c11"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per12 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c12"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per13 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c13"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per14 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c14"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per15 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c15"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per16 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c16"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per17 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c17"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per18 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c18"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per19 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c19"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per0 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c0"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per01 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c01"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per02 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c02"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per03 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c03"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per04 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c04"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per05 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c05"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per06 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c06"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per07 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c07"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per08 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c08"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per09 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c09"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per10 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c10"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per11 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c11"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per12 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c12"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per13 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c13"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per14 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c14"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per15 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c15"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per16 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c16"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per17 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c17"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per18 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c18"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per19 <-}\KeywordTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c19"}\NormalTok{,]}\OperatorTok{/}\NormalTok{n}\OperatorTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -932,12 +926,7 @@ We then bind all these quantities together in a single data frame:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataBS <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(data_uncertainty[, }\DecValTok{1}\OperatorTok{:}\DecValTok{22}\NormalTok{], c0SE, c01SE, }
-\NormalTok{    c02SE, c03SE, c04SE, c05SE, c06SE, c07SE, c08SE, c09SE, c10SE, }
-\NormalTok{    c11SE, c12SE, c13SE, c14SE, c15SE, c16SE, c17SE, c18SE, c19SE, }
-\NormalTok{    per0, per01, per02, per03, per04, per05, per06, per07, per08, }
-\NormalTok{    per09, per10, per11, per12, per13, per14, per15, per16, per17, }
-\NormalTok{    per18, per19))}
+\NormalTok{dataBS <-}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(data_uncertainty[,}\DecValTok{1}\OperatorTok{:}\DecValTok{22}\NormalTok{], c0SE, c01SE, c02SE, c03SE, c04SE, c05SE,c06SE, c07SE, c08SE, c09SE, c10SE, c11SE, c12SE, c13SE, c14SE, c15SE, c16SE, c17SE,c18SE, c19SE, per0, per01, per02, per03, per04, per05, per06, per07, per08, per09,per10, per11, per12, per13, per14, per15, per16, per17, per18, per19))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -954,8 +943,7 @@ First, we make sure that the variable \texttt{coderid} is a factor and make sure
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dataBS}\OperatorTok{$}\NormalTok{coderid <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(dataBS}\OperatorTok{$}\NormalTok{coderid)}
-\NormalTok{dataBS}\OperatorTok{$}\NormalTok{coderid <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(dataBS}\OperatorTok{$}\NormalTok{coderid, }\KeywordTok{levels}\NormalTok{(dataBS}\OperatorTok{$}\NormalTok{coderid)[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }
-    \DecValTok{5}\OperatorTok{:}\DecValTok{12}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{)])}
+\NormalTok{dataBS}\OperatorTok{$}\NormalTok{coderid <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(dataBS}\OperatorTok{$}\NormalTok{coderid,}\KeywordTok{levels}\NormalTok{(dataBS}\OperatorTok{$}\NormalTok{coderid)[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\OperatorTok{:}\DecValTok{12}\NormalTok{,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{)])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -963,15 +951,14 @@ Then, we calculate the 95\% confidence intervals for each category. We do so usi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{c0_lo <-}\StringTok{ }\NormalTok{per0 }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{c0SE)}
-\NormalTok{c0_hi <-}\StringTok{ }\NormalTok{per0 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{c0SE)}
-\NormalTok{c01_lo <-}\StringTok{ }\NormalTok{per01 }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{c01SE)}
-\NormalTok{c01_hi <-}\StringTok{ }\NormalTok{per01 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{c01SE)}
-\NormalTok{c02_lo <-}\StringTok{ }\NormalTok{per02 }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{c02SE)}
-\NormalTok{c02_hi <-}\StringTok{ }\NormalTok{per02 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{c02SE)}
+\NormalTok{c0_lo <-}\StringTok{ }\NormalTok{per0 }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96}\OperatorTok{*}\NormalTok{c0SE)}
+\NormalTok{c0_hi <-}\StringTok{ }\NormalTok{per0 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96}\OperatorTok{*}\NormalTok{c0SE)}
+\NormalTok{c01_lo <-}\StringTok{ }\NormalTok{per01 }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96}\OperatorTok{*}\NormalTok{c01SE)}
+\NormalTok{c01_hi <-}\StringTok{ }\NormalTok{per01 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96}\OperatorTok{*}\NormalTok{c01SE)}
+\NormalTok{c02_lo <-}\StringTok{ }\NormalTok{per02 }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96}\OperatorTok{*}\NormalTok{c02SE)}
+\NormalTok{c02_hi <-}\StringTok{ }\NormalTok{per02 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96}\OperatorTok{*}\NormalTok{c02SE)}
 
-\NormalTok{dataBS <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(dataBS, c0_lo, c0_hi, c01_lo, c01_hi, c02_lo, }
-\NormalTok{    c02_hi)}
+\NormalTok{dataBS <-}\KeywordTok{cbind}\NormalTok{(dataBS, c0_lo, c0_hi, c01_lo, c01_hi, c02_lo, c02_hi)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -979,9 +966,12 @@ Finally, we generate the graphs for each individual category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(dataBS, }\KeywordTok{aes}\NormalTok{(per0, coderid)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ c0_hi, }
-    \DataTypeTok{xmin =}\NormalTok{ c0_lo), }\DataTypeTok{height =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 0"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(dataBS,}\KeywordTok{aes}\NormalTok{(per0, coderid))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ c0_hi, }\DataTypeTok{xmin =}\NormalTok{ c0_lo),}\DataTypeTok{height =} \FloatTok{.2}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 0"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -989,9 +979,12 @@ Finally, we generate the graphs for each individual category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(dataBS, }\KeywordTok{aes}\NormalTok{(per01, coderid)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ c01_hi, }
-    \DataTypeTok{xmin =}\NormalTok{ c01_lo), }\DataTypeTok{height =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 01"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(dataBS,}\KeywordTok{aes}\NormalTok{(per01, coderid))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ c01_hi, }\DataTypeTok{xmin =}\NormalTok{ c01_lo),}\DataTypeTok{height =} \FloatTok{.2}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 01"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -999,9 +992,12 @@ Finally, we generate the graphs for each individual category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(dataBS, }\KeywordTok{aes}\NormalTok{(per02, coderid)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ c02_hi, }
-    \DataTypeTok{xmin =}\NormalTok{ c02_lo), }\DataTypeTok{height =} \FloatTok{0.2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 02"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(dataBS,}\KeywordTok{aes}\NormalTok{(per02, coderid))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ c02_hi, }\DataTypeTok{xmin =}\NormalTok{ c02_lo),}\DataTypeTok{height =} \FloatTok{.2}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 02"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{)}\OperatorTok{+}
+\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1073,8 +1069,7 @@ Now we have our corpus, we can start with the analysis. As noted, we try not to 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{remove =} \KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }
-    \DataTypeTok{remove_punct =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{remove_numbers =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{remove =} \KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\DataTypeTok{remove_punct =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{remove_numbers =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm_tolower}\NormalTok{(data_manifestos_dfm, }\DataTypeTok{keep_acronyms =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1126,8 +1121,7 @@ If we would want to, we can also split up this word cloud based on which words b
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{wordcloud_dfm_comp <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{groups =} \StringTok{"Party"}\NormalTok{)}
-\KeywordTok{textplot_wordcloud}\NormalTok{(}\KeywordTok{dfm_trim}\NormalTok{(wordcloud_dfm_comp, }\DataTypeTok{min_termfreq =} \DecValTok{20}\NormalTok{, }
-    \DataTypeTok{max_words =} \DecValTok{40}\NormalTok{), }\DataTypeTok{comparison =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{textplot_wordcloud}\NormalTok{(}\KeywordTok{dfm_trim}\NormalTok{(wordcloud_dfm_comp, }\DataTypeTok{min_termfreq =} \DecValTok{20}\NormalTok{, }\DataTypeTok{max_words =} \DecValTok{40}\NormalTok{), }\DataTypeTok{comparison =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1160,9 +1154,7 @@ If we want to create our own dictionary in \texttt{quanteda} we use the same com
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dic_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{economy =} \KeywordTok{c}\NormalTok{(}\StringTok{"tax*"}\NormalTok{, }\StringTok{"vat"}\NormalTok{, }\StringTok{"trade"}\NormalTok{), }\DataTypeTok{social =} \KeywordTok{c}\NormalTok{(}\StringTok{"NHS"}\NormalTok{, }
-    \StringTok{"GP"}\NormalTok{, }\StringTok{"health"}\NormalTok{), }\DataTypeTok{devolution =} \KeywordTok{c}\NormalTok{(}\StringTok{"referendum"}\NormalTok{, }\StringTok{"leave"}\NormalTok{, }\StringTok{"independence"}\NormalTok{), }
-    \DataTypeTok{europe =} \KeywordTok{c}\NormalTok{(}\StringTok{"Brussels"}\NormalTok{, }\StringTok{"remain"}\NormalTok{, }\StringTok{"EU"}\NormalTok{))}
+\NormalTok{dic_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{economy =}\KeywordTok{c}\NormalTok{(}\StringTok{"tax*"}\NormalTok{, }\StringTok{"vat"}\NormalTok{, }\StringTok{"trade"}\NormalTok{), }\DataTypeTok{social =}\KeywordTok{c}\NormalTok{(}\StringTok{"NHS"}\NormalTok{, }\StringTok{"GP"}\NormalTok{, }\StringTok{"health"}\NormalTok{), }\DataTypeTok{devolution =} \KeywordTok{c}\NormalTok{(}\StringTok{"referendum"}\NormalTok{,}\StringTok{"leave"}\NormalTok{,}\StringTok{"independence"}\NormalTok{), }\DataTypeTok{europe =} \KeywordTok{c}\NormalTok{(}\StringTok{"Brussels"}\NormalTok{,}\StringTok{"remain"}\NormalTok{,}\StringTok{"EU"}\NormalTok{))}
 \NormalTok{dic_created <-}\StringTok{ }\KeywordTok{dictionary}\NormalTok{(dic_list, }\DataTypeTok{tolower =} \OtherTok{FALSE}\NormalTok{)}
 \NormalTok{dic_created}
 \end{Highlighting}
@@ -1240,36 +1232,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                    doc_id negative positive neg_positive neg_negative
-## 1    train/neg/5626_1.txt        9        5            0            0
-## 2    train/pos/3764_8.txt        9       19            0            0
-## 3   train/pos/2195_10.txt        5       11            0            0
-## 4    train/pos/8087_8.txt       18        9            0            0
-## 5    test/pos/3221_10.txt        2        5            0            0
-## 6     test/pos/6637_8.txt       14        6            0            0
-## 7    train/neg/4709_2.txt       39       37            0            0
-## 8   test/pos/11737_10.txt        3        8            0            0
-## 9     test/pos/180_10.txt        1       19            0            0
-## 10   test/neg/11498_1.txt        6        5            0            0
-## 11   train/pos/7775_8.txt        6       14            0            0
-## 12  train/pos/10079_8.txt        1       12            0            0
-## 13   train/neg/7183_1.txt        7        6            0            0
-## 14   train/pos/5064_8.txt        2        8            0            0
-## 15    test/neg/7374_2.txt       12        3            0            0
-## 16   train/neg/9301_1.txt       25       16            0            0
-## 17  test/pos/11259_10.txt        3       10            0            0
-## 18   train/neg/7759_3.txt       32       12            0            0
-## 19    test/neg/9094_4.txt       10        1            0            0
-## 20 train/pos/11266_10.txt        1       11            0            0
-## 21   train/neg/2867_1.txt        6        5            0            0
-## 22    train/neg/543_2.txt       12       12            0            0
-## 23  train/pos/12350_9.txt        4       24            0            0
-## 24   test/pos/12187_8.txt        0        6            0            0
-## 25   train/pos/1486_7.txt        8       16            0            0
-## 26    test/neg/8884_3.txt       19       24            0            0
-## 27   test/neg/11686_2.txt        9        3            0            0
-## 28  train/pos/11635_8.txt       25       24            0            0
-## 29   test/pos/4157_10.txt       24       45            0            0
-## 30   test/neg/10849_2.txt       23       12            0            0
+## 1   train/pos/4876_10.txt        7       15            0            0
+## 2    train/pos/5935_9.txt        8        5            0            0
+## 3  train/pos/12489_10.txt        9        6            0            0
+## 4    train/neg/9673_1.txt       18        3            0            0
+## 5    train/neg/2901_1.txt        9        4            0            0
+## 6    test/pos/5657_10.txt       24       10            0            0
+## 7    test/neg/11986_2.txt       19       20            0            0
+## 8     test/neg/1308_3.txt        9        7            0            0
+## 9     test/neg/8959_1.txt       22       19            0            0
+## 10   test/neg/11617_1.txt       16        6            0            0
+## 11   train/pos/9625_8.txt        4        6            0            0
+## 12     test/pos/992_7.txt        9       14            0            0
+## 13   train/neg/4782_4.txt        6       10            0            0
+## 14   test/pos/11867_8.txt        4        7            0            0
+## 15      test/pos/38_8.txt        2        7            0            0
+## 16    test/pos/6236_7.txt        9        2            0            0
+## 17  train/pos/6328_10.txt        3        8            0            0
+## 18   train/neg/2588_3.txt       10       11            0            0
+## 19     test/neg/773_1.txt       13        5            0            0
+## 20    test/neg/6089_3.txt       30       23            0            0
+## 21  train/neg/10758_1.txt       16        7            0            0
+## 22 train/pos/12377_10.txt       40       20            0            0
+## 23   test/pos/10592_8.txt        2        6            0            0
+## 24   train/pos/8853_7.txt       27       11            0            0
+## 25 train/pos/11751_10.txt        4        2            0            0
+## 26   test/pos/5653_10.txt      113       40            0            0
+## 27  train/pos/4014_10.txt       12        4            0            0
+## 28   train/pos/1824_8.txt       14       17            0            0
+## 29   train/pos/5139_9.txt        0        2            0            0
+## 30   train/neg/6511_1.txt        4        1            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -1286,10 +1278,9 @@ To compare the sentiment with the stars, we first have to combine the senitments
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sentiment_difference <-}\StringTok{ }\NormalTok{stargraph}\OperatorTok{$}\NormalTok{positive }\OperatorTok{-}\StringTok{ }\NormalTok{stargraph}\OperatorTok{$}\NormalTok{negative}
-\NormalTok{sentiment_ratio <-}\StringTok{ }\NormalTok{(stargraph}\OperatorTok{$}\NormalTok{positive}\OperatorTok{/}\NormalTok{(stargraph}\OperatorTok{$}\NormalTok{positive }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\NormalTok{stargraph}\OperatorTok{$}\NormalTok{negative))}
-\NormalTok{stargraph <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(stargraph, sentiment_difference, sentiment_ratio)}
+\NormalTok{sentiment_difference <-}\StringTok{ }\NormalTok{stargraph}\OperatorTok{$}\NormalTok{positive}\OperatorTok{-}\NormalTok{stargraph}\OperatorTok{$}\NormalTok{negative}
+\NormalTok{sentiment_ratio <-}\StringTok{ }\NormalTok{(stargraph}\OperatorTok{$}\NormalTok{positive}\OperatorTok{/}\StringTok{ }\NormalTok{(stargraph}\OperatorTok{$}\NormalTok{positive }\OperatorTok{+}\StringTok{ }\NormalTok{stargraph}\OperatorTok{$}\NormalTok{negative))}
+\NormalTok{stargraph <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(stargraph, sentiment_difference,sentiment_ratio)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1298,9 +1289,12 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{ggplot}\NormalTok{(stargraph, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sentiment_difference, }\DataTypeTok{y =}\NormalTok{ stars)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Positive minus Negative"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(stargraph,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sentiment_difference, }\DataTypeTok{y =}\NormalTok{ stars)) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Positive minus Negative"}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1312,9 +1306,12 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(stargraph, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sentiment_ratio, }\DataTypeTok{y =}\NormalTok{ stars)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Ratio of Positive to Total"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(stargraph,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sentiment_ratio, }\DataTypeTok{y =}\NormalTok{ stars)) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Ratio of Positive to Total"}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1339,11 +1336,9 @@ We then again specify the number of reviews, the replications that we want and c
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(combinat)}
 
-\NormalTok{nman <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(reviews_bootstrap)}
+\NormalTok{nman <-}\KeywordTok{nrow}\NormalTok{(reviews_bootstrap)}
 \NormalTok{nrepl <-}\StringTok{ }\DecValTok{1000}
-\NormalTok{manifBSn <-}\StringTok{ }\NormalTok{manifBSnRand <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(reviews_bootstrap[, }
-    \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]), }\KeywordTok{c}\NormalTok{(nman, }\DecValTok{2}\NormalTok{, nrepl }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{), }\DataTypeTok{dimnames =} \KeywordTok{list}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{nman, }\KeywordTok{names}\NormalTok{(reviews_bootstrap[, }
-    \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]), }\DecValTok{0}\OperatorTok{:}\NormalTok{nrepl))}
+\NormalTok{manifBSn <-}\StringTok{ }\NormalTok{manifBSnRand <-}\KeywordTok{array}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(reviews_bootstrap[,}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]),}\KeywordTok{c}\NormalTok{(nman, }\DecValTok{2}\NormalTok{, nrepl }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{), }\DataTypeTok{dimnames =}\KeywordTok{list}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{nman,}\KeywordTok{names}\NormalTok{(reviews_bootstrap[,}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]), }\DecValTok{0}\OperatorTok{:}\NormalTok{nrepl))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1351,12 +1346,12 @@ Then, we bootstrap the word counts for each movie review and compute percentages
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{n <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(manifBSn), , }\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, sum)}
+\NormalTok{n <-}\KeywordTok{apply}\NormalTok{(manifBSn[}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(manifBSn), , }\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, sum)}
 \NormalTok{p <-}\StringTok{ }\NormalTok{manifBSn[, , }\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{n}
 
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nrepl) \{}
-\NormalTok{    manifBSn[, , i] <-}\StringTok{ }\KeywordTok{rmultinomial}\NormalTok{(n, p)}
-\NormalTok{\}}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nrepl) \{}
+\NormalTok{ manifBSn[, , i] <-}\KeywordTok{rmultinomial}\NormalTok{(n, p)}
+\NormalTok{ \}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1364,10 +1359,10 @@ We can then ask R to compute the quantities of interest. These are standard erro
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{NegativeSE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{PositiveSE <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{perNegative <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{perPositive <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{NegativeSE <-}\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{PositiveSE <-}\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{perNegative <-}\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{perPositive <-}\KeywordTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\OperatorTok{/}\NormalTok{n }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1375,8 +1370,7 @@ We then save these quantities of interest in a new data frame:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataBS <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(reviews_bootstrap[, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], NegativeSE, }
-\NormalTok{    PositiveSE, perNegative, perPositive))}
+\NormalTok{dataBS <-}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(reviews_bootstrap[, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{], NegativeSE,PositiveSE, perNegative, perPositive))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1388,7 +1382,7 @@ Then, we first calculate the confidence intervals and add these:
 \NormalTok{pos_lo <-}\StringTok{ }\NormalTok{dataBS}\OperatorTok{$}\NormalTok{perPositive }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{dataBS}\OperatorTok{$}\NormalTok{PositiveSE)}
 \NormalTok{neg_lo <-}\StringTok{ }\NormalTok{dataBS}\OperatorTok{$}\NormalTok{perNegative }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{dataBS}\OperatorTok{$}\NormalTok{NegativeSE)}
 \NormalTok{neg_hi <-}\StringTok{ }\NormalTok{dataBS}\OperatorTok{$}\NormalTok{perNegative }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.96} \OperatorTok{*}\StringTok{ }\NormalTok{dataBS}\OperatorTok{$}\NormalTok{NegativeSE)}
-\NormalTok{dataBS <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)}
+\NormalTok{dataBS <-}\KeywordTok{cbind}\NormalTok{(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1423,13 +1417,9 @@ With a dictionary, we aimed to classify our texts into different categories base
 \KeywordTok{library}\NormalTok{(quanteda.corpora)}
 
 \KeywordTok{data}\NormalTok{(data_corpus_ukmanifestos)}
-\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(data_corpus_ukmanifestos, }
-\NormalTok{    Year }\OperatorTok{==}\StringTok{ }\DecValTok{2001} \OperatorTok{|}\StringTok{ }\NormalTok{Year }\OperatorTok{==}\StringTok{ }\DecValTok{2005}\NormalTok{)}
-\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(corpus_manifestos, Party }\OperatorTok{==}\StringTok{ }
-\StringTok{    "Lab"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "LD"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "Con"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "SNP"} \OperatorTok{|}\StringTok{ }
-\StringTok{    }\NormalTok{Party }\OperatorTok{==}\StringTok{ "PCy"}\NormalTok{)}
-\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{remove =} \KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }
-    \DataTypeTok{remove_punct =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{remove_numbers =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(data_corpus_ukmanifestos, Year }\OperatorTok{==}\StringTok{ }\DecValTok{2001} \OperatorTok{|}\StringTok{ }\NormalTok{Year }\OperatorTok{==}\StringTok{ }\DecValTok{2005}\NormalTok{)}
+\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(corpus_manifestos, Party}\OperatorTok{==}\StringTok{"Lab"} \OperatorTok{|}\StringTok{ }\NormalTok{Party}\OperatorTok{==}\StringTok{"LD"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "Con"} \OperatorTok{|}\StringTok{ }\NormalTok{Party}\OperatorTok{==}\StringTok{ "SNP"} \OperatorTok{|}\StringTok{ }\NormalTok{Party}\OperatorTok{==}\StringTok{ "PCy"}\NormalTok{)}
+\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{remove =} \KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\DataTypeTok{remove_punct =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{remove_numbers =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm_tolower}\NormalTok{(data_manifestos_dfm, }\DataTypeTok{keep_acronyms =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1502,7 +1492,7 @@ When we run the \texttt{summary} command, we can see the word scores for each wo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pred_lbg <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(ws, }\DataTypeTok{rescaling =} \StringTok{"lbg"}\NormalTok{)}
+\NormalTok{pred_lbg <-}\KeywordTok{predict}\NormalTok{(ws, }\DataTypeTok{rescaling =} \StringTok{"lbg"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1512,7 +1502,7 @@ When we run the \texttt{summary} command, we can see the word scores for each wo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pred_mv <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(ws, }\DataTypeTok{rescaling =} \StringTok{"mv"}\NormalTok{, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+\NormalTok{pred_mv <-}\KeywordTok{predict}\NormalTok{(ws, }\DataTypeTok{rescaling =} \StringTok{"mv"}\NormalTok{, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1583,10 +1573,9 @@ To compare the scores, we will use the Concordance Correlation Coefficient as de
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{comparison <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(pred_lbg, scores))}
-\NormalTok{comparison <-}\StringTok{ }\NormalTok{comparison[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, ]}
+\NormalTok{comparison <-}\StringTok{ }\NormalTok{comparison[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,]}
 
-\KeywordTok{CCC}\NormalTok{(comparison}\OperatorTok{$}\NormalTok{scores, comparison}\OperatorTok{$}\NormalTok{pred_lbg, }\DataTypeTok{ci =} \StringTok{"z-transform"}\NormalTok{, }
-    \DataTypeTok{conf.level =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{CCC}\NormalTok{(comparison}\OperatorTok{$}\NormalTok{scores, comparison}\OperatorTok{$}\NormalTok{pred_lbg, }\DataTypeTok{ci =} \StringTok{"z-transform"}\NormalTok{, }\DataTypeTok{conf.level =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1641,8 +1630,25 @@ Apart from positioning the texts, we can also have a look at the words themselve
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{textplot_scale1d}\NormalTok{(ws, }\DataTypeTok{margin =} \StringTok{"features"}\NormalTok{, }\DataTypeTok{highlighted =} \KeywordTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{, }
-    \StringTok{"vote"}\NormalTok{, }\StringTok{"europe"}\NormalTok{, }\StringTok{"taxes"}\NormalTok{))}
+\KeywordTok{library}\NormalTok{(quanteda.textplots)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'quanteda.textplots'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:quanteda':
+## 
+##     as.igraph, as.network, textplot_keyness, textplot_network,
+##     textplot_wordcloud, textplot_xray
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{textplot_scale1d}\NormalTok{(ws, }\DataTypeTok{margin =} \StringTok{"features"}\NormalTok{, }\DataTypeTok{highlighted =}\KeywordTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{,}\StringTok{"vote"}\NormalTok{, }\StringTok{"europe"}\NormalTok{, }\StringTok{"taxes"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1682,8 +1688,7 @@ Here, we take the SNP party manifesto as the most left-wing (text 5), and the Co
 \begin{Highlighting}[]
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
 
-\NormalTok{wordfish <-}\StringTok{ }\KeywordTok{textmodel_wordfish}\NormalTok{(data_manifestos_dfm, }\DataTypeTok{dir =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }
-    \DecValTok{1}\NormalTok{))}
+\NormalTok{wordfish <-}\StringTok{ }\KeywordTok{textmodel_wordfish}\NormalTok{(data_manifestos_dfm, }\DataTypeTok{dir =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{))}
 \KeywordTok{summary}\NormalTok{(wordfish)}
 \end{Highlighting}
 \end{Shaded}
@@ -1738,8 +1743,7 @@ As with Wordscores, we can also plot graphs for Wordfish, using the same command
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{textplot_scale1d}\NormalTok{(wordfish, }\DataTypeTok{margin =} \StringTok{"features"}\NormalTok{, }\DataTypeTok{highlighted =} \KeywordTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{, }
-    \StringTok{"vote"}\NormalTok{, }\StringTok{"europe"}\NormalTok{, }\StringTok{"election"}\NormalTok{))}
+\KeywordTok{textplot_scale1d}\NormalTok{(wordfish, }\DataTypeTok{margin =} \StringTok{"features"}\NormalTok{, }\DataTypeTok{highlighted =} \KeywordTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{,}\StringTok{"vote"}\NormalTok{,}\StringTok{"europe"}\NormalTok{,}\StringTok{"election"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1766,7 +1770,32 @@ For the SVM, we will start with a textbook example using a dataset that comes wi
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(}\StringTok{"RTextTools"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Carico il pacchetto richiesto: SparseM
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'SparseM'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     backsolve
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'tree':
+##   method     from
+##   print.tree cli
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(USCongress)}
 \end{Highlighting}
 \end{Shaded}
@@ -1776,6 +1805,21 @@ As you can see, the variable \texttt{text} corresponds to sentences (one per row
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{doc_matrix <-}\StringTok{ }\KeywordTok{create_matrix}\NormalTok{(USCongress}\OperatorTok{$}\NormalTok{text, }\DataTypeTok{language =} \StringTok{"english"}\NormalTok{, }\DataTypeTok{removeNumbers =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{stemWords =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{removeSparseTerms =} \FloatTok{0.998}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in TermDocumentMatrix.SimpleCorpus(x, control): custom functions are
+## ignored
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in TermDocumentMatrix.SimpleCorpus(x, control): custom tokenizer is
+## ignored
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{doc_matrix}
 \end{Highlighting}
 \end{Shaded}
@@ -1848,7 +1892,7 @@ The next step is to check the performance of the model we just tested in terms o
 
 Precision gives the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that were classified in that category (irrespective of where they belong). Recall is the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that belong to this category (true positives plus false negatives). The F score is a weighted average between precision and recall ranging fro 0 to 1.
 
-Instead of using a seperate package, we can also use \texttt{quanteda} to carry out an SVM. For this, we again load the reviews we used ealier, select 1000 of them at random, and place them into our corpus:
+Instead of using a seperate package, we can also use \texttt{quanteda} to carry out an SVM. For this, we again load the reviews we used earlier, select 1000 of them at random, and place them into our corpus:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1895,7 +1939,7 @@ Now we can run the SVM algorithm. To do so, we tell the model on which dfm we wa
 ## textmodel_svm.dfm(x = dfm_reviews, y = docvars(dfm_reviews, "prediction"))
 ## 
 ## 727 training documents; 129,400 fitted features.
-## Method: L2-regularized logistic regression primal (L2R_LR)
+## Method: L2-regularized L2-loss support vector classification dual (L2R_L2LOSS_SVC_DUAL)
 \end{verbatim}
 
 Here we see that the algorithm used 720 texts to train the model (the one with a score) and fitted 133,728 features. The latter refers to the total number of words in the training texts and not only the unique ones. Now we can use this model to predict the ratings we removed earlier:
@@ -1919,14 +1963,14 @@ While we can of course look at the resulting numbers, we can also place them in 
 \begin{verbatim}
 ##     
 ##        1   2   3   4   7   8   9  10
-##   1  170  17  10  11   3   2   1   4
-##   2    8  84  10   3   2   2   0   2
-##   3    0   1  60   3   1   2   0   0
-##   4    2   3   7  72   1   3   0   1
-##   7    2   2   1   2  76   4   2   1
-##   8    0   3   1   1   4  89   2   1
-##   9    1   0   1   2   3   3  80   7
-##   10   7   2   0   2   8  18  12 178
+##   1  165  14   9   7   3   2   2   3
+##   2   10  86  12   6   2   3   0   2
+##   3    1   1  60   4   1   2   0   0
+##   4    2   3   6  71   2   3   0   0
+##   7    2   3   1   3  75   6   2   4
+##   8    0   3   1   2   4  88   2   3
+##   9    2   0   1   1   4   2  79   6
+##   10   8   2   0   2   7  17  12 176
 \end{verbatim}
 
 Here, the table shows the prediction of the algorithm from top to bottom and the original rating from left to right. What we want is that all cases are on the diagonal: in that case, the prediction is the same as the original rating. Here, this happens in the majority of cases. Also, only in a few cases is the algorithm far off.
@@ -1951,6 +1995,11 @@ While we can download the whole dataset, as it is rather large, it makes more se
 \NormalTok{manifesto_corpus <-}\StringTok{ }\KeywordTok{mp_corpus}\NormalTok{(manifestos)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Connecting to Manifesto Project DB API... corpus version: 2020-2 
+## Connecting to Manifesto Project DB API... corpus version: 2020-2
+\end{verbatim}
 
 For now, we are only interested in the (quasi)-sentences the of the manifestos, the codes the coders gave them, and names of the parties. To make everything more clear, we will take these elements from the corpus, combine them into a new data-frame, and remove all the NA values. We do this because otherwise the data would also include the headers and titles of the document, which do not have any codes assigned to them:
 
@@ -2011,64 +2060,64 @@ In our data-frame, the \emph{text} variable indicates the hand-coded quasi-sente
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{table}\NormalTok{(manifesto_data}\OperatorTok{$}\NormalTok{cmp_code, manifesto_data}\OperatorTok{$}\NormalTok{party)}
+\KeywordTok{table}\NormalTok{(manifesto_data}\OperatorTok{$}\NormalTok{cmp_code,manifesto_data}\OperatorTok{$}\NormalTok{party)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##      
 ##       CON GREEN LABOUR LIBDEM  PC SNP UKIP
-##   0     0    20      0     25   8   0    0
-##   101   6     0      2      3   0   0    3
-##   103   2     0      0      0   0   0    0
-##   104  67     5     31     43   7  18   63
-##   105   6    23      9     15   9  16   16
-##   106   4    20      6     20   5   1    2
-##   107  54    96     34     74  16  11   13
-##   108   9    18     29     51   7  22    9
-##   109   0     5      0      0   5   0   17
-##   110  73     9      1     15   3   1  222
-##   201  24    54     25    144   8  11   13
-##   202  20    60     44     81  20  21   24
-##   203   5     1      0      0   1   0    0
-##   204  15    15      9     10   4   3    1
-##   301  67    55     54     72  58 102   28
-##   303  41     6      7     24   3   3   43
-##   304   4    19      1      0   0   0   11
-##   305   6    31      3      2   4   9   10
-##   401  20     0      3      9   0   0   11
-##   402  42     2      8     24  11  54   50
-##   403  79   153     82    123  48  68   70
-##   404  93     0      4      2   2  20   14
-##   405   0     0      3      3   1  10    0
-##   406   6     2      1      7   2   4   39
+##   0    15    25      5      0   8   0    0
+##   101   0     5      0      6   0   0    3
+##   103   0     0      0      2   0   0    0
+##   104   5    45      0     96   7  18   63
+##   105  21    14      2     16   9  16   16
+##   106  18    22      2      8   5   1    2
+##   107  76    62     22     98  16  11   13
+##   108  17    44      4     42   7  22    9
+##   109   5     0      0      0   5   0   17
+##   110   8     2      2     86   3   1  222
+##   201  51   153      4     39   8  11   13
+##   202  60   113      9     23  20  21   24
+##   203   1     0      0      5   1   0    0
+##   204  15    19      0     15   4   3    1
+##   301  62   116      3     67  58 102   28
+##   303   8    28      1     41   3   3   43
+##   304  14     1      5      4   0   0   11
+##   305  20     1     14      7   4   9   10
+##   401   3     4      0     25   0   0   11
+##   402   8    24      2     42  11  54   50
+##   403 164   137     56     80  48  68   70
+##   404   4     2      0     93   2  20   14
+##   405   3     3      0      0   1  10    0
+##   406   0     7      2      7   2   4   39
 ##   407   0     0      0      0   0   0    8
-##   408   1    19      1      0   2   2    2
-##   409   9     7     10      3   1  24    3
-##   410  34     2     13     29  10  16    0
-##   411  89    29     48     87  49  51   12
-##   412   9    14     12     10   9  17    2
-##   413   0    69      3      2  12   7    4
-##   414  53     1     43     35   0  16   15
-##   416  14   167      2     50   7  15   36
-##   501  65   441     43    189  49  32   20
-##   502  34    14     19     11  42   9   13
-##   503  74   378     58    292 105  74   47
-##   504 138   241    129    194  91 124  204
-##   505  28     1      6      6   0   0   18
-##   506  82    87     44     86  27  39   70
-##   601  66     1     37      7   2   1  114
+##   408  16     0      4      1   2   2    2
+##   409   9     4      7      9   1  24    3
+##   410  11    30      2     35  10  16    0
+##   411  70    87      7     89  49  51   12
+##   412  18    10      8      9   9  17    2
+##   413  38     4     32      0  12   7    4
+##   414  43    36      0     53   0  16   15
+##   416  39    49    129     16   7  15   36
+##   501 157   220    295     66  49  32   20
+##   502  14    30      0     34  42   9   13
+##   503 220   324    184     74 105  74   47
+##   504 212   221    131    138  91 124  204
+##   505   1    10      0     30   0   0   18
+##   506 125    86      6     82  27  39   70
+##   601  27    17      1     66   2   1  114
 ##   602   0     0      0      0  17  21    0
-##   603  13     3      0      3   0   0    2
-##   604   0     0      1      1   0   0    0
-##   605 134     4     78     65   1  24   65
-##   606  35    76     21     14  33   1    3
-##   607   2    12      1      9  43   2    0
-##   608   6     0      6      2   0   0   10
-##   701  25    64     70     46  31  26   19
-##   702  12     0      0      0   0   0    0
-##   703  21     2      5     29  22  17   22
-##   706   1     9      3      0   1   0    0
+##   603   3     3      0     13   0   0    2
+##   604   1     1      0      0   0   0    0
+##   605   6   137      4    134   1  24   65
+##   606  57    27     27     35  33   1    3
+##   607  12    10      0      2  43   2    0
+##   608   2     6      0      6   0   0   10
+##   701  91    60     29     25  31  26   19
+##   702   0     0      0     12   0   0    0
+##   703   0    34      2     21  22  17   22
+##   706   2     1      9      1   1   0    0
 \end{verbatim}
 
 Here we see that some codes such as 604 and 407 are rare, while others such as 501 and 504 occur far more often. When we look at the codebook the coders used (\url{https://manifesto-project.wzb.eu/coding_schemes/mp_v5}), we find that 604 and 407 refer to \emph{Traditional Morality: Negative} and \emph{Protectionism: Negative}, while 501 and 504 refer to \emph{Environmental Protection} and \emph{Welfare State Expansion}. As such, it should also come as no surprise that the Green Party refers more to environmental protection than all other parties combined.
@@ -2077,8 +2126,7 @@ To get an even better idea of how much a party ``owns'' a code, we can calculate
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prop_row <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{((}\KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(manifesto_data}\OperatorTok{$}\NormalTok{cmp_code, }
-\NormalTok{    manifesto_data}\OperatorTok{$}\NormalTok{party), }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{))}
+\NormalTok{prop_row <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{((}\KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(manifesto_data}\OperatorTok{$}\NormalTok{cmp_code,manifesto_data}\OperatorTok{$}\NormalTok{party),}\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{))}
 \KeywordTok{names}\NormalTok{(prop_row) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Code"}\NormalTok{, }\StringTok{"Party"}\NormalTok{, }\StringTok{"Percentage"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2089,12 +2137,13 @@ While we can look at the results by looking at the \texttt{prop\_row} object, it
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ggplot2)}
 
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ prop_row, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Code, }\DataTypeTok{y =}\NormalTok{ Percentage, }\DataTypeTok{fill =}\NormalTok{ Party)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{scale_fill_manual}\NormalTok{(}\StringTok{""}\NormalTok{, }\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#0087DC"}\NormalTok{, }\StringTok{"#67B437"}\NormalTok{, }\StringTok{"#DC241F"}\NormalTok{, }
-        \StringTok{"#FAA61A"}\NormalTok{, }\StringTok{"#008142"}\NormalTok{, }\StringTok{"#FDF38E"}\NormalTok{, }\StringTok{"#780077"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
-    \DataTypeTok{position =} \StringTok{"stack"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{theme_classic}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.4}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{prop_row, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Code, }\DataTypeTok{y=}\NormalTok{Percentage, }\DataTypeTok{fill=}\NormalTok{Party)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_manual}\NormalTok{(}\StringTok{""}\NormalTok{, }\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#0087DC"}\NormalTok{,}\StringTok{"#67B437"}\NormalTok{,}\StringTok{"#DC241F"}\NormalTok{,}\StringTok{"#FAA61A"}\NormalTok{,}\StringTok{"#008142"}\NormalTok{,}\StringTok{"#FDF38E"}\NormalTok{,}\StringTok{"#780077"}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"stack"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_classic}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.40}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2106,8 +2155,7 @@ Another thing we can look at is what part of a party's manifesto belongs to any 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prop_col <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{((}\KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(manifesto_data}\OperatorTok{$}\NormalTok{cmp_code, }
-\NormalTok{    manifesto_data}\OperatorTok{$}\NormalTok{party), }\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{))}
+\NormalTok{prop_col <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{((}\KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(manifesto_data}\OperatorTok{$}\NormalTok{cmp_code,manifesto_data}\OperatorTok{$}\NormalTok{party), }\DecValTok{2}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{))}
 \KeywordTok{names}\NormalTok{(prop_col) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Code"}\NormalTok{, }\StringTok{"Party"}\NormalTok{, }\StringTok{"Percentage"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2129,8 +2177,7 @@ If we now type \texttt{prop\_col}, we can see what percentage of a party manifes
 \NormalTok{prop_col}\OperatorTok{$}\NormalTok{Domain[prop_col}\OperatorTok{$}\NormalTok{Code }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{] <-}\StringTok{ "NA"}
 
 \NormalTok{prop_col}\OperatorTok{$}\NormalTok{Domain <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(prop_col}\OperatorTok{$}\NormalTok{Domain)}
-\NormalTok{prop_col}\OperatorTok{$}\NormalTok{Domain <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(prop_col}\OperatorTok{$}\NormalTok{Domain, }\KeywordTok{levels}\NormalTok{(prop_col}\OperatorTok{$}\NormalTok{Domain)[}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }
-    \DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{5}\NormalTok{)])}
+\NormalTok{prop_col}\OperatorTok{$}\NormalTok{Domain <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(prop_col}\OperatorTok{$}\NormalTok{Domain,}\KeywordTok{levels}\NormalTok{(prop_col}\OperatorTok{$}\NormalTok{Domain)[}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{)])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2138,10 +2185,12 @@ We then construct a plot as we did above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ prop_col, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Party, }\DataTypeTok{y =}\NormalTok{ Percentage, }\DataTypeTok{fill =}\NormalTok{ Domain)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"stack"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }
-    \DecValTok{0}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_classic}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.4}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{prop_col, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Party, }\DataTypeTok{y=}\NormalTok{Percentage, }\DataTypeTok{fill=}\NormalTok{Domain)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"stack"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_classic}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.40}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2234,12 +2283,15 @@ While this is already better (we have to pay attention to the diagonal), the lar
 \begin{Highlighting}[]
 \NormalTok{table_class <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(table_class)}
 
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ table_class, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ predicted_class, }\DataTypeTok{y =}\NormalTok{ actual_class)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{geom_tile}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Freq)) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_fill_gradient}\NormalTok{(}\DataTypeTok{high =} \StringTok{"black"}\NormalTok{, }
-    \DataTypeTok{low =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{name =} \StringTok{"Value"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Predicted Class"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Actual Class"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_discrete}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{theme_classic}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.4}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ table_class, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ predicted_class, }\DataTypeTok{y =}\NormalTok{ actual_class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_tile}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Freq)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_gradient}\NormalTok{(}\DataTypeTok{high =} \StringTok{"black"}\NormalTok{, }\DataTypeTok{low =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{name=}\StringTok{"Value"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Predicted Class"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Actual Class"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_discrete}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_classic}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{vjust =} \FloatTok{0.40}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2286,13 +2338,9 @@ Latent Dirichlet Allocation, or LDA, relies on the idea is that each text is in 
 \KeywordTok{library}\NormalTok{(quanteda.corpora)}
 
 \KeywordTok{data}\NormalTok{(data_corpus_ukmanifestos)}
-\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(data_corpus_ukmanifestos, }
-\NormalTok{    Year }\OperatorTok{==}\StringTok{ }\DecValTok{2001}\NormalTok{)}
-\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(corpus_manifestos, Party }\OperatorTok{==}\StringTok{ }
-\StringTok{    "Lab"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "LD"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "Con"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "SNP"} \OperatorTok{|}\StringTok{ }
-\StringTok{    }\NormalTok{Party }\OperatorTok{==}\StringTok{ "PCy"}\NormalTok{)}
-\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{remove =} \KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }
-    \DataTypeTok{remove_punct =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{remove_numbers =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(data_corpus_ukmanifestos, Year }\OperatorTok{==}\StringTok{ }\DecValTok{2001}\NormalTok{)}
+\NormalTok{corpus_manifestos <-}\StringTok{ }\KeywordTok{corpus_subset}\NormalTok{(corpus_manifestos, Party}\OperatorTok{==}\StringTok{"Lab"} \OperatorTok{|}\StringTok{ }\NormalTok{Party}\OperatorTok{==}\StringTok{"LD"} \OperatorTok{|}\StringTok{ }\NormalTok{Party }\OperatorTok{==}\StringTok{ "Con"} \OperatorTok{|}\StringTok{ }\NormalTok{Party}\OperatorTok{==}\StringTok{ "SNP"} \OperatorTok{|}\StringTok{ }\NormalTok{Party}\OperatorTok{==}\StringTok{ "PCy"}\NormalTok{)}
+\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm}\NormalTok{(corpus_manifestos, }\DataTypeTok{remove =} \KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\DataTypeTok{remove_punct =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{remove_numbers =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm_tolower}\NormalTok{(data_manifestos_dfm, }\DataTypeTok{keep_acronyms =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2312,7 +2360,7 @@ Then, we fit an LDA model with 10 topics. First, we have to define some a priori
 \NormalTok{burnin <-}\StringTok{ }\DecValTok{2000}
 \NormalTok{iter <-}\StringTok{ }\DecValTok{1000}
 \NormalTok{thin <-}\StringTok{ }\DecValTok{200}
-\NormalTok{seed <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{42}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{158}\NormalTok{, }\DecValTok{2500}\NormalTok{)}
+\NormalTok{seed <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{42}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{158}\NormalTok{,}\DecValTok{2500}\NormalTok{)}
 \NormalTok{nstart <-}\StringTok{ }\DecValTok{5}
 \NormalTok{best <-}\StringTok{ }\OtherTok{TRUE}
 \end{Highlighting}
@@ -2322,9 +2370,7 @@ The LDA algorithm estimates topic-word probabilities as well as topic-document p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British_lda10 <-}\StringTok{ }\KeywordTok{LDA}\NormalTok{(manifestos_dtm, }\DataTypeTok{k =} \DecValTok{10}\NormalTok{, }\DataTypeTok{method =} \StringTok{"Gibbs"}\NormalTok{, }
-    \DataTypeTok{control =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{burnin =}\NormalTok{ burnin, }\DataTypeTok{iter =}\NormalTok{ iter, }\DataTypeTok{thin =}\NormalTok{ thin, }
-        \DataTypeTok{seed =}\NormalTok{ seed, }\DataTypeTok{nstart =}\NormalTok{ nstart, }\DataTypeTok{best =}\NormalTok{ best))}
+\NormalTok{British_lda10 <-}\KeywordTok{LDA}\NormalTok{(manifestos_dtm, }\DataTypeTok{k=}\DecValTok{10}\NormalTok{, }\DataTypeTok{method=}\StringTok{"Gibbs"}\NormalTok{, }\DataTypeTok{control=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{burnin=}\NormalTok{burnin, }\DataTypeTok{iter=}\NormalTok{iter, }\DataTypeTok{thin=}\NormalTok{thin, }\DataTypeTok{seed=}\NormalTok{seed, }\DataTypeTok{nstart=}\NormalTok{nstart, }\DataTypeTok{best=}\NormalTok{best))}
 
 \KeywordTok{terms}\NormalTok{(British_lda10, }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
@@ -2365,7 +2411,7 @@ Now, we load the packages and use the \texttt{tidy} command to prepare the datas
 \KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(ggplot2)}
 
-\NormalTok{British_lda10_topics <-}\StringTok{ }\KeywordTok{tidy}\NormalTok{(British_lda10, }\DataTypeTok{matrix =} \StringTok{"beta"}\NormalTok{)}
+\NormalTok{British_lda10_topics <-}\StringTok{ }\KeywordTok{tidy}\NormalTok{(British_lda10, }\DataTypeTok{matrix=}\StringTok{"beta"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2373,8 +2419,11 @@ If we would look into the dataset now, we would see that it has 57060 observatio
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British_lda10_topterms <-}\StringTok{ }\NormalTok{British_lda10_topics }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(topic) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{top_n}\NormalTok{(}\DecValTok{10}\NormalTok{, beta) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(topic, }\OperatorTok{-}\NormalTok{beta)}
+\NormalTok{British_lda10_topterms <-}\StringTok{ }\NormalTok{British_lda10_topics }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{group_by}\NormalTok{(topic) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{top_n}\NormalTok{(}\DecValTok{10}\NormalTok{, beta) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{arrange}\NormalTok{(topic, }\OperatorTok{-}\NormalTok{beta)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2382,9 +2431,12 @@ If we now look at the data-set, we see that it is much smaller and has the topic
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British_lda10_topterms }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{term =} \KeywordTok{reorder}\NormalTok{(term, beta)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(term, beta, }\DataTypeTok{fill =} \KeywordTok{factor}\NormalTok{(topic))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{topic, }\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_flip}\NormalTok{()}
+\NormalTok{British_lda10_topterms }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{term=}\KeywordTok{reorder}\NormalTok{(term, beta)) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(term, beta, }\DataTypeTok{fill=}\KeywordTok{factor}\NormalTok{(topic))) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{topic, }\DataTypeTok{scales=}\StringTok{"free"}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{coord_flip}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2396,7 +2448,7 @@ Another question we can ask is how much of each topic is in each of the document
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British_lda10_documents <-}\StringTok{ }\KeywordTok{tidy}\NormalTok{(British_lda10, }\DataTypeTok{matrix =} \StringTok{"gamma"}\NormalTok{)}
+\NormalTok{British_lda10_documents <-}\KeywordTok{tidy}\NormalTok{(British_lda10, }\DataTypeTok{matrix=}\StringTok{"gamma"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2404,14 +2456,20 @@ We then go through similar steps to make the data-set ready for use and prepare 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British_lda10_toptopics <-}\StringTok{ }\NormalTok{British_lda10_documents }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(document) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{top_n}\NormalTok{(}\DecValTok{10}\NormalTok{, gamma) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(topic, }\OperatorTok{-}\NormalTok{gamma)}
+\NormalTok{British_lda10_toptopics <-}\StringTok{ }\NormalTok{British_lda10_documents }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{group_by}\NormalTok{(document) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{top_n}\NormalTok{(}\DecValTok{10}\NormalTok{, gamma) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{arrange}\NormalTok{(topic, }\OperatorTok{-}\NormalTok{gamma)}
 
-\NormalTok{British_lda10_toptopics }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{term =} \KeywordTok{reorder}\NormalTok{(topic, gamma)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(topic, gamma, }\DataTypeTok{fill =} \KeywordTok{factor}\NormalTok{(topic))) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }
-        \DecValTok{10}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{document, }\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{    }\KeywordTok{theme_classic}\NormalTok{()}
+\NormalTok{British_lda10_toptopics }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{term=}\KeywordTok{reorder}\NormalTok{(topic, gamma)) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(topic, gamma, }\DataTypeTok{fill=}\KeywordTok{factor}\NormalTok{(topic))) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend=}\OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{))}\OperatorTok{+}
+\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{document, }\DataTypeTok{scales=}\StringTok{"free"}\NormalTok{) }\OperatorTok{+}
+\StringTok{ }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
+\StringTok{ }\KeywordTok{theme_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2435,6 +2493,10 @@ First, we load the packages we need for the Correspondence Analysis:
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa
+\end{verbatim}
+
 Then, we import the data. You can do so either by downloading the replication data yourselves, or use the file we already put up on GitHub:
 
 \begin{Shaded}
@@ -2445,7 +2507,8 @@ Then, we import the data. You can do so either by downloading the replication da
 \end{Shaded}
 
 \begin{verbatim}
-## Parsed with column specification:
+## 
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_character(),
 ##   TWEETID = col_double(),
@@ -2455,10 +2518,7 @@ Then, we import the data. You can do so either by downloading the replication da
 ##   RETWEET = col_double(),
 ##   FAV = col_double()
 ## )
-\end{verbatim}
-
-\begin{verbatim}
-## See spec(...) for full column specifications.
+## i Use `spec()` for the full column specifications.
 \end{verbatim}
 
 This data-set contains quite some information we do not need. To begin with, we remove all those variables that do not contain information about the 63 categories and the length of the tweet in words:
@@ -2530,7 +2590,7 @@ Here, we only plot the points as adding the labels as well will make the picture
 
 Here, remember to look only at the results from the second column onward. Here, we see that one extreme category for the second dimension (Conversational Style) was the use of a colon (:) or possessive proper nouns (such as Hillary's). This seems to fit well with the idea of conversational style. We can also see that the latter one also corresponds quite well with Dimension 3 (Campaigning Style), while the first one does not.
 
-Apart from this simple overview, Correspondence Analysis has many more features, some of which are included in the article and which include cluster analysis and heatmaps - which we recommend to take a look at
+Apart from this simple overview, Correspondence Analysis has many more features, some of which are included in the article and which include cluster analysis and heatmaps - which we recommend to take a look at.
 
 \hypertarget{refs}{}
 \leavevmode\hypertarget{ref-Albaugh2013}{}%

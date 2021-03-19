@@ -56,7 +56,7 @@ summary(analytics)
 
 Precision gives the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that were classified in that category (irrespective of where they belong). Recall is the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that belong to this category (true positives plus false negatives). The F score is a weighted average between precision and recall ranging fro 0 to 1.
 
-Instead of using a seperate package, we can also use `quanteda` to carry out an SVM. For this, we again load the reviews we used ealier, select 1000 of them at random, and place them into our corpus:
+Instead of using a seperate package, we can also use `quanteda` to carry out an SVM. For this, we again load the reviews we used earlier, select 1000 of them at random, and place them into our corpus:
 
 ```{r}
 detach("package:RTextTools", unload = TRUE)

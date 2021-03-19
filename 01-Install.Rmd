@@ -89,6 +89,7 @@ To install the package, type:
 
 ```{r, eval=FALSE}
 install.packages("quanteda", dependencies=TRUE)
+install.packages("quanteda.textplots", dependencies = TRUE)
 ```
 
 Besides this, there are several sister-packages of ```quanteda``` that contain functions that are not yet part of the main package. Often, these packages will become part of the main package at a later date. As they are still in development, they are not yet on CRAN, but still on GitHub. Install two of them (```quanteda.classifiers``` which we will use for supervised learning methods, and ```quanteda.dictionaries``` which we will use for dictionary analysis), and also install this package (also still in development) for the bootstrap version of Krippendorff's $\alpha$:
