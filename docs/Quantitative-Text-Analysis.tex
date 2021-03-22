@@ -111,7 +111,7 @@
 
 \title{Quantitative Text Analysis}
 \author{Kostas Gemenis \& Bastiaan Bruinsma}
-\date{2021-03-19}
+\date{2021-03-22}
 
 \begin{document}
 \maketitle
@@ -1232,36 +1232,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                    doc_id negative positive neg_positive neg_negative
-## 1   train/pos/4876_10.txt        7       15            0            0
-## 2    train/pos/5935_9.txt        8        5            0            0
-## 3  train/pos/12489_10.txt        9        6            0            0
-## 4    train/neg/9673_1.txt       18        3            0            0
-## 5    train/neg/2901_1.txt        9        4            0            0
-## 6    test/pos/5657_10.txt       24       10            0            0
-## 7    test/neg/11986_2.txt       19       20            0            0
-## 8     test/neg/1308_3.txt        9        7            0            0
-## 9     test/neg/8959_1.txt       22       19            0            0
-## 10   test/neg/11617_1.txt       16        6            0            0
-## 11   train/pos/9625_8.txt        4        6            0            0
-## 12     test/pos/992_7.txt        9       14            0            0
-## 13   train/neg/4782_4.txt        6       10            0            0
-## 14   test/pos/11867_8.txt        4        7            0            0
-## 15      test/pos/38_8.txt        2        7            0            0
-## 16    test/pos/6236_7.txt        9        2            0            0
-## 17  train/pos/6328_10.txt        3        8            0            0
-## 18   train/neg/2588_3.txt       10       11            0            0
-## 19     test/neg/773_1.txt       13        5            0            0
-## 20    test/neg/6089_3.txt       30       23            0            0
-## 21  train/neg/10758_1.txt       16        7            0            0
-## 22 train/pos/12377_10.txt       40       20            0            0
-## 23   test/pos/10592_8.txt        2        6            0            0
-## 24   train/pos/8853_7.txt       27       11            0            0
-## 25 train/pos/11751_10.txt        4        2            0            0
-## 26   test/pos/5653_10.txt      113       40            0            0
-## 27  train/pos/4014_10.txt       12        4            0            0
-## 28   train/pos/1824_8.txt       14       17            0            0
-## 29   train/pos/5139_9.txt        0        2            0            0
-## 30   train/neg/6511_1.txt        4        1            0            0
+## 1    test/pos/4045_10.txt       10       15            0            0
+## 2     test/pos/1289_8.txt        6        8            0            0
+## 3     test/neg/9864_4.txt        6       14            0            0
+## 4     test/pos/6912_7.txt       17       47            0            0
+## 5    test/pos/5612_10.txt        6       10            0            0
+## 6    train/pos/6196_8.txt        7       13            0            0
+## 7     test/pos/2765_9.txt       10       17            0            0
+## 8    train/pos/9592_8.txt       11        4            0            0
+## 9    train/neg/8245_1.txt       12        5            0            0
+## 10   train/pos/5122_9.txt        3        9            0            0
+## 11   train/neg/6070_4.txt       17        9            0            0
+## 12  train/pos/8480_10.txt        6       11            0            0
+## 13     test/neg/867_2.txt       70       32            0            0
+## 14  train/neg/11909_1.txt        8        2            0            0
+## 15   train/pos/9812_7.txt        9       11            0            0
+## 16   test/neg/10507_2.txt        9       11            0            0
+## 17 train/pos/10115_10.txt        7        4            0            0
+## 18   train/neg/2646_3.txt        8       11            0            0
+## 19   train/pos/8248_9.txt        6       20            0            0
+## 20  train/pos/7047_10.txt        4       11            0            0
+## 21   test/pos/10686_7.txt        5        9            0            0
+## 22   train/neg/1758_1.txt       13        6            0            0
+## 23   train/neg/3963_2.txt       14        6            0            0
+## 24   train/pos/8293_8.txt        9       19            0            0
+## 25   train/neg/2260_1.txt        5        6            0            0
+## 26    test/neg/7668_1.txt       22       13            0            0
+## 27   test/pos/4421_10.txt        2       19            0            0
+## 28   train/pos/9397_9.txt       19       17            0            0
+## 29   train/neg/1816_1.txt       12        8            0            0
+## 30     test/pos/663_9.txt       14       24            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
