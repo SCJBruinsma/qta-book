@@ -7,7 +7,7 @@ No analysis is possible unless we have some data to work with. In the following 
 R sees any form of text as a type of characters vector. In their simplest form, these vectors only have a single character in it. At their most complicated, they can contain many sentences or even whole stories. To see how many characters a vector has, we can use the `nchar` function:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-vector1 <- 'This is an example of a character vector'
+vector1 <- 'This is the first of our character vectors'
 nchar(vector1)
 length(vector1)
 ```
