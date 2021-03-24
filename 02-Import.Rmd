@@ -120,12 +120,12 @@ for(file in files) {
 }
 ```
 
-We can now read the .txt files into R. To do so, we use `paste0(txt_directory, "*")` to tell `readtext` to look into our `txt_directory`, and read any file in there. Besides this, we need to specify the encoding. Most often, this is **UTF-8**, though sometimes you might find **latin1** or **Windows-1252** encodings. While `readtext` will convert all these to **UTF-8**, you have to specify the original encoding. To find out which one you need, you have to look into the properties of the .txt file. In any case, R will show you an error if the encoding is not right, which is a good sign you should change your encoding. Also see https://msdn.microsoft.com/en-us/library/windows/desktop/dd317756(v=vs.85).aspx, under **.NET Name** for an overview of possible encodings.
+We can now read the .txt files into R. To do so, we use `paste0(txt_directory, "*")` to tell `readtext` to look into our `txt_directory`, and read any file in there. Besides this, we need to specify the encoding. Most often, this is **UTF-8**, though sometimes you might find **latin1** or **Windows-1252** encodings. While `readtext` will convert all these to **UTF-8**, you have to specify the original encoding. To find out which one you need, you have to look into the properties of the .txt file.
 
 Assuming our texts are in UTF-8 encoding, we run:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), eval=FALSE}
-data_texts <-readtext(paste0(txt_directory, "*"), encoding = "UTF-8")
+data_texts <- readtext(paste0(txt_directory, "*"), encoding = "UTF-8")
 ```
 
 The result of this is a data frame of texts, which we can transform into a corpus for use in `quanteda` or keep as it is for other types of analyses.

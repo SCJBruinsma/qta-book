@@ -90,6 +90,59 @@ Finally, we can have a look at the confidence intervals around the scores we cre
 textplot_scale1d(pred_mv, margin = "documents")
 ```
 
+Note that we can also make this graph ourselves. This requires some data-wrangling and the use of a new package. The first thing we do is take our data and re-arrange it using the ``dplyr`` package:
+
+```{r}
+library(dplyr)
+
+comparison <- cbind(rownames(comparison), comparison)
+comparison <- as_tibble(comparison %>%
+                          rename(id = 1))
+```
+
+Then, we calculate the lower bound, upper bound, standard error and fit (the middle value), place that into a dataframe and sort it:
+
+```{r}
+textplot <- cbind(rownames(as.data.frame(pred_mv$se.fit)), pred_mv$fit, pred_mv$se.fit) %>%
+  as_tibble() %>%
+  rename(id = 1,
+         se = 5) %>%
+  mutate(fit = as.numeric(fit),
+         lwr = as.numeric(lwr),
+         upr = as.numeric(upr),
+         se = as.numeric(se),
+         year = as.factor(stringr::str_sub(id, start = 9, end = 12))) %>%
+  arrange(-fit)
+
+textplot$id = with(textplot,  reorder(id, fit))
+```
+
+Then, we plot this data using ```ggplot```:
+
+```{r}
+ggplot(data = textplot, aes(x = fit, y = id)) +
+  geom_point(aes(colour = year)) +
+  geom_errorbarh(aes(xmax = upr, xmin = lwr, colour = year), height = 0) +
+  theme_classic() +
+  scale_colour_manual(values = c("#ffa600", "#ff6361"),
+                      name = "Years:",
+                      breaks = c("2001", "2005"),
+                      labels = c("2001", "2005")) +
+  labs(title = "Left-Right Distribution of UK Party Manifestos",
+       subtitle = "with 95% confidence intervals",
+       x = "Left - Right score: lower is more left",
+       y = NULL) +
+  theme(plot.title = element_text(size = 20, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.position = "top",
+        legend.title = element_text(face = "bold", size = 10, colour = "grey45"),
+        legend.text = element_text(size = 10, colour = "grey45"),
+        legend.background = element_rect(fill = "white", colour = "white"))
+
+
+```
+
+
 ## Wordfish
 
 Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale. So, from our dfm, we first only take the 2005 texts:
