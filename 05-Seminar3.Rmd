@@ -145,13 +145,7 @@ ggplot(data = textplot, aes(x = fit, y = id)) +
 
 ## Wordfish
 
-Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale. So, from our dfm, we first only take the 2005 texts:
-
-```{r}
-data_manifestos_dfm <- dfm_subset(data_manifestos_dfm, Year == 2005)
-
-data_manifestos_dfm@Dimnames$docs
-```
+Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale. 
 
 Here, we take the SNP party manifesto as the most left-wing (text 5), and the Conservative manifesto as the most right-wing (text 1). Before we run the model, we set a seed as the model draws random numbers and we want our work to be replicable:
 

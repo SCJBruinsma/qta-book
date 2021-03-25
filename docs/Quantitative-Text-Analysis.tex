@@ -111,7 +111,7 @@
 
 \title{Quantitative Text Analysis}
 \author{Kostas Gemenis \& Bastiaan Bruinsma}
-\date{2021-03-22}
+\date{2021-03-24}
 
 \begin{document}
 \maketitle
@@ -322,13 +322,13 @@ R sees any form of text as a type of characters vector. In their simplest form, 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector1 <-}\StringTok{ 'This is an example of a character vector'}
+\NormalTok{vector1 <-}\StringTok{ 'This is the first of our character vectors'}
 \KeywordTok{nchar}\NormalTok{(vector1)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 40
+## [1] 42
 \end{verbatim}
 
 \begin{Shaded}
@@ -543,13 +543,13 @@ We then use this function to extract all the pdf files in the \texttt{pdf\_direc
 \end{Highlighting}
 \end{Shaded}
 
-We can now read the .txt files into R. To do so, we use \texttt{paste0(txt\_directory,\ "*")} to tell \texttt{readtext} to look into our \texttt{txt\_directory}, and read any file in there. Besides this, we need to specify the encoding. Most often, this is \textbf{UTF-8}, though sometimes you might find \textbf{latin1} or \textbf{Windows-1252} encodings. While \texttt{readtext} will convert all these to \textbf{UTF-8}, you have to specify the original encoding. To find out which one you need, you have to look into the properties of the .txt file. In any case, R will show you an error if the encoding is not right, which is a good sign you should change your encoding. Also see \url{https://msdn.microsoft.com/en-us/library/windows/desktop/dd317756(v=vs.85}).aspx, under \textbf{.NET Name} for an overview of possible encodings.
+We can now read the .txt files into R. To do so, we use \texttt{paste0(txt\_directory,\ "*")} to tell \texttt{readtext} to look into our \texttt{txt\_directory}, and read any file in there. Besides this, we need to specify the encoding. Most often, this is \textbf{UTF-8}, though sometimes you might find \textbf{latin1} or \textbf{Windows-1252} encodings. While \texttt{readtext} will convert all these to \textbf{UTF-8}, you have to specify the original encoding. To find out which one you need, you have to look into the properties of the .txt file.
 
 Assuming our texts are in UTF-8 encoding, we run:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_texts <-}\KeywordTok{readtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(txt_directory, }\StringTok{"*"}\NormalTok{), }\DataTypeTok{encoding =} \StringTok{"UTF-8"}\NormalTok{)}
+\NormalTok{data_texts <-}\StringTok{ }\KeywordTok{readtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(txt_directory, }\StringTok{"*"}\NormalTok{), }\DataTypeTok{encoding =} \StringTok{"UTF-8"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1232,36 +1232,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                    doc_id negative positive neg_positive neg_negative
-## 1    test/pos/4045_10.txt       10       15            0            0
-## 2     test/pos/1289_8.txt        6        8            0            0
-## 3     test/neg/9864_4.txt        6       14            0            0
-## 4     test/pos/6912_7.txt       17       47            0            0
-## 5    test/pos/5612_10.txt        6       10            0            0
-## 6    train/pos/6196_8.txt        7       13            0            0
-## 7     test/pos/2765_9.txt       10       17            0            0
-## 8    train/pos/9592_8.txt       11        4            0            0
-## 9    train/neg/8245_1.txt       12        5            0            0
-## 10   train/pos/5122_9.txt        3        9            0            0
-## 11   train/neg/6070_4.txt       17        9            0            0
-## 12  train/pos/8480_10.txt        6       11            0            0
-## 13     test/neg/867_2.txt       70       32            0            0
-## 14  train/neg/11909_1.txt        8        2            0            0
-## 15   train/pos/9812_7.txt        9       11            0            0
-## 16   test/neg/10507_2.txt        9       11            0            0
-## 17 train/pos/10115_10.txt        7        4            0            0
-## 18   train/neg/2646_3.txt        8       11            0            0
-## 19   train/pos/8248_9.txt        6       20            0            0
-## 20  train/pos/7047_10.txt        4       11            0            0
-## 21   test/pos/10686_7.txt        5        9            0            0
-## 22   train/neg/1758_1.txt       13        6            0            0
-## 23   train/neg/3963_2.txt       14        6            0            0
-## 24   train/pos/8293_8.txt        9       19            0            0
-## 25   train/neg/2260_1.txt        5        6            0            0
-## 26    test/neg/7668_1.txt       22       13            0            0
-## 27   test/pos/4421_10.txt        2       19            0            0
-## 28   train/pos/9397_9.txt       19       17            0            0
-## 29   train/neg/1816_1.txt       12        8            0            0
-## 30     test/pos/663_9.txt       14       24            0            0
+## 1    test/pos/5198_10.txt       12        5            0            0
+## 2    test/pos/1826_10.txt        2        7            0            0
+## 3   train/neg/10278_1.txt        9       18            0            0
+## 4     test/pos/5001_8.txt        1        4            0            0
+## 5     test/neg/7651_3.txt        9        8            0            0
+## 6     train/neg/888_4.txt        6        7            0            0
+## 7     test/pos/9534_9.txt       21       72            0            0
+## 8    train/neg/8635_4.txt        9        8            0            0
+## 9   train/pos/10896_8.txt        7        8            0            0
+## 10   train/pos/8774_8.txt       15       27            0            0
+## 11    test/neg/8891_2.txt       10        4            0            0
+## 12  train/pos/6320_10.txt        2        7            0            0
+## 13    test/neg/3200_2.txt        8        4            0            0
+## 14   train/neg/9243_4.txt        8        7            0            0
+## 15   test/neg/11615_1.txt        2        3            0            0
+## 16    test/neg/5697_3.txt        6        7            0            0
+## 17   train/neg/9881_1.txt       15        8            0            0
+## 18    test/neg/7189_2.txt        5        7            0            0
+## 19   train/neg/5780_4.txt        9        8            0            0
+## 20   train/pos/4486_7.txt       16       21            0            0
+## 21   test/pos/1087_10.txt        2       15            0            0
+## 22 train/pos/10583_10.txt       17       22            0            0
+## 23   test/pos/10909_7.txt        2       20            0            0
+## 24  train/pos/1564_10.txt        4        8            0            0
+## 25  train/neg/11485_2.txt       23       16            0            0
+## 26    test/neg/5605_1.txt       25       26            0            0
+## 27   test/pos/5901_10.txt        4        3            0            0
+## 28    test/pos/8670_9.txt       10        8            0            0
+## 29   train/pos/1821_8.txt        4       12            0            0
+## 30    test/neg/1279_3.txt       18       10            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -1664,23 +1664,77 @@ Finally, we can have a look at the confidence intervals around the scores we cre
 
 \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-83-1.pdf}
 
-\hypertarget{wordfish}{%
-\section{Wordfish}\label{wordfish}}
-
-Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale. So, from our dfm, we first only take the 2005 texts:
+Note that we can also make this graph ourselves. This requires some data-wrangling and the use of a new package. The first thing we do is take our data and re-arrange it using the \texttt{dplyr} package:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_manifestos_dfm <-}\StringTok{ }\KeywordTok{dfm_subset}\NormalTok{(data_manifestos_dfm, Year }\OperatorTok{==}\StringTok{ }\DecValTok{2005}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(dplyr)}
 
-\NormalTok{data_manifestos_dfm}\OperatorTok{@}\NormalTok{Dimnames}\OperatorTok{$}\NormalTok{docs}
+\NormalTok{comparison <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(comparison), comparison)}
+\NormalTok{comparison <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(comparison }\OperatorTok{%>%}
+\StringTok{                          }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{id =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we calculate the lower bound, upper bound, standard error and fit (the middle value), place that into a dataframe and sort it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{textplot <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(pred_mv}\OperatorTok{$}\NormalTok{se.fit)), pred_mv}\OperatorTok{$}\NormalTok{fit, pred_mv}\OperatorTok{$}\NormalTok{se.fit) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as_tibble}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{id =} \DecValTok{1}\NormalTok{,}
+         \DataTypeTok{se =} \DecValTok{5}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{fit =} \KeywordTok{as.numeric}\NormalTok{(fit),}
+         \DataTypeTok{lwr =} \KeywordTok{as.numeric}\NormalTok{(lwr),}
+         \DataTypeTok{upr =} \KeywordTok{as.numeric}\NormalTok{(upr),}
+         \DataTypeTok{se =} \KeywordTok{as.numeric}\NormalTok{(se),}
+         \DataTypeTok{year =} \KeywordTok{as.factor}\NormalTok{(stringr}\OperatorTok{::}\KeywordTok{str_sub}\NormalTok{(id, }\DataTypeTok{start =} \DecValTok{9}\NormalTok{, }\DataTypeTok{end =} \DecValTok{12}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\OperatorTok{-}\NormalTok{fit)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "UK_natl_2005_en_Con" "UK_natl_2005_en_Lab" "UK_natl_2005_en_LD" 
-## [4] "UK_natl_2005_en_PCy" "UK_natl_2005_en_SNP"
+## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{textplot}\OperatorTok{$}\NormalTok{id =}\StringTok{ }\KeywordTok{with}\NormalTok{(textplot,  }\KeywordTok{reorder}\NormalTok{(id, fit))}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we plot this data using \texttt{ggplot}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ textplot, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ fit, }\DataTypeTok{y =}\NormalTok{ id)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ year)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbarh}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xmax =}\NormalTok{ upr, }\DataTypeTok{xmin =}\NormalTok{ lwr, }\DataTypeTok{colour =}\NormalTok{ year), }\DataTypeTok{height =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_classic}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_colour_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"#ffa600"}\NormalTok{, }\StringTok{"#ff6361"}\NormalTok{),}
+                      \DataTypeTok{name =} \StringTok{"Years:"}\NormalTok{,}
+                      \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\StringTok{"2001"}\NormalTok{, }\StringTok{"2005"}\NormalTok{),}
+                      \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"2001"}\NormalTok{, }\StringTok{"2005"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Left-Right Distribution of UK Party Manifestos"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"with 95% confidence intervals"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Left - Right score: lower is more left"}\NormalTok{,}
+       \DataTypeTok{y =} \OtherTok{NULL}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
+        \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
+        \DataTypeTok{legend.position =} \StringTok{"top"}\NormalTok{,}
+        \DataTypeTok{legend.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{colour =} \StringTok{"grey45"}\NormalTok{),}
+        \DataTypeTok{legend.text =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{colour =} \StringTok{"grey45"}\NormalTok{),}
+        \DataTypeTok{legend.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"white"}\NormalTok{, }\DataTypeTok{colour =} \StringTok{"white"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-86-1.pdf}
+
+\hypertarget{wordfish}{%
+\section{Wordfish}\label{wordfish}}
+
+Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale.
 
 Here, we take the SNP party manifesto as the most left-wing (text 5), and the Conservative manifesto as the most right-wing (text 1). Before we run the model, we set a seed as the model draws random numbers and we want our work to be replicable:
 
@@ -1699,26 +1753,31 @@ Here, we take the SNP party manifesto as the most left-wing (text 5), and the Co
 ## textmodel_wordfish.dfm(x = data_manifestos_dfm, dir = c(5, 1))
 ## 
 ## Estimated Document Positions:
-##                       theta      se
-## UK_natl_2005_en_Con  0.1996 0.02380
-## UK_natl_2005_en_Lab  1.5893 0.01327
-## UK_natl_2005_en_LD  -0.4141 0.01207
-## UK_natl_2005_en_PCy -0.2888 0.01967
-## UK_natl_2005_en_SNP -1.0859 0.01170
+##                       theta       se
+## UK_natl_2001_en_Con  0.4073 0.007912
+## UK_natl_2001_en_Lab  0.7961 0.002041
+## UK_natl_2001_en_LD   0.4278 0.005803
+## UK_natl_2001_en_PCy  0.2394 0.015333
+## UK_natl_2001_en_SNP -1.1216 0.009733
+## UK_natl_2005_en_Con  0.4746 0.008820
+## UK_natl_2005_en_Lab  0.8193 0.002132
+## UK_natl_2005_en_LD   0.2334 0.009509
+## UK_natl_2005_en_PCy  0.1187 0.016545
+## UK_natl_2005_en_SNP -2.3952 0.003285
 ## 
 ## Estimated Feature Scores:
 ##        time common  sense conservative manifesto introduction  lives raising
-## beta 0.3956 0.4632 0.5303      0.07203    0.8945       0.4418 0.5508 0.90810
-## psi  2.5781 0.6379 0.3440      2.20920    2.2917       0.5671 1.3633 0.09449
-##      family living  safely earning staying healthy growing  older knowing
-## beta  0.824 0.8685 -1.1472  0.1368   2.201  0.9645  0.6282 1.3175   1.866
-## psi   1.292 0.5964 -0.6271 -1.8265  -3.080  0.4524  0.4735 0.6109  -3.298
-##       world  leader stronger society    town country  proud democracy
-## beta 0.1994  0.2138   1.0079   0.608  0.4035  0.8113 0.3435    0.4804
-## psi  2.7040 -0.7441   0.7017   1.527 -0.2928  2.0418 0.6847    1.4325
-##      conclusion present ambitious programme generation
-## beta      1.866 -0.8747    0.1223    1.3017     1.3467
-## psi      -3.298  0.9100    0.4787    0.7419     0.2495
+## beta 0.3326 0.5493 0.9933        0.713    0.5571      -0.2696 0.1406  1.4518
+## psi  2.9630 1.6849 1.3063        2.180    2.2596       1.1291 1.6999  0.3921
+##      family living   safely earning staying healthy growing   older knowing
+## beta  1.647  1.234 -0.58699  1.0747   1.762  0.6234  -0.134  5.4931  0.7284
+## psi   1.350  1.261 -0.01128 -0.7079  -1.104  0.9669   1.133 -0.4511 -0.5886
+##        world  leader stronger society    town country civilised   proud
+## beta -0.2797 0.07871   0.6767  0.5913 -0.4636  0.2083    0.6020 -0.5752
+## psi   3.0916 0.07299   1.3332  2.0658  0.1865  2.5920   -0.6999  0.9699
+##      democracy conclusion present ambitious programme
+## beta     1.379      1.074 -0.2176   -0.3005    0.8894
+## psi      1.247     -1.555  1.4890    0.7119    1.6870
 \end{verbatim}
 
 Here, \emph{theta} gives us the position of the text. As with Wordscores, we can also calculate the confidence intervals (note that \emph{theta} is now called \emph{fit}):
@@ -1731,12 +1790,17 @@ Here, \emph{theta} gives us the position of the text. As with Wordscores, we can
 
 \begin{verbatim}
 ## $fit
-##                            fit        lwr        upr
-## UK_natl_2005_en_Con  0.1996001  0.1529507  0.2462495
-## UK_natl_2005_en_Lab  1.5893219  1.5633088  1.6153349
-## UK_natl_2005_en_LD  -0.4141376 -0.4378016 -0.3904737
-## UK_natl_2005_en_PCy -0.2888387 -0.3273947 -0.2502826
-## UK_natl_2005_en_SNP -1.0859457 -1.1088772 -1.0630142
+##                            fit         lwr        upr
+## UK_natl_2001_en_Con  0.4073476  0.39184076  0.4228544
+## UK_natl_2001_en_Lab  0.7961425  0.79214157  0.8001435
+## UK_natl_2001_en_LD   0.4278410  0.41646775  0.4392142
+## UK_natl_2001_en_PCy  0.2394317  0.20937909  0.2694843
+## UK_natl_2001_en_SNP -1.1216001 -1.14067682 -1.1025234
+## UK_natl_2005_en_Con  0.4746273  0.45734053  0.4919142
+## UK_natl_2005_en_Lab  0.8193327  0.81515345  0.8235120
+## UK_natl_2005_en_LD   0.2333605  0.21472411  0.2519970
+## UK_natl_2005_en_PCy  0.1186673  0.08624069  0.1510940
+## UK_natl_2005_en_SNP -2.3951506 -2.40158974 -2.3887115
 \end{verbatim}
 
 As with Wordscores, we can also plot graphs for Wordfish, using the same commands:
@@ -1747,7 +1811,7 @@ As with Wordscores, we can also plot graphs for Wordfish, using the same command
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-87-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-89-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1755,7 +1819,7 @@ As with Wordscores, we can also plot graphs for Wordfish, using the same command
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-87-2.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-89-2.pdf}
 
 \hypertarget{supervised-methods}{%
 \chapter{Supervised Methods}\label{supervised-methods}}
@@ -2147,7 +2211,7 @@ While we can look at the results by looking at the \texttt{prop\_row} object, it
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-108-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-110-1.pdf}
 
 Now, we can see that some parties dominate some categories, while for others the spread is more even. For example, UKIP dominates the categories 406 and 407 - dealing with positive and negative mentions of protectionism, while the Conservatives do the same with category 103 (\emph{Anti-Imperialism}). Note though, that these are percentages. This means that the reason the Conservatives dominate category 103 is as they have two (quasi)-sentences with that category. The others do not have the category at all (702 on \emph{Negative Mentioning of Labour Groups} has the same issue). Other categories, such as 403 (\emph{Market Regulation}) and 502 (\emph{Positive Mentions of Culture}) are way better spread out over all the parties.
 
@@ -2194,7 +2258,7 @@ We then construct a plot as we did above:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-111-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-113-1.pdf}
 
 Here, we see that the Domain of \emph{Welfare and Quality of Life} was the most dominant in all the manifestos, with \emph{Economy} coming second. Also, especially UKIP paid a lot of attention to \emph{External Relations}, while the Green party paid little attention to the \emph{Fabric of Society}. In all, this gives us a good idea of what type of data we are actually dealing with.
 
@@ -2295,7 +2359,7 @@ While this is already better (we have to pay attention to the diagonal), the lar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 Here, we can see that a high number of cases are on the diagonal, which indicates that the algorithm did a good job. Yet, it also classified a large number of sentences into the 503 and 504 categories, while they belonged to any of the other categories.
 
@@ -2440,7 +2504,7 @@ If we now look at the data-set, we see that it is much smaller and has the topic
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-130-1.pdf}
 
 What is clear here is that looking at only the words in each topic only says so much. In the first topic, the term ``meps'' is more important than anything else, and so is ``eu'' in topic number 10. Also, in topic number six, we see that a bullet symbol causes the highest beta value - which indicates how important it is that we remove this kind of clutter (which we forgot about here).
 
@@ -2473,7 +2537,7 @@ We then go through similar steps to make the data-set ready for use and prepare 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-130-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-132-1.pdf}
 
 Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.
 
@@ -2537,7 +2601,7 @@ We can then run the MCA with the \texttt{FactoMineR} package. For this, we have 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-4.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-4.pdf}
 
 First, let's start by looking at the association of the wordlength with the five dimensions:
 
@@ -2565,7 +2629,7 @@ As we can see, the word length has a strong correlation with Dimension 1. This b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-138-1.pdf}
 
 Here, we only plot the points as adding the labels as well will make the picture quite cluttered. In the article, Dimension 2 is identified as ``Conversational Style'' and Dimension 3 as ``Campaigning Style''. The plot thus nicely shows us that some categories belong to one of these dimensions and not to the other. To see for which cases this is mostly the case (the ones that have the most extreme positions), we can have a look at their coordinates:
 
