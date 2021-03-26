@@ -1256,36 +1256,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                   doc_id negative positive neg_positive neg_negative
-## 1   train/pos/5639_7.txt        4       10            0            0
-## 2  train/neg/10793_4.txt        8        6            0            0
-## 3    test/pos/9093_7.txt       24       18            0            0
-## 4    test/neg/7058_2.txt        4        5            0            0
-## 5    test/pos/1935_7.txt       17       19            0            0
-## 6    test/pos/535_10.txt        0        5            0            0
-## 7    test/pos/7669_9.txt        4       10            0            0
-## 8   train/neg/5389_3.txt       16        8            0            0
-## 9  train/pos/7009_10.txt        1       17            0            0
-## 10  test/pos/10922_8.txt        4       20            0            0
-## 11  train/neg/6683_1.txt       11        7            0            0
-## 12   test/neg/4775_2.txt       15        8            0            0
-## 13   train/neg/909_1.txt        6        3            0            0
-## 14  test/pos/5990_10.txt        4       16            0            0
-## 15   test/neg/4703_3.txt       19       32            0            0
-## 16   test/neg/1950_1.txt        4        7            0            0
-## 17   test/neg/7161_4.txt        5        6            0            0
-## 18  test/neg/10003_3.txt       16       15            0            0
-## 19   test/neg/6513_4.txt        4       12            0            0
-## 20  train/pos/1561_8.txt        4        6            0            0
-## 21  train/neg/3262_3.txt       15       17            0            0
-## 22 train/pos/10587_8.txt       10        5            0            0
-## 23  train/neg/6738_1.txt       10       22            0            0
-## 24 train/pos/8406_10.txt        2        5            0            0
-## 25   test/neg/5774_1.txt       10        2            0            0
-## 26  test/pos/2248_10.txt        5        5            0            0
-## 27 train/neg/11371_1.txt        4        3            0            0
-## 28 train/pos/1831_10.txt        5       12            0            0
-## 29  test/pos/11743_9.txt        9       25            0            0
-## 30  train/neg/5300_4.txt        6        9            0            0
+## 1  train/pos/3100_10.txt        3        7            0            0
+## 2    test/neg/3526_3.txt       50       13            0            0
+## 3    train/pos/431_8.txt        4       16            0            0
+## 4    test/neg/7805_1.txt       11        8            0            0
+## 5   train/neg/9509_1.txt        2        2            0            0
+## 6    test/neg/5396_1.txt       12       10            0            0
+## 7  test/pos/10700_10.txt        6       12            0            0
+## 8  train/pos/7290_10.txt        6       18            0            0
+## 9   train/neg/9083_1.txt        6        6            0            0
+## 10  train/neg/1673_2.txt        3        3            0            0
+## 11  train/pos/3483_9.txt        5        4            0            0
+## 12  train/pos/2725_8.txt       15       16            0            0
+## 13  test/neg/12478_4.txt       24        9            0            0
+## 14  train/neg/7808_1.txt       13        8            0            0
+## 15   test/neg/3506_1.txt       10        3            0            0
+## 16 train/pos/2222_10.txt        2        5            0            0
+## 17  train/neg/5629_2.txt        4        7            0            0
+## 18   test/neg/6738_2.txt       19       12            0            0
+## 19 train/pos/10855_9.txt        8        3            0            0
+## 20  test/neg/10208_1.txt        2        4            0            0
+## 21 train/pos/3980_10.txt        5        5            0            0
+## 22  test/neg/11576_1.txt       12        1            0            0
+## 23  test/pos/4186_10.txt        9        9            0            0
+## 24   test/neg/3782_1.txt       16        7            0            0
+## 25   test/neg/2297_4.txt       18       22            0            0
+## 26  train/neg/5049_3.txt        8        9            0            0
+## 27  test/pos/7001_10.txt        9       12            0            0
+## 28  train/neg/1322_1.txt       13       10            0            0
+## 29  train/neg/9251_3.txt        4        1            0            0
+## 30   test/neg/2614_3.txt        3        7            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -2599,6 +2599,8 @@ Here is an alternative:
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(quanteda.dictionaries)}
 
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+
 \NormalTok{dict }\OtherTok{\textless{}{-}} \FunctionTok{dictionary}\NormalTok{(data\_dictionary\_LaverGarry)}
 
 \NormalTok{seededmodel }\OtherTok{\textless{}{-}} \FunctionTok{textmodel\_seededlda}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{dictionary=}\NormalTok{dict)}
@@ -2608,48 +2610,48 @@ Here is an alternative:
 \end{Shaded}
 
 \begin{verbatim}
-##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS       INSTITUTIONS 
-##  [1,] "people"      "work"       "environmental"   "women"      "reform"     
-##  [2,] "media"       "children"   "environment"     "race"       "parliament" 
-##  [3,] "museums"     "education"  "green"           "ethnic"     "continue"   
-##  [4,] "galleries"   "health"     "population"      "asian"      "commission" 
-##  [5,] "operations"  "investment" "clean"           "girls"      "council"    
-##  [6,] "operation"   "economic"   "emissions"       "racist"     "westminster"
-##  [7,] "artistic"    "care"       "production"      "racing"     "councils"   
-##  [8,] "operate"     "transport"  "car"             "racial"     "assembly"   
-##  [9,] "operating"   "school"     "cleaner"         "racism"     "rules"      
-## [10,] "theatre"     "benefit"    "congestion"      "woman"      "legislation"
-## [11,] "art"         "poverty"    "recycling"       "racially"   "schemes"    
-## [12,] "music"       "money"      "products"        "welsh"      "modern"     
-## [13,] "musical"     "economy"    "produce"         "remaining"  "scheme"     
-## [14,] "operated"    "training"   "environmentally" "rewarded"   "process"    
-## [15,] "operational" "pay"        "emission"        "incentives" "office"     
-## [16,] "operators"   "choice"     "recycle"         "believes"   "election"   
-## [17,] "theatres"    "working"    "productive"      "staying"    "vote"       
-## [18,] "anglers"     "teachers"   "litter"          "citizens"   "agency"     
-## [19,] "operates"    "establish"  "product"         "first"      "reforms"    
-## [20,] "labour"      "child"      "fur"             "soon"       "democratic" 
-##       LAW_AND_ORDER RURAL          URBAN          VALUES          
-##  [1,] "police"      "farming"      "towns"        "rights"        
-##  [2,] "forces"      "fisheries"    "town"         "human"         
-##  [3,] "prison"      "farmers"      "scotland"     "maintain"      
-##  [4,] "drugs"       "countryside"  "snp"          "discrimination"
-##  [5,] "victims"     "fishing"      "scottish"     "principle"     
-##  [6,] "fraud"       "agriculture"  "scotland's"   "threat"        
-##  [7,] "tough"       "agricultural" "independence" "leadership"    
-##  [8,] "force"       "village"      "taxation"     "principles"    
-##  [9,] "drug"        "fish"         "available"    "proud"         
-## [10,] "officers"    "wildlife"     "committed"    "past"          
-## [11,] "court"       "farms"        "review"       "immigration"   
-## [12,] "courts"      "villages"     "key"          "historic"      
-## [13,] "determined"  "farm"         "stand"        "sex"           
-## [14,] "sentences"   "landscape"    "examine"      "leader"        
-## [15,] "sentence"    "fishermen"    "mps"          "reliable"      
-## [16,] "policing"    "landscapes"   "role"         "marriage"      
-## [17,] "forced"      "hens"         "rural"        "history"       
-## [18,] "offences"    "forest"       "scots"        "preserve"      
-## [19,] "victim"      "feed"         "must"         "traditions"    
-## [20,] "penalties"   "lanes"        "direct"       "sexual"
+##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS          
+##  [1,] "people"      "work"       "environmental"   "women"         
+##  [2,] "media"       "children"   "environment"     "race"          
+##  [3,] "museums"     "education"  "green"           "ethnic"        
+##  [4,] "galleries"   "health"     "population"      "asian"         
+##  [5,] "operations"  "investment" "clean"           "girls"         
+##  [6,] "operation"   "economic"   "emissions"       "racist"        
+##  [7,] "artistic"    "care"       "car"             "racing"        
+##  [8,] "operate"     "transport"  "production"      "racial"        
+##  [9,] "operating"   "school"     "cleaner"         "racism"        
+## [10,] "theatre"     "benefit"    "congestion"      "woman"         
+## [11,] "art"         "poverty"    "recycling"       "racially"      
+## [12,] "music"       "money"      "products"        "university"    
+## [13,] "musical"     "economy"    "environmentally" "rehabilitation"
+## [14,] "operated"    "training"   "emission"        "doubled"       
+## [15,] "operational" "pay"        "recycle"         "funds"         
+## [16,] "operators"   "choice"     "productive"      "depends"       
+## [17,] "theatres"    "working"    "litter"          "steps"         
+## [18,] "anglers"     "teachers"   "produce"         "comes"         
+## [19,] "operates"    "establish"  "product"         "scientists"    
+## [20,] "labour"      "child"      "fur"             "employer"      
+##       INSTITUTIONS  LAW_AND_ORDER RURAL          URBAN       VALUES          
+##  [1,] "reform"      "police"      "farming"      "towns"     "rights"        
+##  [2,] "parliament"  "forces"      "fisheries"    "town"      "human"         
+##  [3,] "continue"    "prison"      "farmers"      "sense"     "maintain"      
+##  [4,] "commission"  "drugs"       "countryside"  "couple's"  "discrimination"
+##  [5,] "council"     "victims"     "fishing"      "faith"     "principle"     
+##  [6,] "westminster" "fraud"       "agriculture"  "govern"    "threat"        
+##  [7,] "councils"    "tough"       "agricultural" "harder"    "leadership"    
+##  [8,] "assembly"    "force"       "village"      "try"       "principles"    
+##  [9,] "rules"       "drug"        "fish"         "couple"    "proud"         
+## [10,] "legislation" "officers"    "wildlife"     "labour"    "past"          
+## [11,] "schemes"     "court"       "farms"        "character" "immigration"   
+## [12,] "modern"      "courts"      "villages"     "special"   "historic"      
+## [13,] "scheme"      "determined"  "farm"         "shops"     "sex"           
+## [14,] "process"     "sentences"   "landscape"    "rural"     "leader"        
+## [15,] "office"      "sentence"    "fishermen"    "proceeds"  "reliable"      
+## [16,] "election"    "policing"    "landscapes"   "list"      "marriage"      
+## [17,] "vote"        "forced"      "hens"         "savers"    "history"       
+## [18,] "agency"      "offences"    "forest"       "stealth"   "preserve"      
+## [19,] "reforms"     "victim"      "feed"         "complex"   "traditions"    
+## [20,] "democratic"  "penalties"   "lanes"        "exactly"   "sexual"
 \end{verbatim}
 
 \begin{Shaded}

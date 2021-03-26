@@ -311,53 +311,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     terms</code></pre>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="unsupervised-methods.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
 <span id="cb194-2"><a href="unsupervised-methods.html#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-3"><a href="unsupervised-methods.html#cb194-3" aria-hidden="true" tabindex="-1"></a>dict <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(data_dictionary_LaverGarry)</span>
+<span id="cb194-3"><a href="unsupervised-methods.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb194-4"><a href="unsupervised-methods.html#cb194-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-5"><a href="unsupervised-methods.html#cb194-5" aria-hidden="true" tabindex="-1"></a>seededmodel <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(data_manifestos_dfm, <span class="at">dictionary=</span>dict)</span>
+<span id="cb194-5"><a href="unsupervised-methods.html#cb194-5" aria-hidden="true" tabindex="-1"></a>dict <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(data_dictionary_LaverGarry)</span>
 <span id="cb194-6"><a href="unsupervised-methods.html#cb194-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-7"><a href="unsupervised-methods.html#cb194-7" aria-hidden="true" tabindex="-1"></a><span class="fu">terms</span>(seededmodel, <span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS       INSTITUTIONS 
-##  [1,] &quot;people&quot;      &quot;work&quot;       &quot;environmental&quot;   &quot;women&quot;      &quot;reform&quot;     
-##  [2,] &quot;media&quot;       &quot;children&quot;   &quot;environment&quot;     &quot;race&quot;       &quot;parliament&quot; 
-##  [3,] &quot;museums&quot;     &quot;education&quot;  &quot;green&quot;           &quot;ethnic&quot;     &quot;continue&quot;   
-##  [4,] &quot;galleries&quot;   &quot;health&quot;     &quot;population&quot;      &quot;asian&quot;      &quot;commission&quot; 
-##  [5,] &quot;operations&quot;  &quot;investment&quot; &quot;clean&quot;           &quot;girls&quot;      &quot;council&quot;    
-##  [6,] &quot;operation&quot;   &quot;economic&quot;   &quot;emissions&quot;       &quot;racist&quot;     &quot;westminster&quot;
-##  [7,] &quot;artistic&quot;    &quot;care&quot;       &quot;production&quot;      &quot;racing&quot;     &quot;councils&quot;   
-##  [8,] &quot;operate&quot;     &quot;transport&quot;  &quot;car&quot;             &quot;racial&quot;     &quot;assembly&quot;   
-##  [9,] &quot;operating&quot;   &quot;school&quot;     &quot;cleaner&quot;         &quot;racism&quot;     &quot;rules&quot;      
-## [10,] &quot;theatre&quot;     &quot;benefit&quot;    &quot;congestion&quot;      &quot;woman&quot;      &quot;legislation&quot;
-## [11,] &quot;art&quot;         &quot;poverty&quot;    &quot;recycling&quot;       &quot;racially&quot;   &quot;schemes&quot;    
-## [12,] &quot;music&quot;       &quot;money&quot;      &quot;products&quot;        &quot;welsh&quot;      &quot;modern&quot;     
-## [13,] &quot;musical&quot;     &quot;economy&quot;    &quot;produce&quot;         &quot;remaining&quot;  &quot;scheme&quot;     
-## [14,] &quot;operated&quot;    &quot;training&quot;   &quot;environmentally&quot; &quot;rewarded&quot;   &quot;process&quot;    
-## [15,] &quot;operational&quot; &quot;pay&quot;        &quot;emission&quot;        &quot;incentives&quot; &quot;office&quot;     
-## [16,] &quot;operators&quot;   &quot;choice&quot;     &quot;recycle&quot;         &quot;believes&quot;   &quot;election&quot;   
-## [17,] &quot;theatres&quot;    &quot;working&quot;    &quot;productive&quot;      &quot;staying&quot;    &quot;vote&quot;       
-## [18,] &quot;anglers&quot;     &quot;teachers&quot;   &quot;litter&quot;          &quot;citizens&quot;   &quot;agency&quot;     
-## [19,] &quot;operates&quot;    &quot;establish&quot;  &quot;product&quot;         &quot;first&quot;      &quot;reforms&quot;    
-## [20,] &quot;labour&quot;      &quot;child&quot;      &quot;fur&quot;             &quot;soon&quot;       &quot;democratic&quot; 
-##       LAW_AND_ORDER RURAL          URBAN          VALUES          
-##  [1,] &quot;police&quot;      &quot;farming&quot;      &quot;towns&quot;        &quot;rights&quot;        
-##  [2,] &quot;forces&quot;      &quot;fisheries&quot;    &quot;town&quot;         &quot;human&quot;         
-##  [3,] &quot;prison&quot;      &quot;farmers&quot;      &quot;scotland&quot;     &quot;maintain&quot;      
-##  [4,] &quot;drugs&quot;       &quot;countryside&quot;  &quot;snp&quot;          &quot;discrimination&quot;
-##  [5,] &quot;victims&quot;     &quot;fishing&quot;      &quot;scottish&quot;     &quot;principle&quot;     
-##  [6,] &quot;fraud&quot;       &quot;agriculture&quot;  &quot;scotland&#39;s&quot;   &quot;threat&quot;        
-##  [7,] &quot;tough&quot;       &quot;agricultural&quot; &quot;independence&quot; &quot;leadership&quot;    
-##  [8,] &quot;force&quot;       &quot;village&quot;      &quot;taxation&quot;     &quot;principles&quot;    
-##  [9,] &quot;drug&quot;        &quot;fish&quot;         &quot;available&quot;    &quot;proud&quot;         
-## [10,] &quot;officers&quot;    &quot;wildlife&quot;     &quot;committed&quot;    &quot;past&quot;          
-## [11,] &quot;court&quot;       &quot;farms&quot;        &quot;review&quot;       &quot;immigration&quot;   
-## [12,] &quot;courts&quot;      &quot;villages&quot;     &quot;key&quot;          &quot;historic&quot;      
-## [13,] &quot;determined&quot;  &quot;farm&quot;         &quot;stand&quot;        &quot;sex&quot;           
-## [14,] &quot;sentences&quot;   &quot;landscape&quot;    &quot;examine&quot;      &quot;leader&quot;        
-## [15,] &quot;sentence&quot;    &quot;fishermen&quot;    &quot;mps&quot;          &quot;reliable&quot;      
-## [16,] &quot;policing&quot;    &quot;landscapes&quot;   &quot;role&quot;         &quot;marriage&quot;      
-## [17,] &quot;forced&quot;      &quot;hens&quot;         &quot;rural&quot;        &quot;history&quot;       
-## [18,] &quot;offences&quot;    &quot;forest&quot;       &quot;scots&quot;        &quot;preserve&quot;      
-## [19,] &quot;victim&quot;      &quot;feed&quot;         &quot;must&quot;         &quot;traditions&quot;    
-## [20,] &quot;penalties&quot;   &quot;lanes&quot;        &quot;direct&quot;       &quot;sexual&quot;</code></pre>
+<span id="cb194-7"><a href="unsupervised-methods.html#cb194-7" aria-hidden="true" tabindex="-1"></a>seededmodel <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(data_manifestos_dfm, <span class="at">dictionary=</span>dict)</span>
+<span id="cb194-8"><a href="unsupervised-methods.html#cb194-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-9"><a href="unsupervised-methods.html#cb194-9" aria-hidden="true" tabindex="-1"></a><span class="fu">terms</span>(seededmodel, <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS          
+##  [1,] &quot;people&quot;      &quot;work&quot;       &quot;environmental&quot;   &quot;women&quot;         
+##  [2,] &quot;media&quot;       &quot;children&quot;   &quot;environment&quot;     &quot;race&quot;          
+##  [3,] &quot;museums&quot;     &quot;education&quot;  &quot;green&quot;           &quot;ethnic&quot;        
+##  [4,] &quot;galleries&quot;   &quot;health&quot;     &quot;population&quot;      &quot;asian&quot;         
+##  [5,] &quot;operations&quot;  &quot;investment&quot; &quot;clean&quot;           &quot;girls&quot;         
+##  [6,] &quot;operation&quot;   &quot;economic&quot;   &quot;emissions&quot;       &quot;racist&quot;        
+##  [7,] &quot;artistic&quot;    &quot;care&quot;       &quot;car&quot;             &quot;racing&quot;        
+##  [8,] &quot;operate&quot;     &quot;transport&quot;  &quot;production&quot;      &quot;racial&quot;        
+##  [9,] &quot;operating&quot;   &quot;school&quot;     &quot;cleaner&quot;         &quot;racism&quot;        
+## [10,] &quot;theatre&quot;     &quot;benefit&quot;    &quot;congestion&quot;      &quot;woman&quot;         
+## [11,] &quot;art&quot;         &quot;poverty&quot;    &quot;recycling&quot;       &quot;racially&quot;      
+## [12,] &quot;music&quot;       &quot;money&quot;      &quot;products&quot;        &quot;university&quot;    
+## [13,] &quot;musical&quot;     &quot;economy&quot;    &quot;environmentally&quot; &quot;rehabilitation&quot;
+## [14,] &quot;operated&quot;    &quot;training&quot;   &quot;emission&quot;        &quot;doubled&quot;       
+## [15,] &quot;operational&quot; &quot;pay&quot;        &quot;recycle&quot;         &quot;funds&quot;         
+## [16,] &quot;operators&quot;   &quot;choice&quot;     &quot;productive&quot;      &quot;depends&quot;       
+## [17,] &quot;theatres&quot;    &quot;working&quot;    &quot;litter&quot;          &quot;steps&quot;         
+## [18,] &quot;anglers&quot;     &quot;teachers&quot;   &quot;produce&quot;         &quot;comes&quot;         
+## [19,] &quot;operates&quot;    &quot;establish&quot;  &quot;product&quot;         &quot;scientists&quot;    
+## [20,] &quot;labour&quot;      &quot;child&quot;      &quot;fur&quot;             &quot;employer&quot;      
+##       INSTITUTIONS  LAW_AND_ORDER RURAL          URBAN       VALUES          
+##  [1,] &quot;reform&quot;      &quot;police&quot;      &quot;farming&quot;      &quot;towns&quot;     &quot;rights&quot;        
+##  [2,] &quot;parliament&quot;  &quot;forces&quot;      &quot;fisheries&quot;    &quot;town&quot;      &quot;human&quot;         
+##  [3,] &quot;continue&quot;    &quot;prison&quot;      &quot;farmers&quot;      &quot;sense&quot;     &quot;maintain&quot;      
+##  [4,] &quot;commission&quot;  &quot;drugs&quot;       &quot;countryside&quot;  &quot;couple&#39;s&quot;  &quot;discrimination&quot;
+##  [5,] &quot;council&quot;     &quot;victims&quot;     &quot;fishing&quot;      &quot;faith&quot;     &quot;principle&quot;     
+##  [6,] &quot;westminster&quot; &quot;fraud&quot;       &quot;agriculture&quot;  &quot;govern&quot;    &quot;threat&quot;        
+##  [7,] &quot;councils&quot;    &quot;tough&quot;       &quot;agricultural&quot; &quot;harder&quot;    &quot;leadership&quot;    
+##  [8,] &quot;assembly&quot;    &quot;force&quot;       &quot;village&quot;      &quot;try&quot;       &quot;principles&quot;    
+##  [9,] &quot;rules&quot;       &quot;drug&quot;        &quot;fish&quot;         &quot;couple&quot;    &quot;proud&quot;         
+## [10,] &quot;legislation&quot; &quot;officers&quot;    &quot;wildlife&quot;     &quot;labour&quot;    &quot;past&quot;          
+## [11,] &quot;schemes&quot;     &quot;court&quot;       &quot;farms&quot;        &quot;character&quot; &quot;immigration&quot;   
+## [12,] &quot;modern&quot;      &quot;courts&quot;      &quot;villages&quot;     &quot;special&quot;   &quot;historic&quot;      
+## [13,] &quot;scheme&quot;      &quot;determined&quot;  &quot;farm&quot;         &quot;shops&quot;     &quot;sex&quot;           
+## [14,] &quot;process&quot;     &quot;sentences&quot;   &quot;landscape&quot;    &quot;rural&quot;     &quot;leader&quot;        
+## [15,] &quot;office&quot;      &quot;sentence&quot;    &quot;fishermen&quot;    &quot;proceeds&quot;  &quot;reliable&quot;      
+## [16,] &quot;election&quot;    &quot;policing&quot;    &quot;landscapes&quot;   &quot;list&quot;      &quot;marriage&quot;      
+## [17,] &quot;vote&quot;        &quot;forced&quot;      &quot;hens&quot;         &quot;savers&quot;    &quot;history&quot;       
+## [18,] &quot;agency&quot;      &quot;offences&quot;    &quot;forest&quot;       &quot;stealth&quot;   &quot;preserve&quot;      
+## [19,] &quot;reforms&quot;     &quot;victim&quot;      &quot;feed&quot;         &quot;complex&quot;   &quot;traditions&quot;    
+## [20,] &quot;democratic&quot;  &quot;penalties&quot;   &quot;lanes&quot;        &quot;exactly&quot;   &quot;sexual&quot;</code></pre>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="unsupervised-methods.html#cb196-1" aria-hidden="true" tabindex="-1"></a>topwords <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">terms</span>(seededmodel,<span class="dv">20</span>))</span>
 <span id="cb196-2"><a href="unsupervised-methods.html#cb196-2" aria-hidden="true" tabindex="-1"></a>corpus_manifestos<span class="sc">$</span>topic <span class="ot">&lt;-</span> <span class="fu">topics</span>(seededmodel)</span>
 <span id="cb196-3"><a href="unsupervised-methods.html#cb196-3" aria-hidden="true" tabindex="-1"></a>topics_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(corpus_manifestos<span class="sc">$</span>topic)</span>

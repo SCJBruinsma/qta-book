@@ -116,6 +116,8 @@ Here is an alternative:
 library(seededlda)
 library(quanteda.dictionaries)
 
+set.seed(42)
+
 dict <- dictionary(data_dictionary_LaverGarry)
 
 seededmodel <- textmodel_seededlda(data_manifestos_dfm, dictionary=dict)
