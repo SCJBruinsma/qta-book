@@ -24,7 +24,7 @@
 <meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
 
 
-<meta name="date" content="2021-03-24" />
+<meta name="date" content="2021-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="dictionaries.html"/>
 <link rel="next" href="supervised-methods.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,22 +51,21 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -85,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -135,21 +135,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
-<li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a><ul>
-<li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a><ul>
+<li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="getting-ready.html"><a href="getting-ready.html#r-on-windows"><i class="fa fa-check"></i><b>2.1.1</b> R on Windows</a></li>
 <li class="chapter" data-level="2.1.2" data-path="getting-ready.html"><a href="getting-ready.html#r-on-linux"><i class="fa fa-check"></i><b>2.1.2</b> R on Linux</a></li>
 <li class="chapter" data-level="2.1.3" data-path="getting-ready.html"><a href="getting-ready.html#r-on-macos"><i class="fa fa-check"></i><b>2.1.3</b> R on macOS</a></li>
 <li class="chapter" data-level="2.1.4" data-path="getting-ready.html"><a href="getting-ready.html#r-in-the-cloud"><i class="fa fa-check"></i><b>2.1.4</b> R in the Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="getting-ready.html"><a href="getting-ready.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a><ul>
+<li class="chapter" data-level="2.2" data-path="getting-ready.html"><a href="getting-ready.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-from-cran"><i class="fa fa-check"></i><b>2.2.1</b> Installing from CRAN</a></li>
 <li class="chapter" data-level="2.2.2" data-path="getting-ready.html"><a href="getting-ready.html#installing-from-github"><i class="fa fa-check"></i><b>2.2.2</b> Installing from GitHub</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="getting-ready.html"><a href="getting-ready.html#quanteda"><i class="fa fa-check"></i><b>2.3</b> Quanteda</a></li>
 <li class="chapter" data-level="2.4" data-path="getting-ready.html"><a href="getting-ready.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i><b>3</b> Preparing the Data</a><ul>
+<li class="chapter" data-level="3" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i><b>3</b> Preparing the Data</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="preparing-the-data.html"><a href="preparing-the-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
 <li class="chapter" data-level="3.2" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.2</b> Import .pdf Files</a></li>
 <li class="chapter" data-level="3.3" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.3</b> Import .txt Files</a></li>
@@ -157,24 +161,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.5</b> Import using Web Scraping</a></li>
 <li class="chapter" data-level="3.6" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.6</b> Import from an API</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and validity</a><ul>
+<li class="chapter" data-level="4" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and validity</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html#measuring-inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Measuring inter-coder agreement</a></li>
 <li class="chapter" data-level="4.2" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html#visualizing-the-quality-of-coding"><i class="fa fa-check"></i><b>4.2</b> Visualizing the quality of coding</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="dictionaries.html"><a href="dictionaries.html"><i class="fa fa-check"></i><b>5</b> Dictionaries</a><ul>
+<li class="chapter" data-level="5" data-path="dictionaries.html"><a href="dictionaries.html"><i class="fa fa-check"></i><b>5</b> Dictionaries</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="dictionaries.html"><a href="dictionaries.html#working-with-a-corpus"><i class="fa fa-check"></i><b>5.1</b> Working with a Corpus</a></li>
 <li class="chapter" data-level="5.2" data-path="dictionaries.html"><a href="dictionaries.html#standard-dictionary-analysis"><i class="fa fa-check"></i><b>5.2</b> Standard Dictionary Analysis</a></li>
 <li class="chapter" data-level="5.3" data-path="dictionaries.html"><a href="dictionaries.html#sentiment-analysis"><i class="fa fa-check"></i><b>5.3</b> Sentiment Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling</a><ul>
+<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>6.1</b> Wordscores</a></li>
 <li class="chapter" data-level="6.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>6.2</b> Wordfish</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a><ul>
+<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>7.1</b> Support Vector Machines</a></li>
 <li class="chapter" data-level="7.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>7.2</b> Naive Bayes</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a><ul>
+<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>8.1</b> Latent Dirichlet Allocation</a></li>
 <li class="chapter" data-level="8.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#correspondence-analysis"><i class="fa fa-check"></i><b>8.2</b> Correspondence Analysis</a></li>
 </ul></li>
@@ -199,32 +208,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="scaling" class="section level1">
+<div id="scaling" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Scaling</h1>
-<p>With a dictionary, we aimed to classify our texts into different categories based on the words they contain. While practical, there is no real way to compare these categories: one category is no better or worse than the other. If we do want to compare texts, we have to place them on some sort of scale. Here, we will look at two ways in which we can do so: <em>Wordscores</em> <span class="citation">(Laver, Benoit, and Garry <a href="#ref-Laver2003a" role="doc-biblioref">2003</a>)</span> and <em>Wordfish</em> <span class="citation">(Slapin and Proksch <a href="#ref-Slapin2008a" role="doc-biblioref">2008</a>)</span>. Both methods used to be part of the main <code>quanteda</code> package, but have now moved to the <code>quanteda.textmodels</code> package. For both, we will use again the data from the 2001 and 2005 party manifestos of the five largest parties in the United Kingdom. So, we load this data, make the subset, transform it into a dfm, and clean it:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="scaling.html#cb96-1"></a><span class="kw">library</span>(quanteda)</span>
-<span id="cb96-2"><a href="scaling.html#cb96-2"></a><span class="kw">library</span>(quanteda.corpora)</span>
-<span id="cb96-3"><a href="scaling.html#cb96-3"></a></span>
-<span id="cb96-4"><a href="scaling.html#cb96-4"></a><span class="kw">data</span>(data_corpus_ukmanifestos)</span>
-<span id="cb96-5"><a href="scaling.html#cb96-5"></a>corpus_manifestos &lt;-<span class="st"> </span><span class="kw">corpus_subset</span>(data_corpus_ukmanifestos, Year <span class="op">==</span><span class="st"> </span><span class="dv">2001</span> <span class="op">|</span><span class="st"> </span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2005</span>)</span>
-<span id="cb96-6"><a href="scaling.html#cb96-6"></a>corpus_manifestos &lt;-<span class="st"> </span><span class="kw">corpus_subset</span>(corpus_manifestos, Party<span class="op">==</span><span class="st">&quot;Lab&quot;</span> <span class="op">|</span><span class="st"> </span>Party<span class="op">==</span><span class="st">&quot;LD&quot;</span> <span class="op">|</span><span class="st"> </span>Party <span class="op">==</span><span class="st"> &quot;Con&quot;</span> <span class="op">|</span><span class="st"> </span>Party<span class="op">==</span><span class="st"> &quot;SNP&quot;</span> <span class="op">|</span><span class="st"> </span>Party<span class="op">==</span><span class="st"> &quot;PCy&quot;</span>)</span>
-<span id="cb96-7"><a href="scaling.html#cb96-7"></a>data_manifestos_dfm &lt;-<span class="st"> </span><span class="kw">dfm</span>(corpus_manifestos, <span class="dt">remove =</span> <span class="kw">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="dt">remove_punct =</span> <span class="ot">TRUE</span>, <span class="dt">remove_numbers =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb96-8"><a href="scaling.html#cb96-8"></a>data_manifestos_dfm &lt;-<span class="st"> </span><span class="kw">dfm_tolower</span>(data_manifestos_dfm, <span class="dt">keep_acronyms =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<div id="wordscores" class="section level2">
+<p>With a dictionary, we aimed to classify our texts into different categories based on the words they contain. While practical, there is no real way to compare these categories: one category is no better or worse than the other. If we do want to compare texts, we have to place them on some sort of scale. Here, we will look at two ways in which we can do so: <em>Wordscores</em> <span class="citation">(<a href="references.html#ref-Laver2003a" role="doc-biblioref">Laver, Benoit, and Garry 2003</a>)</span> and <em>Wordfish</em> <span class="citation">(<a href="references.html#ref-Slapin2008a" role="doc-biblioref">Slapin and Proksch 2008</a>)</span>. Both methods used to be part of the main <code>quanteda</code> package, but have now moved to the <code>quanteda.textmodels</code> package. For both, we will use again the data from the 2001 and 2005 party manifestos of the five largest parties in the United Kingdom. So, we load this data, make the subset, transform it into a dfm, and clean it:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="scaling.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb96-2"><a href="scaling.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.corpora)</span>
+<span id="cb96-3"><a href="scaling.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="scaling.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(data_corpus_ukmanifestos)</span>
+<span id="cb96-5"><a href="scaling.html#cb96-5" aria-hidden="true" tabindex="-1"></a>corpus_manifestos <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(data_corpus_ukmanifestos, Year <span class="sc">==</span> <span class="dv">2001</span> <span class="sc">|</span> Year <span class="sc">==</span> <span class="dv">2005</span>)</span>
+<span id="cb96-6"><a href="scaling.html#cb96-6" aria-hidden="true" tabindex="-1"></a>corpus_manifestos <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(corpus_manifestos, Party<span class="sc">==</span><span class="st">&quot;Lab&quot;</span> <span class="sc">|</span> Party<span class="sc">==</span><span class="st">&quot;LD&quot;</span> <span class="sc">|</span> Party <span class="sc">==</span> <span class="st">&quot;Con&quot;</span> <span class="sc">|</span> Party<span class="sc">==</span> <span class="st">&quot;SNP&quot;</span> <span class="sc">|</span> Party<span class="sc">==</span> <span class="st">&quot;PCy&quot;</span>)</span>
+<span id="cb96-7"><a href="scaling.html#cb96-7" aria-hidden="true" tabindex="-1"></a>data_manifestos_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(corpus_manifestos, <span class="at">remove =</span> <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">remove_punct =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb96-8"><a href="scaling.html#cb96-8" aria-hidden="true" tabindex="-1"></a>data_manifestos_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_tolower</span>(data_manifestos_dfm, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div id="wordscores" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Wordscores</h2>
-<p>The idea of Wordscores is to use reference texts (from which we know the position) to position our virgin texts (from which we do not know the position). Here, we will use the 2001 documents as reference texts and the 2005 documents as virgin texts. Here, we the scale we want to position our documents on is the general left-right scale. Thus, we need to know the positions for the 2001 documents on this. Here, we will use the left-right scale from the 2002 Chapel Hill Expert Survey <span class="citation">(Bakker et al. <a href="#ref-Bakker2012a" role="doc-biblioref">2012</a>)</span> to do so.</p>
+<p>The idea of Wordscores is to use reference texts (from which we know the position) to position our virgin texts (from which we do not know the position). Here, we will use the 2001 documents as reference texts and the 2005 documents as virgin texts. Here, we the scale we want to position our documents on is the general left-right scale. Thus, we need to know the positions for the 2001 documents on this. Here, we will use the left-right scale from the 2002 Chapel Hill Expert Survey <span class="citation">(<a href="references.html#ref-Bakker2012a" role="doc-biblioref">Bakker et al. 2012</a>)</span> to do so.</p>
 <p>To start, we have to check the order of the documents inside our dfm:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="scaling.html#cb97-1"></a>data_manifestos_dfm<span class="op">@</span>Dimnames<span class="op">$</span>docs</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="scaling.html#cb97-1" aria-hidden="true" tabindex="-1"></a>data_manifestos_dfm<span class="sc">@</span>Dimnames<span class="sc">$</span>docs</span></code></pre></div>
 <pre><code>##  [1] &quot;UK_natl_2001_en_Con&quot; &quot;UK_natl_2001_en_Lab&quot; &quot;UK_natl_2001_en_LD&quot; 
 ##  [4] &quot;UK_natl_2001_en_PCy&quot; &quot;UK_natl_2001_en_SNP&quot; &quot;UK_natl_2005_en_Con&quot;
 ##  [7] &quot;UK_natl_2005_en_Lab&quot; &quot;UK_natl_2005_en_LD&quot;  &quot;UK_natl_2005_en_PCy&quot;
 ## [10] &quot;UK_natl_2005_en_SNP&quot;</code></pre>
 <p>We can then set the scores for the reference texts. For the virgin texts, we set <code>NA</code> instead. Then, we run the wordscores model - providing the dfm and the reference scores - and save it into an object:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="scaling.html#cb99-1"></a><span class="kw">library</span>(quanteda.textmodels)</span>
-<span id="cb99-2"><a href="scaling.html#cb99-2"></a></span>
-<span id="cb99-3"><a href="scaling.html#cb99-3"></a>scores &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">7.72</span>,<span class="fl">5.18</span>,<span class="fl">3.82</span>,<span class="fl">3.2</span>,<span class="dv">3</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)</span>
-<span id="cb99-4"><a href="scaling.html#cb99-4"></a>ws &lt;-<span class="kw">textmodel_wordscores</span>(data_manifestos_dfm, scores)</span>
-<span id="cb99-5"><a href="scaling.html#cb99-5"></a><span class="kw">summary</span>(ws)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="scaling.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)</span>
+<span id="cb99-2"><a href="scaling.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="scaling.html#cb99-3" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">7.72</span>,<span class="fl">5.18</span>,<span class="fl">3.82</span>,<span class="fl">3.2</span>,<span class="dv">3</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb99-4"><a href="scaling.html#cb99-4" aria-hidden="true" tabindex="-1"></a>ws <span class="ot">&lt;-</span><span class="fu">textmodel_wordscores</span>(data_manifestos_dfm, scores)</span>
+<span id="cb99-5"><a href="scaling.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ws)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## textmodel_wordscores.dfm(x = data_manifestos_dfm, y = scores)
@@ -254,22 +263,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        4.520        4.905        4.338        7.515        4.397        4.273 
 ##        proud    democracy   conclusion      present    ambitious    programme 
 ##        6.066        5.262        6.946        3.592        4.462        4.231</code></pre>
-<p>When we run the <code>summary</code> command, we can see the word scores for each word. This is the position of that word on our scale of interest. We then only need to figure out how often these words occur in each of the texts, add up their scores, and divide this by the total number of words of the texts. This gives us the <em>raw score</em> of the text. Yet, this raw score has some problems. Most important of which is that as some words occur in almost all texts, all the scores will be very clustered in the middle of our scale. To prevent this, we can spread out the scores again, so they look more like the scores of our reference texts. This rescaling has two versions. The first was the original as proposed by <span class="citation">Laver, Benoit, and Garry (<a href="#ref-Laver2003a" role="doc-biblioref">2003</a>)</span>, and focuses on the variance of the scores. The idea here is that the distribution of the scores of the virgin texts has the correct mean, but an incorrect variance which needs rescaling. The second, proposed by <span class="citation">Martin and Vanberg (<a href="#ref-Martin2008a" role="doc-biblioref">2008</a>)</span>, focuses on the extremes of the scores. What it does is to take the scores of the virgin texts and stretch them out to match the extremes of the scores of the reference texts. Here, we run both so we can compare them. For the MV transformation, we will calculate the standard errors for the scores as well:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="scaling.html#cb101-1"></a>pred_lbg &lt;-<span class="kw">predict</span>(ws, <span class="dt">rescaling =</span> <span class="st">&quot;lbg&quot;</span>)</span></code></pre></div>
+<p>When we run the <code>summary</code> command, we can see the word scores for each word. This is the position of that word on our scale of interest. We then only need to figure out how often these words occur in each of the texts, add up their scores, and divide this by the total number of words of the texts. This gives us the <em>raw score</em> of the text. Yet, this raw score has some problems. Most important of which is that as some words occur in almost all texts, all the scores will be very clustered in the middle of our scale. To prevent this, we can spread out the scores again, so they look more like the scores of our reference texts. This rescaling has two versions. The first was the original as proposed by <span class="citation"><a href="references.html#ref-Laver2003a" role="doc-biblioref">Laver, Benoit, and Garry</a> (<a href="references.html#ref-Laver2003a" role="doc-biblioref">2003</a>)</span>, and focuses on the variance of the scores. The idea here is that the distribution of the scores of the virgin texts has the correct mean, but an incorrect variance which needs rescaling. The second, proposed by <span class="citation"><a href="references.html#ref-Martin2008a" role="doc-biblioref">Martin and Vanberg</a> (<a href="references.html#ref-Martin2008a" role="doc-biblioref">2008</a>)</span>, focuses on the extremes of the scores. What it does is to take the scores of the virgin texts and stretch them out to match the extremes of the scores of the reference texts. Here, we run both so we can compare them. For the MV transformation, we will calculate the standard errors for the scores as well:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="scaling.html#cb101-1" aria-hidden="true" tabindex="-1"></a>pred_lbg <span class="ot">&lt;-</span><span class="fu">predict</span>(ws, <span class="at">rescaling =</span> <span class="st">&quot;lbg&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: 2207 features in newdata not used in prediction.</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="scaling.html#cb103-1"></a>pred_mv &lt;-<span class="kw">predict</span>(ws, <span class="dt">rescaling =</span> <span class="st">&quot;mv&quot;</span>, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>, <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="scaling.html#cb103-1" aria-hidden="true" tabindex="-1"></a>pred_mv <span class="ot">&lt;-</span><span class="fu">predict</span>(ws, <span class="at">rescaling =</span> <span class="st">&quot;mv&quot;</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: 2207 features in newdata not used in prediction.</code></pre>
 <pre><code>## Warning in predict.textmodel_wordscores(ws, rescaling = &quot;mv&quot;, se.fit = TRUE, :
 ## More than two reference scores found with MV rescaling; using only min, max
 ## values.</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="scaling.html#cb106-1"></a>pred_lbg</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="scaling.html#cb106-1" aria-hidden="true" tabindex="-1"></a>pred_lbg</span></code></pre></div>
 <pre><code>## UK_natl_2001_en_Con UK_natl_2001_en_Lab  UK_natl_2001_en_LD UK_natl_2001_en_PCy 
 ##            8.784956            5.450883            3.962689            1.912643 
 ## UK_natl_2001_en_SNP UK_natl_2005_en_Con UK_natl_2005_en_Lab  UK_natl_2005_en_LD 
 ##            2.168203            5.655377            5.132459            5.053201 
 ## UK_natl_2005_en_PCy UK_natl_2005_en_SNP 
 ##            3.742887            4.314414</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="scaling.html#cb108-1"></a>pred_mv</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="scaling.html#cb108-1" aria-hidden="true" tabindex="-1"></a>pred_mv</span></code></pre></div>
 <pre><code>## $fit
 ##                          fit      lwr      upr
 ## UK_natl_2001_en_Con 7.720000 7.634261 7.805739
@@ -290,13 +299,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##          0.03436002          0.05004366          0.02483411          0.03178094 
 ## UK_natl_2005_en_PCy UK_natl_2005_en_SNP 
 ##          0.04583006          0.09582906</code></pre>
-<p>Note that this does not only predict the 2005 texts, but also the 2001 texts. As such, we can use these scores to see how well this procedure can recover the original scores. One reason why this might be a problem is because of a warning you most likely received. This says that “<em>n</em> features in newdata not used in prediction”. This is as the method does not use all the words from the reference texts to score the virgin texts. Instead, it only uses the words that occur in them both. Thus, when we compare the reference scores with the scores the method gives to the reference documents, can see how well the method does.</p>
-<p>To compare the scores, we will use the Concordance Correlation Coefficient as developed by <span class="citation">Lin (<a href="#ref-Lin1989a" role="doc-biblioref">1989</a>)</span>. This coefficient estimates how far two sets of data deviate from a line of 45 degrees (which indicates perfect agreement). To calculate this, we take the scores (here we take the LBG version) from the object we created and combine them with the original scores. From this, we only select the first five texts (those from 2001) and calculate the CCC:</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="scaling.html#cb110-1"></a><span class="kw">library</span>(DescTools)</span></code></pre></div>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="scaling.html#cb111-1"></a>comparison &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(pred_lbg, scores))</span>
-<span id="cb111-2"><a href="scaling.html#cb111-2"></a>comparison &lt;-<span class="st"> </span>comparison[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</span>
-<span id="cb111-3"><a href="scaling.html#cb111-3"></a></span>
-<span id="cb111-4"><a href="scaling.html#cb111-4"></a><span class="kw">CCC</span>(comparison<span class="op">$</span>scores, comparison<span class="op">$</span>pred_lbg, <span class="dt">ci =</span> <span class="st">&quot;z-transform&quot;</span>, <span class="dt">conf.level =</span> <span class="fl">0.95</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Note that this does not only predict the 2005 texts, but also the 2001 texts. As such, we can use these scores to see how well this procedure can recover the original scores. One reason why this might be a problem is because of a warning you most likely received. This says that “<em>n</em> features in newdata not used in prediction.” This is as the method does not use all the words from the reference texts to score the virgin texts. Instead, it only uses the words that occur in them both. Thus, when we compare the reference scores with the scores the method gives to the reference documents, can see how well the method does.</p>
+<p>To compare the scores, we will use the Concordance Correlation Coefficient as developed by <span class="citation"><a href="references.html#ref-Lin1989a" role="doc-biblioref">Lin</a> (<a href="references.html#ref-Lin1989a" role="doc-biblioref">1989</a>)</span>. This coefficient estimates how far two sets of data deviate from a line of 45 degrees (which indicates perfect agreement). To calculate this, we take the scores (here we take the LBG version) from the object we created and combine them with the original scores. From this, we only select the first five texts (those from 2001) and calculate the CCC:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="scaling.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="scaling.html#cb111-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(pred_lbg, scores))</span>
+<span id="cb111-2"><a href="scaling.html#cb111-2" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> comparison[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
+<span id="cb111-3"><a href="scaling.html#cb111-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-4"><a href="scaling.html#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="fu">CCC</span>(comparison<span class="sc">$</span>scores, comparison<span class="sc">$</span>pred_lbg, <span class="at">ci =</span> <span class="st">&quot;z-transform&quot;</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## $rho.c
 ##         est    lwr.ci    upr.ci
 ## 1 0.9238208 0.8231088 0.9681934
@@ -318,83 +327,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 2.556321  1.2873572
 ## 5 2.584101  0.8317971</code></pre>
 <p>The result here is not bad, though the confidence intervals are rather large. We can have a further look at why this is the case by plotting the data. In this plot, we will show the position of the texts, as well as a 45-degree line. Also, we plot the reduced major axis, which shows the symmetrical relationship between the two variables. This line is a linear regression, which we compute first using the <code>lm</code> command:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="scaling.html#cb113-1"></a>lm_line &lt;-<span class="st"> </span><span class="kw">lm</span>(comparison<span class="op">$</span>scores <span class="op">~</span><span class="st"> </span>comparison<span class="op">$</span>pred_lbg)</span>
-<span id="cb113-2"><a href="scaling.html#cb113-2"></a></span>
-<span id="cb113-3"><a href="scaling.html#cb113-3"></a><span class="kw">ggplot</span>(comparison, <span class="kw">aes</span>(<span class="dt">x=</span>scores, <span class="dt">y=</span>pred_lbg)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb113-4"><a href="scaling.html#cb113-4"></a><span class="st"> </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
-<span id="cb113-5"><a href="scaling.html#cb113-5"></a><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Original Scores&quot;</span>)<span class="op">+</span></span>
-<span id="cb113-6"><a href="scaling.html#cb113-6"></a><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;LBG Scores&quot;</span>)<span class="op">+</span></span>
-<span id="cb113-7"><a href="scaling.html#cb113-7"></a><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">12</span>)<span class="op">+</span></span>
-<span id="cb113-8"><a href="scaling.html#cb113-8"></a><span class="st"> </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">12</span>)<span class="op">+</span></span>
-<span id="cb113-9"><a href="scaling.html#cb113-9"></a><span class="st"> </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span><span class="dv">1</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>))<span class="op">+</span></span>
-<span id="cb113-10"><a href="scaling.html#cb113-10"></a><span class="st"> </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> lm_line<span class="op">$</span>coefficients[<span class="dv">1</span>], <span class="dt">slope =</span> lm_line<span class="op">$</span>coefficients[<span class="dv">2</span>], <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span> ))<span class="op">+</span></span>
-<span id="cb113-11"><a href="scaling.html#cb113-11"></a><span class="st"> </span><span class="kw">scale_shape_manual</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>, <span class="dt">values=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="op">+</span></span>
-<span id="cb113-12"><a href="scaling.html#cb113-12"></a><span class="st"> </span><span class="kw">scale_linetype_manual</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>,<span class="dt">values=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="op">+</span></span>
-<span id="cb113-13"><a href="scaling.html#cb113-13"></a><span class="st"> </span><span class="kw">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="scaling.html#cb113-1" aria-hidden="true" tabindex="-1"></a>lm_line <span class="ot">&lt;-</span> <span class="fu">lm</span>(comparison<span class="sc">$</span>scores <span class="sc">~</span> comparison<span class="sc">$</span>pred_lbg)</span>
+<span id="cb113-2"><a href="scaling.html#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-3"><a href="scaling.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison, <span class="fu">aes</span>(<span class="at">x=</span>scores, <span class="at">y=</span>pred_lbg)) <span class="sc">+</span> </span>
+<span id="cb113-4"><a href="scaling.html#cb113-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb113-5"><a href="scaling.html#cb113-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Original Scores&quot;</span>)<span class="sc">+</span></span>
+<span id="cb113-6"><a href="scaling.html#cb113-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;LBG Scores&quot;</span>)<span class="sc">+</span></span>
+<span id="cb113-7"><a href="scaling.html#cb113-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">12</span>)<span class="sc">+</span></span>
+<span id="cb113-8"><a href="scaling.html#cb113-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">12</span>)<span class="sc">+</span></span>
+<span id="cb113-9"><a href="scaling.html#cb113-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span><span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>))<span class="sc">+</span></span>
+<span id="cb113-10"><a href="scaling.html#cb113-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> lm_line<span class="sc">$</span>coefficients[<span class="dv">1</span>], <span class="at">slope =</span> lm_line<span class="sc">$</span>coefficients[<span class="dv">2</span>], <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span> ))<span class="sc">+</span></span>
+<span id="cb113-11"><a href="scaling.html#cb113-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="sc">+</span></span>
+<span id="cb113-12"><a href="scaling.html#cb113-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_linetype_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>,<span class="at">values=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Line of perfect concordance&quot;</span>,<span class="st">&quot;Reduced major axis&quot;</span>))<span class="sc">+</span></span>
+<span id="cb113-13"><a href="scaling.html#cb113-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p>This graph allows us to spot the problem. That is that while we gave the manifesto for Plaid Cymru (PCy) a reference score of 3.20, Wordscores gave it 1.91. Removing this manifesto from our data-set would thus improve our estimates.</p>
 <p>Apart from positioning the texts, we can also have a look at the words themselves. We can do this with the <code>textplot_scale1d</code> command, for which we also specify some words to highlight:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="scaling.html#cb114-1"></a><span class="kw">library</span>(quanteda.textplots)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="scaling.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;quanteda.textplots&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:quanteda&#39;:
 ## 
 ##     as.igraph, as.network, textplot_keyness, textplot_network,
 ##     textplot_wordcloud, textplot_xray</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="scaling.html#cb117-1"></a><span class="kw">textplot_scale1d</span>(ws, <span class="dt">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="dt">highlighted =</span><span class="kw">c</span>(<span class="st">&quot;british&quot;</span>,<span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;taxes&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="scaling.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(ws, <span class="at">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="at">highlighted =</span><span class="fu">c</span>(<span class="st">&quot;british&quot;</span>,<span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;taxes&quot;</span>))</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 <p>Finally, we can have a look at the confidence intervals around the scores we created. For this, we use the same command as above, though instead of specifying <code>features</code> (referring to the words), we specify <code>texts</code>. Note that we can only do this for the MV scores, as only here we also calculated the standard errors:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="scaling.html#cb118-1"></a><span class="kw">textplot_scale1d</span>(pred_mv, <span class="dt">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="scaling.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(pred_mv, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 <p>Note that we can also make this graph ourselves. This requires some data-wrangling and the use of a new package. The first thing we do is take our data and re-arrange it using the <code>dplyr</code> package:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="scaling.html#cb119-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb119-2"><a href="scaling.html#cb119-2"></a></span>
-<span id="cb119-3"><a href="scaling.html#cb119-3"></a>comparison &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(comparison), comparison)</span>
-<span id="cb119-4"><a href="scaling.html#cb119-4"></a>comparison &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(comparison <span class="op">%&gt;%</span></span>
-<span id="cb119-5"><a href="scaling.html#cb119-5"></a><span class="st">                          </span><span class="kw">rename</span>(<span class="dt">id =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="scaling.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb119-2"><a href="scaling.html#cb119-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-3"><a href="scaling.html#cb119-3" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(comparison), comparison)</span>
+<span id="cb119-4"><a href="scaling.html#cb119-4" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(comparison <span class="sc">%&gt;%</span></span>
+<span id="cb119-5"><a href="scaling.html#cb119-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">rename</span>(<span class="at">id =</span> <span class="dv">1</span>))</span></code></pre></div>
 <p>Then, we calculate the lower bound, upper bound, standard error and fit (the middle value), place that into a dataframe and sort it:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="scaling.html#cb120-1"></a>textplot &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(<span class="kw">as.data.frame</span>(pred_mv<span class="op">$</span>se.fit)), pred_mv<span class="op">$</span>fit, pred_mv<span class="op">$</span>se.fit) <span class="op">%&gt;%</span></span>
-<span id="cb120-2"><a href="scaling.html#cb120-2"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
-<span id="cb120-3"><a href="scaling.html#cb120-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">id =</span> <span class="dv">1</span>,</span>
-<span id="cb120-4"><a href="scaling.html#cb120-4"></a>         <span class="dt">se =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></span>
-<span id="cb120-5"><a href="scaling.html#cb120-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fit =</span> <span class="kw">as.numeric</span>(fit),</span>
-<span id="cb120-6"><a href="scaling.html#cb120-6"></a>         <span class="dt">lwr =</span> <span class="kw">as.numeric</span>(lwr),</span>
-<span id="cb120-7"><a href="scaling.html#cb120-7"></a>         <span class="dt">upr =</span> <span class="kw">as.numeric</span>(upr),</span>
-<span id="cb120-8"><a href="scaling.html#cb120-8"></a>         <span class="dt">se =</span> <span class="kw">as.numeric</span>(se),</span>
-<span id="cb120-9"><a href="scaling.html#cb120-9"></a>         <span class="dt">year =</span> <span class="kw">as.factor</span>(stringr<span class="op">::</span><span class="kw">str_sub</span>(id, <span class="dt">start =</span> <span class="dv">9</span>, <span class="dt">end =</span> <span class="dv">12</span>))) <span class="op">%&gt;%</span></span>
-<span id="cb120-10"><a href="scaling.html#cb120-10"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>fit)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="scaling.html#cb120-1" aria-hidden="true" tabindex="-1"></a>textplot <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(<span class="fu">as.data.frame</span>(pred_mv<span class="sc">$</span>se.fit)), pred_mv<span class="sc">$</span>fit, pred_mv<span class="sc">$</span>se.fit) <span class="sc">%&gt;%</span></span>
+<span id="cb120-2"><a href="scaling.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb120-3"><a href="scaling.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> <span class="dv">1</span>,</span>
+<span id="cb120-4"><a href="scaling.html#cb120-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">se =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb120-5"><a href="scaling.html#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">as.numeric</span>(fit),</span>
+<span id="cb120-6"><a href="scaling.html#cb120-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">lwr =</span> <span class="fu">as.numeric</span>(lwr),</span>
+<span id="cb120-7"><a href="scaling.html#cb120-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">upr =</span> <span class="fu">as.numeric</span>(upr),</span>
+<span id="cb120-8"><a href="scaling.html#cb120-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">se =</span> <span class="fu">as.numeric</span>(se),</span>
+<span id="cb120-9"><a href="scaling.html#cb120-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(stringr<span class="sc">::</span><span class="fu">str_sub</span>(id, <span class="at">start =</span> <span class="dv">9</span>, <span class="at">end =</span> <span class="dv">12</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb120-10"><a href="scaling.html#cb120-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>fit)</span></code></pre></div>
 <pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
 ## Using compatibility `.name_repair`.</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="scaling.html#cb122-1"></a>textplot<span class="op">$</span>id =<span class="st"> </span><span class="kw">with</span>(textplot,  <span class="kw">reorder</span>(id, fit))</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="scaling.html#cb122-1" aria-hidden="true" tabindex="-1"></a>textplot<span class="sc">$</span>id <span class="ot">=</span> <span class="fu">with</span>(textplot,  <span class="fu">reorder</span>(id, fit))</span></code></pre></div>
 <p>Then, we plot this data using <code>ggplot</code>:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="scaling.html#cb123-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> textplot, <span class="kw">aes</span>(<span class="dt">x =</span> fit, <span class="dt">y =</span> id)) <span class="op">+</span></span>
-<span id="cb123-2"><a href="scaling.html#cb123-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> year)) <span class="op">+</span></span>
-<span id="cb123-3"><a href="scaling.html#cb123-3"></a><span class="st">  </span><span class="kw">geom_errorbarh</span>(<span class="kw">aes</span>(<span class="dt">xmax =</span> upr, <span class="dt">xmin =</span> lwr, <span class="dt">colour =</span> year), <span class="dt">height =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb123-4"><a href="scaling.html#cb123-4"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span></span>
-<span id="cb123-5"><a href="scaling.html#cb123-5"></a><span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ffa600&quot;</span>, <span class="st">&quot;#ff6361&quot;</span>),</span>
-<span id="cb123-6"><a href="scaling.html#cb123-6"></a>                      <span class="dt">name =</span> <span class="st">&quot;Years:&quot;</span>,</span>
-<span id="cb123-7"><a href="scaling.html#cb123-7"></a>                      <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;2001&quot;</span>, <span class="st">&quot;2005&quot;</span>),</span>
-<span id="cb123-8"><a href="scaling.html#cb123-8"></a>                      <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;2001&quot;</span>, <span class="st">&quot;2005&quot;</span>)) <span class="op">+</span></span>
-<span id="cb123-9"><a href="scaling.html#cb123-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Left-Right Distribution of UK Party Manifestos&quot;</span>,</span>
-<span id="cb123-10"><a href="scaling.html#cb123-10"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;with 95% confidence intervals&quot;</span>,</span>
-<span id="cb123-11"><a href="scaling.html#cb123-11"></a>       <span class="dt">x =</span> <span class="st">&quot;Left - Right score: lower is more left&quot;</span>,</span>
-<span id="cb123-12"><a href="scaling.html#cb123-12"></a>       <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb123-13"><a href="scaling.html#cb123-13"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb123-14"><a href="scaling.html#cb123-14"></a>        <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb123-15"><a href="scaling.html#cb123-15"></a>        <span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb123-16"><a href="scaling.html#cb123-16"></a>        <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">colour =</span> <span class="st">&quot;grey45&quot;</span>),</span>
-<span id="cb123-17"><a href="scaling.html#cb123-17"></a>        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">colour =</span> <span class="st">&quot;grey45&quot;</span>),</span>
-<span id="cb123-18"><a href="scaling.html#cb123-18"></a>        <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="scaling.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> textplot, <span class="fu">aes</span>(<span class="at">x =</span> fit, <span class="at">y =</span> id)) <span class="sc">+</span></span>
+<span id="cb123-2"><a href="scaling.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> year)) <span class="sc">+</span></span>
+<span id="cb123-3"><a href="scaling.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmax =</span> upr, <span class="at">xmin =</span> lwr, <span class="at">colour =</span> year), <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb123-4"><a href="scaling.html#cb123-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb123-5"><a href="scaling.html#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ffa600&quot;</span>, <span class="st">&quot;#ff6361&quot;</span>),</span>
+<span id="cb123-6"><a href="scaling.html#cb123-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">&quot;Years:&quot;</span>,</span>
+<span id="cb123-7"><a href="scaling.html#cb123-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;2001&quot;</span>, <span class="st">&quot;2005&quot;</span>),</span>
+<span id="cb123-8"><a href="scaling.html#cb123-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;2001&quot;</span>, <span class="st">&quot;2005&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb123-9"><a href="scaling.html#cb123-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Left-Right Distribution of UK Party Manifestos&quot;</span>,</span>
+<span id="cb123-10"><a href="scaling.html#cb123-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;with 95% confidence intervals&quot;</span>,</span>
+<span id="cb123-11"><a href="scaling.html#cb123-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Left - Right score: lower is more left&quot;</span>,</span>
+<span id="cb123-12"><a href="scaling.html#cb123-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb123-13"><a href="scaling.html#cb123-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb123-14"><a href="scaling.html#cb123-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb123-15"><a href="scaling.html#cb123-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb123-16"><a href="scaling.html#cb123-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">&quot;grey45&quot;</span>),</span>
+<span id="cb123-17"><a href="scaling.html#cb123-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">&quot;grey45&quot;</span>),</span>
+<span id="cb123-18"><a href="scaling.html#cb123-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>))</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 </div>
-<div id="wordfish" class="section level2">
+<div id="wordfish" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Wordfish</h2>
 <p>Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale.</p>
 <p>Here, we take the SNP party manifesto as the most left-wing (text 5), and the Conservative manifesto as the most right-wing (text 1). Before we run the model, we set a seed as the model draws random numbers and we want our work to be replicable:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="scaling.html#cb124-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb124-2"><a href="scaling.html#cb124-2"></a></span>
-<span id="cb124-3"><a href="scaling.html#cb124-3"></a>wordfish &lt;-<span class="st"> </span><span class="kw">textmodel_wordfish</span>(data_manifestos_dfm, <span class="dt">dir =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">1</span>))</span>
-<span id="cb124-4"><a href="scaling.html#cb124-4"></a><span class="kw">summary</span>(wordfish)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="scaling.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb124-2"><a href="scaling.html#cb124-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-3"><a href="scaling.html#cb124-3" aria-hidden="true" tabindex="-1"></a>wordfish <span class="ot">&lt;-</span> <span class="fu">textmodel_wordfish</span>(data_manifestos_dfm, <span class="at">dir =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">1</span>))</span>
+<span id="cb124-4"><a href="scaling.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wordfish)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## textmodel_wordfish.dfm(x = data_manifestos_dfm, dir = c(5, 1))
@@ -426,7 +435,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## beta     1.379      1.074 -0.2176   -0.3005    0.8894
 ## psi      1.247     -1.555  1.4890    0.7119    1.6870</code></pre>
 <p>Here, <em>theta</em> gives us the position of the text. As with Wordscores, we can also calculate the confidence intervals (note that <em>theta</em> is now called <em>fit</em>):</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="scaling.html#cb126-1"></a><span class="kw">predict</span>(wordfish, <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="scaling.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(wordfish, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>## $fit
 ##                            fit         lwr        upr
 ## UK_natl_2001_en_Con  0.4073476  0.39184076  0.4228544
@@ -440,29 +449,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## UK_natl_2005_en_PCy  0.1186673  0.08624069  0.1510940
 ## UK_natl_2005_en_SNP -2.3951506 -2.40158974 -2.3887115</code></pre>
 <p>As with Wordscores, we can also plot graphs for Wordfish, using the same commands:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="scaling.html#cb128-1"></a><span class="kw">textplot_scale1d</span>(wordfish, <span class="dt">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="dt">highlighted =</span> <span class="kw">c</span>(<span class="st">&quot;british&quot;</span>,<span class="st">&quot;vote&quot;</span>,<span class="st">&quot;europe&quot;</span>,<span class="st">&quot;election&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="scaling.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(wordfish, <span class="at">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="at">highlighted =</span> <span class="fu">c</span>(<span class="st">&quot;british&quot;</span>,<span class="st">&quot;vote&quot;</span>,<span class="st">&quot;europe&quot;</span>,<span class="st">&quot;election&quot;</span>))</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="scaling.html#cb129-1"></a><span class="kw">textplot_scale1d</span>(wordfish, <span class="dt">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="scaling.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(wordfish, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
 <p><img src="Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-89-2.png" width="672" /></p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Bakker2012a">
-<p>Bakker, Ryan, Catherine de Vries, Erica Edwards, Liesbet Hooghe, Seth Jolly, Gary Marks, Jonathan Polk, Jan Rovny, Marco R. Steenbergen, and Milada Anna Vachudova. 2012. “Measuring Party Positions in Europe: The Chapel Hill Expert Survey Trend File, 1999-2010: The Chapel Hill Expert Survey Trend File, 1999–2010.” <em>Party Politics</em> 21 (1): 1–15. <a href="https://doi.org/10.1177/1354068812462931">https://doi.org/10.1177/1354068812462931</a>.</p>
-</div>
-<div id="ref-Laver2003a">
-<p>Laver, Michael, Kenneth Benoit, and John Garry. 2003. “Extracting Policy Positions from Political Texts Using Words as Data.” <em>The American Political Science Review</em> 97 (2): 311–31. <a href="https://doi.org/10.1017/S0003055403000698">https://doi.org/10.1017/S0003055403000698</a>.</p>
-</div>
-<div id="ref-Lin1989a">
-<p>Lin, L. 1989. “A Concordance Correlation Coefficient to Evaluate Reproducibility.” <em>Biometrics</em> 45: 255–68.</p>
-</div>
-<div id="ref-Martin2008a">
-<p>Martin, Lanny W., and Georg Vanberg. 2008. “Reply to Benoit and Laver.” <em>Political Analysis</em> 16 (1): 112–14. <a href="https://doi.org/10.1093/pan/mpm018">https://doi.org/10.1093/pan/mpm018</a>.</p>
-</div>
-<div id="ref-Slapin2008a">
-<p>Slapin, Jonathan B., and Sven-Oliver Proksch. 2008. “A Scaling Model for Estimating Time-Series Party Positions from Texts.” <em>American Journal of Political Science</em> 52 (3): 705–22.</p>
 </div>
 </div>
             </section>

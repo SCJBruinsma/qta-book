@@ -121,6 +121,7 @@ First, we load the packages we need for the Correspondence Analysis:
 ```{r}
 library(FactoMineR)
 library(factoextra)
+library(readr)
 ```
 
 Then, we import the data. You can do so either by downloading the replication data yourselves, or use the file we already put up on GitHub:

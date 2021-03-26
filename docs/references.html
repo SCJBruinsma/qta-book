@@ -24,7 +24,7 @@
 <meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
 
 
-<meta name="date" content="2021-03-24" />
+<meta name="date" content="2021-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="unsupervised-methods.html"/>
 
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,22 +51,21 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -85,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -135,21 +135,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
-<li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a><ul>
-<li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a><ul>
+<li class="chapter" data-level="2" data-path="getting-ready.html"><a href="getting-ready.html"><i class="fa fa-check"></i><b>2</b> Getting Ready</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="getting-ready.html"><a href="getting-ready.html#r-on-windows"><i class="fa fa-check"></i><b>2.1.1</b> R on Windows</a></li>
 <li class="chapter" data-level="2.1.2" data-path="getting-ready.html"><a href="getting-ready.html#r-on-linux"><i class="fa fa-check"></i><b>2.1.2</b> R on Linux</a></li>
 <li class="chapter" data-level="2.1.3" data-path="getting-ready.html"><a href="getting-ready.html#r-on-macos"><i class="fa fa-check"></i><b>2.1.3</b> R on macOS</a></li>
 <li class="chapter" data-level="2.1.4" data-path="getting-ready.html"><a href="getting-ready.html#r-in-the-cloud"><i class="fa fa-check"></i><b>2.1.4</b> R in the Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="getting-ready.html"><a href="getting-ready.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a><ul>
+<li class="chapter" data-level="2.2" data-path="getting-ready.html"><a href="getting-ready.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="getting-ready.html"><a href="getting-ready.html#installing-from-cran"><i class="fa fa-check"></i><b>2.2.1</b> Installing from CRAN</a></li>
 <li class="chapter" data-level="2.2.2" data-path="getting-ready.html"><a href="getting-ready.html#installing-from-github"><i class="fa fa-check"></i><b>2.2.2</b> Installing from GitHub</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="getting-ready.html"><a href="getting-ready.html#quanteda"><i class="fa fa-check"></i><b>2.3</b> Quanteda</a></li>
 <li class="chapter" data-level="2.4" data-path="getting-ready.html"><a href="getting-ready.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i><b>3</b> Preparing the Data</a><ul>
+<li class="chapter" data-level="3" data-path="preparing-the-data.html"><a href="preparing-the-data.html"><i class="fa fa-check"></i><b>3</b> Preparing the Data</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="preparing-the-data.html"><a href="preparing-the-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
 <li class="chapter" data-level="3.2" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.2</b> Import .pdf Files</a></li>
 <li class="chapter" data-level="3.3" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.3</b> Import .txt Files</a></li>
@@ -157,24 +161,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.5</b> Import using Web Scraping</a></li>
 <li class="chapter" data-level="3.6" data-path="preparing-the-data.html"><a href="preparing-the-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.6</b> Import from an API</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and validity</a><ul>
+<li class="chapter" data-level="4" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and validity</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html#measuring-inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Measuring inter-coder agreement</a></li>
 <li class="chapter" data-level="4.2" data-path="reliability-and-validity.html"><a href="reliability-and-validity.html#visualizing-the-quality-of-coding"><i class="fa fa-check"></i><b>4.2</b> Visualizing the quality of coding</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="dictionaries.html"><a href="dictionaries.html"><i class="fa fa-check"></i><b>5</b> Dictionaries</a><ul>
+<li class="chapter" data-level="5" data-path="dictionaries.html"><a href="dictionaries.html"><i class="fa fa-check"></i><b>5</b> Dictionaries</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="dictionaries.html"><a href="dictionaries.html#working-with-a-corpus"><i class="fa fa-check"></i><b>5.1</b> Working with a Corpus</a></li>
 <li class="chapter" data-level="5.2" data-path="dictionaries.html"><a href="dictionaries.html#standard-dictionary-analysis"><i class="fa fa-check"></i><b>5.2</b> Standard Dictionary Analysis</a></li>
 <li class="chapter" data-level="5.3" data-path="dictionaries.html"><a href="dictionaries.html#sentiment-analysis"><i class="fa fa-check"></i><b>5.3</b> Sentiment Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling</a><ul>
+<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>6.1</b> Wordscores</a></li>
 <li class="chapter" data-level="6.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>6.2</b> Wordfish</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a><ul>
+<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>7.1</b> Support Vector Machines</a></li>
 <li class="chapter" data-level="7.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>7.2</b> Naive Bayes</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a><ul>
+<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>8.1</b> Latent Dirichlet Allocation</a></li>
 <li class="chapter" data-level="8.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#correspondence-analysis"><i class="fa fa-check"></i><b>8.2</b> Correspondence Analysis</a></li>
 </ul></li>
@@ -202,93 +211,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 
-<div id="refs" class="references">
-<div>
-<p>Albaugh, Quinn, Julie Sevenans, Stuart Soroka, and Peter John Loewen. 2013. “The Automated Coding of Policy Agendas: A Dictionary-Based Approach.” In <em>6th Annual Comparative Agendas Conference, Antwerp, Belgium</em>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Albaugh2013" class="csl-entry">
+Albaugh, Quinn, Julie Sevenans, Stuart Soroka, and Peter John Loewen. 2013. <span>“The Automated Coding of Policy Agendas: A Dictionary-Based Approach.”</span> In <em>6th Annual Comparative Agendas Conference, Antwerp, Belgium</em>.
 </div>
-<div>
-<p>Bakker, Ryan, Catherine de Vries, Erica Edwards, Liesbet Hooghe, Seth Jolly, Gary Marks, Jonathan Polk, Jan Rovny, Marco R. Steenbergen, and Milada Anna Vachudova. 2012. “Measuring Party Positions in Europe: The Chapel Hill Expert Survey Trend File, 1999-2010: The Chapel Hill Expert Survey Trend File, 1999–2010.” <em>Party Politics</em> 21 (1): 1–15. <a href="https://doi.org/10.1177/1354068812462931">https://doi.org/10.1177/1354068812462931</a>.</p>
+<div id="ref-Bakker2012a" class="csl-entry">
+Bakker, Ryan, Catherine de Vries, Erica Edwards, Liesbet Hooghe, Seth Jolly, Gary Marks, Jonathan Polk, Jan Rovny, Marco R. Steenbergen, and Milada Anna Vachudova. 2012. <span>“Measuring Party Positions in Europe: The Chapel Hill Expert Survey Trend File, 1999-2010: The Chapel Hill Expert Survey Trend File, 1999–2010.”</span> <em>Party Politics</em> 21 (1): 1–15. <a href="https://doi.org/10.1177/1354068812462931">https://doi.org/10.1177/1354068812462931</a>.
 </div>
-<div>
-<p>Benoit, Kenneth, Michael Laver, and Slava Mikhaylov. 2009. “Treating Words as Data with Error: Uncertainty in Text Statements of Policy Positions.” <em>American Journal of Political Science</em> 53 (2): 495–513. <a href="https://doi.org/10.1111/j.1540-5907.2009.00383.x">https://doi.org/10.1111/j.1540-5907.2009.00383.x</a>.</p>
+<div id="ref-Benoit2009a" class="csl-entry">
+Benoit, Kenneth, Michael Laver, and Slava Mikhaylov. 2009. <span>“Treating Words as Data with Error: Uncertainty in Text Statements of Policy Positions.”</span> <em>American Journal of Political Science</em> 53 (2): 495–513. <a href="https://doi.org/10.1111/j.1540-5907.2009.00383.x">https://doi.org/10.1111/j.1540-5907.2009.00383.x</a>.
 </div>
-<div>
-<p>Benoit, Kenneth, Kohei Watanabe, Haiyan Wang, Paul Nulty, Adam Obeng, Stefan Müller, and Akitaka Matsuo. 2018. “Quanteda: An R Package for the Quantitative Analysis of Textual Data.” <em>Journal of Open Source Software</em> 3 (30): 774.</p>
+<div id="ref-Benoit2018" class="csl-entry">
+Benoit, Kenneth, Kohei Watanabe, Haiyan Wang, Paul Nulty, Adam Obeng, Stefan Müller, and Akitaka Matsuo. 2018. <span>“Quanteda: An r Package for the Quantitative Analysis of Textual Data.”</span> <em>Journal of Open Source Software</em> 3 (30): 774.
 </div>
-<div>
-<p>Blei, David M, Andrew Y Ng, and Michael I Jordan. 2003. “Latent Dirichlet Allocation.” <em>Journal of Machine Learning Research</em> 3 (Jan): 993–1022.</p>
+<div id="ref-Blei2003a" class="csl-entry">
+Blei, David M, Andrew Y Ng, and Michael I Jordan. 2003. <span>“Latent Dirichlet Allocation.”</span> <em>Journal of Machine Learning Research</em> 3 (Jan): 993–1022.
 </div>
-<div>
-<p>Carmines, Edward G., and Richard A. Zeller. 1979. <em>Reliability and Validity Assessment</em>. Beverly Hills, CA: Sage.</p>
+<div id="ref-Carmines1979a" class="csl-entry">
+Carmines, Edward G., and Richard A. Zeller. 1979. <em>Reliability and Validity Assessment</em>. Beverly Hills, CA: Sage.
 </div>
-<div>
-<p>Clarke, Isobelle, and Jack Grieve. 2019. “Stylistic Variation on the Donald Trump Twitter Account: A Linguistic Analysis of Tweets Posted Between 2009 and 2018.” <em>PLOS ONE</em> 14 (9): 1–27. <a href="https://doi.org/10.1371/journal.pone.0222062">https://doi.org/10.1371/journal.pone.0222062</a>.</p>
+<div id="ref-Clarke2019a" class="csl-entry">
+Clarke, Isobelle, and Jack Grieve. 2019. <span>“Stylistic Variation on the Donald Trump Twitter Account: A Linguistic Analysis of Tweets Posted Between 2009 and 2018.”</span> <em>PLOS ONE</em> 14 (9): 1–27. <a href="https://doi.org/10.1371/journal.pone.0222062">https://doi.org/10.1371/journal.pone.0222062</a>.
 </div>
-<div>
-<p>Freelon, Deen. 2018. “Computational Research in the Post-Api Age.” <em>Political Communication</em> 35 (4): 665–68.</p>
+<div id="ref-Freelon2018" class="csl-entry">
+Freelon, Deen. 2018. <span>“Computational Research in the Post-API Age.”</span> <em>Political Communication</em> 35 (4): 665–68.
 </div>
-<div>
-<p>Griffiths, Thomas L, and Mark Steyvers. 2004. “Finding Scientific Topics.” <em>Proceedings of the National Academy of Sciences</em> 101 (suppl 1): 5228–35.</p>
+<div id="ref-Griffiths2004a" class="csl-entry">
+Griffiths, Thomas L, and Mark Steyvers. 2004. <span>“Finding Scientific Topics.”</span> <em>Proceedings of the National Academy of Sciences</em> 101 (suppl 1): 5228–35.
 </div>
-<div>
-<p>Grimmer, Justin, and Brandon M. Stewart. 2013. “Text as Data: The Promise and Pitfals of Automatic Content Analysis Methods for Political Texts.” <em>Political Analysis</em> 21 (3): 267–97. <a href="https://doi.org/10.1093/pan/mps028">https://doi.org/10.1093/pan/mps028</a>.</p>
+<div id="ref-Grimmer2013a" class="csl-entry">
+Grimmer, Justin, and Brandon M. Stewart. 2013. <span>“Text as Data: The Promise and Pitfals of Automatic Content Analysis Methods for Political Texts.”</span> <em>Political Analysis</em> 21 (3): 267–97. <a href="https://doi.org/10.1093/pan/mps028">https://doi.org/10.1093/pan/mps028</a>.
 </div>
-<div>
-<p>Haselmayer, Martin, and Marcelo Jenny. 2017. “Sentiment Analysis of Political Communication: Combining a Dictionary Approach with Crowdcoding.” <em>Quality &amp; Quantity</em> 51 (6): 2623–46.</p>
+<div id="ref-Haselmayer2017" class="csl-entry">
+Haselmayer, Martin, and Marcelo Jenny. 2017. <span>“Sentiment Analysis of Political Communication: Combining a Dictionary Approach with Crowdcoding.”</span> <em>Quality &amp; Quantity</em> 51 (6): 2623–46.
 </div>
-<div>
-<p>Hayes, Andrew F., and Klaus Krippendorff. 2007. “Answering the Call for a Standard Reliability Measure for Coding Data.” <em>Communication Methods and Measures</em> 1 (1): 77–89. <a href="https://doi.org/10.1080/19312450709336664">https://doi.org/10.1080/19312450709336664</a>.</p>
+<div id="ref-Hayes2007a" class="csl-entry">
+Hayes, Andrew F., and Klaus Krippendorff. 2007. <span>“Answering the Call for a Standard Reliability Measure for Coding Data.”</span> <em>Communication Methods and Measures</em> 1 (1): 77–89. <a href="https://doi.org/10.1080/19312450709336664">https://doi.org/10.1080/19312450709336664</a>.
 </div>
-<div>
-<p>Krippendorff, Klaus. 2004. <em>Content Analysis - an Introduction to Its Methodology</em>. 2nd ed. Thousand Oaks, CA: SAGE Publications.</p>
+<div id="ref-Krippendorff2004a" class="csl-entry">
+Krippendorff, Klaus. 2004. <em>Content Analysis - an Introduction to Its Methodology</em>. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 </div>
-<div>
-<p>Lamprianou, Iasonas. 2020. “Measuring and Visualizing Coders’ Reliability: New Approaches and Guidelines from Experimental Data.” <em>Sociological Methods &amp; Research</em>, 0049124120926198.</p>
+<div id="ref-Lamprianou2020" class="csl-entry">
+Lamprianou, Iasonas. 2020. <span>“Measuring and Visualizing Coders’ Reliability: New Approaches and Guidelines from Experimental Data.”</span> <em>Sociological Methods &amp; Research</em>, 0049124120926198.
 </div>
-<div>
-<p>Laver, Michael, Kenneth Benoit, and John Garry. 2003. “Extracting Policy Positions from Political Texts Using Words as Data.” <em>The American Political Science Review</em> 97 (2): 311–31. <a href="https://doi.org/10.1017/S0003055403000698">https://doi.org/10.1017/S0003055403000698</a>.</p>
+<div id="ref-Laver2003a" class="csl-entry">
+Laver, Michael, Kenneth Benoit, and John Garry. 2003. <span>“Extracting Policy Positions from Political Texts Using Words as Data.”</span> <em>The American Political Science Review</em> 97 (2): 311–31. <a href="https://doi.org/10.1017/S0003055403000698">https://doi.org/10.1017/S0003055403000698</a>.
 </div>
-<div>
-<p>Laver, Michael, and John Garry. 2000. “Estimating Policy Positions from Political Texts.” <em>American Journal of Political Science</em> 44 (3): 619–34. <a href="https://doi.org/10.2307/2669268">https://doi.org/10.2307/2669268</a>.</p>
+<div id="ref-Laver2000a" class="csl-entry">
+Laver, Michael, and John Garry. 2000. <span>“Estimating Policy Positions from Political Texts.”</span> <em>American Journal of Political Science</em> 44 (3): 619–34. <a href="https://doi.org/10.2307/2669268">https://doi.org/10.2307/2669268</a>.
 </div>
-<div>
-<p>Lin, L. 1989. “A Concordance Correlation Coefficient to Evaluate Reproducibility.” <em>Biometrics</em> 45: 255–68.</p>
+<div id="ref-Lin1989a" class="csl-entry">
+Lin, L. 1989. <span>“A Concordance Correlation Coefficient to Evaluate Reproducibility.”</span> <em>Biometrics</em> 45: 255–68.
 </div>
-<div>
-<p>Lind, Fabienne, Jakob-Moritz Eberl, Tobias Heidenreich, Hajo G Boomgaarden, Eva Luisa Gómez Montero, Beatriz Herrero, Rosa Berganza, Will Allen, and Peter Bajomi-Lazar. 2019. “Multilingual Dictionary Construction: A Roadmap to Measuring Migration Frames in European Media Discourse.”</p>
+<div id="ref-Lind2019" class="csl-entry">
+Lind, Fabienne, Jakob-Moritz Eberl, Tobias Heidenreich, Hajo G Boomgaarden, Eva Luisa Gómez Montero, Beatriz Herrero, Rosa Berganza, Will Allen, and Peter Bajomi-Lazar. 2019. <span>“Multilingual Dictionary Construction: A Roadmap to Measuring Migration Frames in European Media Discourse.”</span>
 </div>
-<div>
-<p>Lowe, Will. 2011. <em>JFreq: Count Words, Quickly</em>. <a href="http://www.conjugateprior.org/software/jfreq/">http://www.conjugateprior.org/software/jfreq/</a>.</p>
+<div id="ref-Lowe2011b" class="csl-entry">
+Lowe, Will. 2011. <em>JFreq: Count Words, Quickly</em>. <a href="http://www.conjugateprior.org/software/jfreq/">http://www.conjugateprior.org/software/jfreq/</a>.
 </div>
-<div>
-<p>Lowe, Will, and Kenneth Benoit. 2011. “Estimating Uncertainty in Quantitative Text Analysis.” <em>Paper Prepared for Presentation at the Annual Conference of the Midwest Political Science Association</em>, 1–34.</p>
+<div id="ref-Lowe2011a" class="csl-entry">
+Lowe, Will, and Kenneth Benoit. 2011. <span>“Estimating Uncertainty in Quantitative Text Analysis.”</span> <em>Paper Prepared for Presentation at the Annual Conference of the Midwest Political Science Association</em>, 1–34.
 </div>
-<div>
-<p>Martin, Lanny W., and Georg Vanberg. 2008. “Reply to Benoit and Laver.” <em>Political Analysis</em> 16 (1): 112–14. <a href="https://doi.org/10.1093/pan/mpm018">https://doi.org/10.1093/pan/mpm018</a>.</p>
+<div id="ref-Martin2008a" class="csl-entry">
+Martin, Lanny W., and Georg Vanberg. 2008. <span>“Reply to Benoit and Laver.”</span> <em>Political Analysis</em> 16 (1): 112–14. <a href="https://doi.org/10.1093/pan/mpm018">https://doi.org/10.1093/pan/mpm018</a>.
 </div>
-<div>
-<p>Merz, Nicolas, Sven Regel, and Jirka Lewandowski. 2016. “The Manifesto Corpus: A New Resource for Research on Political Parties and Quantitative Text Analysis.” <em>Research &amp; Politics</em> 3 (2): 1–8.</p>
+<div id="ref-Merz2016" class="csl-entry">
+Merz, Nicolas, Sven Regel, and Jirka Lewandowski. 2016. <span>“The Manifesto Corpus: A New Resource for Research on Political Parties and Quantitative Text Analysis.”</span> <em>Research &amp; Politics</em> 3 (2): 2053168016643346.
 </div>
-<div>
-<p>Mikhaylov, Slava, Michael Laver, and Kenneth Benoit. 2012. “Coder Reliability and Misclassification in the Human Coding of Party Manifestos.” <em>Political Analysis</em> 20 (1): 78–91. <a href="https://doi.org/10.1093/pan/mpr047">https://doi.org/10.1093/pan/mpr047</a>.</p>
+<div id="ref-Mikhaylov2012a" class="csl-entry">
+Mikhaylov, Slava, Michael Laver, and Kenneth Benoit. 2012. <span>“Coder Reliability and Misclassification in the Human Coding of Party Manifestos.”</span> <em>Political Analysis</em> 20 (1): 78–91. <a href="https://doi.org/10.1093/pan/mpr047">https://doi.org/10.1093/pan/mpr047</a>.
 </div>
-<div>
-<p>Munzert, Simon, Christian Rubba, Peter Meißner, and Dominic Nyhuis. 2014. <em>Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining</em>. John Wiley &amp; Sons.</p>
+<div id="ref-Munzert2014" class="csl-entry">
+Munzert, Simon, Christian Rubba, Peter Meißner, and Dominic Nyhuis. 2014. <em>Automated Data Collection with r: A Practical Guide to Web Scraping and Text Mining</em>. John Wiley &amp; Sons.
 </div>
-<div>
-<p>Perriam, Jessamy, Andreas Birkbak, and Andy Freeman. 2020. “Digital Methods in a Post-Api Environment.” <em>International Journal of Social Research Methodology</em> 23 (3): 277–90.</p>
+<div id="ref-Perriam2020" class="csl-entry">
+Perriam, Jessamy, Andreas Birkbak, and Andy Freeman. 2020. <span>“Digital Methods in a Post-API Environment.”</span> <em>International Journal of Social Research Methodology</em> 23 (3): 277–90.
 </div>
-<div>
-<p>Slapin, Jonathan B., and Sven-Oliver Proksch. 2008. “A Scaling Model for Estimating Time-Series Party Positions from Texts.” <em>American Journal of Political Science</em> 52 (3): 705–22.</p>
+<div id="ref-Slapin2008a" class="csl-entry">
+Slapin, Jonathan B., and Sven-Oliver Proksch. 2008. <span>“A Scaling Model for Estimating Time-Series Party Positions from Texts.”</span> <em>American Journal of Political Science</em> 52 (3): 705–22.
 </div>
-<div>
-<p>Volkens, Andrea, Werner Krause, Pola Lehmann, Theres Matthieß, Nicolas Merz, Sven Regel, and Bernhard Weßels. 2019. “The Manifesto Data Collection. Manifesto Project (MRG/CMP/MARPOR).” Berlin: Wissenschaftszentrum Berlin für Sozialforschung (WZB). 2019. <a href="https://doi.org/10.25522/manifesto.mpds.2019b">https://doi.org/10.25522/manifesto.mpds.2019b</a>.</p>
+<div id="ref-Volkens2019a" class="csl-entry">
+Volkens, Andrea, Werner Krause, Pola Lehmann, Theres Matthieß, Nicolas Merz, Sven Regel, and Bernhard Weßels. 2019. <span>“<span>The Manifesto Data Collection. Manifesto Project (MRG/CMP/MARPOR)</span>.”</span> Berlin: Wissenschaftszentrum Berlin f<span>ü</span>r Sozialforschung (WZB). 2019. <a href="https://doi.org/10.25522/manifesto.mpds.2019b">https://doi.org/10.25522/manifesto.mpds.2019b</a>.
 </div>
-<div>
-<p>Welbers, Kasper, Wouter Van Atteveldt, and Kenneth Benoit. 2017. “Text Analysis in R.” <em>Communication Methods and Measures</em> 11 (4): 245–65.</p>
+<div id="ref-Welbers2017" class="csl-entry">
+Welbers, Kasper, Wouter Van Atteveldt, and Kenneth Benoit. 2017. <span>“Text Analysis in r.”</span> <em>Communication Methods and Measures</em> 11 (4): 245–65.
 </div>
-<div>
-<p>Young, Lori, and Stuart Soroka. 2012. “Affective News: The Automated Coding of Sentiment in Political Texts.” <em>Political Communication</em> 29 (2): 205–31.</p>
+<div id="ref-Young2012" class="csl-entry">
+Young, Lori, and Stuart Soroka. 2012. <span>“Lexicoder Sentiment Dictionary.”</span>
 </div>
 </div>
 </div>
