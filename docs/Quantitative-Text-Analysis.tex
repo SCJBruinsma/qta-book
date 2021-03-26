@@ -1256,36 +1256,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                   doc_id negative positive neg_positive neg_negative
-## 1   train/neg/8194_4.txt        9        8            0            0
-## 2   train/neg/8033_1.txt       21       15            0            0
-## 3  train/neg/12330_4.txt       24       25            0            0
-## 4    test/neg/3730_1.txt        9        3            0            0
-## 5   test/pos/11927_8.txt        5        8            0            0
-## 6     test/pos/892_8.txt       14       16            0            0
-## 7  test/pos/12215_10.txt        3        4            0            0
-## 8    test/neg/7948_3.txt       22       17            0            0
-## 9   train/pos/4803_8.txt       16       40            0            0
-## 10   test/neg/7538_4.txt        6        8            0            0
-## 11  train/neg/2524_4.txt       36       51            0            0
-## 12  test/pos/4710_10.txt        2        4            0            0
-## 13 train/pos/11073_8.txt        5       12            0            0
-## 14  test/pos/9471_10.txt        5       10            0            0
-## 15  train/neg/1254_4.txt        5       18            0            0
-## 16   test/pos/7527_7.txt        4       10            0            0
-## 17  test/neg/11120_4.txt       11        3            0            0
-## 18  train/neg/6013_1.txt        8        4            0            0
-## 19   test/neg/7640_4.txt       24        6            0            0
-## 20    test/pos/789_8.txt        5        6            0            0
-## 21    train/pos/23_7.txt       12       15            0            0
-## 22   test/neg/8151_2.txt        8        5            0            0
-## 23   test/pos/9160_9.txt       19       10            0            0
-## 24  train/pos/9688_9.txt       24       51            0            0
-## 25   test/neg/4217_1.txt        9        5            0            0
-## 26  test/neg/11010_3.txt        5        5            0            0
-## 27  test/neg/11894_1.txt        9        7            0            0
-## 28  train/neg/4445_4.txt       12        9            0            0
-## 29 train/pos/9692_10.txt        2        7            0            0
-## 30 train/pos/7674_10.txt        4        7            0            0
+## 1   train/pos/5639_7.txt        4       10            0            0
+## 2  train/neg/10793_4.txt        8        6            0            0
+## 3    test/pos/9093_7.txt       24       18            0            0
+## 4    test/neg/7058_2.txt        4        5            0            0
+## 5    test/pos/1935_7.txt       17       19            0            0
+## 6    test/pos/535_10.txt        0        5            0            0
+## 7    test/pos/7669_9.txt        4       10            0            0
+## 8   train/neg/5389_3.txt       16        8            0            0
+## 9  train/pos/7009_10.txt        1       17            0            0
+## 10  test/pos/10922_8.txt        4       20            0            0
+## 11  train/neg/6683_1.txt       11        7            0            0
+## 12   test/neg/4775_2.txt       15        8            0            0
+## 13   train/neg/909_1.txt        6        3            0            0
+## 14  test/pos/5990_10.txt        4       16            0            0
+## 15   test/neg/4703_3.txt       19       32            0            0
+## 16   test/neg/1950_1.txt        4        7            0            0
+## 17   test/neg/7161_4.txt        5        6            0            0
+## 18  test/neg/10003_3.txt       16       15            0            0
+## 19   test/neg/6513_4.txt        4       12            0            0
+## 20  train/pos/1561_8.txt        4        6            0            0
+## 21  train/neg/3262_3.txt       15       17            0            0
+## 22 train/pos/10587_8.txt       10        5            0            0
+## 23  train/neg/6738_1.txt       10       22            0            0
+## 24 train/pos/8406_10.txt        2        5            0            0
+## 25   test/neg/5774_1.txt       10        2            0            0
+## 26  test/pos/2248_10.txt        5        5            0            0
+## 27 train/neg/11371_1.txt        4        3            0            0
+## 28 train/pos/1831_10.txt        5       12            0            0
+## 29  test/pos/11743_9.txt        9       25            0            0
+## 30  train/neg/5300_4.txt        6        9            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -2570,6 +2570,105 @@ We then go through similar steps to make the data-set ready for use and prepare 
 
 Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.
 
+Here is an alternative:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(seededlda)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'seededlda'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:topicmodels':
+## 
+##     terms, topics
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     terms
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(quanteda.dictionaries)}
+
+\NormalTok{dict }\OtherTok{\textless{}{-}} \FunctionTok{dictionary}\NormalTok{(data\_dictionary\_LaverGarry)}
+
+\NormalTok{seededmodel }\OtherTok{\textless{}{-}} \FunctionTok{textmodel\_seededlda}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{dictionary=}\NormalTok{dict)}
+
+\FunctionTok{terms}\NormalTok{(seededmodel, }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS       INSTITUTIONS 
+##  [1,] "people"      "work"       "environmental"   "women"      "reform"     
+##  [2,] "media"       "children"   "environment"     "race"       "parliament" 
+##  [3,] "museums"     "education"  "green"           "ethnic"     "continue"   
+##  [4,] "galleries"   "health"     "population"      "asian"      "commission" 
+##  [5,] "operations"  "investment" "clean"           "girls"      "council"    
+##  [6,] "operation"   "economic"   "emissions"       "racist"     "westminster"
+##  [7,] "artistic"    "care"       "production"      "racing"     "councils"   
+##  [8,] "operate"     "transport"  "car"             "racial"     "assembly"   
+##  [9,] "operating"   "school"     "cleaner"         "racism"     "rules"      
+## [10,] "theatre"     "benefit"    "congestion"      "woman"      "legislation"
+## [11,] "art"         "poverty"    "recycling"       "racially"   "schemes"    
+## [12,] "music"       "money"      "products"        "welsh"      "modern"     
+## [13,] "musical"     "economy"    "produce"         "remaining"  "scheme"     
+## [14,] "operated"    "training"   "environmentally" "rewarded"   "process"    
+## [15,] "operational" "pay"        "emission"        "incentives" "office"     
+## [16,] "operators"   "choice"     "recycle"         "believes"   "election"   
+## [17,] "theatres"    "working"    "productive"      "staying"    "vote"       
+## [18,] "anglers"     "teachers"   "litter"          "citizens"   "agency"     
+## [19,] "operates"    "establish"  "product"         "first"      "reforms"    
+## [20,] "labour"      "child"      "fur"             "soon"       "democratic" 
+##       LAW_AND_ORDER RURAL          URBAN          VALUES          
+##  [1,] "police"      "farming"      "towns"        "rights"        
+##  [2,] "forces"      "fisheries"    "town"         "human"         
+##  [3,] "prison"      "farmers"      "scotland"     "maintain"      
+##  [4,] "drugs"       "countryside"  "snp"          "discrimination"
+##  [5,] "victims"     "fishing"      "scottish"     "principle"     
+##  [6,] "fraud"       "agriculture"  "scotland's"   "threat"        
+##  [7,] "tough"       "agricultural" "independence" "leadership"    
+##  [8,] "force"       "village"      "taxation"     "principles"    
+##  [9,] "drug"        "fish"         "available"    "proud"         
+## [10,] "officers"    "wildlife"     "committed"    "past"          
+## [11,] "court"       "farms"        "review"       "immigration"   
+## [12,] "courts"      "villages"     "key"          "historic"      
+## [13,] "determined"  "farm"         "stand"        "sex"           
+## [14,] "sentences"   "landscape"    "examine"      "leader"        
+## [15,] "sentence"    "fishermen"    "mps"          "reliable"      
+## [16,] "policing"    "landscapes"   "role"         "marriage"      
+## [17,] "forced"      "hens"         "rural"        "history"       
+## [18,] "offences"    "forest"       "scots"        "preserve"      
+## [19,] "victim"      "feed"         "must"         "traditions"    
+## [20,] "penalties"   "lanes"        "direct"       "sexual"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topwords }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{terms}\NormalTok{(seededmodel,}\DecValTok{20}\NormalTok{))}
+\NormalTok{corpus\_manifestos}\SpecialCharTok{$}\NormalTok{topic }\OtherTok{\textless{}{-}} \FunctionTok{topics}\NormalTok{(seededmodel)}
+\NormalTok{topics\_table }\OtherTok{\textless{}{-}} \FunctionTok{ftable}\NormalTok{(corpus\_manifestos}\SpecialCharTok{$}\NormalTok{topic)}
+
+\NormalTok{topicsprop\_table }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(topics\_table))}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{topicsprop\_table, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Var1, }\AttributeTok{y=}\NormalTok{Freq))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Topics"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Topic Percentage"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{, }\AttributeTok{size=}\DecValTok{10}\NormalTok{, }\AttributeTok{angle=}\DecValTok{45}\NormalTok{,}\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-133-1.pdf}
+
 \hypertarget{correspondence-analysis}{%
 \section{Correspondence Analysis}\label{correspondence-analysis}}
 
@@ -2636,7 +2735,7 @@ We can then run the MCA with the \texttt{FactoMineR} package. For this, we have 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-4.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-4.pdf}
 
 First, let's start by looking at the association of the wordlength with the five dimensions:
 
@@ -2664,7 +2763,7 @@ As we can see, the word length has a strong correlation with Dimension 1. This b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-138-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-139-1.pdf}
 
 Here, we only plot the points as adding the labels as well will make the picture quite cluttered. In the article, Dimension 2 is identified as ``Conversational Style'' and Dimension 3 as ``Campaigning Style.'' The plot thus nicely shows us that some categories belong to one of these dimensions and not to the other. To see for which cases this is mostly the case (the ones that have the most extreme positions), we can have a look at their coordinates:
 

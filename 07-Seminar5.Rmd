@@ -110,6 +110,31 @@ British_lda10_toptopics %>%
 
 Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.
 
+Here is an alternative:
+
+```{r}
+library(seededlda)
+library(quanteda.dictionaries)
+
+dict <- dictionary(data_dictionary_LaverGarry)
+
+seededmodel <- textmodel_seededlda(data_manifestos_dfm, dictionary=dict)
+
+terms(seededmodel, 20)
+
+topwords <- as.data.frame(terms(seededmodel,20))
+corpus_manifestos$topic <- topics(seededmodel)
+topics_table <- ftable(corpus_manifestos$topic)
+
+topicsprop_table <- as.data.frame(prop.table(topics_table))
+
+ggplot(data=topicsprop_table, aes(x=Var1, y=Freq))+
+  geom_bar(stat="identity")+
+  labs(x="Topics", y="Topic Percentage")+
+  theme(axis.text = element_text(face="bold", size=10, angle=45,hjust = 1))
+```
+
+
 ## Correspondence Analysis
 
 Correspondence Analysis has a similar logic as Principal Component Analysis. Yet, while PCA requires metric data, CA only requires nominal data (such as text). The idea behind both is to reduce the complexity of the data by looking for new dimensions. These dimensions should then explain as much of the original variance that is present in the data as possible. Within R many packages can run CA (such as the `ca` and `FactoMineR` packages and even `quanteda.textmodels`). One interesting package is the `R.temis` package. The `R.temis` package is interesting as it aims to bring the techniques of qualitative text analysis into R. Thus, the package focus on the import of corpus from programs such as Alceste (https://www.image-zafar.com/Logicieluk.html) and sites such as LexisNexis (https://www.lexisnexis.com) - programs that are often used in qualitative text analysis. The package itself is build on the popular `tm` package and has a largely similar logic.

@@ -322,36 +322,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="dictionaries.html#cb81-1" aria-hidden="true" tabindex="-1"></a>sentiment <span class="ot">&lt;-</span> <span class="fu">convert</span>(results_dfm, <span class="at">to=</span><span class="st">&quot;data.frame&quot;</span>)</span>
 <span id="cb81-2"><a href="dictionaries.html#cb81-2" aria-hidden="true" tabindex="-1"></a>sentiment</span></code></pre></div>
 <pre><code>##                    doc_id negative positive neg_positive neg_negative
-## 1    train/neg/9242_3.txt       19       12            0            0
-## 2   train/neg/12257_3.txt       10        7            0            0
-## 3    test/pos/7741_10.txt        3        7            0            0
-## 4    train/neg/1968_4.txt       42       26            0            0
-## 5     test/pos/5069_8.txt       17        5            0            0
-## 6     train/neg/429_3.txt       10       10            0            0
-## 7    train/neg/4950_3.txt       32       22            0            0
-## 8    train/pos/6996_8.txt        4        8            0            0
-## 9    train/neg/2068_2.txt        4        6            0            0
-## 10   train/pos/6393_8.txt        4        4            0            0
-## 11   train/neg/6498_1.txt        8        3            0            0
-## 12    test/neg/8318_4.txt       14        9            0            0
-## 13   train/neg/5188_1.txt        5        5            0            0
-## 14   train/neg/1430_1.txt        7        8            0            0
-## 15    test/neg/6442_3.txt        4        4            0            0
-## 16   test/pos/6989_10.txt        1        8            0            0
-## 17  test/pos/11554_10.txt       16        8            0            0
-## 18   test/pos/9581_10.txt        5       22            0            0
-## 19  train/pos/8137_10.txt        3        6            0            0
-## 20   train/neg/2601_3.txt        7        4            0            0
-## 21   train/pos/1354_9.txt       36       53            0            0
-## 22    test/pos/2231_7.txt        9       10            0            0
-## 23    test/neg/5973_3.txt       26       12            0            0
-## 24    test/neg/8590_1.txt        7        6            0            0
-## 25    test/neg/6315_4.txt        8       10            0            0
-## 26 train/pos/11861_10.txt        4        5            0            0
-## 27  train/neg/11937_1.txt        3        3            0            0
-## 28   test/pos/2185_10.txt       10       11            0            0
-## 29  train/pos/11380_7.txt        2       11            0            0
-## 30  train/pos/7905_10.txt        7       10            0            0</code></pre>
+## 1     test/pos/7853_8.txt        3        4            0            0
+## 2     test/neg/3541_2.txt        7        6            0            0
+## 3    train/pos/5097_8.txt        6       11            0            0
+## 4     test/pos/9353_8.txt       12       10            0            0
+## 5    train/neg/9141_1.txt       32       13            0            0
+## 6     test/neg/6116_2.txt       16        5            0            0
+## 7    train/neg/1269_2.txt       15        9            0            0
+## 8    train/neg/1223_1.txt       16        5            0            0
+## 9    train/neg/9778_2.txt        9        9            0            0
+## 10  train/neg/12358_1.txt        4        4            0            0
+## 11   test/pos/6628_10.txt        3        3            0            0
+## 12 train/pos/11876_10.txt       34       18            0            0
+## 13    test/neg/7609_1.txt        5        1            0            0
+## 14    train/neg/630_2.txt       24       11            0            0
+## 15   test/pos/5900_10.txt        2       19            0            0
+## 16   test/pos/9530_10.txt        4        2            0            0
+## 17   train/neg/4266_3.txt        7       31            0            0
+## 18 train/pos/10126_10.txt       11       21            0            0
+## 19    test/neg/8345_4.txt       35       31            0            0
+## 20    test/neg/8027_1.txt        5        1            0            0
+## 21    test/neg/5674_1.txt       14       19            0            0
+## 22    test/neg/3650_1.txt        3        1            0            0
+## 23   train/pos/7011_7.txt       12       16            0            0
+## 24    test/neg/3883_4.txt        8       12            0            0
+## 25    test/neg/8375_4.txt        2        6            0            0
+## 26  train/neg/11957_1.txt       57       40            0            0
+## 27     test/neg/319_1.txt        6        6            0            0
+## 28   train/pos/9171_9.txt        5       25            0            0
+## 29   test/pos/6630_10.txt        7        7            0            0
+## 30  test/pos/10660_10.txt       58       39            0            0</code></pre>
 <p>Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="dictionaries.html#cb83-1" aria-hidden="true" tabindex="-1"></a>star_data <span class="ot">&lt;-</span> reviews_dfm<span class="sc">@</span>docvars<span class="sc">$</span>rating</span>
 <span id="cb83-2"><a href="dictionaries.html#cb83-2" aria-hidden="true" tabindex="-1"></a>stargraph <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(star_data, sentiment<span class="sc">$</span>negative, sentiment<span class="sc">$</span>positive))</span>
