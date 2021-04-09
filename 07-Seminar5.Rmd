@@ -19,8 +19,25 @@ library(quanteda.corpora)
 data(data_corpus_ukmanifestos)
 corpus_manifestos <- corpus_subset(data_corpus_ukmanifestos, Year == 2001)
 corpus_manifestos <- corpus_subset(corpus_manifestos, Party=="Lab" | Party=="LD" | Party == "Con" | Party== "SNP" | Party== "PCy")
-data_manifestos_dfm <- dfm(corpus_manifestos, remove = stopwords("english"), remove_punct = TRUE, remove_numbers = TRUE)
-data_manifestos_dfm <- dfm_tolower(data_manifestos_dfm, keep_acronyms = FALSE)
+
+data_manifestos_tokens <- tokens(
+  corpus_manifestos,
+  what = "word",
+  remove_punct = TRUE,
+  remove_symbols = TRUE,
+  remove_numbers = TRUE,
+  remove_url = TRUE,
+  remove_separators = TRUE,
+  split_hyphens = FALSE,
+  include_docvars = TRUE,
+  padding = FALSE,
+  verbose = TRUE
+)
+
+data_manifestos_tokens <- tokens_tolower(data_manifestos_tokens, keep_acronyms = FALSE)
+data_manifestos_tokens <- tokens_select(data_manifestos_tokens, stopwords("english"), selection = "remove")
+
+data_manifestos_dfm <- dfm(data_manifestos_tokens)
 ```
 
 First, we will use the `convert` function to convert the data frequency matrix to a data term matrix as this is what `topicmodels` uses:
@@ -33,14 +50,14 @@ Then, we fit an LDA model with 10 topics. First, we have to define some a priori
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
 burnin <- 2000
-iter <- 1000
-thin <- 200
-seed <- list(42,5,24,158,2500)
+iter   <- 1000
+thin   <- 200
+seed   <- list(42,5,24,158,2500)
 nstart <- 5
-best <- TRUE
+best   <- TRUE
 ```
 
-The LDA algorithm estimates topic-word probabilities as well as topic-document probabilities that we can extract and visualise. Here, we will start with the topic-word probabilities called *beta*. To do this, we will use the `tidytext` package which is part of the tidyverse family of packages. Central to the logic of tidyverse packages is that `tidytext` does not rely on a document term matrix but represents the data in a long format [@Welbers2017,p.252]. Although this makes it less memory efficient, such data arrangement lends itself to effective visualisation. The whole logic of these packages is that it works with data which has columns (variables) and rows with single observations. While this is the logic most people know, but it is not always the quickest (and is also not used by `quanteda`). Yet, it always allows you to look at your data in a way most will understand. First, we run the LDA and have a look at the first 10 terms:
+The LDA algorithm estimates topic-word probabilities as well as topic-document probabilities that we can extract and visualize. Here, we will start with the topic-word probabilities called *beta*. To do this, we will use the `tidytext` package which is part of the tidyverse family of packages. Central to the logic of tidyverse packages is that `tidytext` does not rely on a document term matrix but represents the data in a long format [@Welbers2017,p.252]. Although this makes it less memory efficient, such data arrangement lends itself to effective visualisation. The whole logic of these packages is that it works with data which has columns (variables) and rows with single observations. While this is the logic most people know, but it is not always the quickest (and is also not used by `quanteda`). Yet, it always allows you to look at your data in a way most will understand. First, we run the LDA and have a look at the first 10 terms:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
 British_lda10 <-LDA(manifestos_dtm, k=10, method="Gibbs", control=list(burnin=burnin, iter=iter, thin=thin, seed=seed, nstart=nstart, best=best))
@@ -60,7 +77,7 @@ library(ggplot2)
 British_lda10_topics <- tidy(British_lda10, matrix="beta")
 ```
 
-If we would look into the dataset now, we would see that it has 57060 observations with 3 variables. These are the number of the topic, the word (the term) and the **beta** - the chance that the word occurs in that topic. We now want to visualise only the top ten words for each topic in a bar-plot. Also, we want the graphs of each of these ten topics to appear in a single graph. To make this happen, we first have to select the top ten words for each topic. We do so using a pipe (which is the ``%>%`` command). This pipe transports an output of a command to another one before saving it. So here, we take our data-set and group it by topic using the `group_by` command. This command groups the dataset into 10 groups, each for every topic. What this allows us is to calculate things that we otherwise calculate for the whole data-set but here calculate for the groups instead. We then do so and select the top 10 terms (based on their beta value), using ``top_n``. We then ungroup again (to make R view it as a single data-set), and use the ``arrange`` function to ensure the data-set has the topics sorted in an increasing fashion and the beta values in a decreasing fashion. Finally, we save this into a new object:
+If we would look into the dataset now, we would see that it has 57060 observations with 3 variables. These are the number of the topic, the word (the term) and the **beta** - the chance that the word occurs in that topic. We now want to visualise only the top ten words for each topic in a bar-plot. Also, we want the graphs of each of these ten topics to appear in a single graph. To make this happen, we first have to select the top ten words for each topic. We do so gain using a pipe (which is the ``%>%`` command). This pipe transports an output of a command to another one before saving it. So here, we take our data-set and group it by topic using the `group_by` command. This command groups the dataset into 10 groups, each for every topic. What this allows us is to calculate things that we otherwise calculate for the whole data-set but here calculate for the groups instead. We then do so and select the top 10 terms (based on their beta value), using ``top_n``. We then ungroup again (to make R view it as a single data-set), and use the ``arrange`` function to ensure the data-set has the topics sorted in an increasing fashion and the beta values in a decreasing fashion. Finally, we save this into a new object:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
 British_lda10_topterms <- British_lda10_topics %>%
@@ -86,7 +103,7 @@ What is clear here is that looking at only the words in each topic only says so 
 Another question we can ask is how much of each topic is in each of the documents. Put in another way: do certain documents talk more about certain topics than others? To see this, we first generate a new data frame with this information, known as the *gamma* value for each document:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-British_lda10_documents <-tidy(British_lda10, matrix="gamma")
+British_lda10_documents <- tidy(British_lda10, matrix="gamma")
 ```
 
 We then go through similar steps to make the data-set ready for use and prepare the graph. For the graph, the only steps we do different are to force R to label each topic on the axis (as otherwise it will treat it as a continuous variable and come up with useless values such as 7.5), and to give it a different look (using the `theme_classic()` command):
@@ -110,21 +127,26 @@ British_lda10_toptopics %>%
 
 Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.
 
-Here is an alternative:
+An alternative to the above approach is one known as seeded-LDA. This approach uses seed words that can steer the LDA into the right direction. One origin of these seed words can be a dictionary that tells the algorithm which words belong together in various categories. To use it, we will first load the packages and set a seed:
 
 ```{r}
 library(seededlda)
 library(quanteda.dictionaries)
 
 set.seed(42)
+```
 
+Next, we need to specify a selection of seed words in a dictionary form. While we can construct a dictionary ourselves, here we choose to use the Laver and Garry dictionary we saw earlier. We then use this dictionary to run our seeded LDA:
+
+```{r}
 dict <- dictionary(data_dictionary_LaverGarry)
-
 seededmodel <- textmodel_seededlda(data_manifestos_dfm, dictionary=dict)
-
 terms(seededmodel, 20)
+```
 
-topwords <- as.data.frame(terms(seededmodel,20))
+Note that using the dictionary has ensured that only the categories of the dictionary are used. We can therefore also have an easy look at the proportions of these categories as well:
+
+```{r}
 corpus_manifestos$topic <- topics(seededmodel)
 topics_table <- ftable(corpus_manifestos$topic)
 
@@ -133,7 +155,8 @@ topicsprop_table <- as.data.frame(prop.table(topics_table))
 ggplot(data=topicsprop_table, aes(x=Var1, y=Freq))+
   geom_bar(stat="identity")+
   labs(x="Topics", y="Topic Percentage")+
-  theme(axis.text = element_text(face="bold", size=10, angle=45,hjust = 1))
+  theme(axis.text = element_text(size=10, angle=45,hjust = 1))+
+  theme_classic()
 ```
 
 

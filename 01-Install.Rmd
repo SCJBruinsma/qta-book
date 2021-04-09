@@ -59,9 +59,7 @@ Some packages that have not yet had an official release are in development on Gi
 install.packages("devtools", dependencies=TRUE)
 ```
 
-Here, ``dependencies=TRUE`` ensures that if we need other packages to make ```devtools``` work, R will install these as well.
-
-Depending on your operating system, you might have to install some other software for ```devtools``` to work.
+Here, ``dependencies=TRUE`` ensures that if we need other packages to make ```devtools``` work, R will install these as well. Depending on your operating system, you might have to install some other software for ```devtools``` to work.
 
 On Windows, ```devtools``` requires the *RTools* software. To install this, go to https://cran.r-project.org/bin/windows/Rtools/, download the latest *recommended* version (in green), and install it. Then re-open R again and install ```devtools``` as shown above.
 
@@ -83,29 +81,29 @@ On OSX (or macOS), ```devtools``` requires the *XCode* software. To install this
 
 While we will be using several different packages to run quantitative text analysis, we will mostly use ```quanteda``` (@Benoit2018). ```quanteda``` integrates many of the text analysis functions of R that were before spread out over many different packages (see, for example @Welbers2017). Besides, it is easy to combine with other packages, has simple and logical commands, and a well-maintained website (www.quanteda.io).
 
-The current version of ```quanteda``` as of writing is 2.0.1. This version works best with R version 4.0.1 or higher. To check if your system has this, type ```R.Version()``` in your console. The result will be a list. Look for ```$version.string``` to see which version number your version of R is. If you do not have the latest version, see the steps above on how to download this. 
+The current version of ```quanteda``` as of writing is ```packageVersion("quanteda")```. This version works best with R version 4.0.1 or higher. To check if your system has this, type ```R.Version()``` in your console. The result will be a list. Look for ```$version.string``` to see which version number your version of R is. If you do not have the latest version, see the steps above on how to download this. 
 
 To install the package, type:
 
 ```{r, eval=FALSE}
 install.packages("quanteda", dependencies=TRUE)
-install.packages("quanteda.textplots", dependencies = TRUE)
 ```
 
-Besides this, there are several sister-packages of ```quanteda``` that contain functions that are not yet part of the main package. Often, these packages will become part of the main package at a later date. As they are still in development, they are not yet on CRAN, but still on GitHub. Install two of them (```quanteda.classifiers``` which we will use for supervised learning methods, and ```quanteda.dictionaries``` which we will use for dictionary analysis), and also install this package (also still in development) for the bootstrap version of Krippendorff's $\alpha$:
+Note that because we wrote ```dependencies=TRUE```, this command also installed three other ```quanteda``` helper packages that serve to expand upon the basic tools that are already within ```quanteda```. In the future, more of these helper packages will be added to expand the package even more. Yet, before these packages get an official release, we can already find them, in development, on GitHub. Here, we install two of them - ```quanteda.classifiers``` which we will use for supervised learning methods, and ```quanteda.dictionaries``` which we will use for dictionary analysis:
 
 ```{r, eval=FALSE}
 library(devtools)
 install_github("quanteda/quanteda.classifiers", dependencies = TRUE)
 install_github("kbenoit/quanteda.dictionaries", dependencies = TRUE)
-install_github("mikegruz/kripp.boot", dependencies = TRUE)
 ```
 
-Apart from ```quanteda``` we then need seven other packages to work, which are all available on CRAN:
+Apart from ```quanteda``` we then need these other packages as well:
 
 ```{r, eval=FALSE}
+install_github("mikegruz/kripp.boot", dependencies = TRUE)
 install.packages("ca", dependencies = TRUE)
 install.packages("combinat", dependencies = TRUE)
+install.packages("DescTools")
 install.packages("factoextra", dependencies = TRUE)
 install.packages("Hmisc", dependencies = TRUE)
 install.packages("httr", dependencies = TRUE)
@@ -116,6 +114,7 @@ install.packages("readtext", dependencies = TRUE)
 install.packages("RTextTools", dependencies = TRUE)
 install.packages("R.temis", dependencies = TRUE)
 install.packages("rvest", dependencies = TRUE)
+install.packages("seededlda", dependencies = TRUE)
 install.packages("tidyverse", dependencies = TRUE)
 ```
 

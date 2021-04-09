@@ -56,7 +56,7 @@ summary(analytics)
 
 Precision gives the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that were classified in that category (irrespective of where they belong). Recall is the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that belong to this category (true positives plus false negatives). The F score is a weighted average between precision and recall ranging fro 0 to 1.
 
-Instead of using a seperate package, we can also use `quanteda` to carry out an SVM. For this, we again load the reviews we used earlier, select 1000 of them at random, and place them into our corpus:
+Instead of using a separate package, we can also use `quanteda` to carry out an SVM. For this, we again load the reviews we used earlier, select 1000 of them at random, and place them into our corpus:
 
 ```{r}
 detach("package:RTextTools", unload = TRUE)
@@ -103,8 +103,8 @@ svm_predict <- predict(svm_reviews)
 While we can of course look at the resulting numbers, we can also place them in a two-way table with the actual rating, to see how well the algorithm did:
 
 ```{r}
-rating <- corpus_reviews$rating
-table_data <- as.data.frame(cbind(svm_predict,rating))
+rating     <- corpus_reviews$rating
+table_data <- as.data.frame(cbind(svm_predict, rating))
 table(table_data$svm_predict,table_data$rating)
 ```
 
@@ -176,7 +176,7 @@ manifesto_data <- na.omit(manifesto_data)
 In our data-frame, the *text* variable indicates the hand-coded quasi-sentences, while the *cmp_code* indicates the code it received. There are 56 categories in the Manifesto Project coding scheme, and an extra empty category indicated with 0. Before we go on, it might be interesting to see which parties have which codes assigned to them. The most simplest way to do this so is to make a cross-table of the parties and the codes. We can do this with the `table()` command:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-table(manifesto_data$cmp_code,manifesto_data$party)
+table(manifesto_data$cmp_code, manifesto_data$party)
 ```
 
 Here we see that some codes such as 604 and 407 are rare, while others such as 501 and 504 occur far more often. When we look at the codebook the coders used (https://manifesto-project.wzb.eu/coding_schemes/mp_v5), we find that 604 and 407 refer to *Traditional Morality: Negative* and *Protectionism: Negative*, while 501 and 504 refer to *Environmental Protection* and *Welfare State Expansion*. As such, it should also come as no surprise that the Green Party refers more to environmental protection than all other parties combined.
@@ -269,13 +269,15 @@ Then we generate a unique number for each of the 10780 sentences in our corpus. 
 docvars(manifesto_corpus, "id_numeric") <- 1:ndoc(manifesto_corpus)
 ```
 
-We should now see this new variable *id_numeric* appear in our corpus. We can now construct our training and test set using these id's. For the training set, the logic is to create a sub set of the main corpus, and to take only those sentences whose *id_numeric* is also in *id_train*. For the test set, we do the same, only now taking only those sentences whose *id_numeric* is not in *id_train* (note that the ! mark signifies this). Then, we use the ``%>%`` pipe to transform the resulting object into a dfm:
+We should now see this new variable *id_numeric* appear in our corpus. We can now construct our training and test set using these id's. For the training set, the logic is to create a sub set of the main corpus, and to take only those sentences whose *id_numeric* is also in *id_train*. For the test set, we do the same, only now taking only those sentences whose *id_numeric* is not in *id_train* (note that the ! mark signifies this). Then, we use the ``%>%`` pipe to transform the resulting object via a tokens object into a dfm:
 
 ```{r}
 manifesto_train <- corpus_subset(manifesto_corpus, id_numeric %in% id_train) %>%
+  tokens() %>%
     dfm()
 
 manifesto_test <- corpus_subset(manifesto_corpus, !id_numeric %in% id_train) %>%
+    tokens() %>%
     dfm()
 ```
 
@@ -337,6 +339,13 @@ Then, we load the `kripp.boot` package, and calculate the nominal version of Kri
 ```{r, eval=FALSE}
 library(kripp.boot)
 kripp.boot(reliability, iter = 500, method = "nominal")
+```
+
+Alternatively, we can use the ``DescTools`` package:
+
+```{r, eval = FALSE}
+library(DescTools)
+KrippAlpha(reliability, method = "nominal")
 ```
 
 Here we see that the number of subjects was 2780 (the number of sentences in the test set), the number of coders 2 (the actual and the predicted codes), and the value of $\alpha$ 0.318 with an interval between 0.297 and 0.337. While this might not look particularly encouraging, when we realise that @Mikhaylov2012a estimate the agreement among trained coders by the Manifesto Project to be between 0.350 and 0.400, then 0.305 is quite a good score for a simple model!

@@ -89,6 +89,7 @@ library(readtext)
 Then, we go to our working directory (to see where this is, type `getwd()` into the Console). Here, we make two folders: one in which to store the .pdf files - called *PDF* - and another new and empty folder in which to store the .txt files. We call this one *Texts*. Ensure that all the .pdf files are in the *PDF* folder. Then, we tell R about these folders:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), results=FALSE, eval=FALSE}
+setwd("Your Working Directory")
 pdf_directory <- paste0(getwd(),"/PDF")
 txt_directory <- paste0(getwd(),"/Texts")
 ```
@@ -96,7 +97,7 @@ txt_directory <- paste0(getwd(),"/Texts")
 Then, we ask R for a list of all the files in the .pdf directory. This is both to ensure that we are not overlooking anything and to tell R which files are in the folder. Here, setting `recurse=FALSE` means that we only list the files in the main folder and not any files that are in other folders in this main folder.
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), results=FALSE, eval=FALSE}
-files <-list.files(pdf_directory, pattern = ".pdf", recursive = FALSE,full.names = TRUE)
+files <-list.files(pdf_directory, pattern = ".pdf", recursive = FALSE, full.names = TRUE)
 
 files
 ```
@@ -106,9 +107,9 @@ While we could convert a single document at a time, more often we have to deal w
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), results=FALSE, eval=FALSE}
 extract <- function(filename) {
  print(filename)
- try({text <-pdf_text(filename)})
- f <-gsub("(.*)/([^/]*).pdf", "\\2", filename)
- write(text,file.path(txt_directory,paste0(f, ".txt")))
+ try({text <- pdf_text(filename)})
+ title <-gsub("(.*)/([^/]*).pdf", "\\2", filename)
+ write(text, file.path(txt_directory, paste0(title, ".txt")))
 }
 ```
 
@@ -137,8 +138,8 @@ In case that we already have the .txt files somewhere, we can make the above pro
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), eval=FALSE}
 library(readtext)
 
-directory <-getwd()
-data_texts <-readtext(paste0(txt_directory, "*"), encoding = "UTF-8")
+txt_directory <- paste0(getwd(),"/Texts")
+data_texts <- readtext(paste0(txt_directory, "*"), encoding = "UTF-8")
 ```
 
 ## Import .csv Files

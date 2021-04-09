@@ -135,7 +135,7 @@
 
 \title{Quantitative Text Analysis}
 \author{Kostas Gemenis \& Bastiaan Bruinsma}
-\date{2021-03-26}
+\date{2021-04-09}
 
 \begin{document}
 \maketitle
@@ -229,9 +229,7 @@ Some packages that have not yet had an official release are in development on Gi
 \end{Highlighting}
 \end{Shaded}
 
-Here, \texttt{dependencies=TRUE} ensures that if we need other packages to make \texttt{devtools} work, R will install these as well.
-
-Depending on your operating system, you might have to install some other software for \texttt{devtools} to work.
+Here, \texttt{dependencies=TRUE} ensures that if we need other packages to make \texttt{devtools} work, R will install these as well. Depending on your operating system, you might have to install some other software for \texttt{devtools} to work.
 
 On Windows, \texttt{devtools} requires the \emph{RTools} software. To install this, go to \url{https://cran.r-project.org/bin/windows/Rtools/}, download the latest \emph{recommended} version (in green), and install it. Then re-open R again and install \texttt{devtools} as shown above.
 
@@ -270,34 +268,34 @@ On OSX (or macOS), \texttt{devtools} requires the \emph{XCode} software. To inst
 
 While we will be using several different packages to run quantitative text analysis, we will mostly use \texttt{quanteda} (\protect\hyperlink{ref-Benoit2018}{Benoit et al.} (\protect\hyperlink{ref-Benoit2018}{2018})). \texttt{quanteda} integrates many of the text analysis functions of R that were before spread out over many different packages (see, for example \protect\hyperlink{ref-Welbers2017}{Welbers, Van Atteveldt, and Benoit} (\protect\hyperlink{ref-Welbers2017}{2017})). Besides, it is easy to combine with other packages, has simple and logical commands, and a well-maintained website (www.quanteda.io).
 
-The current version of \texttt{quanteda} as of writing is 2.0.1. This version works best with R version 4.0.1 or higher. To check if your system has this, type \texttt{R.Version()} in your console. The result will be a list. Look for \texttt{\$version.string} to see which version number your version of R is. If you do not have the latest version, see the steps above on how to download this.
+The current version of \texttt{quanteda} as of writing is \texttt{packageVersion("quanteda")}. This version works best with R version 4.0.1 or higher. To check if your system has this, type \texttt{R.Version()} in your console. The result will be a list. Look for \texttt{\$version.string} to see which version number your version of R is. If you do not have the latest version, see the steps above on how to download this.
 
 To install the package, type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"quanteda"}\NormalTok{, }\AttributeTok{dependencies=}\ConstantTok{TRUE}\NormalTok{)}
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"quanteda.textplots"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Besides this, there are several sister-packages of \texttt{quanteda} that contain functions that are not yet part of the main package. Often, these packages will become part of the main package at a later date. As they are still in development, they are not yet on CRAN, but still on GitHub. Install two of them (\texttt{quanteda.classifiers} which we will use for supervised learning methods, and \texttt{quanteda.dictionaries} which we will use for dictionary analysis), and also install this package (also still in development) for the bootstrap version of Krippendorff's \(\alpha\):
+Note that because we wrote \texttt{dependencies=TRUE}, this command also installed three other \texttt{quanteda} helper packages that serve to expand upon the basic tools that are already within \texttt{quanteda}. In the future, more of these helper packages will be added to expand the package even more. Yet, before these packages get an official release, we can already find them, in development, on GitHub. Here, we install two of them - \texttt{quanteda.classifiers} which we will use for supervised learning methods, and \texttt{quanteda.dictionaries} which we will use for dictionary analysis:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(devtools)}
 \FunctionTok{install\_github}\NormalTok{(}\StringTok{"quanteda/quanteda.classifiers"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install\_github}\NormalTok{(}\StringTok{"kbenoit/quanteda.dictionaries"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
-\FunctionTok{install\_github}\NormalTok{(}\StringTok{"mikegruz/kripp.boot"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Apart from \texttt{quanteda} we then need seven other packages to work, which are all available on CRAN:
+Apart from \texttt{quanteda} we then need these other packages as well:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{install\_github}\NormalTok{(}\StringTok{"mikegruz/kripp.boot"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"ca"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"combinat"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"factoextra"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"Hmisc"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"httr"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
@@ -308,6 +306,7 @@ Apart from \texttt{quanteda} we then need seven other packages to work, which ar
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"RTextTools"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"R.temis"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"rvest"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"seededlda"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\AttributeTok{dependencies =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -346,7 +345,7 @@ R sees any form of text as a type of characters vector. In their simplest form, 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector1 }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}This is the first of our character vectors\textquotesingle{}}
+\NormalTok{vector1 }\OtherTok{\textless{}{-}} \StringTok{"This is the first of our character vectors"}
 \FunctionTok{nchar}\NormalTok{(vector1)}
 \end{Highlighting}
 \end{Shaded}
@@ -369,7 +368,7 @@ This example also shows the logic of R. First, we assign the text we have to a c
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}This is an example\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}This is another\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}And so we can go on.\textquotesingle{}}\NormalTok{)}
+\NormalTok{vector2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"This is an example"}\NormalTok{, }\StringTok{"This is another"}\NormalTok{, }\StringTok{"And so we can go on."}\NormalTok{)}
 \FunctionTok{length}\NormalTok{(vector2)}
 \end{Highlighting}
 \end{Shaded}
@@ -402,7 +401,7 @@ Another thing we can do is extract certain words from a sentence. For this, we u
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector3 }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}This is yet another sentence\textquotesingle{}}
+\NormalTok{vector3 }\OtherTok{\textless{}{-}} \StringTok{"This is yet another sentence"}
 \FunctionTok{substr}\NormalTok{(vector3, }\DecValTok{4}\NormalTok{, }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -415,8 +414,8 @@ We can also split a character vector into smaller parts. We often do this when w
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector3 }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Here is a sentence {-} And a second\textquotesingle{}}
-\NormalTok{parts1 }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(vector3, }\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{)}
+\NormalTok{vector3 }\OtherTok{\textless{}{-}} \StringTok{"Here is a sentence {-} And a second"}
+\NormalTok{parts1 }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(vector3, }\StringTok{"{-}"}\NormalTok{)}
 \NormalTok{parts1}
 \end{Highlighting}
 \end{Shaded}
@@ -430,8 +429,8 @@ If we now look in the Environment window, we will see that R calls \texttt{parts
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector4 }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}Here is another sentence {-} And one more\textquotesingle{}}
-\NormalTok{parts2 }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(vector4, }\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{)}
+\NormalTok{vector4 }\OtherTok{\textless{}{-}} \StringTok{"Here is another sentence {-} And one more"}
+\NormalTok{parts2 }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(vector4, }\StringTok{"{-}"}\NormalTok{)}
 \NormalTok{parts3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(parts1, parts2)}
 \end{Highlighting}
 \end{Shaded}
@@ -440,7 +439,7 @@ We can now look at this new list in the Environment and check that it indeed has
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fruits }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}oranges\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}lemons\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pears\textquotesingle{}}\NormalTok{, }\AttributeTok{sep =} \StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{)}
+\NormalTok{fruits }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"oranges"}\NormalTok{, }\StringTok{"lemons"}\NormalTok{, }\StringTok{"pears"}\NormalTok{, }\AttributeTok{sep =} \StringTok{"{-}"}\NormalTok{)}
 \NormalTok{fruits}
 \end{Highlighting}
 \end{Shaded}
@@ -453,8 +452,8 @@ Note that we can also use this command that paste objects that we made earlier t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sentences }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(vector3, vector4, }\AttributeTok{sep =} \StringTok{\textquotesingle{}.\textquotesingle{}}\NormalTok{)}
-\NormalTok{sentences }
+\NormalTok{sentences }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(vector3, vector4, }\AttributeTok{sep =} \StringTok{"."}\NormalTok{)}
+\NormalTok{sentences}
 \end{Highlighting}
 \end{Shaded}
 
@@ -529,8 +528,9 @@ Then, we go to our working directory (to see where this is, type \texttt{getwd()
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pdf\_directory }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(),}\StringTok{"/PDF"}\NormalTok{)}
-\NormalTok{txt\_directory }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(),}\StringTok{"/Texts"}\NormalTok{)}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"Your Working Directory"}\NormalTok{)}
+\NormalTok{pdf\_directory }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(), }\StringTok{"/PDF"}\NormalTok{)}
+\NormalTok{txt\_directory }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(), }\StringTok{"/Texts"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -538,7 +538,8 @@ Then, we ask R for a list of all the files in the .pdf directory. This is both t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{files }\OtherTok{\textless{}{-}}\FunctionTok{list.files}\NormalTok{(pdf\_directory, }\AttributeTok{pattern =} \StringTok{".pdf"}\NormalTok{, }\AttributeTok{recursive =} \ConstantTok{FALSE}\NormalTok{,}\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(pdf\_directory, }\AttributeTok{pattern =} \StringTok{".pdf"}\NormalTok{, }\AttributeTok{recursive =} \ConstantTok{FALSE}\NormalTok{, }
+    \AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \NormalTok{files}
 \end{Highlighting}
@@ -549,10 +550,12 @@ While we could convert a single document at a time, more often we have to deal w
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{extract }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(filename) \{}
- \FunctionTok{print}\NormalTok{(filename)}
- \FunctionTok{try}\NormalTok{(\{text }\OtherTok{\textless{}{-}}\FunctionTok{pdf\_text}\NormalTok{(filename)\})}
-\NormalTok{ f }\OtherTok{\textless{}{-}}\FunctionTok{gsub}\NormalTok{(}\StringTok{"(.*)/([\^{}/]*).pdf"}\NormalTok{, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{2"}\NormalTok{, filename)}
- \FunctionTok{write}\NormalTok{(text,}\FunctionTok{file.path}\NormalTok{(txt\_directory,}\FunctionTok{paste0}\NormalTok{(f, }\StringTok{".txt"}\NormalTok{)))}
+    \FunctionTok{print}\NormalTok{(filename)}
+    \FunctionTok{try}\NormalTok{(\{}
+\NormalTok{        text }\OtherTok{\textless{}{-}} \FunctionTok{pdf\_text}\NormalTok{(filename)}
+\NormalTok{    \})}
+\NormalTok{    title }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"(.*)/([\^{}/]*).pdf"}\NormalTok{, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{2"}\NormalTok{, filename)}
+    \FunctionTok{write}\NormalTok{(text, }\FunctionTok{file.path}\NormalTok{(txt\_directory, }\FunctionTok{paste0}\NormalTok{(title, }\StringTok{".txt"}\NormalTok{)))}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -561,8 +564,8 @@ We then use this function to extract all the pdf files in the \texttt{pdf\_direc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{(file }\ControlFlowTok{in}\NormalTok{ files) \{}
- \FunctionTok{extract}\NormalTok{(file)}
+\ControlFlowTok{for}\NormalTok{ (file }\ControlFlowTok{in}\NormalTok{ files) \{}
+    \FunctionTok{extract}\NormalTok{(file)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -588,8 +591,8 @@ In case that we already have the .txt files somewhere, we can make the above pro
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(readtext)}
 
-\NormalTok{directory }\OtherTok{\textless{}{-}}\FunctionTok{getwd}\NormalTok{()}
-\NormalTok{data\_texts }\OtherTok{\textless{}{-}}\FunctionTok{readtext}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(txt\_directory, }\StringTok{"*"}\NormalTok{), }\AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{)}
+\NormalTok{txt\_directory }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(), }\StringTok{"/Texts"}\NormalTok{)}
+\NormalTok{data\_texts }\OtherTok{\textless{}{-}} \FunctionTok{readtext}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(txt\_directory, }\StringTok{"*"}\NormalTok{), }\AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -814,7 +817,6 @@ Note also that \texttt{kripp.boot} is a GitHub package. You can still calculate 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)}
 \FunctionTok{library}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)}
 
 \NormalTok{reliability\_results\_t }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(reliability\_results)}
@@ -846,31 +848,36 @@ In the following example we perform the sensitivity analysis on the coded senten
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{coderid }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"coder1"}\NormalTok{,}\StringTok{"coder2"}\NormalTok{,}\StringTok{"coder3"}\NormalTok{,}\StringTok{"coder4"}\NormalTok{,}\StringTok{"coder5"}\NormalTok{,}\StringTok{"coder6"}\NormalTok{,}\StringTok{"coder7"}\NormalTok{,}\StringTok{"coder8"}\NormalTok{,}\StringTok{"coder9"}\NormalTok{,}\StringTok{"coder10"}\NormalTok{,}\StringTok{"coder11"}\NormalTok{,}\StringTok{"coder12"}\NormalTok{)}
-\NormalTok{c0 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{14}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{29}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{c01 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{c02 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{c03 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{21}\NormalTok{)}
-\NormalTok{c04 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{c05 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{c06 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{20}\NormalTok{)}
-\NormalTok{c07 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
-\NormalTok{c08 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
-\NormalTok{c09 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{c10 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{22}\NormalTok{)}
-\NormalTok{c11 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{,}\DecValTok{31}\NormalTok{,}\DecValTok{33}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{31}\NormalTok{)}
-\NormalTok{c12 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{c13 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{)}
-\NormalTok{c14 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{13}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{14}\NormalTok{)}
-\NormalTok{c15 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{7}\NormalTok{)}
-\NormalTok{c16 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{c17 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{c18 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{,}\DecValTok{33}\NormalTok{,}\DecValTok{27}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{28}\NormalTok{,}\DecValTok{31}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{28}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{16}\NormalTok{)}
-\NormalTok{c19 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{c20 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{163}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{155}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{)}
+\NormalTok{coderid }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"coder1"}\NormalTok{, }\StringTok{"coder2"}\NormalTok{, }\StringTok{"coder3"}\NormalTok{, }\StringTok{"coder4"}\NormalTok{, }\StringTok{"coder5"}\NormalTok{, }
+    \StringTok{"coder6"}\NormalTok{, }\StringTok{"coder7"}\NormalTok{, }\StringTok{"coder8"}\NormalTok{, }\StringTok{"coder9"}\NormalTok{, }\StringTok{"coder10"}\NormalTok{, }\StringTok{"coder11"}\NormalTok{, }
+    \StringTok{"coder12"}\NormalTok{)}
+\NormalTok{c0 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{14}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{c01 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{c02 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{c03 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{21}\NormalTok{)}
+\NormalTok{c04 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{c05 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{c06 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{20}\NormalTok{)}
+\NormalTok{c07 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{c08 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{c09 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{c10 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{22}\NormalTok{)}
+\NormalTok{c11 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{31}\NormalTok{)}
+\NormalTok{c12 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{c13 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{c14 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{13}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{14}\NormalTok{)}
+\NormalTok{c15 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{7}\NormalTok{)}
+\NormalTok{c16 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{c17 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{c18 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{16}\NormalTok{)}
+\NormalTok{c19 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{c20 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{163}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{155}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{164}\NormalTok{, }
+    \DecValTok{164}\NormalTok{)}
 
-\NormalTok{data\_uncertainty }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(coderid, c0,c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,n, }\AttributeTok{stringsAsFactors=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{data\_uncertainty }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(coderid, c0, c01, c02, c03, c04, }
+\NormalTok{    c05, c06, c07, c08, c09, c10, c11, c12, c13, c14, c15, c16, }
+\NormalTok{    c17, c18, c19, c20, n, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -878,11 +885,11 @@ We then tell R how many coders we have. As this number is equal to the number of
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nman }\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(data\_uncertainty)}
+\NormalTok{nman }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(data\_uncertainty)}
 \NormalTok{nrepl }\OtherTok{\textless{}{-}} \DecValTok{1000}
-\NormalTok{manifBSn }\OtherTok{\textless{}{-}}\NormalTok{ manifBSnRand }\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(data\_uncertainty[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{21}\NormalTok{]),}
- \FunctionTok{c}\NormalTok{(nman, }\DecValTok{20}\NormalTok{, nrepl}\SpecialCharTok{+}\DecValTok{1}\NormalTok{),}
- \AttributeTok{dimnames=}\FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nman,}\FunctionTok{names}\NormalTok{(data\_uncertainty[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{21}\NormalTok{]), }\DecValTok{0}\SpecialCharTok{:}\NormalTok{nrepl))}
+\NormalTok{manifBSn }\OtherTok{\textless{}{-}}\NormalTok{ manifBSnRand }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(data\_uncertainty[, }
+    \DecValTok{2}\SpecialCharTok{:}\DecValTok{21}\NormalTok{]), }\FunctionTok{c}\NormalTok{(nman, }\DecValTok{20}\NormalTok{, nrepl }\SpecialCharTok{+} \DecValTok{1}\NormalTok{), }\AttributeTok{dimnames =} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nman, }\FunctionTok{names}\NormalTok{(data\_uncertainty[, }
+    \DecValTok{2}\SpecialCharTok{:}\DecValTok{21}\NormalTok{]), }\DecValTok{0}\SpecialCharTok{:}\NormalTok{nrepl))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -890,11 +897,11 @@ We then bootstrap the sentence counts for each coder and compute percentages for
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ manifBSn[,,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{n}
+\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ manifBSn[, , }\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{n}
 
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrepl) \{}
-\NormalTok{ manifBSn[,,i] }\OtherTok{\textless{}{-}}\FunctionTok{rmultinomial}\NormalTok{(n, p)}
-\NormalTok{ \}}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrepl) \{}
+\NormalTok{    manifBSn[, , i] }\OtherTok{\textless{}{-}} \FunctionTok{rmultinomial}\NormalTok{(n, p)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -902,47 +909,47 @@ With this data, we can then ask R to compute the quantities of interest. These a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{c0SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c0"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c01SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c01"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c02SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c02"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c03SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c03"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c04SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c04"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c05SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c05"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c06SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c06"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c07SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c07"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c08SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c08"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c09SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c09"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd) }
-\NormalTok{c10SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c10"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c11SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c11"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c12SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c12"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c13SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c13"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c14SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c14"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c15SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c15"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c16SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c16"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c17SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c17"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c18SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c18"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{c19SE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c19"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c0SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c0"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c01SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c01"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c02SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c02"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c03SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c03"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c04SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c04"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c05SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c05"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c06SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c06"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c07SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c07"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c08SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c08"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c09SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c09"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c10SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c10"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c11SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c11"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c12SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c12"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c13SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c13"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c14SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c14"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c15SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c15"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c16SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c16"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c17SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c17"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c18SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c18"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{c19SE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c19"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
 
-\NormalTok{per0 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c0"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per01 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c01"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per02 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c02"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per03 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c03"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per04 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c04"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per05 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c05"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per06 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c06"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per07 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c07"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per08 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c08"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per09 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c09"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per10 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c10"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per11 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c11"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per12 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c12"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per13 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c13"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per14 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c14"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per15 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c15"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per16 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c16"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per17 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c17"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per18 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c18"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{per19 }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[,}\StringTok{"c19"}\NormalTok{,]}\SpecialCharTok{/}\NormalTok{n}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per0 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c0"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per01 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c01"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per02 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c02"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per03 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c03"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per04 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c04"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per05 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c05"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per06 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c06"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per07 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c07"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per08 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c08"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per09 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c09"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per10 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c10"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per11 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c11"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per12 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c12"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per13 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c13"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per14 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c14"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per15 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c15"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per16 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c16"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per17 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c17"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per18 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c18"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{per19 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"c19"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -950,7 +957,12 @@ We then bind all these quantities together in a single data frame:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataBS }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(data\_uncertainty[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{22}\NormalTok{], c0SE, c01SE, c02SE, c03SE, c04SE, c05SE,c06SE, c07SE, c08SE, c09SE, c10SE, c11SE, c12SE, c13SE, c14SE, c15SE, c16SE, c17SE,c18SE, c19SE, per0, per01, per02, per03, per04, per05, per06, per07, per08, per09,per10, per11, per12, per13, per14, per15, per16, per17, per18, per19))}
+\NormalTok{dataBS }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(data\_uncertainty[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{22}\NormalTok{], c0SE, c01SE, }
+\NormalTok{    c02SE, c03SE, c04SE, c05SE, c06SE, c07SE, c08SE, c09SE, c10SE, }
+\NormalTok{    c11SE, c12SE, c13SE, c14SE, c15SE, c16SE, c17SE, c18SE, c19SE, }
+\NormalTok{    per0, per01, per02, per03, per04, per05, per06, per07, per08, }
+\NormalTok{    per09, per10, per11, per12, per13, per14, per15, per16, per17, }
+\NormalTok{    per18, per19))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -967,7 +979,8 @@ First, we make sure that the variable \texttt{coderid} is a factor and make sure
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dataBS}\SpecialCharTok{$}\NormalTok{coderid }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(dataBS}\SpecialCharTok{$}\NormalTok{coderid)}
-\NormalTok{dataBS}\SpecialCharTok{$}\NormalTok{coderid }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(dataBS}\SpecialCharTok{$}\NormalTok{coderid,}\FunctionTok{levels}\NormalTok{(dataBS}\SpecialCharTok{$}\NormalTok{coderid)[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\SpecialCharTok{:}\DecValTok{12}\NormalTok{,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)])}
+\NormalTok{dataBS}\SpecialCharTok{$}\NormalTok{coderid }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(dataBS}\SpecialCharTok{$}\NormalTok{coderid, }\FunctionTok{levels}\NormalTok{(dataBS}\SpecialCharTok{$}\NormalTok{coderid)[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }
+    \DecValTok{5}\SpecialCharTok{:}\DecValTok{12}\NormalTok{, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -975,14 +988,15 @@ Then, we calculate the 95\% confidence intervals for each category. We do so usi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{c0\_lo }\OtherTok{\textless{}{-}}\NormalTok{ per0 }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96}\SpecialCharTok{*}\NormalTok{c0SE)}
-\NormalTok{c0\_hi }\OtherTok{\textless{}{-}}\NormalTok{ per0 }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96}\SpecialCharTok{*}\NormalTok{c0SE)}
-\NormalTok{c01\_lo }\OtherTok{\textless{}{-}}\NormalTok{ per01 }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96}\SpecialCharTok{*}\NormalTok{c01SE)}
-\NormalTok{c01\_hi }\OtherTok{\textless{}{-}}\NormalTok{ per01 }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96}\SpecialCharTok{*}\NormalTok{c01SE)}
-\NormalTok{c02\_lo }\OtherTok{\textless{}{-}}\NormalTok{ per02 }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96}\SpecialCharTok{*}\NormalTok{c02SE)}
-\NormalTok{c02\_hi }\OtherTok{\textless{}{-}}\NormalTok{ per02 }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96}\SpecialCharTok{*}\NormalTok{c02SE)}
+\NormalTok{c0\_lo }\OtherTok{\textless{}{-}}\NormalTok{ per0 }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ c0SE)}
+\NormalTok{c0\_hi }\OtherTok{\textless{}{-}}\NormalTok{ per0 }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ c0SE)}
+\NormalTok{c01\_lo }\OtherTok{\textless{}{-}}\NormalTok{ per01 }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ c01SE)}
+\NormalTok{c01\_hi }\OtherTok{\textless{}{-}}\NormalTok{ per01 }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ c01SE)}
+\NormalTok{c02\_lo }\OtherTok{\textless{}{-}}\NormalTok{ per02 }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ c02SE)}
+\NormalTok{c02\_hi }\OtherTok{\textless{}{-}}\NormalTok{ per02 }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ c02SE)}
 
-\NormalTok{dataBS }\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(dataBS, c0\_lo, c0\_hi, c01\_lo, c01\_hi, c02\_lo, c02\_hi)}
+\NormalTok{dataBS }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(dataBS, c0\_lo, c0\_hi, c01\_lo, c01\_hi, c02\_lo, }
+\NormalTok{    c02\_hi)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -990,12 +1004,9 @@ Finally, we generate the graphs for each individual category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(dataBS,}\FunctionTok{aes}\NormalTok{(per0, coderid))}\SpecialCharTok{+}
- \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
- \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ c0\_hi, }\AttributeTok{xmin =}\NormalTok{ c0\_lo),}\AttributeTok{height =}\NormalTok{ .}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 0"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{theme\_classic}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(dataBS, }\FunctionTok{aes}\NormalTok{(per0, coderid)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ c0\_hi, }
+    \AttributeTok{xmin =}\NormalTok{ c0\_lo), }\AttributeTok{height =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 0"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1003,12 +1014,9 @@ Finally, we generate the graphs for each individual category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(dataBS,}\FunctionTok{aes}\NormalTok{(per01, coderid))}\SpecialCharTok{+}
- \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
- \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ c01\_hi, }\AttributeTok{xmin =}\NormalTok{ c01\_lo),}\AttributeTok{height =}\NormalTok{ .}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 01"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{theme\_classic}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(dataBS, }\FunctionTok{aes}\NormalTok{(per01, coderid)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ c01\_hi, }
+    \AttributeTok{xmin =}\NormalTok{ c01\_lo), }\AttributeTok{height =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 01"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1016,12 +1024,9 @@ Finally, we generate the graphs for each individual category:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(dataBS,}\FunctionTok{aes}\NormalTok{(per02, coderid))}\SpecialCharTok{+}
- \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
- \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ c02\_hi, }\AttributeTok{xmin =}\NormalTok{ c02\_lo),}\AttributeTok{height =}\NormalTok{ .}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 02"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{theme\_classic}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(dataBS, }\FunctionTok{aes}\NormalTok{(per02, coderid)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ c02\_hi, }
+    \AttributeTok{xmin =}\NormalTok{ c02\_lo), }\AttributeTok{height =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Percentage coded to category 02"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{"Coder ID"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1089,12 +1094,73 @@ You should now see the corpus appear in the Environment tab. If you click on it,
 \end{Highlighting}
 \end{Shaded}
 
-Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the data frequency matrix (dfm). This is a matrix which contains the documents in the rows and the word counts for each word in the columns. To convert the corpus into a dfm, we can use the \texttt{dfm} command. Besides, within this command, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters. We can also remove certain stopwords so that words like ``and'' or ``the'' do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type \texttt{stopwords("english")} in the console. To make the dfm, run:
+Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the data frequency matrix (dfm). This is a matrix which contains the documents in the rows and the word counts for each word in the columns.
+
+Before we can do so however, we have to split up our texts into unique words. To do this, we first have to construct a \texttt{tokens} object. In the command that we use to do this, we can specify how we want our texts to be split (here we use the standard option), and in addition clean our data a bit. For example, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(corpus\_manifestos, }\AttributeTok{remove =} \FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_tolower}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens}\NormalTok{(corpus\_manifestos, }\AttributeTok{what =} \StringTok{"word"}\NormalTok{, }
+    \AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_symbols =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{, }
+    \AttributeTok{remove\_url =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_separators =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{split\_hyphens =} \ConstantTok{FALSE}\NormalTok{, }
+    \AttributeTok{include\_docvars =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{padding =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Creating a tokens object from a corpus input...
+\end{verbatim}
+
+\begin{verbatim}
+##  ...starting tokenization
+\end{verbatim}
+
+\begin{verbatim}
+##  ...UK_natl_2001_en_Con to UK_natl_2005_en_SNP
+\end{verbatim}
+
+\begin{verbatim}
+##  ...preserving hyphens
+\end{verbatim}
+
+\begin{verbatim}
+##  ...preserving social media tags (#, @)
+\end{verbatim}
+
+\begin{verbatim}
+##  ...segmenting into words
+\end{verbatim}
+
+\begin{verbatim}
+##  ...10,488 unique types
+\end{verbatim}
+
+\begin{verbatim}
+##  ...removing separators, punctuation, symbols, numbers, URLs
+\end{verbatim}
+
+\begin{verbatim}
+##  ...complete, elapsed time: 0.729 seconds.
+\end{verbatim}
+
+\begin{verbatim}
+## Finished constructing tokens from 10 documents.
+\end{verbatim}
+
+We can also remove certain stopwords so that words like ``and'' or ``the'' do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type \texttt{stopwords("english")} in the console. Stopwords for other languages are also available (such as German, French and Spanish). Even more stopwords can be found in the \texttt{stopword} package, that can easily be integrated with \texttt{quanteda}. For now, we will use the English ones. First, however, as all the stopwords are lower-case, we will have to lower case our words as well:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_tolower}\NormalTok{(data\_manifestos\_tokens, }\AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_select}\NormalTok{(data\_manifestos\_tokens, }\FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\AttributeTok{selection =} \StringTok{"remove"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then, we can construct our dfm:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(data\_manifestos\_tokens)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1127,29 +1193,35 @@ Then we can plot the results:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-54-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-56-1.pdf}
 
 We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 40 times. We can do this with the \texttt{dfm\_trim} function. Then, we can use this newly trimmed dfm to generate the word cloud:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(quanteda.textplots)}
+
 \NormalTok{wordcloud\_dfm\_trim }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_trim}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{min\_termfreq =} \DecValTok{40}\NormalTok{)}
 \FunctionTok{textplot\_wordcloud}\NormalTok{(wordcloud\_dfm\_trim)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-55-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-57-1.pdf}
 
 If we would want to, we can also split up this word cloud based on which words belong to which parties. For this, we have to generate a new dfm and within it, specify the groups that well which words belong to which party:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{wordcloud\_dfm\_comp }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(corpus\_manifestos, }\AttributeTok{groups =} \StringTok{"Party"}\NormalTok{)}
-\FunctionTok{textplot\_wordcloud}\NormalTok{(}\FunctionTok{dfm\_trim}\NormalTok{(wordcloud\_dfm\_comp, }\AttributeTok{min\_termfreq =} \DecValTok{20}\NormalTok{, }\AttributeTok{max\_words =} \DecValTok{40}\NormalTok{), }\AttributeTok{comparison =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(quanteda.textplots)}
+
+\NormalTok{wordcloud\_dfm\_comp }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_group}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{groups =}\NormalTok{ Party)}
+\NormalTok{wordcloud\_dfm\_comp }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_trim}\NormalTok{(wordcloud\_dfm\_comp, }\AttributeTok{min\_termfreq =} \DecValTok{20}\NormalTok{, }
+    \AttributeTok{max\_words =} \DecValTok{40}\NormalTok{)}
+\FunctionTok{textplot\_wordcloud}\NormalTok{(wordcloud\_dfm\_comp, }\AttributeTok{comparison =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-58-1.pdf}
 
 \hypertarget{standard-dictionary-analysis}{%
 \section{Standard Dictionary Analysis}\label{standard-dictionary-analysis}}
@@ -1178,7 +1250,9 @@ If we want to create our own dictionary in \texttt{quanteda} we use the same com
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dic\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{economy =}\FunctionTok{c}\NormalTok{(}\StringTok{"tax*"}\NormalTok{, }\StringTok{"vat"}\NormalTok{, }\StringTok{"trade"}\NormalTok{), }\AttributeTok{social =}\FunctionTok{c}\NormalTok{(}\StringTok{"NHS"}\NormalTok{, }\StringTok{"GP"}\NormalTok{, }\StringTok{"health"}\NormalTok{), }\AttributeTok{devolution =} \FunctionTok{c}\NormalTok{(}\StringTok{"referendum"}\NormalTok{,}\StringTok{"leave"}\NormalTok{,}\StringTok{"independence"}\NormalTok{), }\AttributeTok{europe =} \FunctionTok{c}\NormalTok{(}\StringTok{"Brussels"}\NormalTok{,}\StringTok{"remain"}\NormalTok{,}\StringTok{"EU"}\NormalTok{))}
+\NormalTok{dic\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{economy =} \FunctionTok{c}\NormalTok{(}\StringTok{"tax*"}\NormalTok{, }\StringTok{"vat"}\NormalTok{, }\StringTok{"trade"}\NormalTok{), }\AttributeTok{social =} \FunctionTok{c}\NormalTok{(}\StringTok{"NHS"}\NormalTok{, }
+    \StringTok{"GP"}\NormalTok{, }\StringTok{"health"}\NormalTok{), }\AttributeTok{devolution =} \FunctionTok{c}\NormalTok{(}\StringTok{"referendum"}\NormalTok{, }\StringTok{"leave"}\NormalTok{, }\StringTok{"independence"}\NormalTok{), }
+    \AttributeTok{europe =} \FunctionTok{c}\NormalTok{(}\StringTok{"Brussels"}\NormalTok{, }\StringTok{"remain"}\NormalTok{, }\StringTok{"EU"}\NormalTok{))}
 \NormalTok{dic\_created }\OtherTok{\textless{}{-}} \FunctionTok{dictionary}\NormalTok{(dic\_list, }\AttributeTok{tolower =} \ConstantTok{FALSE}\NormalTok{)}
 \NormalTok{dic\_created}
 \end{Highlighting}
@@ -1206,7 +1280,7 @@ If you compare the \texttt{dic\_list} file with the \texttt{data\_dictionary\_La
 \end{Shaded}
 
 \begin{verbatim}
-## Document-feature matrix of: 10 documents, 4 features (2.5% sparse) and 6 docvars.
+## Document-feature matrix of: 10 documents, 4 features (2.50% sparse) and 6 docvars.
 ##                      features
 ## docs                  economy social devolution europe
 ##   UK_natl_2001_en_Con     108     27         13     14
@@ -1225,13 +1299,14 @@ Here, we see that the Conservatives are the most active on the Economy together 
 
 The logic of dictionaries is that we can use them to see which kind of topics are present in our documents. Yet, we can also use them to provide us with measurements that are most often related to scaling. One way to do so is with \emph{sentiment} analysis. Here, we look at whether a certain piece of text is happy, angry, positive, negative, and so on. One case in which this can help us is with movie reviews. These reviews give us a description of a movie and then tell us their opinion. Here, we will use these reviews and apply a sentiment dictionary on them.
 
-First, we load some reviews into R. The corpus we use here contains 50,000 movie reviews, each with a 1-10 rating (amongst others). As 50,000 reviews make the analysis quite slow, we will first select 30 reviews at random from this corpus. We do so via \texttt{corpus\_sample}, after which we transform it into a dfm:
+First, we load some reviews into R. The corpus we use here contains 50,000 movie reviews, each with a 1-10 rating (amongst others). As 50,000 reviews make the analysis quite slow, we will first select 30 reviews at random from this corpus. We do so via \texttt{corpus\_sample}, after which we transform it via a tokens object into a dfm:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(quanteda.classifiers)}
 \NormalTok{reviews }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_sample}\NormalTok{(data\_corpus\_LMRD, }\DecValTok{30}\NormalTok{)}
-\NormalTok{reviews\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(reviews)}
+\NormalTok{reviews\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens}\NormalTok{(reviews)}
+\NormalTok{reviews\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(reviews\_tokens)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1240,7 +1315,7 @@ The next step is to load in a sentiment analysis dictionary. Here, we will use t
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{data\_dictionary\_LSD2015}
-\NormalTok{results\_dfm }\OtherTok{\textless{}{-}}\FunctionTok{dfm\_lookup}\NormalTok{(reviews\_dfm, data\_dictionary\_LSD2015)}
+\NormalTok{results\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_lookup}\NormalTok{(reviews\_dfm, data\_dictionary\_LSD2015)}
 \NormalTok{results\_dfm}
 \end{Highlighting}
 \end{Shaded}
@@ -1256,36 +1331,36 @@ The next step is to convert the results to a data frame and view them:
 
 \begin{verbatim}
 ##                   doc_id negative positive neg_positive neg_negative
-## 1  train/pos/3100_10.txt        3        7            0            0
-## 2    test/neg/3526_3.txt       50       13            0            0
-## 3    train/pos/431_8.txt        4       16            0            0
-## 4    test/neg/7805_1.txt       11        8            0            0
-## 5   train/neg/9509_1.txt        2        2            0            0
-## 6    test/neg/5396_1.txt       12       10            0            0
-## 7  test/pos/10700_10.txt        6       12            0            0
-## 8  train/pos/7290_10.txt        6       18            0            0
-## 9   train/neg/9083_1.txt        6        6            0            0
-## 10  train/neg/1673_2.txt        3        3            0            0
-## 11  train/pos/3483_9.txt        5        4            0            0
-## 12  train/pos/2725_8.txt       15       16            0            0
-## 13  test/neg/12478_4.txt       24        9            0            0
-## 14  train/neg/7808_1.txt       13        8            0            0
-## 15   test/neg/3506_1.txt       10        3            0            0
-## 16 train/pos/2222_10.txt        2        5            0            0
-## 17  train/neg/5629_2.txt        4        7            0            0
-## 18   test/neg/6738_2.txt       19       12            0            0
-## 19 train/pos/10855_9.txt        8        3            0            0
-## 20  test/neg/10208_1.txt        2        4            0            0
-## 21 train/pos/3980_10.txt        5        5            0            0
-## 22  test/neg/11576_1.txt       12        1            0            0
-## 23  test/pos/4186_10.txt        9        9            0            0
-## 24   test/neg/3782_1.txt       16        7            0            0
-## 25   test/neg/2297_4.txt       18       22            0            0
-## 26  train/neg/5049_3.txt        8        9            0            0
-## 27  test/pos/7001_10.txt        9       12            0            0
-## 28  train/neg/1322_1.txt       13       10            0            0
-## 29  train/neg/9251_3.txt        4        1            0            0
-## 30   test/neg/2614_3.txt        3        7            0            0
+## 1   test/pos/1127_10.txt        6        6            0            0
+## 2    test/pos/5833_7.txt       15       14            0            0
+## 3    test/neg/4006_1.txt        4        6            0            0
+## 4    test/neg/7372_1.txt       13        7            0            0
+## 5    test/neg/3644_1.txt        8       12            0            0
+## 6    test/pos/6639_8.txt       28       18            0            0
+## 7  train/pos/8061_10.txt        4        6            0            0
+## 8    test/neg/9782_4.txt       16        7            0            0
+## 9    test/neg/5091_1.txt        3        7            0            0
+## 10  train/pos/7410_7.txt        4       11            0            0
+## 11  test/neg/10956_4.txt        4       13            0            0
+## 12  train/pos/7502_7.txt        0        9            0            0
+## 13   test/neg/4332_2.txt        2        0            0            0
+## 14  test/pos/6777_10.txt        7       12            0            0
+## 15   test/neg/9482_1.txt        5        7            0            0
+## 16  test/pos/2898_10.txt        3        8            0            0
+## 17   test/neg/6464_4.txt       10        7            0            0
+## 18   test/neg/5807_1.txt        5        6            0            0
+## 19  train/pos/689_10.txt        4        6            0            0
+## 20    test/neg/905_3.txt       11        7            0            0
+## 21   test/neg/9320_1.txt       17        7            0            0
+## 22   test/neg/5237_2.txt        6        7            0            0
+## 23  train/neg/4103_2.txt       10        7            0            0
+## 24   test/neg/2164_4.txt        1        2            0            0
+## 25   test/neg/4420_4.txt       32       29            0            0
+## 26   test/pos/4205_7.txt       11       10            0            0
+## 27     test/neg/46_2.txt       37       24            0            0
+## 28    train/neg/77_4.txt        5       16            0            0
+## 29  train/pos/4751_8.txt       17        9            0            0
+## 30  train/pos/7966_9.txt        8       16            0            0
 \end{verbatim}
 
 Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data-frame with the positive and negative sentiments:
@@ -1302,9 +1377,10 @@ To compare the sentiment with the stars, we first have to combine the senitments
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sentiment\_difference }\OtherTok{\textless{}{-}}\NormalTok{ stargraph}\SpecialCharTok{$}\NormalTok{positive}\SpecialCharTok{{-}}\NormalTok{stargraph}\SpecialCharTok{$}\NormalTok{negative}
-\NormalTok{sentiment\_ratio }\OtherTok{\textless{}{-}}\NormalTok{ (stargraph}\SpecialCharTok{$}\NormalTok{positive}\SpecialCharTok{/}\NormalTok{ (stargraph}\SpecialCharTok{$}\NormalTok{positive }\SpecialCharTok{+}\NormalTok{ stargraph}\SpecialCharTok{$}\NormalTok{negative))}
-\NormalTok{stargraph }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(stargraph, sentiment\_difference,sentiment\_ratio)}
+\NormalTok{sentiment\_difference }\OtherTok{\textless{}{-}}\NormalTok{ stargraph}\SpecialCharTok{$}\NormalTok{positive }\SpecialCharTok{{-}}\NormalTok{ stargraph}\SpecialCharTok{$}\NormalTok{negative}
+\NormalTok{sentiment\_ratio }\OtherTok{\textless{}{-}}\NormalTok{ (stargraph}\SpecialCharTok{$}\NormalTok{positive}\SpecialCharTok{/}\NormalTok{(stargraph}\SpecialCharTok{$}\NormalTok{positive }\SpecialCharTok{+} 
+\NormalTok{    stargraph}\SpecialCharTok{$}\NormalTok{negative))}
+\NormalTok{stargraph }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(stargraph, sentiment\_difference, sentiment\_ratio)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1313,12 +1389,10 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ggplot2)}
-\FunctionTok{ggplot}\NormalTok{(stargraph,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sentiment\_difference, }\AttributeTok{y =}\NormalTok{ stars)) }\SpecialCharTok{+}
- \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{shape =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{xlab}\NormalTok{(}\StringTok{"Positive minus Negative"}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{theme\_classic}\NormalTok{()}
+
+\FunctionTok{ggplot}\NormalTok{(stargraph, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sentiment\_difference, }\AttributeTok{y =}\NormalTok{ stars)) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{shape =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Positive minus Negative"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1326,16 +1400,13 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-66-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-68-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(stargraph,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sentiment\_ratio, }\AttributeTok{y =}\NormalTok{ stars)) }\SpecialCharTok{+}
- \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{shape =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{xlab}\NormalTok{(}\StringTok{"Ratio of Positive to Total"}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{theme\_classic}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(stargraph, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sentiment\_ratio, }\AttributeTok{y =}\NormalTok{ stars)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{shape =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Ratio of Positive to Total"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{"Stars"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1343,13 +1414,13 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-67-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-69-1.pdf}
 
 Finally, we would like to illustrate how one can make inferences by using the output of a dictionary analysis, by estimating confidence intervals around the point estimates. To do so, again the first step is to add a column which will be the total of positive and negative words scored by the dictionary. We do so by copying the data frame to a new data frame and adding a new column filled with NA values:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{reviews\_bootstrap }\OtherTok{\textless{}{-}}\NormalTok{ sentiment}
+\NormalTok{reviews\_bootstrap   }\OtherTok{\textless{}{-}}\NormalTok{ sentiment}
 \NormalTok{reviews\_bootstrap}\SpecialCharTok{$}\NormalTok{n }\OtherTok{\textless{}{-}} \ConstantTok{NA}
 \end{Highlighting}
 \end{Shaded}
@@ -1360,9 +1431,11 @@ We then again specify the number of reviews, the replications that we want and c
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(combinat)}
 
-\NormalTok{nman }\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(reviews\_bootstrap)}
+\NormalTok{nman }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(reviews\_bootstrap)}
 \NormalTok{nrepl }\OtherTok{\textless{}{-}} \DecValTok{1000}
-\NormalTok{manifBSn }\OtherTok{\textless{}{-}}\NormalTok{ manifBSnRand }\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(reviews\_bootstrap[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]),}\FunctionTok{c}\NormalTok{(nman, }\DecValTok{2}\NormalTok{, nrepl }\SpecialCharTok{+} \DecValTok{1}\NormalTok{), }\AttributeTok{dimnames =}\FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nman,}\FunctionTok{names}\NormalTok{(reviews\_bootstrap[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]), }\DecValTok{0}\SpecialCharTok{:}\NormalTok{nrepl))}
+\NormalTok{manifBSn }\OtherTok{\textless{}{-}}\NormalTok{ manifBSnRand }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(reviews\_bootstrap[, }
+    \DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]), }\FunctionTok{c}\NormalTok{(nman, }\DecValTok{2}\NormalTok{, nrepl }\SpecialCharTok{+} \DecValTok{1}\NormalTok{), }\AttributeTok{dimnames =} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nman, }\FunctionTok{names}\NormalTok{(reviews\_bootstrap[, }
+    \DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]), }\DecValTok{0}\SpecialCharTok{:}\NormalTok{nrepl))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1370,12 +1443,12 @@ Then, we bootstrap the word counts for each movie review and compute percentages
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{n }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(manifBSn), , }\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, sum)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(manifBSn), , }\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, sum)}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ manifBSn[, , }\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{n}
 
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrepl) \{}
-\NormalTok{ manifBSn[, , i] }\OtherTok{\textless{}{-}}\FunctionTok{rmultinomial}\NormalTok{(n, p)}
-\NormalTok{ \}}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrepl) \{}
+\NormalTok{    manifBSn[, , i] }\OtherTok{\textless{}{-}} \FunctionTok{rmultinomial}\NormalTok{(n, p)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1383,10 +1456,10 @@ We can then ask R to compute the quantities of interest. These are standard erro
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{NegativeSE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{PositiveSE }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
-\NormalTok{perNegative }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{perPositive }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{NegativeSE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{PositiveSE }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, sd)}
+\NormalTok{perNegative }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"negative"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{perPositive }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(manifBSn[, }\StringTok{"positive"}\NormalTok{, ]}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, mean)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1394,7 +1467,8 @@ We then save these quantities of interest in a new data frame:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataBS }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(reviews\_bootstrap[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], NegativeSE,PositiveSE, perNegative, perPositive))}
+\NormalTok{dataBS }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(reviews\_bootstrap[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], NegativeSE, }
+\NormalTok{    PositiveSE, perNegative, perPositive))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1406,7 +1480,7 @@ Then, we first calculate the confidence intervals and add these:
 \NormalTok{pos\_lo }\OtherTok{\textless{}{-}}\NormalTok{ dataBS}\SpecialCharTok{$}\NormalTok{perPositive }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ dataBS}\SpecialCharTok{$}\NormalTok{PositiveSE)}
 \NormalTok{neg\_lo }\OtherTok{\textless{}{-}}\NormalTok{ dataBS}\SpecialCharTok{$}\NormalTok{perNegative }\SpecialCharTok{{-}}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ dataBS}\SpecialCharTok{$}\NormalTok{NegativeSE)}
 \NormalTok{neg\_hi }\OtherTok{\textless{}{-}}\NormalTok{ dataBS}\SpecialCharTok{$}\NormalTok{perNegative }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ dataBS}\SpecialCharTok{$}\NormalTok{NegativeSE)}
-\NormalTok{dataBS }\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(dataBS, pos\_hi, pos\_lo, neg\_lo, neg\_hi)}
+\NormalTok{dataBS }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(dataBS, pos\_hi, pos\_lo, neg\_lo, neg\_hi)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1415,6 +1489,7 @@ Finally, we can then make the graph. Here, we plot each of the positive and nega
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ggplot2)}
+
 \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dataBS,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ perPositive, }\AttributeTok{y =}\NormalTok{ doc\_id), }\AttributeTok{shape =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dataBS,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ perNegative, }\AttributeTok{y =}\NormalTok{ doc\_id), }\AttributeTok{shape =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
@@ -1426,7 +1501,7 @@ Finally, we can then make the graph. Here, we plot each of the positive and nega
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-74-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-76-1.pdf}
 
 As can be seen in this particular example, the fact that some documents are much less lengthier than others introduces a lot of uncertainty in the estimates. As evident from the overlapping confidence intervals in the figure, for most reviews, the percentage of negative words is not much different from the percentage of positive words. In other words: the sentiment for these reviews is rather mixed.
 
@@ -1441,10 +1516,23 @@ With a dictionary, we aimed to classify our texts into different categories base
 \FunctionTok{library}\NormalTok{(quanteda.corpora)}
 
 \FunctionTok{data}\NormalTok{(data\_corpus\_ukmanifestos)}
-\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(data\_corpus\_ukmanifestos, Year }\SpecialCharTok{==} \DecValTok{2001} \SpecialCharTok{|}\NormalTok{ Year }\SpecialCharTok{==} \DecValTok{2005}\NormalTok{)}
-\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(corpus\_manifestos, Party}\SpecialCharTok{==}\StringTok{"Lab"} \SpecialCharTok{|}\NormalTok{ Party}\SpecialCharTok{==}\StringTok{"LD"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"Con"} \SpecialCharTok{|}\NormalTok{ Party}\SpecialCharTok{==} \StringTok{"SNP"} \SpecialCharTok{|}\NormalTok{ Party}\SpecialCharTok{==} \StringTok{"PCy"}\NormalTok{)}
-\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(corpus\_manifestos, }\AttributeTok{remove =} \FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_tolower}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(data\_corpus\_ukmanifestos, }
+\NormalTok{    Year }\SpecialCharTok{==} \DecValTok{2001} \SpecialCharTok{|}\NormalTok{ Year }\SpecialCharTok{==} \DecValTok{2005}\NormalTok{)}
+\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(corpus\_manifestos, Party }\SpecialCharTok{==} 
+    \StringTok{"Lab"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"LD"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"Con"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"SNP"} \SpecialCharTok{|} 
+\NormalTok{    Party }\SpecialCharTok{==} \StringTok{"PCy"}\NormalTok{)}
+
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens}\NormalTok{(corpus\_manifestos, }\AttributeTok{what =} \StringTok{"word"}\NormalTok{, }
+    \AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_symbols =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{, }
+    \AttributeTok{remove\_url =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_separators =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{split\_hyphens =} \ConstantTok{FALSE}\NormalTok{, }
+    \AttributeTok{include\_docvars =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{padding =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_tolower}\NormalTok{(data\_manifestos\_tokens, }
+    \AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_select}\NormalTok{(data\_manifestos\_tokens, }
+    \FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\AttributeTok{selection =} \StringTok{"remove"}\NormalTok{)}
+
+\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(data\_manifestos\_tokens)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1475,7 +1563,7 @@ We can then set the scores for the reference texts. For the virgin texts, we set
 \FunctionTok{library}\NormalTok{(quanteda.textmodels)}
 
 \NormalTok{scores }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{7.72}\NormalTok{,}\FloatTok{5.18}\NormalTok{,}\FloatTok{3.82}\NormalTok{,}\FloatTok{3.2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\ConstantTok{NA}\NormalTok{,}\ConstantTok{NA}\NormalTok{,}\ConstantTok{NA}\NormalTok{,}\ConstantTok{NA}\NormalTok{,}\ConstantTok{NA}\NormalTok{)}
-\NormalTok{ws }\OtherTok{\textless{}{-}}\FunctionTok{textmodel\_wordscores}\NormalTok{(data\_manifestos\_dfm, scores)}
+\NormalTok{ws }\OtherTok{\textless{}{-}} \FunctionTok{textmodel\_wordscores}\NormalTok{(data\_manifestos\_dfm, scores)}
 \FunctionTok{summary}\NormalTok{(ws)}
 \end{Highlighting}
 \end{Shaded}
@@ -1487,51 +1575,51 @@ We can then set the scores for the reference texts. For the virgin texts, we set
 ## 
 ## Reference Document Statistics:
 ##                     score total min max   mean median
-## UK_natl_2001_en_Con  7.72  7239   0  92 0.8669      0
-## UK_natl_2001_en_Lab  5.18 16519   0 166 1.9783      0
-## UK_natl_2001_en_LD   3.82 12366   0 101 1.4810      0
-## UK_natl_2001_en_PCy  3.20  3515   0  72 0.4210      0
-## UK_natl_2001_en_SNP  3.00  5711   0 108 0.6840      0
-## UK_natl_2005_en_Con    NA  4374   0  46 0.5238      0
-## UK_natl_2005_en_Lab    NA 13473   0 147 1.6135      0
-## UK_natl_2005_en_LD     NA  9314   0 109 1.1154      0
-## UK_natl_2005_en_PCy    NA  4215   0 148 0.5048      0
-## UK_natl_2005_en_SNP    NA  1578   0  58 0.1890      0
+## UK_natl_2001_en_Con  7.72  7179   0  92 0.8606      0
+## UK_natl_2001_en_Lab  5.18 16395   0 166 1.9654      0
+## UK_natl_2001_en_LD   3.82 12337   0 101 1.4789      0
+## UK_natl_2001_en_PCy  3.20  3508   0  72 0.4205      0
+## UK_natl_2001_en_SNP  3.00  5693   0 108 0.6825      0
+## UK_natl_2005_en_Con    NA  4350   0  46 0.5215      0
+## UK_natl_2005_en_Lab    NA 13370   0 147 1.6027      0
+## UK_natl_2005_en_LD     NA  9265   0 109 1.1106      0
+## UK_natl_2005_en_PCy    NA  4204   0 148 0.5040      0
+## UK_natl_2005_en_SNP    NA  1509   0  49 0.1809      0
 ## 
 ## Wordscores:
 ## (showing first 30 elements)
 ##         time       common        sense conservative    manifesto introduction 
-##        5.833        6.535        7.374        7.159        4.474        3.979 
+##        5.838        6.540        7.376        7.161        4.478        3.982 
 ##        lives      raising       family       living       safely      earning 
-##        6.041        4.423        5.515        4.714        5.739        6.042 
+##        6.047        4.427        5.519        4.719        5.743        6.046 
 ##      staying      healthy      growing        older      knowing        world 
-##        6.946        4.291        4.741        6.278        7.720        4.362 
+##        6.946        4.294        4.745        6.280        7.720        4.366 
 ##       leader     stronger      society         town      country    civilised 
-##        4.520        4.905        4.338        7.515        4.397        4.273 
+##        4.524        4.910        4.342        7.515        4.401        4.278 
 ##        proud    democracy   conclusion      present    ambitious    programme 
-##        6.066        5.262        6.946        3.592        4.462        4.231
+##        6.069        5.267        6.946        3.594        4.466        4.233
 \end{verbatim}
 
 When we run the \texttt{summary} command, we can see the word scores for each word. This is the position of that word on our scale of interest. We then only need to figure out how often these words occur in each of the texts, add up their scores, and divide this by the total number of words of the texts. This gives us the \emph{raw score} of the text. Yet, this raw score has some problems. Most important of which is that as some words occur in almost all texts, all the scores will be very clustered in the middle of our scale. To prevent this, we can spread out the scores again, so they look more like the scores of our reference texts. This rescaling has two versions. The first was the original as proposed by \protect\hyperlink{ref-Laver2003a}{Laver, Benoit, and Garry} (\protect\hyperlink{ref-Laver2003a}{2003}), and focuses on the variance of the scores. The idea here is that the distribution of the scores of the virgin texts has the correct mean, but an incorrect variance which needs rescaling. The second, proposed by \protect\hyperlink{ref-Martin2008a}{Martin and Vanberg} (\protect\hyperlink{ref-Martin2008a}{2008}), focuses on the extremes of the scores. What it does is to take the scores of the virgin texts and stretch them out to match the extremes of the scores of the reference texts. Here, we run both so we can compare them. For the MV transformation, we will calculate the standard errors for the scores as well:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pred\_lbg }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(ws, }\AttributeTok{rescaling =} \StringTok{"lbg"}\NormalTok{)}
+\NormalTok{pred\_lbg }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(ws, }\AttributeTok{rescaling =} \StringTok{"lbg"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: 2207 features in newdata not used in prediction.
+## Warning: 2203 features in newdata not used in prediction.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pred\_mv }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(ws, }\AttributeTok{rescaling =} \StringTok{"mv"}\NormalTok{, }\AttributeTok{se.fit =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+\NormalTok{pred\_mv }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(ws, }\AttributeTok{rescaling =} \StringTok{"mv"}\NormalTok{, }\AttributeTok{se.fit =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: 2207 features in newdata not used in prediction.
+## Warning: 2203 features in newdata not used in prediction.
 \end{verbatim}
 
 \begin{verbatim}
@@ -1548,11 +1636,11 @@ When we run the \texttt{summary} command, we can see the word scores for each wo
 
 \begin{verbatim}
 ## UK_natl_2001_en_Con UK_natl_2001_en_Lab  UK_natl_2001_en_LD UK_natl_2001_en_PCy 
-##            8.784956            5.450883            3.962689            1.912643 
+##            8.794566            5.440327            3.971305            1.921840 
 ## UK_natl_2001_en_SNP UK_natl_2005_en_Con UK_natl_2005_en_Lab  UK_natl_2005_en_LD 
-##            2.168203            5.655377            5.132459            5.053201 
+##            2.166928            5.656940            5.128174            5.047475 
 ## UK_natl_2005_en_PCy UK_natl_2005_en_SNP 
-##            3.742887            4.314414
+##            3.752962            4.289754
 \end{verbatim}
 
 \begin{Shaded}
@@ -1564,24 +1652,24 @@ When we run the \texttt{summary} command, we can see the word scores for each wo
 \begin{verbatim}
 ## $fit
 ##                          fit      lwr      upr
-## UK_natl_2001_en_Con 7.720000 7.634261 7.805739
-## UK_natl_2001_en_Lab 5.341669 5.305916 5.377422
-## UK_natl_2001_en_LD  4.280080 4.238654 4.321507
-## UK_natl_2001_en_PCy 2.817699 2.742500 2.892898
-## UK_natl_2001_en_SNP 3.000000 2.932656 3.067344
-## UK_natl_2005_en_Con 5.487543 5.389459 5.585627
-## UK_natl_2005_en_Lab 5.114525 5.065851 5.163199
-## UK_natl_2005_en_LD  5.057987 4.995697 5.120276
-## UK_natl_2005_en_PCy 4.123286 4.033461 4.213112
-## UK_natl_2005_en_SNP 4.530980 4.343159 4.718802
+## UK_natl_2001_en_Con 7.720000 7.633952 7.806048
+## UK_natl_2001_en_Lab 5.331214 5.295467 5.366960
+## UK_natl_2001_en_LD  4.285022 4.243678 4.326365
+## UK_natl_2001_en_PCy 2.825456 2.750505 2.900406
+## UK_natl_2001_en_SNP 3.000000 2.932910 3.067090
+## UK_natl_2005_en_Con 5.485479 5.387391 5.583567
+## UK_natl_2005_en_Lab 5.108908 5.060253 5.157564
+## UK_natl_2005_en_LD  5.051437 4.989127 5.113747
+## UK_natl_2005_en_PCy 4.129525 4.039903 4.219146
+## UK_natl_2005_en_SNP 4.511812 4.323620 4.700003
 ## 
 ## $se.fit
 ## UK_natl_2001_en_Con UK_natl_2001_en_Lab  UK_natl_2001_en_LD UK_natl_2001_en_PCy 
-##          0.04374508          0.01824162          0.02113627          0.03836752 
+##          0.04390309          0.01823830          0.02109396          0.03824078 
 ## UK_natl_2001_en_SNP UK_natl_2005_en_Con UK_natl_2005_en_Lab  UK_natl_2005_en_LD 
-##          0.03436002          0.05004366          0.02483411          0.03178094 
+##          0.03423029          0.05004577          0.02482464          0.03179121 
 ## UK_natl_2005_en_PCy UK_natl_2005_en_SNP 
-##          0.04583006          0.09582906
+##          0.04572606          0.09601792
 \end{verbatim}
 
 Note that this does not only predict the 2005 texts, but also the 2001 texts. As such, we can use these scores to see how well this procedure can recover the original scores. One reason why this might be a problem is because of a warning you most likely received. This says that ``\emph{n} features in newdata not used in prediction.'' This is as the method does not use all the words from the reference texts to score the virgin texts. Instead, it only uses the words that occur in them both. Thus, when we compare the reference scores with the scores the method gives to the reference documents, can see how well the method does.
@@ -1597,56 +1685,68 @@ To compare the scores, we will use the Concordance Correlation Coefficient as de
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{comparison }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(pred\_lbg, scores))}
-\NormalTok{comparison }\OtherTok{\textless{}{-}}\NormalTok{ comparison[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{,]}
+\NormalTok{comparison }\OtherTok{\textless{}{-}}\NormalTok{ comparison[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ]}
 
-\FunctionTok{CCC}\NormalTok{(comparison}\SpecialCharTok{$}\NormalTok{scores, comparison}\SpecialCharTok{$}\NormalTok{pred\_lbg, }\AttributeTok{ci =} \StringTok{"z{-}transform"}\NormalTok{, }\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{CCC}\NormalTok{(comparison}\SpecialCharTok{$}\NormalTok{scores, comparison}\SpecialCharTok{$}\NormalTok{pred\_lbg, }\AttributeTok{ci =} \StringTok{"z{-}transform"}\NormalTok{, }
+    \AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## $rho.c
-##         est    lwr.ci    upr.ci
-## 1 0.9238208 0.8231088 0.9681934
+##         est    lwr.ci   upr.ci
+## 1 0.9239205 0.8242101 0.968064
 ## 
 ## $s.shift
-## [1] 1.44368
+## [1] 1.443978
 ## 
 ## $l.shift
-## [1] -0.06116343
+## [1] -0.05966866
 ## 
 ## $C.b
-## [1] 0.9345378
+## [1] 0.9345491
 ## 
 ## $blalt
 ##       mean      delta
-## 1 8.252478 -1.0649565
-## 2 5.315441 -0.2708827
-## 3 3.891345 -0.1426893
-## 4 2.556321  1.2873572
-## 5 2.584101  0.8317971
+## 1 8.257283 -1.0745660
+## 2 5.310163 -0.2603267
+## 3 3.895653 -0.1513052
+## 4 2.560920  1.2781600
+## 5 2.583464  0.8330719
 \end{verbatim}
 
 The result here is not bad, though the confidence intervals are rather large. We can have a further look at why this is the case by plotting the data. In this plot, we will show the position of the texts, as well as a 45-degree line. Also, we plot the reduced major axis, which shows the symmetrical relationship between the two variables. This line is a linear regression, which we compute first using the \texttt{lm} command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
 \NormalTok{lm\_line }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(comparison}\SpecialCharTok{$}\NormalTok{scores }\SpecialCharTok{\textasciitilde{}}\NormalTok{ comparison}\SpecialCharTok{$}\NormalTok{pred\_lbg)}
 
 \FunctionTok{ggplot}\NormalTok{(comparison, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{scores, }\AttributeTok{y=}\NormalTok{pred\_lbg)) }\SpecialCharTok{+} 
  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Original Scores"}\NormalTok{)}\SpecialCharTok{+}
  \FunctionTok{ylab}\NormalTok{(}\StringTok{"LBG Scores"}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{12}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{12}\NormalTok{)}\SpecialCharTok{+}
- \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{slope =}\DecValTok{1}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{))}\SpecialCharTok{+}
- \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ lm\_line}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{], }\AttributeTok{slope =}\NormalTok{ lm\_line}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{], }\AttributeTok{linetype =} \StringTok{"solid"}\NormalTok{ ))}\SpecialCharTok{+}
- \FunctionTok{scale\_shape\_manual}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{breaks=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Line of perfect concordance"}\NormalTok{,}\StringTok{"Reduced major axis"}\NormalTok{))}\SpecialCharTok{+}
- \FunctionTok{scale\_linetype\_manual}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{,}\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Line of perfect concordance"}\NormalTok{,}\StringTok{"Reduced major axis"}\NormalTok{))}\SpecialCharTok{+}
+ \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{12}\NormalTok{)}\SpecialCharTok{+}
+ \FunctionTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{12}\NormalTok{)}\SpecialCharTok{+}
+ \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =} \DecValTok{0}\NormalTok{,}
+                 \AttributeTok{slope =}\DecValTok{1}\NormalTok{,}
+                 \AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{))}\SpecialCharTok{+}
+ \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ lm\_line}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{],}
+                 \AttributeTok{slope =}\NormalTok{ lm\_line}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{],}
+                 \AttributeTok{linetype =} \StringTok{"solid"}\NormalTok{ ))}\SpecialCharTok{+}
+ \FunctionTok{scale\_shape\_manual}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{,}
+                    \AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                    \AttributeTok{breaks=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+                    \AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Line of perfect concordance"}\NormalTok{ , }\StringTok{"Reduced major axis"}\NormalTok{))}\SpecialCharTok{+}
+ \FunctionTok{scale\_linetype\_manual}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{,}
+                       \AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                       \AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Line of perfect concordance"}\NormalTok{ , }\StringTok{"Reduced major axis"}\NormalTok{))}\SpecialCharTok{+}
  \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-81-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-83-1.pdf}
 
 This graph allows us to spot the problem. That is that while we gave the manifesto for Plaid Cymru (PCy) a reference score of 3.20, Wordscores gave it 1.91. Removing this manifesto from our data-set would thus improve our estimates.
 
@@ -1655,28 +1755,13 @@ Apart from positioning the texts, we can also have a look at the words themselve
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(quanteda.textplots)}
+
+\FunctionTok{textplot\_scale1d}\NormalTok{(ws, }\AttributeTok{margin =} \StringTok{"features"}\NormalTok{, }\AttributeTok{highlighted =} \FunctionTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{, }
+    \StringTok{"vote"}\NormalTok{, }\StringTok{"europe"}\NormalTok{, }\StringTok{"taxes"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-## Attaching package: 'quanteda.textplots'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:quanteda':
-## 
-##     as.igraph, as.network, textplot_keyness, textplot_network,
-##     textplot_wordcloud, textplot_xray
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{textplot\_scale1d}\NormalTok{(ws, }\AttributeTok{margin =} \StringTok{"features"}\NormalTok{, }\AttributeTok{highlighted =}\FunctionTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{,}\StringTok{"vote"}\NormalTok{, }\StringTok{"europe"}\NormalTok{, }\StringTok{"taxes"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-82-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-84-1.pdf}
 
 Finally, we can have a look at the confidence intervals around the scores we created. For this, we use the same command as above, though instead of specifying \texttt{features} (referring to the words), we specify \texttt{texts}. Note that we can only do this for the MV scores, as only here we also calculated the standard errors:
 
@@ -1686,25 +1771,15 @@ Finally, we can have a look at the confidence intervals around the scores we cre
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-83-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-85-1.pdf}
 
-Note that we can also make this graph ourselves. This requires some data-wrangling and the use of a new package. The first thing we do is take our data and re-arrange it using the \texttt{dplyr} package:
+Note that we can also make this graph ourselves. This requires some data-wrangling using the \texttt{dplyr} package. This package allows us to use pipes, which are denoted by the \texttt{\%\textgreater{}\%} command. This pipe transports an output of a command to another one before saving it. This saves us from constructing too many intermediate data-sets. Thus, here we first bind together the row names of the fit (which denote the documents), the fit itself, and the standard error of the fit (which also includes the lower and upper bound). We then transform this into a tibble (which is similar to a dataframe), rename the first and fifth columns, and finally ensure that all the values (which are still characters), are numeric (and year a factor):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(dplyr)}
 
-\NormalTok{comparison }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(comparison), comparison)}
-\NormalTok{comparison }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(comparison }\SpecialCharTok{\%\textgreater{}\%}
-                          \FunctionTok{rename}\NormalTok{(}\AttributeTok{id =} \DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-Then, we calculate the lower bound, upper bound, standard error and fit (the middle value), place that into a dataframe and sort it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{textplot }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(pred\_mv}\SpecialCharTok{$}\NormalTok{se.fit)), pred\_mv}\SpecialCharTok{$}\NormalTok{fit, pred\_mv}\SpecialCharTok{$}\NormalTok{se.fit) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{data\_textplot }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(pred\_mv}\SpecialCharTok{$}\NormalTok{se.fit)), pred\_mv}\SpecialCharTok{$}\NormalTok{fit, pred\_mv}\SpecialCharTok{$}\NormalTok{se.fit) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{id =} \DecValTok{1}\NormalTok{,}
          \AttributeTok{se =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
@@ -1712,8 +1787,7 @@ Then, we calculate the lower bound, upper bound, standard error and fit (the mid
          \AttributeTok{lwr =} \FunctionTok{as.numeric}\NormalTok{(lwr),}
          \AttributeTok{upr =} \FunctionTok{as.numeric}\NormalTok{(upr),}
          \AttributeTok{se =} \FunctionTok{as.numeric}\NormalTok{(se),}
-         \AttributeTok{year =} \FunctionTok{as.factor}\NormalTok{(stringr}\SpecialCharTok{::}\FunctionTok{str\_sub}\NormalTok{(id, }\AttributeTok{start =} \DecValTok{9}\NormalTok{, }\AttributeTok{end =} \DecValTok{12}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{arrange}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{fit)}
+         \AttributeTok{year =} \FunctionTok{as.factor}\NormalTok{(stringr}\SpecialCharTok{::}\FunctionTok{str\_sub}\NormalTok{(id, }\AttributeTok{start =} \DecValTok{9}\NormalTok{, }\AttributeTok{end =} \DecValTok{12}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1722,19 +1796,22 @@ Then, we calculate the lower bound, upper bound, standard error and fit (the mid
 ## Using compatibility `.name_repair`.
 \end{verbatim}
 
+If we now look at our \texttt{data\_textplot} object, we see that we have all the data we need: the fit (the average value), the lower and upper bounds, the year and the id that tells us with which party and year we are dealing. The only thing that we perhaps can do is to give the parties slightly better names. To see the current ones, type \texttt{data\_textplot\$id} in the console. We can then give them different names (just ensure that the order remains the same). We then sort them in decreasing order based on their fit:
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{textplot}\SpecialCharTok{$}\NormalTok{id }\OtherTok{=} \FunctionTok{with}\NormalTok{(textplot,  }\FunctionTok{reorder}\NormalTok{(id, fit))}
+\NormalTok{data\_textplot}\SpecialCharTok{$}\NormalTok{id }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"CON 2001"}\NormalTok{, }\StringTok{"LAB 2001"}\NormalTok{, }\StringTok{"LD 2001"}\NormalTok{, }\StringTok{"PCY 2001"}\NormalTok{, }\StringTok{"SNP 2001"}\NormalTok{, }\StringTok{"CON 2005"}\NormalTok{,}\StringTok{"LAB 2005"}\NormalTok{, }\StringTok{"LD 2005"}\NormalTok{,}\StringTok{"PCY 2005"}\NormalTok{, }\StringTok{"SNP 2005"}\NormalTok{))}
+\NormalTok{data\_textplot}\SpecialCharTok{$}\NormalTok{id }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(data\_textplot,  }\FunctionTok{reorder}\NormalTok{(id, fit))}
 \end{Highlighting}
 \end{Shaded}
 
-Then, we plot this data using \texttt{ggplot}:
+Then, we can plot this data using \texttt{ggplot}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ textplot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fit, }\AttributeTok{y =}\NormalTok{ id)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ year)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_errorbarh}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ upr, }\AttributeTok{xmin =}\NormalTok{ lwr, }\AttributeTok{colour =}\NormalTok{ year), }\AttributeTok{height =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ data\_textplot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fit, }\AttributeTok{y =}\NormalTok{ id, }\AttributeTok{colour =}\NormalTok{ year)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbarh}\NormalTok{(}\AttributeTok{data =}\NormalTok{ data\_textplot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmax =}\NormalTok{ upr, }\AttributeTok{xmin =}\NormalTok{ lwr,  }\AttributeTok{y =}\NormalTok{ id, }\AttributeTok{colour =}\NormalTok{ year), }\AttributeTok{height =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#ffa600"}\NormalTok{, }\StringTok{"\#ff6361"}\NormalTok{),}
                       \AttributeTok{name =} \StringTok{"Years:"}\NormalTok{,}
@@ -1742,18 +1819,16 @@ Then, we plot this data using \texttt{ggplot}:
                       \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"2001"}\NormalTok{, }\StringTok{"2005"}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Left{-}Right Distribution of UK Party Manifestos"}\NormalTok{,}
        \AttributeTok{subtitle =} \StringTok{"with 95\% confidence intervals"}\NormalTok{,}
-       \AttributeTok{x =} \StringTok{"Left {-} Right score: lower is more left"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Left {-} Right Score"}\NormalTok{,}
        \AttributeTok{y =} \ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{20}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
         \AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
-        \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,}
-        \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{colour =} \StringTok{"grey45"}\NormalTok{),}
-        \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{colour =} \StringTok{"grey45"}\NormalTok{),}
-        \AttributeTok{legend.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill =} \StringTok{"white"}\NormalTok{, }\AttributeTok{colour =} \StringTok{"white"}\NormalTok{))}
+        \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-86-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-88-1.pdf}
 
 \hypertarget{wordfish}{%
 \section{Wordfish}\label{wordfish}}
@@ -1766,7 +1841,8 @@ Here, we take the SNP party manifesto as the most left-wing (text 5), and the Co
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
 
-\NormalTok{wordfish }\OtherTok{\textless{}{-}} \FunctionTok{textmodel\_wordfish}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{dir =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{wordfish }\OtherTok{\textless{}{-}} \FunctionTok{textmodel\_wordfish}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{dir =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }
+    \DecValTok{1}\NormalTok{))}
 \FunctionTok{summary}\NormalTok{(wordfish)}
 \end{Highlighting}
 \end{Shaded}
@@ -1777,65 +1853,69 @@ Here, we take the SNP party manifesto as the most left-wing (text 5), and the Co
 ## textmodel_wordfish.dfm(x = data_manifestos_dfm, dir = c(5, 1))
 ## 
 ## Estimated Document Positions:
-##                       theta       se
-## UK_natl_2001_en_Con  0.4073 0.007912
-## UK_natl_2001_en_Lab  0.7961 0.002041
-## UK_natl_2001_en_LD   0.4278 0.005803
-## UK_natl_2001_en_PCy  0.2394 0.015333
-## UK_natl_2001_en_SNP -1.1216 0.009733
-## UK_natl_2005_en_Con  0.4746 0.008820
-## UK_natl_2005_en_Lab  0.8193 0.002132
-## UK_natl_2005_en_LD   0.2334 0.009509
-## UK_natl_2005_en_PCy  0.1187 0.016545
-## UK_natl_2005_en_SNP -2.3952 0.003285
+##                        theta       se
+## UK_natl_2001_en_Con  0.45019 0.007679
+## UK_natl_2001_en_Lab  0.81006 0.002302
+## UK_natl_2001_en_LD   0.41124 0.006307
+## UK_natl_2001_en_PCy  0.15749 0.017494
+## UK_natl_2001_en_SNP -1.06313 0.015665
+## UK_natl_2005_en_Con  0.49764 0.008975
+## UK_natl_2005_en_Lab  0.82510 0.002465
+## UK_natl_2005_en_LD   0.25800 0.009393
+## UK_natl_2005_en_PCy  0.06539 0.017745
+## UK_natl_2005_en_SNP -2.41199 0.007575
 ## 
 ## Estimated Feature Scores:
-##        time common  sense conservative manifesto introduction  lives raising
-## beta 0.3326 0.5493 0.9933        0.713    0.5571      -0.2696 0.1406  1.4518
-## psi  2.9630 1.6849 1.3063        2.180    2.2596       1.1291 1.6999  0.3921
-##      family living   safely earning staying healthy growing   older knowing
-## beta  1.647  1.234 -0.58699  1.0747   1.762  0.6234  -0.134  5.4931  0.7284
-## psi   1.350  1.261 -0.01128 -0.7079  -1.104  0.9669   1.133 -0.4511 -0.5886
-##        world  leader stronger society    town country civilised   proud
-## beta -0.2797 0.07871   0.6767  0.5913 -0.4636  0.2083    0.6020 -0.5752
-## psi   3.0916 0.07299   1.3332  2.0658  0.1865  2.5920   -0.6999  0.9699
+##        time common sense conservative manifesto introduction  lives raising
+## beta 0.3518 0.5047 1.057       0.7323    0.6961      -0.3103 0.1735  1.2013
+## psi  2.9531 1.6942 1.271       2.1655    2.2049       1.1399 1.6881  0.4653
+##      family living    safely earning staying healthy growing   older knowing
+## beta  1.535  1.076 -0.602201  1.1355   2.106  0.5472 -0.1338  5.6901  0.8190
+## psi   1.369  1.303 -0.004214 -0.7429  -1.256  0.9864  1.1348 -0.6328 -0.6289
+##        world     leader stronger society    town country civilised   proud
+## beta -0.2892 -0.0004557   0.5799   0.455 -0.4604  0.1801    0.4196 -0.5724
+## psi   3.0965  0.0954406   1.3595   2.106  0.1917  2.5988   -0.6439  0.9771
 ##      democracy conclusion present ambitious programme
-## beta     1.379      1.074 -0.2176   -0.3005    0.8894
-## psi      1.247     -1.555  1.4890    0.7119    1.6870
+## beta     1.177      1.308 -0.2745   -0.3027    0.7754
+## psi      1.303     -1.653  1.5034    0.7156    1.7173
 \end{verbatim}
 
 Here, \emph{theta} gives us the position of the text. As with Wordscores, we can also calculate the confidence intervals (note that \emph{theta} is now called \emph{fit}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{predict}\NormalTok{(wordfish, }\AttributeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+\NormalTok{pred\_wordfish }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(wordfish, }\AttributeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+\NormalTok{pred\_wordfish}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## $fit
-##                            fit         lwr        upr
-## UK_natl_2001_en_Con  0.4073476  0.39184076  0.4228544
-## UK_natl_2001_en_Lab  0.7961425  0.79214157  0.8001435
-## UK_natl_2001_en_LD   0.4278410  0.41646775  0.4392142
-## UK_natl_2001_en_PCy  0.2394317  0.20937909  0.2694843
-## UK_natl_2001_en_SNP -1.1216001 -1.14067682 -1.1025234
-## UK_natl_2005_en_Con  0.4746273  0.45734053  0.4919142
-## UK_natl_2005_en_Lab  0.8193327  0.81515345  0.8235120
-## UK_natl_2005_en_LD   0.2333605  0.21472411  0.2519970
-## UK_natl_2005_en_PCy  0.1186673  0.08624069  0.1510940
-## UK_natl_2005_en_SNP -2.3951506 -2.40158974 -2.3887115
+##                             fit         lwr        upr
+## UK_natl_2001_en_Con  0.45018987  0.43513947  0.4652403
+## UK_natl_2001_en_Lab  0.81006430  0.80555209  0.8145765
+## UK_natl_2001_en_LD   0.41124290  0.39888176  0.4236040
+## UK_natl_2001_en_PCy  0.15749257  0.12320579  0.1917794
+## UK_natl_2001_en_SNP -1.06312773 -1.09382985 -1.0324256
+## UK_natl_2005_en_Con  0.49763583  0.48004576  0.5152259
+## UK_natl_2005_en_Lab  0.82510393  0.82027268  0.8299352
+## UK_natl_2005_en_LD   0.25799681  0.23958695  0.2764067
+## UK_natl_2005_en_PCy  0.06538904  0.03061003  0.1001680
+## UK_natl_2005_en_SNP -2.41198751 -2.42683400 -2.3971410
 \end{verbatim}
 
-As with Wordscores, we can also plot graphs for Wordfish, using the same commands:
+As with Wordscores, we can also plot graphs for Wordfish, using the same commands. The first graph we will again be looking at is the distribution of the words, which here forms an ``Eifel Tower'' like graph:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{textplot\_scale1d}\NormalTok{(wordfish, }\AttributeTok{margin =} \StringTok{"features"}\NormalTok{, }\AttributeTok{highlighted =} \FunctionTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{,}\StringTok{"vote"}\NormalTok{,}\StringTok{"europe"}\NormalTok{,}\StringTok{"election"}\NormalTok{))}
+\FunctionTok{textplot\_scale1d}\NormalTok{(wordfish, }\AttributeTok{margin =} \StringTok{"features"}\NormalTok{, }\AttributeTok{highlighted =} \FunctionTok{c}\NormalTok{(}\StringTok{"british"}\NormalTok{, }
+    \StringTok{"vote"}\NormalTok{, }\StringTok{"europe"}\NormalTok{, }\StringTok{"election"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-89-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-91-1.pdf}
+
+And then we can do the same for the documents as well. Note that we can also make a similar graph to the one we made ourselves above (just replace \texttt{pred\_mv} with \texttt{pred\_wordfish}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1843,7 +1923,7 @@ As with Wordscores, we can also plot graphs for Wordfish, using the same command
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-89-2.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-92-1.pdf}
 
 \hypertarget{supervised-methods}{%
 \chapter{Supervised Methods}\label{supervised-methods}}
@@ -1980,7 +2060,7 @@ The next step is to check the performance of the model we just tested in terms o
 
 Precision gives the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that were classified in that category (irrespective of where they belong). Recall is the proportion of bills that were classified as belonging to a category and actually belong to this category (true positives) to all the bills that belong to this category (true positives plus false negatives). The F score is a weighted average between precision and recall ranging fro 0 to 1.
 
-Instead of using a seperate package, we can also use \texttt{quanteda} to carry out an SVM. For this, we again load the reviews we used earlier, select 1000 of them at random, and place them into our corpus:
+Instead of using a separate package, we can also use \texttt{quanteda} to carry out an SVM. For this, we again load the reviews we used earlier, select 1000 of them at random, and place them into our corpus:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2016,6 +2096,18 @@ We then transform the corpus into a data frame, and also remove stopwords, numbe
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## Warning: 'dfm.corpus()' is deprecated. Use 'tokens()' first.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: '...' should not be used for tokens() arguments; use 'tokens()' first.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: 'remove' is deprecated; use dfm_remove() instead
+\end{verbatim}
+
 Now we can run the SVM algorithm. To do so, we tell the model on which dfm we want to run our model, and which variable contains the scores to train the algorithm. Here, this is our \texttt{prediction} variable with the missing data:
 
 \begin{Shaded}
@@ -2047,8 +2139,8 @@ While we can of course look at the resulting numbers, we can also place them in 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rating }\OtherTok{\textless{}{-}}\NormalTok{ corpus\_reviews}\SpecialCharTok{$}\NormalTok{rating}
-\NormalTok{table\_data }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(svm\_predict,rating))}
+\NormalTok{rating     }\OtherTok{\textless{}{-}}\NormalTok{ corpus\_reviews}\SpecialCharTok{$}\NormalTok{rating}
+\NormalTok{table\_data }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(svm\_predict, rating))}
 \FunctionTok{table}\NormalTok{(table\_data}\SpecialCharTok{$}\NormalTok{svm\_predict,table\_data}\SpecialCharTok{$}\NormalTok{rating)}
 \end{Highlighting}
 \end{Shaded}
@@ -2153,7 +2245,7 @@ In our data-frame, the \emph{text} variable indicates the hand-coded quasi-sente
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{table}\NormalTok{(manifesto\_data}\SpecialCharTok{$}\NormalTok{cmp\_code,manifesto\_data}\SpecialCharTok{$}\NormalTok{party)}
+\FunctionTok{table}\NormalTok{(manifesto\_data}\SpecialCharTok{$}\NormalTok{cmp\_code, manifesto\_data}\SpecialCharTok{$}\NormalTok{party)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2219,7 +2311,8 @@ To get an even better idea of how much a party ``owns'' a code, we can calculate
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prop\_row }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{((}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(manifesto\_data}\SpecialCharTok{$}\NormalTok{cmp\_code,manifesto\_data}\SpecialCharTok{$}\NormalTok{party),}\DecValTok{1}\NormalTok{) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{))}
+\NormalTok{prop\_row }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{((}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(manifesto\_data}\SpecialCharTok{$}\NormalTok{cmp\_code, }
+\NormalTok{    manifesto\_data}\SpecialCharTok{$}\NormalTok{party), }\DecValTok{1}\NormalTok{) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{))}
 \FunctionTok{names}\NormalTok{(prop\_row) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Code"}\NormalTok{, }\StringTok{"Party"}\NormalTok{, }\StringTok{"Percentage"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2230,17 +2323,16 @@ While we can look at the results by looking at the \texttt{prop\_row} object, it
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ggplot2)}
 
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{prop\_row, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Code, }\AttributeTok{y=}\NormalTok{Percentage, }\AttributeTok{fill=}\NormalTok{Party)) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{""}\NormalTok{, }\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#0087DC"}\NormalTok{,}\StringTok{"\#67B437"}\NormalTok{,}\StringTok{"\#DC241F"}\NormalTok{,}\StringTok{"\#FAA61A"}\NormalTok{,}\StringTok{"\#008142"}\NormalTok{,}\StringTok{"\#FDF38E"}\NormalTok{,}\StringTok{"\#780077"}\NormalTok{))}\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"stack"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{theme\_classic}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.40}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ prop\_row, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Code, }\AttributeTok{y =}\NormalTok{ Percentage, }\AttributeTok{fill =}\NormalTok{ Party)) }\SpecialCharTok{+} 
+    \FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{""}\NormalTok{, }\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#0087DC"}\NormalTok{, }\StringTok{"\#67B437"}\NormalTok{, }\StringTok{"\#DC241F"}\NormalTok{, }
+        \StringTok{"\#FAA61A"}\NormalTok{, }\StringTok{"\#008142"}\NormalTok{, }\StringTok{"\#FDF38E"}\NormalTok{, }\StringTok{"\#780077"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+    \AttributeTok{position =} \StringTok{"stack"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.4}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-110-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-113-1.pdf}
 
 Now, we can see that some parties dominate some categories, while for others the spread is more even. For example, UKIP dominates the categories 406 and 407 - dealing with positive and negative mentions of protectionism, while the Conservatives do the same with category 103 (\emph{Anti-Imperialism}). Note though, that these are percentages. This means that the reason the Conservatives dominate category 103 is as they have two (quasi)-sentences with that category. The others do not have the category at all (702 on \emph{Negative Mentioning of Labour Groups} has the same issue). Other categories, such as 403 (\emph{Market Regulation}) and 502 (\emph{Positive Mentions of Culture}) are way better spread out over all the parties.
 
@@ -2248,7 +2340,8 @@ Another thing we can look at is what part of a party's manifesto belongs to any 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prop\_col }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{((}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(manifesto\_data}\SpecialCharTok{$}\NormalTok{cmp\_code,manifesto\_data}\SpecialCharTok{$}\NormalTok{party), }\DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{))}
+\NormalTok{prop\_col }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{((}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(manifesto\_data}\SpecialCharTok{$}\NormalTok{cmp\_code, }
+\NormalTok{    manifesto\_data}\SpecialCharTok{$}\NormalTok{party), }\DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{))}
 \FunctionTok{names}\NormalTok{(prop\_col) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Code"}\NormalTok{, }\StringTok{"Party"}\NormalTok{, }\StringTok{"Percentage"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2270,7 +2363,8 @@ If we now type \texttt{prop\_col}, we can see what percentage of a party manifes
 \NormalTok{prop\_col}\SpecialCharTok{$}\NormalTok{Domain[prop\_col}\SpecialCharTok{$}\NormalTok{Code }\SpecialCharTok{==} \DecValTok{0}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"NA"}
 
 \NormalTok{prop\_col}\SpecialCharTok{$}\NormalTok{Domain }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(prop\_col}\SpecialCharTok{$}\NormalTok{Domain)}
-\NormalTok{prop\_col}\SpecialCharTok{$}\NormalTok{Domain }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(prop\_col}\SpecialCharTok{$}\NormalTok{Domain,}\FunctionTok{levels}\NormalTok{(prop\_col}\SpecialCharTok{$}\NormalTok{Domain)[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{)])}
+\NormalTok{prop\_col}\SpecialCharTok{$}\NormalTok{Domain }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(prop\_col}\SpecialCharTok{$}\NormalTok{Domain, }\FunctionTok{levels}\NormalTok{(prop\_col}\SpecialCharTok{$}\NormalTok{Domain)[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }
+    \DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{5}\NormalTok{)])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2278,16 +2372,14 @@ We then construct a plot as we did above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{prop\_col, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Party, }\AttributeTok{y=}\NormalTok{Percentage, }\AttributeTok{fill=}\NormalTok{Domain)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"stack"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{theme\_classic}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.40}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ prop\_col, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Party, }\AttributeTok{y =}\NormalTok{ Percentage, }\AttributeTok{fill =}\NormalTok{ Domain)) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"stack"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }
+    \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.4}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-113-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-116-1.pdf}
 
 Here, we see that the Domain of \emph{Welfare and Quality of Life} was the most dominant in all the manifestos, with \emph{Economy} coming second. Also, especially UKIP paid a lot of attention to \emph{External Relations}, while the Green party paid little attention to the \emph{Fabric of Society}. In all, this gives us a good idea of what type of data we are actually dealing with.
 
@@ -2326,14 +2418,16 @@ Then we generate a unique number for each of the 10780 sentences in our corpus. 
 \end{Highlighting}
 \end{Shaded}
 
-We should now see this new variable \emph{id\_numeric} appear in our corpus. We can now construct our training and test set using these id's. For the training set, the logic is to create a sub set of the main corpus, and to take only those sentences whose \emph{id\_numeric} is also in \emph{id\_train}. For the test set, we do the same, only now taking only those sentences whose \emph{id\_numeric} is not in \emph{id\_train} (note that the ! mark signifies this). Then, we use the \texttt{\%\textgreater{}\%} pipe to transform the resulting object into a dfm:
+We should now see this new variable \emph{id\_numeric} appear in our corpus. We can now construct our training and test set using these id's. For the training set, the logic is to create a sub set of the main corpus, and to take only those sentences whose \emph{id\_numeric} is also in \emph{id\_train}. For the test set, we do the same, only now taking only those sentences whose \emph{id\_numeric} is not in \emph{id\_train} (note that the ! mark signifies this). Then, we use the \texttt{\%\textgreater{}\%} pipe to transform the resulting object via a tokens object into a dfm:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{manifesto\_train }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(manifesto\_corpus, id\_numeric }\SpecialCharTok{\%in\%}\NormalTok{ id\_train) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tokens}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{dfm}\NormalTok{()}
 
 \NormalTok{manifesto\_test }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(manifesto\_corpus, }\SpecialCharTok{!}\NormalTok{id\_numeric }\SpecialCharTok{\%in\%}\NormalTok{ id\_train) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{tokens}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{dfm}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2376,19 +2470,16 @@ While this is already better (we have to pay attention to the diagonal), the lar
 \begin{Highlighting}[]
 \NormalTok{table\_class }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(table\_class)}
 
-\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ table\_class, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ predicted\_class, }\AttributeTok{y =}\NormalTok{ actual\_class)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_tile}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ Freq)) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{high =} \StringTok{"black"}\NormalTok{, }\AttributeTok{low =} \StringTok{"white"}\NormalTok{, }\AttributeTok{name=}\StringTok{"Value"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Predicted Class"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Actual Class"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{scale\_y\_discrete}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{theme\_classic}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.40}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ table\_class, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ predicted\_class, }\AttributeTok{y =}\NormalTok{ actual\_class)) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_tile}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ Freq)) }\SpecialCharTok{+} \FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{high =} \StringTok{"black"}\NormalTok{, }
+    \AttributeTok{low =} \StringTok{"white"}\NormalTok{, }\AttributeTok{name =} \StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Predicted Class"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{"Actual Class"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_y\_discrete}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.4}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-121-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-124-1.pdf}
 
 Here, we can see that a high number of cases are on the diagonal, which indicates that the algorithm did a good job. Yet, it also classified a large number of sentences into the 503 and 504 categories, while they belonged to any of the other categories.
 
@@ -2412,6 +2503,15 @@ Then, we load the \texttt{kripp.boot} package, and calculate the nominal version
 \end{Highlighting}
 \end{Shaded}
 
+Alternatively, we can use the \texttt{DescTools} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(DescTools)}
+\FunctionTok{KrippAlpha}\NormalTok{(reliability, }\AttributeTok{method =} \StringTok{"nominal"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 Here we see that the number of subjects was 2780 (the number of sentences in the test set), the number of coders 2 (the actual and the predicted codes), and the value of \(\alpha\) 0.318 with an interval between 0.297 and 0.337. While this might not look particularly encouraging, when we realise that \protect\hyperlink{ref-Mikhaylov2012a}{Mikhaylov, Laver, and Benoit} (\protect\hyperlink{ref-Mikhaylov2012a}{2012}) estimate the agreement among trained coders by the Manifesto Project to be between 0.350 and 0.400, then 0.305 is quite a good score for a simple model!
 
 \hypertarget{unsupervised-methods}{%
@@ -2431,10 +2531,23 @@ Latent Dirichlet Allocation, or LDA, relies on the idea is that each text is in 
 \FunctionTok{library}\NormalTok{(quanteda.corpora)}
 
 \FunctionTok{data}\NormalTok{(data\_corpus\_ukmanifestos)}
-\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(data\_corpus\_ukmanifestos, Year }\SpecialCharTok{==} \DecValTok{2001}\NormalTok{)}
-\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(corpus\_manifestos, Party}\SpecialCharTok{==}\StringTok{"Lab"} \SpecialCharTok{|}\NormalTok{ Party}\SpecialCharTok{==}\StringTok{"LD"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"Con"} \SpecialCharTok{|}\NormalTok{ Party}\SpecialCharTok{==} \StringTok{"SNP"} \SpecialCharTok{|}\NormalTok{ Party}\SpecialCharTok{==} \StringTok{"PCy"}\NormalTok{)}
-\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(corpus\_manifestos, }\AttributeTok{remove =} \FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm\_tolower}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(data\_corpus\_ukmanifestos, }
+\NormalTok{    Year }\SpecialCharTok{==} \DecValTok{2001}\NormalTok{)}
+\NormalTok{corpus\_manifestos }\OtherTok{\textless{}{-}} \FunctionTok{corpus\_subset}\NormalTok{(corpus\_manifestos, Party }\SpecialCharTok{==} 
+    \StringTok{"Lab"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"LD"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"Con"} \SpecialCharTok{|}\NormalTok{ Party }\SpecialCharTok{==} \StringTok{"SNP"} \SpecialCharTok{|} 
+\NormalTok{    Party }\SpecialCharTok{==} \StringTok{"PCy"}\NormalTok{)}
+
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens}\NormalTok{(corpus\_manifestos, }\AttributeTok{what =} \StringTok{"word"}\NormalTok{, }
+    \AttributeTok{remove\_punct =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_symbols =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_numbers =} \ConstantTok{TRUE}\NormalTok{, }
+    \AttributeTok{remove\_url =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{remove\_separators =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{split\_hyphens =} \ConstantTok{FALSE}\NormalTok{, }
+    \AttributeTok{include\_docvars =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{padding =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_tolower}\NormalTok{(data\_manifestos\_tokens, }
+    \AttributeTok{keep\_acronyms =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{data\_manifestos\_tokens }\OtherTok{\textless{}{-}} \FunctionTok{tokens\_select}\NormalTok{(data\_manifestos\_tokens, }
+    \FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{), }\AttributeTok{selection =} \StringTok{"remove"}\NormalTok{)}
+
+\NormalTok{data\_manifestos\_dfm }\OtherTok{\textless{}{-}} \FunctionTok{dfm}\NormalTok{(data\_manifestos\_tokens)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2453,45 +2566,47 @@ Then, we fit an LDA model with 10 topics. First, we have to define some a priori
 \NormalTok{burnin }\OtherTok{\textless{}{-}} \DecValTok{2000}
 \NormalTok{iter }\OtherTok{\textless{}{-}} \DecValTok{1000}
 \NormalTok{thin }\OtherTok{\textless{}{-}} \DecValTok{200}
-\NormalTok{seed }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{42}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{158}\NormalTok{,}\DecValTok{2500}\NormalTok{)}
+\NormalTok{seed }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\DecValTok{42}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{158}\NormalTok{, }\DecValTok{2500}\NormalTok{)}
 \NormalTok{nstart }\OtherTok{\textless{}{-}} \DecValTok{5}
 \NormalTok{best }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
 \end{Highlighting}
 \end{Shaded}
 
-The LDA algorithm estimates topic-word probabilities as well as topic-document probabilities that we can extract and visualise. Here, we will start with the topic-word probabilities called \emph{beta}. To do this, we will use the \texttt{tidytext} package which is part of the tidyverse family of packages. Central to the logic of tidyverse packages is that \texttt{tidytext} does not rely on a document term matrix but represents the data in a long format (\protect\hyperlink{ref-Welbers2017}{Welbers, Van Atteveldt, and Benoit 2017, 252}). Although this makes it less memory efficient, such data arrangement lends itself to effective visualisation. The whole logic of these packages is that it works with data which has columns (variables) and rows with single observations. While this is the logic most people know, but it is not always the quickest (and is also not used by \texttt{quanteda}). Yet, it always allows you to look at your data in a way most will understand. First, we run the LDA and have a look at the first 10 terms:
+The LDA algorithm estimates topic-word probabilities as well as topic-document probabilities that we can extract and visualize. Here, we will start with the topic-word probabilities called \emph{beta}. To do this, we will use the \texttt{tidytext} package which is part of the tidyverse family of packages. Central to the logic of tidyverse packages is that \texttt{tidytext} does not rely on a document term matrix but represents the data in a long format (\protect\hyperlink{ref-Welbers2017}{Welbers, Van Atteveldt, and Benoit 2017, 252}). Although this makes it less memory efficient, such data arrangement lends itself to effective visualisation. The whole logic of these packages is that it works with data which has columns (variables) and rows with single observations. While this is the logic most people know, but it is not always the quickest (and is also not used by \texttt{quanteda}). Yet, it always allows you to look at your data in a way most will understand. First, we run the LDA and have a look at the first 10 terms:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British\_lda10 }\OtherTok{\textless{}{-}}\FunctionTok{LDA}\NormalTok{(manifestos\_dtm, }\AttributeTok{k=}\DecValTok{10}\NormalTok{, }\AttributeTok{method=}\StringTok{"Gibbs"}\NormalTok{, }\AttributeTok{control=}\FunctionTok{list}\NormalTok{(}\AttributeTok{burnin=}\NormalTok{burnin, }\AttributeTok{iter=}\NormalTok{iter, }\AttributeTok{thin=}\NormalTok{thin, }\AttributeTok{seed=}\NormalTok{seed, }\AttributeTok{nstart=}\NormalTok{nstart, }\AttributeTok{best=}\NormalTok{best))}
+\NormalTok{British\_lda10 }\OtherTok{\textless{}{-}} \FunctionTok{LDA}\NormalTok{(manifestos\_dtm, }\AttributeTok{k =} \DecValTok{10}\NormalTok{, }\AttributeTok{method =} \StringTok{"Gibbs"}\NormalTok{, }
+    \AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{burnin =}\NormalTok{ burnin, }\AttributeTok{iter =}\NormalTok{ iter, }\AttributeTok{thin =}\NormalTok{ thin, }
+        \AttributeTok{seed =}\NormalTok{ seed, }\AttributeTok{nstart =}\NormalTok{ nstart, }\AttributeTok{best =}\NormalTok{ best))}
 
 \FunctionTok{terms}\NormalTok{(British\_lda10, }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       Topic 1      Topic 2      Topic 3      Topic 4         Topic 5     
-##  [1,] "matters"    "cent"       "also"       "services"      "people"    
-##  [2,] "traffic"    "per"        "ensure"     "opportunities" "new"       
-##  [3,] "penalised"  "britain"    "support"    "primary"       "£"         
-##  [4,] "creating"   "investment" "public"     "home"          "work"      
-##  [5,] "boost"      "now"        "system"     "major"         "tax"       
-##  [6,] "confidence" "million"    "european"   "secondary"     "local"     
-##  [7,] "propose"    "labour"     "health"     "steps"         "labour"    
-##  [8,] "major"      "every"      "parliament" "say"           "government"
-##  [9,] "cash"       "since"      "education"  "incentives"    "help"      
-## [10,] "nothing"    "want"       "crime"      "affordable"    "schools"   
-##       Topic 6         Topic 7        Topic 8     Topic 9         Topic 10    
-##  [1,] "conservative"  "scotland"     "wales"     "liberal"       "government"
-##  [2,] "common"        "snp"          "shall"     "environmental" "britain"   
-##  [3,] "sense"         "scottish"     "call"      "local"         "police"    
-##  [4,] "conservatives" "government"   "party"     "s"             "give"      
-##  [5,] "pensioners"    "scotland's"   "social"    "promote"       "businesses"
-##  [6,] "need"          "independence" "assembly"  "democrats"     "want"      
-##  [7,] "taxes"         "taxation"     "countries" "safety"        "council"   
-##  [8,] "britain's"     "review"       "health"    "energy"        "less"      
-##  [9,] "keep"          "mps"          "press"     "encourage"     "councils"  
-## [10,] "means"         "key"          "important" "reduce"        "long"
+##       Topic 1        Topic 2   Topic 3      Topic 4     Topic 5     
+##  [1,] "scotland"     "people"  "per"        "long-term" "national"  
+##  [2,] "snp"          "local"   "labour"     "control"   "need"      
+##  [3,] "scottish"     "new"     "new"        "workers"   "government"
+##  [4,] "scotland's"   "support" "cent"       "coming"    "europe"    
+##  [5,] "independence" "also"    "services"   "efforts"   "parliament"
+##  [6,] "taxation"     "work"    "now"        "career"    "want"      
+##  [7,] "key"          "tax"     "million"    "usa"       "benefit"   
+##  [8,] "rural"        "make"    "help"       "can"       "one"       
+##  [9,] "mps"          "schools" "investment" "authority" "must"      
+## [10,] "westminster"  "policy"  "work"       "poorer"    "level"     
+##       Topic 6      Topic 7     Topic 8       Topic 9         Topic 10       
+##  [1,] "public"     "wales"     "funded"      "liberal"       "government"   
+##  [2,] "government" "party"     "bureaucracy" "s"             "time"         
+##  [3,] "system"     "social"    "run"         "also"          "conservatives"
+##  [4,] "ensure"     "health"    "decisions"   "democrats"     "conservative" 
+##  [5,] "education"  "powers"    "away"        "transport"     "businesses"   
+##  [6,] "european"   "assembly"  "distinct"    "environmental" "common"       
+##  [7,] "uk"         "shall"     "nothing"     "green"         "tax"          
+##  [8,] "establish"  "order"     "disease"     "energy"        "taxes"        
+##  [9,] "investment" "important" "power"       "nations"       "sense"        
+## [10,] "end"        "economic"  "loan"        "eu"            "patients"
 \end{verbatim}
 
 Here, we can see that the 10th topic is most concerned with the Conservative party, as is topic 7 with the Liberal Democrats, and topic 9 with the Green Party. Topic 4 concerns green solutions and energy and topic 3 is about equalities.
@@ -2504,19 +2619,16 @@ Now, we load the packages and use the \texttt{tidy} command to prepare the datas
 \FunctionTok{library}\NormalTok{(dplyr)}
 \FunctionTok{library}\NormalTok{(ggplot2)}
 
-\NormalTok{British\_lda10\_topics }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(British\_lda10, }\AttributeTok{matrix=}\StringTok{"beta"}\NormalTok{)}
+\NormalTok{British\_lda10\_topics }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(British\_lda10, }\AttributeTok{matrix =} \StringTok{"beta"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-If we would look into the dataset now, we would see that it has 57060 observations with 3 variables. These are the number of the topic, the word (the term) and the \textbf{beta} - the chance that the word occurs in that topic. We now want to visualise only the top ten words for each topic in a bar-plot. Also, we want the graphs of each of these ten topics to appear in a single graph. To make this happen, we first have to select the top ten words for each topic. We do so using a pipe (which is the \texttt{\%\textgreater{}\%} command). This pipe transports an output of a command to another one before saving it. So here, we take our data-set and group it by topic using the \texttt{group\_by} command. This command groups the dataset into 10 groups, each for every topic. What this allows us is to calculate things that we otherwise calculate for the whole data-set but here calculate for the groups instead. We then do so and select the top 10 terms (based on their beta value), using \texttt{top\_n}. We then ungroup again (to make R view it as a single data-set), and use the \texttt{arrange} function to ensure the data-set has the topics sorted in an increasing fashion and the beta values in a decreasing fashion. Finally, we save this into a new object:
+If we would look into the dataset now, we would see that it has 57060 observations with 3 variables. These are the number of the topic, the word (the term) and the \textbf{beta} - the chance that the word occurs in that topic. We now want to visualise only the top ten words for each topic in a bar-plot. Also, we want the graphs of each of these ten topics to appear in a single graph. To make this happen, we first have to select the top ten words for each topic. We do so gain using a pipe (which is the \texttt{\%\textgreater{}\%} command). This pipe transports an output of a command to another one before saving it. So here, we take our data-set and group it by topic using the \texttt{group\_by} command. This command groups the dataset into 10 groups, each for every topic. What this allows us is to calculate things that we otherwise calculate for the whole data-set but here calculate for the groups instead. We then do so and select the top 10 terms (based on their beta value), using \texttt{top\_n}. We then ungroup again (to make R view it as a single data-set), and use the \texttt{arrange} function to ensure the data-set has the topics sorted in an increasing fashion and the beta values in a decreasing fashion. Finally, we save this into a new object:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British\_lda10\_topterms }\OtherTok{\textless{}{-}}\NormalTok{ British\_lda10\_topics }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{group\_by}\NormalTok{(topic) }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{top\_n}\NormalTok{(}\DecValTok{10}\NormalTok{, beta) }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{beta)}
+\NormalTok{British\_lda10\_topterms }\OtherTok{\textless{}{-}}\NormalTok{ British\_lda10\_topics }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(topic) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{top\_n}\NormalTok{(}\DecValTok{10}\NormalTok{, beta) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{beta)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2524,16 +2636,13 @@ If we now look at the data-set, we see that it is much smaller and has the topic
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British\_lda10\_topterms }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term=}\FunctionTok{reorder}\NormalTok{(term, beta)) }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(term, beta, }\AttributeTok{fill=}\FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+}
- \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ topic, }\AttributeTok{scales=}\StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{coord\_flip}\NormalTok{()}
+\NormalTok{British\_lda10\_topterms }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \FunctionTok{reorder}\NormalTok{(term, beta)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(term, beta, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{topic, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-130-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-134-1.pdf}
 
 What is clear here is that looking at only the words in each topic only says so much. In the first topic, the term ``meps'' is more important than anything else, and so is ``eu'' in topic number 10. Also, in topic number six, we see that a bullet symbol causes the highest beta value - which indicates how important it is that we remove this kind of clutter (which we forgot about here).
 
@@ -2541,7 +2650,7 @@ Another question we can ask is how much of each topic is in each of the document
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British\_lda10\_documents }\OtherTok{\textless{}{-}}\FunctionTok{tidy}\NormalTok{(British\_lda10, }\AttributeTok{matrix=}\StringTok{"gamma"}\NormalTok{)}
+\NormalTok{British\_lda10\_documents }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(British\_lda10, }\AttributeTok{matrix =} \StringTok{"gamma"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2549,28 +2658,22 @@ We then go through similar steps to make the data-set ready for use and prepare 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{British\_lda10\_toptopics }\OtherTok{\textless{}{-}}\NormalTok{ British\_lda10\_documents }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{group\_by}\NormalTok{(document) }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{top\_n}\NormalTok{(}\DecValTok{10}\NormalTok{, gamma) }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{gamma)}
+\NormalTok{British\_lda10\_toptopics }\OtherTok{\textless{}{-}}\NormalTok{ British\_lda10\_documents }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(document) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{top\_n}\NormalTok{(}\DecValTok{10}\NormalTok{, gamma) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(topic, }\SpecialCharTok{{-}}\NormalTok{gamma)}
 
-\NormalTok{British\_lda10\_toptopics }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term=}\FunctionTok{reorder}\NormalTok{(topic, gamma)) }\SpecialCharTok{\%\textgreater{}\%}
- \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(topic, gamma, }\AttributeTok{fill=}\FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+}
- \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{))}\SpecialCharTok{+}
- \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ document, }\AttributeTok{scales=}\StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
- \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
- \FunctionTok{theme\_classic}\NormalTok{()}
+\NormalTok{British\_lda10\_toptopics }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \FunctionTok{reorder}\NormalTok{(topic, gamma)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(topic, gamma, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(topic))) }\SpecialCharTok{+} \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }
+        \DecValTok{10}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{document, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+} 
+    \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-136-1.pdf}
 
 Here, we see that the Conservatives talked about topics 10 and 8 a lot (and also 6 in 2014), which makes sense, as these topics cover the EU and trade. The Greens use topic 4 a lot in 2009 (as it is about Green policies), but not in 2014. Also, the liberal topic 7 occurs a lot in 2009 Liberal Democrat texts, but not in their 2014 manifesto.
 
-Here is an alternative:
+An alternative to the above approach is one known as seeded-LDA. This approach uses seed words that can steer the LDA into the right direction. One origin of these seed words can be a dictionary that tells the algorithm which words belong together in various categories. To use it, we will first load the packages and set a seed:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2600,63 +2703,68 @@ Here is an alternative:
 \FunctionTok{library}\NormalTok{(quanteda.dictionaries)}
 
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+Next, we need to specify a selection of seed words in a dictionary form. While we can construct a dictionary ourselves, here we choose to use the Laver and Garry dictionary we saw earlier. We then use this dictionary to run our seeded LDA:
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{dict }\OtherTok{\textless{}{-}} \FunctionTok{dictionary}\NormalTok{(data\_dictionary\_LaverGarry)}
-
 \NormalTok{seededmodel }\OtherTok{\textless{}{-}} \FunctionTok{textmodel\_seededlda}\NormalTok{(data\_manifestos\_dfm, }\AttributeTok{dictionary=}\NormalTok{dict)}
-
 \FunctionTok{terms}\NormalTok{(seededmodel, }\DecValTok{20}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS          
-##  [1,] "people"      "work"       "environmental"   "women"         
-##  [2,] "media"       "children"   "environment"     "race"          
-##  [3,] "museums"     "education"  "green"           "ethnic"        
-##  [4,] "galleries"   "health"     "population"      "asian"         
-##  [5,] "operations"  "investment" "clean"           "girls"         
-##  [6,] "operation"   "economic"   "emissions"       "racist"        
-##  [7,] "artistic"    "care"       "car"             "racing"        
-##  [8,] "operate"     "transport"  "production"      "racial"        
-##  [9,] "operating"   "school"     "cleaner"         "racism"        
-## [10,] "theatre"     "benefit"    "congestion"      "woman"         
-## [11,] "art"         "poverty"    "recycling"       "racially"      
-## [12,] "music"       "money"      "products"        "university"    
-## [13,] "musical"     "economy"    "environmentally" "rehabilitation"
-## [14,] "operated"    "training"   "emission"        "doubled"       
-## [15,] "operational" "pay"        "recycle"         "funds"         
-## [16,] "operators"   "choice"     "productive"      "depends"       
-## [17,] "theatres"    "working"    "litter"          "steps"         
-## [18,] "anglers"     "teachers"   "produce"         "comes"         
-## [19,] "operates"    "establish"  "product"         "scientists"    
-## [20,] "labour"      "child"      "fur"             "employer"      
-##       INSTITUTIONS  LAW_AND_ORDER RURAL          URBAN       VALUES          
-##  [1,] "reform"      "police"      "farming"      "towns"     "rights"        
-##  [2,] "parliament"  "forces"      "fisheries"    "town"      "human"         
-##  [3,] "continue"    "prison"      "farmers"      "sense"     "maintain"      
-##  [4,] "commission"  "drugs"       "countryside"  "couple's"  "discrimination"
-##  [5,] "council"     "victims"     "fishing"      "faith"     "principle"     
-##  [6,] "westminster" "fraud"       "agriculture"  "govern"    "threat"        
-##  [7,] "councils"    "tough"       "agricultural" "harder"    "leadership"    
-##  [8,] "assembly"    "force"       "village"      "try"       "principles"    
-##  [9,] "rules"       "drug"        "fish"         "couple"    "proud"         
-## [10,] "legislation" "officers"    "wildlife"     "labour"    "past"          
-## [11,] "schemes"     "court"       "farms"        "character" "immigration"   
-## [12,] "modern"      "courts"      "villages"     "special"   "historic"      
-## [13,] "scheme"      "determined"  "farm"         "shops"     "sex"           
-## [14,] "process"     "sentences"   "landscape"    "rural"     "leader"        
-## [15,] "office"      "sentence"    "fishermen"    "proceeds"  "reliable"      
-## [16,] "election"    "policing"    "landscapes"   "list"      "marriage"      
-## [17,] "vote"        "forced"      "hens"         "savers"    "history"       
-## [18,] "agency"      "offences"    "forest"       "stealth"   "preserve"      
-## [19,] "reforms"     "victim"      "feed"         "complex"   "traditions"    
-## [20,] "democratic"  "penalties"   "lanes"        "exactly"   "sexual"
+##       CULTURE       ECONOMY      ENVIRONMENT       GROUPS       INSTITUTIONS 
+##  [1,] "people"      "work"       "environmental"   "women"      "reform"     
+##  [2,] "media"       "children"   "environment"     "race"       "parliament" 
+##  [3,] "museums"     "education"  "green"           "ethnic"     "continue"   
+##  [4,] "galleries"   "health"     "population"      "asian"      "commission" 
+##  [5,] "operations"  "investment" "clean"           "girls"      "council"    
+##  [6,] "operating"   "economic"   "emissions"       "racist"     "westminster"
+##  [7,] "artistic"    "care"       "production"      "racing"     "councils"   
+##  [8,] "theatre"     "transport"  "car"             "racial"     "assembly"   
+##  [9,] "art"         "school"     "cleaner"         "racism"     "rules"      
+## [10,] "operation"   "benefit"    "congestion"      "woman"      "legislation"
+## [11,] "music"       "poverty"    "recycling"       "racially"   "process"    
+## [12,] "musical"     "economy"    "products"        "scotland"   "schemes"    
+## [13,] "operated"    "money"      "environmentally" "snp"        "modern"     
+## [14,] "operational" "training"   "emission"        "scottish"   "scheme"     
+## [15,] "theatres"    "pay"        "recycle"         "scotland's" "office"     
+## [16,] "anglers"     "choice"     "productive"      "taxation"   "election"   
+## [17,] "operate"     "working"    "litter"          "key"        "vote"       
+## [18,] "operators"   "teachers"   "product"         "stand"      "agency"     
+## [19,] "operates"    "establish"  "fur"             "review"     "democratic" 
+## [20,] "labour"      "child"      "chemical"        "mps"        "management" 
+##       LAW_AND_ORDER RURAL          URBAN       VALUES          
+##  [1,] "police"      "farming"      "towns"     "rights"        
+##  [2,] "forces"      "fisheries"    "town"      "human"         
+##  [3,] "prison"      "farmers"      "gps"       "maintain"      
+##  [4,] "drugs"       "countryside"  "stronger"  "discrimination"
+##  [5,] "victims"     "fishing"      "govern"    "principle"     
+##  [6,] "fraud"       "agriculture"  "taken"     "threat"        
+##  [7,] "tough"       "agricultural" "source"    "leadership"    
+##  [8,] "force"       "village"      "insist"    "principles"    
+##  [9,] "drug"        "fish"         "harder"    "proud"         
+## [10,] "officers"    "wildlife"     "transfer"  "past"          
+## [11,] "court"       "farms"        "modest"    "immigration"   
+## [12,] "courts"      "villages"     "character" "historic"      
+## [13,] "determined"  "farm"         "habit"     "sex"           
+## [14,] "sentences"   "landscape"    "stealth"   "leader"        
+## [15,] "sentence"    "fishermen"    "driven"    "marriage"      
+## [16,] "policing"    "landscapes"   "alongside" "reliable"      
+## [17,] "forced"      "hens"         "losing"    "history"       
+## [18,] "offences"    "forest"       "channel"   "preserve"      
+## [19,] "victim"      "feed"         "real"      "traditions"    
+## [20,] "penalties"   "lanes"        "bogus"     "sexual"
 \end{verbatim}
+
+Note that using the dictionary has ensured that only the categories of the dictionary are used. We can therefore also have an easy look at the proportions of these categories as well:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{topwords }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{terms}\NormalTok{(seededmodel,}\DecValTok{20}\NormalTok{))}
 \NormalTok{corpus\_manifestos}\SpecialCharTok{$}\NormalTok{topic }\OtherTok{\textless{}{-}} \FunctionTok{topics}\NormalTok{(seededmodel)}
 \NormalTok{topics\_table }\OtherTok{\textless{}{-}} \FunctionTok{ftable}\NormalTok{(corpus\_manifestos}\SpecialCharTok{$}\NormalTok{topic)}
 
@@ -2665,11 +2773,12 @@ Here is an alternative:
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{topicsprop\_table, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Var1, }\AttributeTok{y=}\NormalTok{Freq))}\SpecialCharTok{+}
   \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Topics"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Topic Percentage"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{, }\AttributeTok{size=}\DecValTok{10}\NormalTok{, }\AttributeTok{angle=}\DecValTok{45}\NormalTok{,}\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{10}\NormalTok{, }\AttributeTok{angle=}\DecValTok{45}\NormalTok{,}\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-133-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-139-1.pdf}
 
 \hypertarget{correspondence-analysis}{%
 \section{Correspondence Analysis}\label{correspondence-analysis}}
@@ -2737,7 +2846,7 @@ We can then run the MCA with the \texttt{FactoMineR} package. For this, we have 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-137-4.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-143-1.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-143-2.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-143-3.pdf} \includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-143-4.pdf}
 
 First, let's start by looking at the association of the wordlength with the five dimensions:
 
@@ -2765,7 +2874,7 @@ As we can see, the word length has a strong correlation with Dimension 1. This b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-139-1.pdf}
+\includegraphics{Quantitative-Text-Analysis_files/figure-latex/unnamed-chunk-145-1.pdf}
 
 Here, we only plot the points as adding the labels as well will make the picture quite cluttered. In the article, Dimension 2 is identified as ``Conversational Style'' and Dimension 3 as ``Campaigning Style.'' The plot thus nicely shows us that some categories belong to one of these dimensions and not to the other. To see for which cases this is mostly the case (the ones that have the most extreme positions), we can have a look at their coordinates:
 

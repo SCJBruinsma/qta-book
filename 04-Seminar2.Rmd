@@ -29,11 +29,37 @@ corpus_manifestos <- corpus_subset(data_corpus_ukmanifestos, Year == 2001 | Year
 corpus_manifestos <- corpus_subset(corpus_manifestos, Party=="Lab" | Party=="LD" | Party == "Con" | Party== "SNP" | Party== "PCy")
 ```
 
-Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the data frequency matrix (dfm). This is a matrix which contains the documents in the rows and the word counts for each word in the columns. To convert the corpus into a dfm, we can use the `dfm` command. Besides, within this command, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters. We can also remove certain stopwords so that words like "and" or "the" do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type `stopwords("english")` in the console. To make the dfm, run:
+Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the data frequency matrix (dfm). This is a matrix which contains the documents in the rows and the word counts for each word in the columns. 
+
+Before we can do so however, we have to split up our texts into unique words. To do this, we first have to construct a `tokens` object. In the command that we use to do this, we can specify how we want our texts to be split (here we use the standard option), and in addition clean our data a bit. For example, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters. 
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-data_manifestos_dfm <- dfm(corpus_manifestos, remove = stopwords("english"), remove_punct = TRUE, remove_numbers = TRUE)
-data_manifestos_dfm <- dfm_tolower(data_manifestos_dfm, keep_acronyms = FALSE)
+data_manifestos_tokens <- tokens(
+  corpus_manifestos,
+  what = "word",
+  remove_punct = TRUE,
+  remove_symbols = TRUE,
+  remove_numbers = TRUE,
+  remove_url = TRUE,
+  remove_separators = TRUE,
+  split_hyphens = FALSE,
+  include_docvars = TRUE,
+  padding = FALSE,
+  verbose = TRUE
+)
+```
+
+We can also remove certain stopwords so that words like "and" or "the" do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type `stopwords("english")` in the console. Stopwords for other languages are also available (such as German, French and Spanish). Even more stopwords can be found in the ``stopword`` package, that can easily be integrated with ``quanteda``. For now, we will use the English ones. First, however, as all the stopwords are lower-case, we will have to lower case our words as well:
+
+```{r}
+data_manifestos_tokens <- tokens_tolower(data_manifestos_tokens, keep_acronyms = FALSE)
+data_manifestos_tokens <- tokens_select(data_manifestos_tokens, stopwords("english"), selection = "remove")
+```
+
+Then, we can construct our dfm:
+
+```{r}
+data_manifestos_dfm <- dfm(data_manifestos_tokens)
 ```
 
 One thing we can do with this dfm is to generate a frequency graph using the ``topfeatures`` function. For this, we first have to save the 50 most frequently occurring words in our texts:
@@ -62,6 +88,8 @@ ggplot(features_plot) +
 We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 40 times. We can do this with the `dfm_trim` function. Then, we can use this newly trimmed dfm to generate the word cloud:
 
 ```{r, warning=FALSE, tidy.opts = list(width.cutoff = 60)}
+library(quanteda.textplots)
+
 wordcloud_dfm_trim <- dfm_trim(data_manifestos_dfm, min_termfreq = 40)
 textplot_wordcloud(wordcloud_dfm_trim)
 ```
@@ -69,8 +97,11 @@ textplot_wordcloud(wordcloud_dfm_trim)
 If we would want to, we can also split up this word cloud based on which words belong to which parties. For this, we have to generate a new dfm and within it, specify the groups that well which words belong to which party:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), warning=FALSE}
-wordcloud_dfm_comp <- dfm(corpus_manifestos, groups = "Party")
-textplot_wordcloud(dfm_trim(wordcloud_dfm_comp, min_termfreq = 20, max_words = 40), comparison = TRUE)
+library(quanteda.textplots)
+
+wordcloud_dfm_comp <- dfm_group(data_manifestos_dfm, groups = Party)
+wordcloud_dfm_comp <- dfm_trim(wordcloud_dfm_comp, min_termfreq = 20, max_words = 40)
+textplot_wordcloud(wordcloud_dfm_comp, comparison = TRUE)
 ```
 
 ## Standard Dictionary Analysis
@@ -111,19 +142,20 @@ Here, we see that the Conservatives are the most active on the Economy together 
 
 The logic of dictionaries is that we can use them to see which kind of topics are present in our documents. Yet, we can also use them to provide us with measurements that are most often related to scaling. One way to do so is with *sentiment* analysis. Here, we look at whether a certain piece of text is happy, angry, positive, negative, and so on. One case in which this can help us is with movie reviews. These reviews give us a description of a movie and then tell us their opinion. Here, we will use these reviews and apply a sentiment dictionary on them. 
 
-First, we load some reviews into R. The corpus we use here contains 50,000 movie reviews, each with a 1-10 rating (amongst others). As 50,000 reviews make the analysis quite slow, we will first select 30 reviews at random from this corpus. We do so via ``corpus_sample``, after which we transform it into a dfm:
+First, we load some reviews into R. The corpus we use here contains 50,000 movie reviews, each with a 1-10 rating (amongst others). As 50,000 reviews make the analysis quite slow, we will first select 30 reviews at random from this corpus. We do so via ``corpus_sample``, after which we transform it via a tokens object into a dfm:
 
 ```{r}
 library(quanteda.classifiers)
 reviews <- corpus_sample(data_corpus_LMRD, 30)
-reviews_dfm <- dfm(reviews)
+reviews_tokens <- tokens(reviews)
+reviews_dfm <- dfm(reviews_tokens)
 ```
 
 The next step is to load in a sentiment analysis dictionary. Here, we will use the Lexicoder Sentiment Dictionary, included in `quanteda` and run it on the dfm:
 
 ```{r, results=FALSE}
 data_dictionary_LSD2015
-results_dfm <-dfm_lookup(reviews_dfm, data_dictionary_LSD2015)
+results_dfm <- dfm_lookup(reviews_dfm, data_dictionary_LSD2015)
 results_dfm
 ```
 
@@ -154,6 +186,7 @@ Then, we can plot the ratings and the scaled sentiment measures together with a 
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
 library(ggplot2)
+
 ggplot(stargraph,aes(x = sentiment_difference, y = stars)) +
  geom_point(shape = 1) +
  geom_smooth(method = lm, se = FALSE) +
@@ -174,7 +207,7 @@ ggplot(stargraph,aes(x = sentiment_ratio, y = stars)) +
 Finally, we would like to illustrate how one can make inferences by using the output of a dictionary analysis, by estimating confidence intervals around the point estimates. To do so, again the first step is to add a column which will be the total of positive and negative words scored by the dictionary. We do so by copying the data frame to a new data frame and adding a new column filled with NA values:
 
 ```{r}
-reviews_bootstrap <- sentiment
+reviews_bootstrap   <- sentiment
 reviews_bootstrap$n <- NA
 ```
 We then again specify the number of reviews, the replications that we want and change the data frame into an array:
@@ -182,15 +215,18 @@ We then again specify the number of reviews, the replications that we want and c
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
 library(combinat)
 
-nman <-nrow(reviews_bootstrap)
-nrepl <- 1000
-manifBSn <- manifBSnRand <-array(as.matrix(reviews_bootstrap[,2:3]),c(nman, 2, nrepl + 1), dimnames =list(1:nman,names(reviews_bootstrap[,2:3]), 0:nrepl))
+nman     <- nrow(reviews_bootstrap)
+nrepl    <- 1000
+manifBSn <- manifBSnRand <- array(as.matrix(reviews_bootstrap[,2:3]),
+                                c(nman, 2, nrepl + 1), 
+                                dimnames = list(1:nman,names(reviews_bootstrap[,2:3]), 
+                                                0:nrepl))
 ```
 
 Then, we bootstrap the word counts for each movie review and compute percentages for each category using a multinomial draw:
 
 ```{r, results='hide', tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-n <-apply(manifBSn[1:nrow(manifBSn), , 1], 1, sum)
+n <- apply(manifBSn[1:nrow(manifBSn), , 1], 1, sum)
 p <- manifBSn[, , 1]/n
 
 for(i in 1:nrepl) {
@@ -201,16 +237,16 @@ for(i in 1:nrepl) {
 We can then ask R to compute the quantities of interest. These are standard errors for each category, as well as the percentage coded for each category.
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-NegativeSE <-apply(manifBSn[, "negative", ]/n * 100, 1, sd)
-PositiveSE <-apply(manifBSn[, "positive", ]/n * 100, 1, sd)
-perNegative <-apply(manifBSn[, "negative", ]/n * 100, 1, mean)
-perPositive <-apply(manifBSn[, "positive", ]/n * 100, 1, mean)
+NegativeSE  <- apply(manifBSn[, "negative", ]/n * 100, 1, sd)
+PositiveSE  <- apply(manifBSn[, "positive", ]/n * 100, 1, sd)
+perNegative <- apply(manifBSn[, "negative", ]/n * 100, 1, mean)
+perPositive <- apply(manifBSn[, "positive", ]/n * 100, 1, mean)
 ```
 
 We then save these quantities of interest in a new data frame:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60)}
-dataBS <-data.frame(cbind(reviews_bootstrap[, 1:3], NegativeSE,PositiveSE, perNegative, perPositive))
+dataBS <- data.frame(cbind(reviews_bootstrap[, 1:3], NegativeSE,PositiveSE, perNegative, perPositive))
 ```
 
 Then, we first calculate the confidence intervals and add these:
@@ -220,13 +256,14 @@ pos_hi <- dataBS$perPositive + (1.96 * dataBS$PositiveSE)
 pos_lo <- dataBS$perPositive - (1.96 * dataBS$PositiveSE)
 neg_lo <- dataBS$perNegative - (1.96 * dataBS$NegativeSE)
 neg_hi <- dataBS$perNegative + (1.96 * dataBS$NegativeSE)
-dataBS <-cbind(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)
+dataBS <- cbind(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)
 ```
 
 Finally, we can then make the graph. Here, we plot each of the positive and negative points and then overlay them with their error bars:
 
 ```{r, tidy.opts = list(width.cutoff = 60), warning=FALSE}
 library(ggplot2)
+
 ggplot() +
  geom_point(data = dataBS,aes(x = perPositive, y = doc_id), shape = 0) +
  geom_point(data = dataBS,aes(x = perNegative, y = doc_id), shape = 2) +

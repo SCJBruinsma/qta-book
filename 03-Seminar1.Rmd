@@ -63,7 +63,6 @@ kalpha$value
 Note also that `kripp.boot` is a GitHub package. You can still calculate the value (but without the confidence interval) with another package:
 
 ```{r, eval = FALSE}
-install.packages("DescTools")
 library("DescTools")
 
 reliability_results_t <- t(reliability_results)
@@ -120,11 +119,12 @@ data_uncertainty <- data.frame(coderid, c0,c01,c02,c03,c04,c05,c06,c07,c08,c09,c
 We then tell R how many coders we have. As this number is equal to the number of rows we have, we can get this number using the `nrow` command. We also specify the number of bootstraps we want to carry out (1000) and transform our data frame into an array. We do the latter as R needs the data in this format later on:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), message=FALSE}
-nman <-nrow(data_uncertainty)
-nrepl <- 1000
-manifBSn <- manifBSnRand <-array(as.matrix(data_uncertainty[,2:21]),
- c(nman, 20, nrepl+1),
- dimnames=list(1:nman,names(data_uncertainty[,2:21]), 0:nrepl))
+nman     <- nrow(data_uncertainty)
+nrepl    <- 1000
+manifBSn <- manifBSnRand <- array(as.matrix(data_uncertainty[,2:21]),
+                                  c(nman, 20, nrepl+1),
+                                  dimnames=list(1:nman,names(data_uncertainty[,2:21]), 
+                                                0:nrepl))
 ```
 
 We then bootstrap the sentence counts for each coder and compute percentages for each category using a multinomial draw. First, we define `p`, which is the proportion of each category over all the coders. Then, we input this value together with the total number of codes `n` into the `rmultinomial` command, which gives the random draws. As we want to do this a 1000 times, we place this command into a `for` loop:
@@ -133,54 +133,54 @@ We then bootstrap the sentence counts for each coder and compute percentages for
 p <- manifBSn[,,1]/n
 
 for(i in 1:nrepl) {
- manifBSn[,,i] <-rmultinomial(n, p)
+ manifBSn[,,i] <- rmultinomial(n, p)
  }
 ```
 
 With this data, we can then ask R to compute the quantities of interest. These are standard errors for each category, as well as the percentage coded for each category:
 
 ```{r, tidy=TRUE, tidy.opts = list(width.cutoff = 60), message=FALSE}
-c0SE <-apply(manifBSn[,"c0",]/n*100, 1, sd)
-c01SE <-apply(manifBSn[,"c01",]/n*100, 1, sd)
-c02SE <-apply(manifBSn[,"c02",]/n*100, 1, sd)
-c03SE <-apply(manifBSn[,"c03",]/n*100, 1, sd)
-c04SE <-apply(manifBSn[,"c04",]/n*100, 1, sd)
-c05SE <-apply(manifBSn[,"c05",]/n*100, 1, sd)
-c06SE <-apply(manifBSn[,"c06",]/n*100, 1, sd)
-c07SE <-apply(manifBSn[,"c07",]/n*100, 1, sd)
-c08SE <-apply(manifBSn[,"c08",]/n*100, 1, sd)
-c09SE <-apply(manifBSn[,"c09",]/n*100, 1, sd) 
-c10SE <-apply(manifBSn[,"c10",]/n*100, 1, sd)
-c11SE <-apply(manifBSn[,"c11",]/n*100, 1, sd)
-c12SE <-apply(manifBSn[,"c12",]/n*100, 1, sd)
-c13SE <-apply(manifBSn[,"c13",]/n*100, 1, sd)
-c14SE <-apply(manifBSn[,"c14",]/n*100, 1, sd)
-c15SE <-apply(manifBSn[,"c15",]/n*100, 1, sd)
-c16SE <-apply(manifBSn[,"c16",]/n*100, 1, sd)
-c17SE <-apply(manifBSn[,"c17",]/n*100, 1, sd)
-c18SE <-apply(manifBSn[,"c18",]/n*100, 1, sd)
-c19SE <-apply(manifBSn[,"c19",]/n*100, 1, sd)
+c0SE  <- apply(manifBSn[,"c0",]/n*100, 1, sd)
+c01SE <- apply(manifBSn[,"c01",]/n*100, 1, sd)
+c02SE <- apply(manifBSn[,"c02",]/n*100, 1, sd)
+c03SE <- apply(manifBSn[,"c03",]/n*100, 1, sd)
+c04SE <- apply(manifBSn[,"c04",]/n*100, 1, sd)
+c05SE <- apply(manifBSn[,"c05",]/n*100, 1, sd)
+c06SE <- apply(manifBSn[,"c06",]/n*100, 1, sd)
+c07SE <- apply(manifBSn[,"c07",]/n*100, 1, sd)
+c08SE <- apply(manifBSn[,"c08",]/n*100, 1, sd)
+c09SE <- apply(manifBSn[,"c09",]/n*100, 1, sd) 
+c10SE <- apply(manifBSn[,"c10",]/n*100, 1, sd)
+c11SE <- apply(manifBSn[,"c11",]/n*100, 1, sd)
+c12SE <- apply(manifBSn[,"c12",]/n*100, 1, sd)
+c13SE <- apply(manifBSn[,"c13",]/n*100, 1, sd)
+c14SE <- apply(manifBSn[,"c14",]/n*100, 1, sd)
+c15SE <- apply(manifBSn[,"c15",]/n*100, 1, sd)
+c16SE <- apply(manifBSn[,"c16",]/n*100, 1, sd)
+c17SE <- apply(manifBSn[,"c17",]/n*100, 1, sd)
+c18SE <- apply(manifBSn[,"c18",]/n*100, 1, sd)
+c19SE <- apply(manifBSn[,"c19",]/n*100, 1, sd)
 
-per0 <-apply(manifBSn[,"c0",]/n*100, 1, mean)
-per01 <-apply(manifBSn[,"c01",]/n*100, 1, mean)
-per02 <-apply(manifBSn[,"c02",]/n*100, 1, mean)
-per03 <-apply(manifBSn[,"c03",]/n*100, 1, mean)
-per04 <-apply(manifBSn[,"c04",]/n*100, 1, mean)
-per05 <-apply(manifBSn[,"c05",]/n*100, 1, mean)
-per06 <-apply(manifBSn[,"c06",]/n*100, 1, mean)
-per07 <-apply(manifBSn[,"c07",]/n*100, 1, mean)
-per08 <-apply(manifBSn[,"c08",]/n*100, 1, mean)
-per09 <-apply(manifBSn[,"c09",]/n*100, 1, mean)
-per10 <-apply(manifBSn[,"c10",]/n*100, 1, mean)
-per11 <-apply(manifBSn[,"c11",]/n*100, 1, mean)
-per12 <-apply(manifBSn[,"c12",]/n*100, 1, mean)
-per13 <-apply(manifBSn[,"c13",]/n*100, 1, mean)
-per14 <-apply(manifBSn[,"c14",]/n*100, 1, mean)
-per15 <-apply(manifBSn[,"c15",]/n*100, 1, mean)
-per16 <-apply(manifBSn[,"c16",]/n*100, 1, mean)
-per17 <-apply(manifBSn[,"c17",]/n*100, 1, mean)
-per18 <-apply(manifBSn[,"c18",]/n*100, 1, mean)
-per19 <-apply(manifBSn[,"c19",]/n*100, 1, mean)
+per0  <- apply(manifBSn[,"c0",]/n*100, 1, mean)
+per01 <- apply(manifBSn[,"c01",]/n*100, 1, mean)
+per02 <- apply(manifBSn[,"c02",]/n*100, 1, mean)
+per03 <- apply(manifBSn[,"c03",]/n*100, 1, mean)
+per04 <- apply(manifBSn[,"c04",]/n*100, 1, mean)
+per05 <- apply(manifBSn[,"c05",]/n*100, 1, mean)
+per06 <- apply(manifBSn[,"c06",]/n*100, 1, mean)
+per07 <- apply(manifBSn[,"c07",]/n*100, 1, mean)
+per08 <- apply(manifBSn[,"c08",]/n*100, 1, mean)
+per09 <- apply(manifBSn[,"c09",]/n*100, 1, mean)
+per10 <- apply(manifBSn[,"c10",]/n*100, 1, mean)
+per11 <- apply(manifBSn[,"c11",]/n*100, 1, mean)
+per12 <- apply(manifBSn[,"c12",]/n*100, 1, mean)
+per13 <- apply(manifBSn[,"c13",]/n*100, 1, mean)
+per14 <- apply(manifBSn[,"c14",]/n*100, 1, mean)
+per15 <- apply(manifBSn[,"c15",]/n*100, 1, mean)
+per16 <- apply(manifBSn[,"c16",]/n*100, 1, mean)
+per17 <- apply(manifBSn[,"c17",]/n*100, 1, mean)
+per18 <- apply(manifBSn[,"c18",]/n*100, 1, mean)
+per19 <- apply(manifBSn[,"c19",]/n*100, 1, mean)
 ```
 
 We then bind all these quantities together in a single data frame:
