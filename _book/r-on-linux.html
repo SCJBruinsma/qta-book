@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.3 R on Linux | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="2.3 R on Linux | Introduction to Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.3 R on Linux | Introduction to Quantitative Text Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.3 R on Linux | Introduction to Quantitative Text Analysis" />
+  
+  
+  
+
+<meta name="author" content="Kostas Gemenis and Bastiaan Bruinsma" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-on-windows.html"/>
+<link rel="next" href="r-on-macos.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="assets/datatables-binding-0.30/datatables.js"></script>
+<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
+<li class="chapter" data-level="1" data-path="getting-started-with-qta.html"><a href="getting-started-with-qta.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Quantitative Text Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="qta-in-steps.html"><a href="qta-in-steps.html"><i class="fa fa-check"></i><b>1.1</b> QTA in steps</a></li>
+<li class="chapter" data-level="1.2" data-path="how-this-book-works.html"><a href="how-this-book-works.html"><i class="fa fa-check"></i><b>1.2</b> How this book works</a></li>
+<li class="chapter" data-level="1.3" data-path="further-literature.html"><a href="further-literature.html"><i class="fa fa-check"></i><b>1.3</b> Further Literature</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-r.html"><a href="what-is-r.html"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="r-on-windows.html"><a href="r-on-windows.html"><i class="fa fa-check"></i><b>2.2</b> R on Windows</a></li>
+<li class="chapter" data-level="2.3" data-path="r-on-linux.html"><a href="r-on-linux.html"><i class="fa fa-check"></i><b>2.3</b> R on Linux</a></li>
+<li class="chapter" data-level="2.4" data-path="r-on-macos.html"><a href="r-on-macos.html"><i class="fa fa-check"></i><b>2.4</b> R on MacOS</a></li>
+<li class="chapter" data-level="2.5" data-path="r-in-the-cloud.html"><a href="r-in-the-cloud.html"><i class="fa fa-check"></i><b>2.5</b> R in the Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>3</b> Installing Packages</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installing-from-cran.html"><a href="installing-from-cran.html"><i class="fa fa-check"></i><b>3.1</b> Installing from CRAN</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-from-github.html"><a href="installing-from-github.html"><i class="fa fa-check"></i><b>3.2</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="3.3" data-path="packages-for-quantitative-text-analysis-in-r.html"><a href="packages-for-quantitative-text-analysis-in-r.html"><i class="fa fa-check"></i><b>3.3</b> Packages for Quantitative Text Analysis in R</a></li>
+<li class="chapter" data-level="3.4" data-path="problems-bugs-and-errors.html"><a href="problems-bugs-and-errors.html"><i class="fa fa-check"></i><b>3.4</b> Problems, Bugs and Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>4</b> Importing Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="text-in-r.html"><a href="text-in-r.html"><i class="fa fa-check"></i><b>4.1</b> Text in R</a></li>
+<li class="chapter" data-level="4.2" data-path="import-.txt-files.html"><a href="import-.txt-files.html"><i class="fa fa-check"></i><b>4.2</b> Import .txt Files</a></li>
+<li class="chapter" data-level="4.3" data-path="import-.pdf-files.html"><a href="import-.pdf-files.html"><i class="fa fa-check"></i><b>4.3</b> Import .pdf Files</a></li>
+<li class="chapter" data-level="4.4" data-path="import-.csv-files.html"><a href="import-.csv-files.html"><i class="fa fa-check"></i><b>4.4</b> Import .csv Files</a></li>
+<li class="chapter" data-level="4.5" data-path="import-from-an-api.html"><a href="import-from-an-api.html"><i class="fa fa-check"></i><b>4.5</b> Import from an API</a></li>
+<li class="chapter" data-level="4.6" data-path="import-using-web-scraping.html"><a href="import-using-web-scraping.html"><i class="fa fa-check"></i><b>4.6</b> Import using Web Scraping</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>5</b> Reliability and Validity</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="inter-coder-agreement.html"><a href="inter-coder-agreement.html"><i class="fa fa-check"></i><b>5.1</b> Inter-Coder Agreement</a></li>
+<li class="chapter" data-level="5.2" data-path="visualizing-quality.html"><a href="visualizing-quality.html"><i class="fa fa-check"></i><b>5.2</b> Visualizing Quality</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>6</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-corpus.html"><a href="the-corpus.html"><i class="fa fa-check"></i><b>6.1</b> The Corpus</a></li>
+<li class="chapter" data-level="6.2" data-path="keywords-in-context.html"><a href="keywords-in-context.html"><i class="fa fa-check"></i><b>6.2</b> Keywords in Context</a></li>
+<li class="chapter" data-level="6.3" data-path="visualisations-and-descriptives.html"><a href="visualisations-and-descriptives.html"><i class="fa fa-check"></i><b>6.3</b> Visualisations and Descriptives</a></li>
+<li class="chapter" data-level="6.4" data-path="text-statistics.html"><a href="text-statistics.html"><i class="fa fa-check"></i><b>6.4</b> Text Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>7</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="classical-dictionary-analysis.html"><a href="classical-dictionary-analysis.html"><i class="fa fa-check"></i><b>7.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>7.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>7.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#twitter"><i class="fa fa-check"></i><b>7.2.2</b> Twitter</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sentiment-analysis-using-vader.html"><a href="sentiment-analysis-using-vader.html"><i class="fa fa-check"></i><b>7.3</b> Sentiment Analysis using VADER</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercices.html"><a href="exercices.html"><i class="fa fa-check"></i><b>8</b> Exercices</a></li>
+<li class="chapter" data-level="9" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>9</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="wordscores.html"><a href="wordscores.html"><i class="fa fa-check"></i><b>9.1</b> Wordscores</a></li>
+<li class="chapter" data-level="9.2" data-path="wordfish.html"><a href="wordfish.html"><i class="fa fa-check"></i><b>9.2</b> Wordfish</a></li>
+<li class="chapter" data-level="9.3" data-path="correspondence-analysis.html"><a href="correspondence-analysis.html"><i class="fa fa-check"></i><b>9.3</b> Correspondence Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>10</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>10.1</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>10.1.1</b> SVM with RTextTools</a></li>
+<li class="chapter" data-level="10.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#svm-with-quanteda"><i class="fa fa-check"></i><b>10.1.2</b> SVM with Quanteda</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="naive-bayes.html"><a href="naive-bayes.html"><i class="fa fa-check"></i><b>10.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>11</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="latent-dirichlet-allocation.html"><a href="latent-dirichlet-allocation.html"><i class="fa fa-check"></i><b>11.1</b> Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="11.2" data-path="seeded-latent-dirichlet-allocation.html"><a href="seeded-latent-dirichlet-allocation.html"><i class="fa fa-check"></i><b>11.2</b> Seeded Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="11.3" data-path="structural-topic-model.html"><a href="structural-topic-model.html"><i class="fa fa-check"></i><b>11.3</b> Structural Topic Model</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>12</b> Texttricks</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Quantitative Text Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-on-linux" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> R on Linux<a href="r-on-linux.html#r-on-linux" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How you install R on Linux depends on which flavour of Linux you have. In most cases, R is already included in your Linux distribution. You can check this by opening a terminal and typing <code>R</code>. If it is installed, R will start in the terminal. If R is not part of your system, run the following in a terminal</p>
+<ol style="list-style-type: decimal">
+<li>sudo apt update</li>
+<li>sudo apt install r-base r-base-dev -y</li>
+<li>Now run “R” to see if the installation worked</li>
+</ol>
+<p>To install RStudio, go to <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>. At the bottom of the page, select the installer for your operating system. Then install the file either using an installation manager or via the terminal. After running the launcher, you will find RStudio in the Dash.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-on-windows.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-on-macos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

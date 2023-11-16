@@ -1,0 +1,207 @@
+# Preliminaries{#preliminaries}
+
+Now that we have loaded our texts into R, it is time to understand *what* our texts are about, who their authors are, and what we can expect to find in them. Here we will look at three different techniques for doing this: keywords-in-context, visualisations and text statistics. Before that, however, we will have a brief look at the idea of the *corpus*, as it is central to the idea of how `quanteda` works.
+
+## The Corpus
+
+Within `quanteda`, the main way to store documents is in the form of a `corpus` object. This object contains all the information that comes with the texts and does not change during our analysis. Instead, we make copies of the main corpus, convert them to the type we need and run our analyses on them. The advantage of this is that we can always go back to our original data. 
+
+There are various ways to make a corpus. One we already saw in the \@ref(importing-data) chapter were we used ``readtext`` to generate a data frame, with both a variable that gave us a **doc_id** and another that gave us the text. As ``readtext`` and ``quanteda`` work close together, we can directly change this to a corpus. Alternatively, we can take a character vector, where each element of the vector is taken as an individual document. If the vector is named, those names will be used as document names - if not, new ones are generated.
+
+Here, let us go back to the Cold War page we scraped earlier and use the resulting text from that as our input:
+
+```{r data-coldwar2, tidy=TRUE}
+url <- "https://en.wikipedia.org/wiki/Cold_War"
+url <- rvest::read_html(url)
+data_coldwar <- url %>% 
+  html_nodes("p") %>% 
+  html_text2()  %>%
+  as.data.frame()
+data_coldwar <- data_coldwar$.
+data_coldwar <- data_coldwar[-c(1,2)]
+```
+
+Note that the resulting ``data_coldwar`` vector is unnamed, so ``quanteda`` will generate those names for us. Now, we simply put this into the ``corpus`` command:
+
+```{r corpus-owncorpus, tidy=TRUE}
+library(quanteda)
+
+data_corpus <- corpus(data_coldwar)
+```
+
+Apart from importing texts ourselves, `quanteda` contains several corpora as well. Here, we use one of these, which contains the inaugural speeches of all the US Presidents. For this, we first have to load the main package and then load the data into R:
+
+Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the *data frequency matrix* (dfm). This is a matrix that contains the documents in the rows and the word counts for each word in the columns. 
+
+Before we can do so, we have to split up our texts into unique words. To do this, we first have to construct a `tokens` object. In the command that we use to do this, we can specify how we want to split our texts (here we use the standard option) and how we want to clean our data. For example, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters. 
+
+```{r tokens-inaugural, message=FALSE, warning=FALSE}
+data_tokens <- tokens(
+ data_corpus,
+ what = "word",
+ remove_punct = TRUE,
+ remove_symbols = TRUE,
+ remove_numbers = TRUE,
+ remove_url = TRUE,
+ remove_separators = TRUE,
+ split_hyphens = FALSE,
+ include_docvars = TRUE,
+ padding = FALSE,
+ verbose = TRUE
+)
+```
+
+We can also remove certain stopwords so that words like "and" or "the" do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type `stopwords("english")` in the console. Stopwords for other languages are also available (such as German, French and Spanish). There are even more stopwords in the `stopwords` package, which works well with `quanteda`. For now, we will use the English ones. As all the stopwords here are lower-case, we will have to lower case our words as well. Also notice that we also do this for any acronyms in our text (so, "NATO" will become "nato"):
+
+```{r tokenslower-inaugural}
+data_tokens <- tokens_tolower(data_tokens,
+                              keep_acronyms = FALSE)
+data_tokens <- tokens_select(data_tokens,
+                             stopwords("english"),
+                             selection = "remove")
+```
+
+Then, we can construct our dfm:
+
+```{r dfm-inaugural}
+data_dfm <- dfm(data_tokens)
+```
+
+## Keywords in Context
+
+One simple - but effective - way to learn more about our texts is by looking at keywords-in-context (kwic). Here, we look at with which other words a certain word appears in our texts. This is also known as looking at the *concordance* of our text. To do so is easy with our tokens data frame. Let's take all those words that start with 'secur' and look at which three words occur before and after this word. We can then run:
+
+```{r kwic1-inaugural}
+kwic_output <- kwic(data_tokens, pattern = "secur*", valuetype = "glob", window = 3)
+```
+
+In the outputted object, we find a column labelled `pre` and another labelled `post`. These refer to the words that came either before or after the word 'secur*'. We can easily take these out and combine them:
+
+```{r kwic2-inaugural}
+text_pre <- kwic_output$pre
+text_post <- kwic_output$post
+text_word <- kwic_output$keyword
+text <- as.data.frame(paste(text_pre, text_word, text_post))
+```
+
+We then combine this information with the name of the document it came from so that we know which text the word is from:
+
+```{r kwic-extracted-inaugural}
+extracted <- cbind(kwic_output$docname, text)
+names(extracted) <- c("docname", "text")
+head(extracted)
+```
+
+## Visualisations and Descriptives
+
+Another thing we can do is generate various visualisations to understand our data. One interesting thing can be to see which words occur most often. We can do this using the `topfeatures` function. For this, we first have to save the 50 most frequently occurring words in our texts (note that there is also the `textstat_frequency` function in the `quanteda.textstats` helper package that can do this):
+
+```{r topfeatures-inaugural}
+features <- topfeatures(data_dfm, 50)
+```
+
+We then have to transform this object into a data frame, and sort it by decreasing frequency:
+
+```{r topfeatures-transform-inaugural}
+features_plot <- data.frame(list(term = names(features),frequency = unname(features)))
+features_plot$term <- with(features_plot, reorder(term, -frequency))
+```
+
+Then we can plot the results:
+
+```{r topfeatures-ggplot}
+library(ggplot2)
+ggplot(features_plot) + 
+ geom_point(aes(x=term, y=frequency)) +
+ theme_classic()+
+ theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 30 times. We can do this with the `dfm_trim` function. Then, we can use this trimmed dfm to generate the word cloud:
+
+```{r wordcloud-inaugural, warning=FALSE}
+library(quanteda.textplots)
+
+wordcloud_dfm_trim <- dfm_trim(data_dfm, min_termfreq = 10)
+textplot_wordcloud(wordcloud_dfm_trim)
+```
+
+## Text Statistics
+
+Finally, `quanteda` also allows us to calculate quite some textual statistics. These are all collected in the `quanteda.textstats` helper package. Here, we will look at several of them, starting with a simple overview of our corpus in the terms of a summary. This tells us the number of characters, sentences, tokens, etc. for each of the texts:
+
+```{r package-textstats}
+library(quanteda.textstats)
+corpus_summary <- textstat_summary(data_corpus)
+```
+
+If we want, we can then use this data to make some simple graphs telling us various things about the texts in our corpus. As an example, let's look at the number of sentences in the various paragraphs:
+
+```{r ggplot-summary}
+ggplot(data=corpus_summary, aes(x=document, y=sents, group=1)) +
+ geom_line()+
+ geom_point()+
+ ylab("Number of Characters")+
+ xlab("Paragraph")+
+ theme_classic()+
+ theme(axis.text.x = element_text(angle = 90))
+```
+
+Other things we can look at are the readability and lexical diversity of the texts. The former one of these refers to how readable a text is (i.e. how easy or difficult it is to read), while the latter tells us how many different types of words there are in the texts and thus how *diverse* the text is in word choice and use. Given that there are many ways to calculate both metrics, please have a look at the help file to see which one works best for you. Here, we will use the most popular:
+
+```{r inaugural-readability}
+corpus_readability <- textstat_readability(data_corpus, measure = c("Flesch.Kincaid", "Dale.Chall.old"))
+corpus_lexdiv <- textstat_lexdiv(data_tokens, c("CTTR", "TTR", "MATTR"), MATTR_window = 100)
+```
+
+As before, we can plot this data in a graph to see how lexical diversity developed over the course of the article:
+
+```{r ggplot-lexdiv}
+ggplot(data=corpus_lexdiv, aes(x=document, y=CTTR, group=1)) +
+ geom_line()+
+ geom_point()+
+ ylab("Lexical Diversity (CTTR)")+
+ xlab("Paragraph")+
+ theme_classic()+
+ theme(axis.text.x = element_text(angle = 90))
+```
+
+Another thing we can do is look at the similarities and distances between documents. With this, we can answer questions such as: how *different* are these documents from each other? And if different (or similar), how different (or similar)? The idea is that the larger the similarity is, the smaller the distance is as well. A good way to understand the idea of similarity is to consider how many operations you need to perform to change one text into the other. The more "replace" options you have to carry out, the more different the text. As for the distances, it is best to consider the texts as having positions on a Cartesian plane (with positions based on their word counts). The distance between these two points (either Euclidean, Manhattan or other) is then the distance between the texts.
+
+Let's start with a look at these similarities (note again that there are many different methods to calculate this):
+
+```{r inaugural-similarties}
+corpus_similarties <- textstat_simil(data_dfm, method = "correlation", margin = "documents")
+corpus_similarties <- as.data.frame(corpus_similarties)
+```
+
+Note that while we look here at the documents, we could also look at individual words (set ``margin="features``). For now, let us look at the distances between the documents, choosing the Euclidean distance between the documents as our metric:
+
+```{r inaugural-distances}
+corpus_distances <- textstat_dist(data_dfm, margin = "documents", method = "euclidean")
+corpus_distances_df <- as.data.frame(corpus_distances)
+```
+
+If we want to, we can even convert this data into a dendrogram. We do this by taking the information on the distances out of the `corpus_distances` object, make them into a triangular matrix, and plot them:
+
+```{r plot-distances}
+plot(hclust(as.dist(corpus_distances)), hang = -1)
+```
+
+Finally, let us look at the entropy of our texts. The entropy of a document measures the 'amount' of information each letter of the text produces. To get an idea of what this means, consider the 'e' is an often occurring letter in an English text, while 'z' is not. Thus, a word with a 'z' in it, it more unique and thus likely to carry unique and interesting information. The 'higher' the entropy of a text, the less 'information' is in it:
+
+```{r inaugural-entropy}
+corpus_entropy_docs <- textstat_entropy(data_dfm, "documents")
+corpus_entropy_docs <- as.data.frame(corpus_entropy_docs)
+```
+
+While not as common as the other distance metrics, entropy is sometimes used to measure the similarity between texts. Thus, it can be useful if we want to know the importance of certain words. This is because if a certain word is not important, we could consider it to be a stop word:
+
+```{r inaugural-entropy-feats}
+corpus_entropy_feats <- textstat_entropy(data_dfm, "features")
+corpus_entropy_feats <- as.data.frame(corpus_entropy_feats)
+corpus_entropy_feats <- corpus_entropy_feats[order(-corpus_entropy_feats$entropy),]
+head(corpus_entropy_feats, 10)
+```
+
+Looking at the data, we find that 'soviet', 'war' and 'union' have pretty high entropies. This indicates that the words added little to the information of the documents, and would-be candidates for removal from our corpus.

@@ -1,0 +1,32 @@
+---
+title: "Introduction to Quantitative Text Analysis"
+author: "Kostas Gemenis and Bastiaan Bruinsma"
+bibliography: library.bib
+biblio-style: apa
+csl: apa.csl
+link-citations: yes
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: true
+  bookdown::html_book:
+    css: style.css
+documentclass: book
+always_allow_html: true
+---
+
+
+# Welcome! {-}
+
+Welcome to our introductory textbook on quantitative text analysis! This book originated as a collection of assignments and lecture slides that we prepared for the ECPR Winter and Summer Schools in Methods and Techniques. Later, as we taught the Introduction to Quantitative Analysis course at the ECPR Schools, the MethodsNET Summer School, and seminars at the Max Planck Institute for the Study of Societies, Goethe University Frankfurt, Chalmers University, and the Cyprus University of Technology, we added more and more material and text, resulting in this book. The version you see today has been updated with the help of a grant from the [Learning Development Network] (https://ldn.cut.ac.cy/) at the Cyprus University of Technology. For now, the book focuses on some of the best-known quantitative text analysis methods in the field, showing what they are and how to run them in R.
+
+So why bother with quantitative content analysis? For one thing, we can say that developments over the last twenty years have made research using quantitative text analysis a particularly exciting proposition. First, the huge increase in computing power has made it possible to work with large amounts of text. Second, there is the development of R - a free, open-source, cross-platform statistical software. This development has enabled many researchers and programmers to develop packages for statistical methods for working with text. In addition, the spread of the internet has made many interesting sources of textual data available in digital form. Add to this the emergence of social media as a massive source of text generated daily by millions of users around the world.
+
+However, quantitative text analysis can be a daunting experience for someone unfamiliar with quantitative methods or programming. Our aim with this book is to guide you through it, combining theoretical explanations with a step-by-step explanation of the code. There are also several exercises designed for those with little or no experience in text analysis, R, or quantitative methods. Ultimately, we hope that you will find this book not only informative but also engaging and educational.
+

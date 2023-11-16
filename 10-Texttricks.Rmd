@@ -1,0 +1,35 @@
+# Texttricks{#texttricks}
+
+One of the main advantages of using R for quantitative text analysis is that it is (for a part) a general-purpose language. That is, we are not limited to any of the functions that the original designers chose to implement with it. Indeed, this is the reason for the existence of the all the packages we have been using. Indeed, writing a package in R is relatively simple, as is hosting your package and making it available to others.
+
+The main logic of R packages rests on the idea of *functions*. We already saw an example of a function in Chapter \@ref(importing-data), where we specified a function to read in a .pdf file and convert it to a .txt file. The way a function in R works it that you encapsulate the commands you require within the `function` command. Anything between the curly brackets will be treated as part of the function, while everything between the parentheses will be treated as the input of our function.
+
+
+```{r texttricks-function, eval=FALSE}
+extract_pdf <- function(filename) {
+  require(pdftools)
+  print(filename)
+  try({
+    text <- pdf_text(filename)
+  })
+  title <- gsub("(.*)/([^/]*).pdf", "\\2", filename)
+  txt_directory <- getwd()
+  write(text, file.path(txt_directory, paste0(title, ".txt")))
+}
+```
+
+* *Function Name* - The name of the function and what we need to type into the console in order to run the function
+* *Arguments* - Arguments are placeholders. In our case, `filename` is an argument. This can be anything, and in our case it is the address of where our .pdf file is stored. When we run the function, anything we specify in the place of `filename` will be treated as such by R.
+* *Body* - Everything between the curly brackets that makes up the complete function
+* *Return Value* - The output of the function. Can be specified by `return(value)`. Yet, in our case the return is in the `write()` command that writes the .txt file to our `txt_directory` folder.
+
+Compiling this function (or many different functions) into a package, requires a little bit more work, but not much. A very nice introduction is given by [Hilary Parker](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/). Here, we placed the function above in the ``texttricks`` package. As this package is on GitHub, you can have a look at all its files at: https://github.com/SCJBruinsma/texttricks.
+
+To install the package within `R`, use the `install_github` command that is part of the devtools package:
+
+```{r texttricks-install, eval=FALSE, results=FALSE, warning=FALSE}
+install.packages("devtools")
+library(devtools)
+devtools::install_github("SCJBruinsma/texttricks")
+```
+

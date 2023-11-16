@@ -1,0 +1,305 @@
+# Scaling Methods{#scaling}
+
+With a dictionary, we aimed to classify our texts into different categories based on the words they contain. While practical, there is no real way to compare these categories: one category is no better or worse than the other. If we do want to compare texts, we have to place them on some sort of scale. Here, we will look at three ways in which we can do so: *Wordscores* [@Laver2003a], *Wordfish* [@Slapin2008a], and *Correspondence Analysis*. The first two methods used to be part of the main `quanteda` package, but have now moved to the `quanteda.textmodels` package, while we find CA in the `FactoMineR` package.
+
+## Wordscores
+
+The idea of Wordscores is to use reference texts (from which we know the position) to position our virgin texts (from which we do not know the position). Here, we aim to position the 2005 party manifestos of the five largest parties in the United Kingdom on a general left-right scale. For this, we will use the 2001 party manifestos of the same parties as reference texts. To know their positions, we will use the left-right scale from the 2002 [Chapel Hill Expert Survey](https://www.chesdata.eu/) [@Bakker2012a] to do so. So, we load our data, make a subset, transform it into a dfm, and clean it:
+
+```{r import-wordscores, results='hide', message=FALSE}
+library(quanteda)
+library(quanteda.corpora)
+
+data(data_corpus_ukmanifestos)
+corpus_manifestos <- corpus_subset(data_corpus_ukmanifestos, Year == 2001 | Year == 2005)
+corpus_manifestos <- corpus_subset(corpus_manifestos, Party=="Lab" | Party=="LD" | Party == "Con" | Party== "SNP" | Party== "PCy")
+
+data_manifestos_tokens <- tokens(
+ corpus_manifestos,
+ what = "word",
+ remove_punct = TRUE,
+ remove_symbols = TRUE,
+ remove_numbers = TRUE,
+ remove_url = TRUE,
+ remove_separators = TRUE,
+ split_hyphens = FALSE,
+ include_docvars = TRUE,
+ padding = FALSE,
+ verbose = TRUE
+)
+
+data_manifestos_tokens <- tokens_tolower(data_manifestos_tokens, keep_acronyms = FALSE)
+data_manifestos_tokens <- tokens_select(data_manifestos_tokens, stopwords("english"), selection = "remove")
+
+data_manifestos_dfm <- dfm(data_manifestos_tokens)
+```
+
+Then, we check the order of the documents inside our dfm:
+
+```{r wordscores-dimnames}
+data_manifestos_dfm@Dimnames$docs
+```
+
+We can then set the scores for the reference texts. For the virgin texts, we set `NA` instead. Then, we run the wordscores model - providing the dfm and the reference scores - and save it into an object:
+
+```{r package-textmodels, message=FALSE}
+library(quanteda.textmodels)
+
+scores <- c(7.72,5.18,3.82,3.2,3,NA,NA,NA,NA,NA)
+ws <- textmodel_wordscores(data_manifestos_dfm, scores)
+summary(ws)
+```
+
+When we run the `summary` command, we can see the word scores for each word. This is the position of that word on our scale of interest. We then only need to figure out how often these words occur in each of the texts, add up their scores, and divide this by the total number of words of the texts. This gives us the *raw score* of the text. Yet, this raw score has some problems. Most important of which is that as some words occur in almost all texts, all the scores will be very clustered in the middle of our scale. To prevent this, we can spread out the scores again, so they look more like the scores of our reference texts. This rescaling has two versions. The first was the original as proposed by @Laver2003a, and focuses on the variance of the scores. The idea here is that the distribution of the scores of the virgin texts has the correct mean, but an incorrect variance that needs rescaling. The second, proposed by @Martin2008a, focuses on the extremes of the scores. What it does is to take the scores of the virgin texts and stretch them out to match the extremes of the scores of the reference texts. Here, we run both so we can compare them. For the MV transformation, we will calculate the standard errors for the scores as well:
+
+```{r wordscores-predict}
+pred_lbg <- predict(ws, rescaling = "lbg")
+pred_mv <- predict(ws, rescaling = "mv", se.fit = TRUE, interval = "confidence")
+
+pred_lbg
+pred_mv
+```
+
+Note that this does not only predict the 2005 texts, but also the 2001 texts. As such, we can use these scores to see how well this procedure can recover the original scores. One reason why this might be a problem is because of a warning you most likely received. This says that 'n features in newdata not used in prediction'. This is as the method does not use all the words from the reference texts to score the virgin texts. Instead, it only uses the words that occur in them both. Thus, when we compare the reference scores with the scores the method gives to the reference documents, can see how well the method does.
+
+To compare the scores, we will use the Concordance Correlation Coefficient as developed by @Lin1989a. This coefficient estimates how far two sets of data deviate from a line of 45 degrees (which indicates perfect agreement). To calculate this, we take the scores (here we take the LBG version) from the object we created and combine them with the original scores. From this, we only select the first five texts (those from 2001) and calculate the CCC:
+
+```{r package-desctools, message=FALSE}
+library(DescTools)
+```
+```{r wordscores-ccc, tidy=TRUE}
+comparison <- as.data.frame(cbind(pred_lbg, scores))
+comparison <- comparison[1:5,]
+
+CCC(comparison$scores, comparison$pred_lbg, ci = "z-transform", conf.level = 0.95, na.rm = TRUE)
+```
+
+The result here is not bad, though the confidence intervals are rather large. We can have a further look at why this is the case by plotting the data. In this plot, we will show the position of the texts, as well as a 45-degree line. Also, we plot the reduced major axis, which shows the symmetrical relationship between the two variables. This line is a linear regression, which we compute first using the `lm` command:
+
+```{r ggplot-wordscores-ccc, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+lm_line <- lm(comparison$scores ~ comparison$pred_lbg)
+
+ggplot(comparison, aes(x=scores, y=pred_lbg)) + 
+ geom_point()+
+ xlab("Original Scores")+
+ ylab("LBG Scores")+
+ ylim(0, 12)+
+ xlim(0, 12)+
+ geom_abline(aes(intercept = 0,
+                 slope =1,
+                 linetype = "dashed"))+
+ geom_abline(aes(intercept = lm_line$coefficients[1],
+                 slope = lm_line$coefficients[2],
+                 linetype = "solid" ))+
+ scale_shape_manual(name = "", 
+                    values=c(1,3), 
+                    breaks=c(0,1),
+                    labels=c("Line of perfect concordance" , "Reduced major axis"))+
+ scale_linetype_manual(name = "",
+                       values=c(1,3),
+                       labels=c("Line of perfect concordance" , "Reduced major axis"))+
+ theme_classic()
+```
+
+This graph allows us to spot the problem. That is that while we gave the manifesto for Plaid Cymru (PCy) a reference score of 3.20, Wordscores gave it 1.91. Removing this manifesto from our data-set would thus improve our estimates.
+
+Apart from positioning the texts, we can also have a look at the words themselves. We can do this with the `textplot_scale1d` command, for which we also specify some words to highlight:
+
+```{r wordscores-textplotscale-features}
+library(quanteda.textplots)
+
+textplot_scale1d(ws, 
+                 margin = "features", 
+                 highlighted =c("british","vote", "europe", "taxes")
+                 )
+```
+
+Finally, we can have a look at the confidence intervals around the scores we created. For this, we use the same command as above, though instead of specifying `features` (referring to the words), we specify `texts`. Note that we can only do this for the MV scores, as only here we also calculated the standard errors:
+
+```{r wordscores-textplotscale-documents}
+textplot_scale1d(pred_mv, margin = "documents")
+```
+
+Note that we can also make this graph ourselves. This requires some data-wrangling using the `dplyr` package. This package allows us to use pipes, denoted by the `%>%` command. This pipe transports an output of a command to another one before saving it. This saves us from constructing too many intermediate data sets. Thus, here we first bind together the row names of the fit (which denotes the documents), the fit itself, and the standard error of the fit (which also includes the lower and upper bound). We then transform this into a tibble (similar to a data frame), rename the first and fifth columns, and finally ensure that all the values (which are still characters) are numeric (and year a factor):
+
+```{r dplyr-wordscores-textplotscale, warning=FALSE, message=FALSE}
+library(dplyr)
+
+data_textplot <- cbind(rownames(as.data.frame(pred_mv$se.fit)), pred_mv$fit, pred_mv$se.fit) %>%
+ as_tibble() %>%
+ rename(id = 1, se = 5) %>%
+ mutate(fit = as.numeric(fit),
+        lwr = as.numeric(lwr),
+        upr = as.numeric(upr),
+        se = as.numeric(se),
+        year = as.factor(stringr::str_sub(id, start = 9, end = 12)))
+```
+
+If we now look at our `data_textplot` object, we see that we have all the data we need: the fit (the average value), the lower and upper bounds, the year and the id that tells us with which party and year we are dealing. The only thing that remains is to give the parties better names. To see the current ones, type `data_textplot$id` in the console. We can then give them different names (ensure that the order remains the same). We then sort them in decreasing order based on their fit:
+
+```{r wordscores-sort}
+data_textplot$id <- as.character(c("CON 2001", "LAB 2001", "LD 2001", "PCY 2001", "SNP 2001", "CON 2005","LAB 2005", "LD 2005","PCY 2005", "SNP 2005"))
+data_textplot$id <- with(data_textplot, reorder(id, fit))
+```
+
+Then, we can plot this data using `ggplot`:
+
+```{r ggplot-wordscores-textplotscale}
+ggplot() +
+ geom_point(data = data_textplot,
+            aes(x = fit, y = id, colour = year)) +
+ geom_errorbarh(data = data_textplot,
+                aes(xmax = upr, xmin = lwr, y = id, colour = year),
+                height = 0) +
+ theme_classic() +
+ scale_colour_manual(values = c("#ffa600", "#ff6361"),
+                     name = "Years:",
+                     breaks = c("2001", "2005"),
+                     labels = c("2001", "2005")) +
+ labs(title = "Left-Right Distribution of UK Party Manifestos",
+      subtitle = "with 95% confidence intervals",
+      x = "Left - Right Score",
+      y = NULL) +
+ theme_classic()+
+ theme(plot.title = element_text(size = 20, hjust = 0.5),
+       plot.subtitle = element_text(hjust = 0.5),
+       legend.position = "top")
+```
+
+
+## Wordfish
+
+Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale. While this might seems very practical, it also leaves us with a problem: which scale do we want? For example, let us have another look at the corpus of inaugural speeches of American presidents we saw earlier. What scale should we expect? Let us, for now, say that we care about a general left-right position. As benchmarks, we then set the 1965 Johnson speech as the most "left" and the 1985 Reagan speech as the most "right". Also, we set a seed as the model draws random numbers and we want our work to be replicable:
+
+```{r wordfish-setoptions, message = FALSE, results=FALSE}
+set.seed(42)
+
+library(quanteda)
+
+data(data_corpus_inaugural)
+corpus_inaugural <- corpus_subset(data_corpus_inaugural, Year > 1900)
+
+data_inaugural_tokens <- tokens(
+ corpus_inaugural,
+ what = "word",
+ remove_punct = TRUE,
+ remove_symbols = TRUE,
+ remove_numbers = TRUE,
+ remove_url = TRUE,
+ remove_separators = TRUE,
+ split_hyphens = FALSE,
+ include_docvars = TRUE,
+ padding = FALSE,
+ verbose = TRUE
+)
+
+data_inaugural_tokens <- tokens_tolower(data_inaugural_tokens, keep_acronyms = FALSE)
+data_inaugural_tokens <- tokens_select(data_inaugural_tokens, stopwords("english"), selection = "remove")
+
+data_inaugural_dfm <- dfm(data_inaugural_tokens)
+
+data_inaugural_dfm@Dimnames$docs
+wordfish <- textmodel_wordfish(data_inaugural_dfm, dir = c(17,22))
+summary(wordfish)
+```
+
+Here, `theta` gives us the position of the text. As with Wordscores, we can also calculate the confidence intervals (note that `theta` is now called `fit`):
+
+```{r wordfish-predict, message=FALSE,warning=FALSE}
+pred_wordfish <- predict(wordfish, interval = "confidence")
+head(pred_wordfish)
+```
+
+As with Wordscores, we can also plot graphs for Wordfish, using the same commands. The first graph we will again be looking at is the distribution of the words, which here forms an 'Eifel Tower'-like graph:
+
+```{r wordfish-textplot-features, message=FALSE, warning=FALSE}
+textplot_scale1d(wordfish,
+                 margin = "features",
+                 highlighted = c("america","jobs","taxes","election")
+                 )
+```
+
+And then we can do the same for the documents as well. Note that we can also make a similar graph to the one we made ourselves above (just replace `pred_mv` with `pred_wordfish`):
+
+```{r wordfish-textplot-documents, message=FALSE, warning=FALSE}
+textplot_scale1d(wordfish,
+                 margin = "documents"
+                 )
+```
+
+Looking at the results here gives us an interesting picture. Remember that we chose our benchmark texts to look at the left-right position of our texts? Here, we see that both these texts (the 1965 Johnson and 1985 Reagan) are quite close to each other. Sticking with our interpretation that Reagan is more right-wing than Johnson, this would mean that the 1909 Taft address was the most right-wing and the 2017 Trump text the most left-wing. Whether this is true is of course up to our interpretation.
+
+## Correspondence Analysis
+
+Correspondence Analysis uses a similar logic as Principal Component Analysis. Yet, while PCA requires metric data, CA only requires nominal data (such as text). The idea behind both is to reduce the complexity of the data by looking for new dimensions. These dimensions should then explain as much of the original variance that is present in the data as possible. Within R many packages can run CA (such as the `ca` and `FactoMineR` packages and even `quanteda.textmodels`). One interesting package is the `R.temis` package. This package aims to bring the techniques of qualitative text analysis into R. Thus, the package focuses on the import of corpus from programs such as [Alceste](https://www.image-zafar.com/Logicieluk.html) and sites such as [LexisNexis](https://www.lexisnexis.com) - programs that are often used in qualitative text analysis. The package itself is built on the popular `tm` package and has a similar logic.
+
+To carry out the Correspondence Analysis, `R.temis` uses the `FactoMineR` and `factoextra` packages [@Le2008a]. Here, we will look at an example using data from an article on the stylistic variations in the Twitter data of Donald Trump between 2009 and 2018 [@Clarke2019a]. Here, the authors aimed to figure out whether the way Trump's tweets were written fluctuated over time. To do so, they downloaded 21,739 tweets and grouped them into 63 categories over 4 dimensions based on their content. Given that all the data used in the article is available for inspection, we can attempt to replicate part of the analysis here.
+
+First, we load the packages we need for the Correspondence Analysis:
+
+```{r packages-factominer, warning=FALSE, message=FALSE}
+library(FactoMineR)
+library(factoextra)
+library(readr)
+```
+
+Then, we import the data. You can do so either by downloading the replication data yourselves, or use the file we already put up on GitHub:
+
+```{r import-trumptweets, message=FALSE, results=FALSE}
+urlfile = "https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/TRUMP_DATA.csv"
+tweets <- read_csv(url(urlfile), show_col_types = FALSE)
+```
+
+This data set contains quite some information we do not need. To begin with, we remove all those variables that do not contain information about the 63 categories and the length of the tweet in words. Also, for clarity's sake, we sample 200 of the tweets:
+
+```{r sample-trumptweets}
+tweets <- tweets[sample(nrow(tweets), 200), ]
+tweets_mat <- tweets[,2:65]
+```
+
+We can then run the MCA with the `FactoMineR` package. For this, we have to give the data set and the number of dimensions we think are in the data. We can set the latter either by establishing the dimensions as in a regular PCA (for example through a scree plot) or based on theory. Here we combine both and use the 5 dimensions established in the article. Besides this, we set a supplementary quantitative variable as `quanti.sup=1`. As this is a quantitative variable, it is not taken into consideration by the MCA, but does allow us to assess later on how it correlates with each of the five dimensions:
+
+```{r mca-trumptweets, results=FALSE}
+mca_tweets <- MCA(tweets_mat, ncp=5, quanti.sup=1, graph = FALSE)
+```
+
+First, let's start by looking at the association of the word length with the five dimensions:
+
+```{r trumptweets-quanti}
+mca_tweets$quanti.sup
+```
+
+As we can see, the word length has a strong correlation with Dimension 1. This means that this dimension captures the length of the words and is not a separate dimension. Thus, when we want to look at the correspondence between the categories and the dimensions, we can ignore this dimension. Thus, for the MCA, we will look at dimensions 2 and 3:
+
+```{r trumptweets-fvizvar}
+fviz_mca_var(mca_tweets,
+             repel = TRUE,
+             geom = c("point"),
+             axes = c(2, 3),
+             ggtheme = theme_minimal()
+             )
+```
+
+Here, we only plot the points as adding the labels as well will make the picture quite cluttered. In the article, the authors identify Dimension 2 as 'Conversational Style' and Dimension 3 as 'Campaigning Style'. The plot thus shows us that some categories belong to one of these dimensions and not to the other. To see for which cases this is most often the case (the ones that have the most extreme positions), we can have a look at their coordinates:
+
+```{r trumptweets-coordinates}
+var <- get_mca_var(mca_tweets)
+coordinates <- as.data.frame(var$coord)
+coordinates <- coordinates[order(coordinates$`Dim 2`),]
+head(coordinates)
+```
+
+Here, remember to look only at the results from the second column onward. Here, we see that one extreme category for the second dimension (Conversational Style) was the use of a colon (:) or possessive proper nouns (such as Hillary's). This seems to fit well with the idea of conversational style. We can also see that the latter one also corresponds quite well with Dimension 3 (Campaigning Style), while the first one does not. 
+
+As you can see, the possibilities with MCA call for a rather investigative approach. For this reason, the designers of `FactoMineR` developed a Shiny app that allows you to play around with the data and look at all the various options. Load it by running:
+
+```{r trumptweets-factoshiny, eval=FALSE}
+library(Factoshiny)
+res.shiny <- MCAshiny(tweets_mat)
+```
+
+Ensure you quit by clicking the "Quit the App" button to return to R. For more information on the 'Facto'-family packages, please have a look at the original article by @Le2008a or the website that belongs to it: http://factominer.free.fr/.
+
+
