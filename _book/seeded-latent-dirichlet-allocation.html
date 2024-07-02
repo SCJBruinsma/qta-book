@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.2 Seeded Latent Dirichlet Allocation | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="11.2 Seeded Latent Dirichlet Allocation | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.2 Seeded Latent Dirichlet Allocation | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -263,80 +264,80 @@ div.csl-indent {
 <div id="seeded-latent-dirichlet-allocation" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Seeded Latent Dirichlet Allocation<a href="seeded-latent-dirichlet-allocation.html#seeded-latent-dirichlet-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>An alternative to the above approach is one known as seeded-LDA. This approach uses seed words that can steer the LDA in the right direction. One origin of these seed words can be a dictionary that tells the algorithm which words belong together in various categories. To use it, we will first load the packages and set a seed:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="seeded-latent-dirichlet-allocation.html#cb223-1" tabindex="-1"></a><span class="fu">library</span>(seededlda)</span>
-<span id="cb223-2"><a href="seeded-latent-dirichlet-allocation.html#cb223-2" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
-<span id="cb223-3"><a href="seeded-latent-dirichlet-allocation.html#cb223-3" tabindex="-1"></a></span>
-<span id="cb223-4"><a href="seeded-latent-dirichlet-allocation.html#cb223-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="seeded-latent-dirichlet-allocation.html#cb226-1" tabindex="-1"></a><span class="fu">library</span>(seededlda)</span>
+<span id="cb226-2"><a href="seeded-latent-dirichlet-allocation.html#cb226-2" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
+<span id="cb226-3"><a href="seeded-latent-dirichlet-allocation.html#cb226-3" tabindex="-1"></a></span>
+<span id="cb226-4"><a href="seeded-latent-dirichlet-allocation.html#cb226-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span></code></pre></div>
 <p>Next, we need to specify a selection of seed words in dictionary form. While we can construct a dictionary ourselves, here we choose to use the Laver and Garry dictionary we saw earlier. We then use this dictionary to run our seeded LDA:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="seeded-latent-dirichlet-allocation.html#cb224-1" tabindex="-1"></a>dictionary_LaverGarry <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(data_dictionary_LaverGarry)</span>
-<span id="cb224-2"><a href="seeded-latent-dirichlet-allocation.html#cb224-2" tabindex="-1"></a>seededmodel <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(data_inaugural_dfm, <span class="at">dictionary =</span> dictionary_LaverGarry)</span>
-<span id="cb224-3"><a href="seeded-latent-dirichlet-allocation.html#cb224-3" tabindex="-1"></a><span class="fu">terms</span>(seededmodel, <span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##       CULTURE     ECONOMY       ENVIRONMENT     GROUPS       INSTITUTIONS    
-##  [1,] &quot;people&quot;    &quot;work&quot;        &quot;civilization&quot;  &quot;women&quot;      &quot;president&quot;     
-##  [2,] &quot;us&quot;        &quot;government&quot;  &quot;production&quot;    &quot;race&quot;       &quot;administration&quot;
-##  [3,] &quot;new&quot;       &quot;can&quot;         &quot;products&quot;      &quot;life&quot;       &quot;executive&quot;     
-##  [4,] &quot;america&quot;   &quot;great&quot;       &quot;productive&quot;    &quot;men&quot;        &quot;continue&quot;      
-##  [5,] &quot;nation&quot;    &quot;must&quot;        &quot;produce&quot;       &quot;spirit&quot;     &quot;business&quot;      
-##  [6,] &quot;must&quot;      &quot;upon&quot;        &quot;population&quot;    &quot;mind&quot;       &quot;office&quot;        
-##  [7,] &quot;can&quot;       &quot;shall&quot;       &quot;relations&quot;     &quot;task&quot;       &quot;congress&quot;      
-##  [8,] &quot;world&quot;     &quot;may&quot;         &quot;task&quot;          &quot;evil&quot;       &quot;policy&quot;        
-##  [9,] &quot;time&quot;      &quot;economic&quot;    &quot;order&quot;         &quot;body&quot;       &quot;legislation&quot;   
-## [10,] &quot;let&quot;       &quot;justice&quot;     &quot;republic&quot;      &quot;speaks&quot;     &quot;law&quot;           
-## [11,] &quot;one&quot;       &quot;opportunity&quot; &quot;tasks&quot;         &quot;fail&quot;       &quot;federal&quot;       
-## [12,] &quot;now&quot;       &quot;children&quot;    &quot;understanding&quot; &quot;built&quot;      &quot;rule&quot;          
-## [13,] &quot;today&quot;     &quot;life&quot;        &quot;lies&quot;          &quot;minds&quot;      &quot;democratic&quot;    
-## [14,] &quot;americans&quot; &quot;united&quot;      &quot;planet&quot;        &quot;woman&quot;      &quot;authority&quot;     
-## [15,] &quot;american&quot;  &quot;war&quot;         &quot;international&quot; &quot;set&quot;        &quot;secure&quot;        
-## [16,] &quot;together&quot;  &quot;country&quot;     &quot;established&quot;   &quot;democratic&quot; &quot;modern&quot;        
-## [17,] &quot;know&quot;      &quot;progress&quot;    &quot;supreme&quot;       &quot;west&quot;       &quot;agencies&quot;      
-## [18,] &quot;make&quot;      &quot;economy&quot;     &quot;making&quot;        &quot;vital&quot;      &quot;necessary&quot;     
-## [19,] &quot;every&quot;     &quot;peace&quot;       &quot;promote&quot;       &quot;deeply&quot;     &quot;international&quot; 
-## [20,] &quot;years&quot;     &quot;national&quot;    &quot;seeking&quot;       &quot;mercy&quot;      &quot;conditions&quot;    
-##       LAW_AND_ORDER   RURAL          URBAN       VALUES      
-##  [1,] &quot;force&quot;         &quot;public&quot;       &quot;thank&quot;     &quot;freedom&quot;   
-##  [2,] &quot;forces&quot;        &quot;party&quot;        &quot;story&quot;     &quot;history&quot;   
-##  [3,] &quot;change&quot;        &quot;permanent&quot;    &quot;president&quot; &quot;human&quot;     
-##  [4,] &quot;determined&quot;    &quot;enforcement&quot;  &quot;bless&quot;     &quot;peace&quot;     
-##  [5,] &quot;conviction&quot;    &quot;laws&quot;         &quot;hand&quot;      &quot;free&quot;      
-##  [6,] &quot;determination&quot; &quot;property&quot;     &quot;friends&quot;   &quot;world&quot;     
-##  [7,] &quot;terror&quot;        &quot;agricultural&quot; &quot;prayer&quot;    &quot;nations&quot;   
-##  [8,] &quot;powerful&quot;      &quot;direction&quot;    &quot;back&quot;      &quot;rights&quot;    
-##  [9,] &quot;citizen&quot;       &quot;countrymen&quot;   &quot;hear&quot;      &quot;principles&quot;
-## [10,] &quot;determine&quot;     &quot;fail&quot;         &quot;left&quot;      &quot;past&quot;      
-## [11,] &quot;man&quot;           &quot;agriculture&quot;  &quot;lost&quot;      &quot;help&quot;      
-## [12,] &quot;common&quot;        &quot;institutions&quot; &quot;vice&quot;      &quot;faith&quot;     
-## [13,] &quot;begin&quot;         &quot;nation&quot;       &quot;right&quot;     &quot;hope&quot;      
-## [14,] &quot;forth&quot;         &quot;islands&quot;      &quot;much&quot;      &quot;live&quot;      
-## [15,] &quot;happiness&quot;     &quot;constitution&quot; &quot;love&quot;      &quot;strength&quot;  
-## [16,] &quot;sides&quot;         &quot;must&quot;         &quot;heroes&quot;    &quot;peoples&quot;   
-## [17,] &quot;founding&quot;      &quot;forests&quot;      &quot;steps&quot;     &quot;security&quot;  
-## [18,] &quot;meaning&quot;       &quot;court&quot;        &quot;told&quot;      &quot;humanity&quot;  
-## [19,] &quot;creed&quot;         &quot;employment&quot;   &quot;federal&quot;   &quot;leadership&quot;
-## [20,] &quot;dealing&quot;       &quot;faith&quot;        &quot;white&quot;     &quot;maintain&quot;</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="seeded-latent-dirichlet-allocation.html#cb227-1" tabindex="-1"></a>dictionary_LaverGarry <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(data_dictionary_LaverGarry)</span>
+<span id="cb227-2"><a href="seeded-latent-dirichlet-allocation.html#cb227-2" tabindex="-1"></a>seededmodel <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(data_inaugural_dfm, <span class="at">dictionary =</span> dictionary_LaverGarry)</span>
+<span id="cb227-3"><a href="seeded-latent-dirichlet-allocation.html#cb227-3" tabindex="-1"></a><span class="fu">terms</span>(seededmodel, <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>##       CULTURE     ECONOMY       ENVIRONMENT     GROUPS      INSTITUTIONS    
+##  [1,] &quot;people&quot;    &quot;work&quot;        &quot;civilization&quot;  &quot;women&quot;     &quot;president&quot;     
+##  [2,] &quot;us&quot;        &quot;government&quot;  &quot;production&quot;    &quot;race&quot;      &quot;administration&quot;
+##  [3,] &quot;new&quot;       &quot;can&quot;         &quot;productive&quot;    &quot;day&quot;       &quot;executive&quot;     
+##  [4,] &quot;america&quot;   &quot;upon&quot;        &quot;republic&quot;      &quot;story&quot;     &quot;continue&quot;      
+##  [5,] &quot;nation&quot;    &quot;great&quot;       &quot;population&quot;    &quot;thank&quot;     &quot;office&quot;        
+##  [6,] &quot;world&quot;     &quot;must&quot;        &quot;war&quot;           &quot;back&quot;      &quot;business&quot;      
+##  [7,] &quot;must&quot;      &quot;may&quot;         &quot;order&quot;         &quot;bless&quot;     &quot;congress&quot;      
+##  [8,] &quot;can&quot;       &quot;shall&quot;       &quot;produce&quot;       &quot;president&quot; &quot;policy&quot;        
+##  [9,] &quot;time&quot;      &quot;economic&quot;    &quot;tasks&quot;         &quot;schools&quot;   &quot;legislation&quot;   
+## [10,] &quot;let&quot;       &quot;justice&quot;     &quot;planet&quot;        &quot;around&quot;    &quot;law&quot;           
+## [11,] &quot;one&quot;       &quot;opportunity&quot; &quot;products&quot;      &quot;yes&quot;       &quot;modern&quot;        
+## [12,] &quot;today&quot;     &quot;children&quot;    &quot;making&quot;        &quot;across&quot;    &quot;rule&quot;          
+## [13,] &quot;now&quot;       &quot;country&quot;     &quot;conditions&quot;    &quot;hand&quot;      &quot;authority&quot;     
+## [14,] &quot;every&quot;     &quot;united&quot;      &quot;productivity&quot;  &quot;left&quot;      &quot;race&quot;          
+## [15,] &quot;make&quot;      &quot;war&quot;         &quot;relations&quot;     &quot;friends&quot;   &quot;necessary&quot;     
+## [16,] &quot;americans&quot; &quot;progress&quot;    &quot;promote&quot;       &quot;began&quot;     &quot;agencies&quot;      
+## [17,] &quot;american&quot;  &quot;men&quot;         &quot;maintained&quot;    &quot;lost&quot;      &quot;make&quot;          
+## [18,] &quot;years&quot;     &quot;never&quot;       &quot;understanding&quot; &quot;racial&quot;    &quot;proper&quot;        
+## [19,] &quot;together&quot;  &quot;economy&quot;     &quot;leadership&quot;    &quot;young&quot;     &quot;reforms&quot;       
+## [20,] &quot;spirit&quot;    &quot;made&quot;        &quot;normal&quot;        &quot;founding&quot;  &quot;voices&quot;        
+##       LAW_AND_ORDER   RURAL           URBAN        VALUES      
+##  [1,] &quot;force&quot;         &quot;public&quot;        &quot;man&quot;        &quot;freedom&quot;   
+##  [2,] &quot;determined&quot;    &quot;law&quot;           &quot;price&quot;      &quot;history&quot;   
+##  [3,] &quot;forces&quot;        &quot;party&quot;         &quot;sides&quot;      &quot;human&quot;     
+##  [4,] &quot;men&quot;           &quot;permanent&quot;     &quot;begin&quot;      &quot;peace&quot;     
+##  [5,] &quot;determination&quot; &quot;toward&quot;        &quot;growth&quot;     &quot;free&quot;      
+##  [6,] &quot;day&quot;           &quot;enforcement&quot;   &quot;loyalty&quot;    &quot;world&quot;     
+##  [7,] &quot;court&quot;         &quot;agricultural&quot;  &quot;covenant&quot;   &quot;nations&quot;   
+##  [8,] &quot;counsel&quot;       &quot;relations&quot;     &quot;sick&quot;       &quot;rights&quot;    
+##  [9,] &quot;every&quot;         &quot;direction&quot;     &quot;compassion&quot; &quot;principles&quot;
+## [10,] &quot;something&quot;     &quot;nation&quot;        &quot;final&quot;      &quot;past&quot;      
+## [11,] &quot;evil&quot;          &quot;establishment&quot; &quot;heal&quot;       &quot;help&quot;      
+## [12,] &quot;mind&quot;          &quot;islands&quot;       &quot;globe&quot;      &quot;life&quot;      
+## [13,] &quot;conviction&quot;    &quot;countrymen&quot;    &quot;goals&quot;      &quot;faith&quot;     
+## [14,] &quot;terror&quot;        &quot;stability&quot;     &quot;passed&quot;     &quot;strength&quot;  
+## [15,] &quot;necessity&quot;     &quot;independence&quot;  &quot;call&quot;       &quot;live&quot;      
+## [16,] &quot;life&quot;          &quot;feed&quot;          &quot;understood&quot; &quot;know&quot;      
+## [17,] &quot;dealing&quot;       &quot;provided&quot;      &quot;suffer&quot;     &quot;peoples&quot;   
+## [18,] &quot;body&quot;          &quot;civilization&quot;  &quot;trying&quot;     &quot;security&quot;  
+## [19,] &quot;democratic&quot;    &quot;agriculture&quot;   &quot;mountains&quot;  &quot;humanity&quot;  
+## [20,] &quot;determine&quot;     &quot;ideals&quot;        &quot;assure&quot;     &quot;leadership&quot;</code></pre>
 <p>Note that using the dictionary has ensured that we only use the categories that occur in the dictionary. This means that we can look at which topics are in each inaugural speech and which terms were most likely for each of the topics. Let us start with the topics first:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="seeded-latent-dirichlet-allocation.html#cb226-1" tabindex="-1"></a>topics <span class="ot">&lt;-</span> <span class="fu">topics</span>(seededmodel)</span>
-<span id="cb226-2"><a href="seeded-latent-dirichlet-allocation.html#cb226-2" tabindex="-1"></a>topics_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(topics)</span>
-<span id="cb226-3"><a href="seeded-latent-dirichlet-allocation.html#cb226-3" tabindex="-1"></a>topics_prop_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">prop.table</span>(topics_table))</span>
-<span id="cb226-4"><a href="seeded-latent-dirichlet-allocation.html#cb226-4" tabindex="-1"></a></span>
-<span id="cb226-5"><a href="seeded-latent-dirichlet-allocation.html#cb226-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>topics_prop_table, <span class="fu">aes</span>(<span class="at">x=</span>topics, <span class="at">y=</span>Freq))<span class="sc">+</span></span>
-<span id="cb226-6"><a href="seeded-latent-dirichlet-allocation.html#cb226-6" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
-<span id="cb226-7"><a href="seeded-latent-dirichlet-allocation.html#cb226-7" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Topics&quot;</span>, <span class="at">y=</span><span class="st">&quot;Topic Percentage&quot;</span>)<span class="sc">+</span></span>
-<span id="cb226-8"><a href="seeded-latent-dirichlet-allocation.html#cb226-8" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb226-9"><a href="seeded-latent-dirichlet-allocation.html#cb226-9" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb226-10"><a href="seeded-latent-dirichlet-allocation.html#cb226-10" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="seeded-latent-dirichlet-allocation.html#cb229-1" tabindex="-1"></a>topics <span class="ot">&lt;-</span> <span class="fu">topics</span>(seededmodel)</span>
+<span id="cb229-2"><a href="seeded-latent-dirichlet-allocation.html#cb229-2" tabindex="-1"></a>topics_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(topics)</span>
+<span id="cb229-3"><a href="seeded-latent-dirichlet-allocation.html#cb229-3" tabindex="-1"></a>topics_prop_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">prop.table</span>(topics_table))</span>
+<span id="cb229-4"><a href="seeded-latent-dirichlet-allocation.html#cb229-4" tabindex="-1"></a></span>
+<span id="cb229-5"><a href="seeded-latent-dirichlet-allocation.html#cb229-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>topics_prop_table, <span class="fu">aes</span>(<span class="at">x=</span>topics, <span class="at">y=</span>Freq))<span class="sc">+</span></span>
+<span id="cb229-6"><a href="seeded-latent-dirichlet-allocation.html#cb229-6" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb229-7"><a href="seeded-latent-dirichlet-allocation.html#cb229-7" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Topics&quot;</span>, <span class="at">y=</span><span class="st">&quot;Topic Percentage&quot;</span>)<span class="sc">+</span></span>
+<span id="cb229-8"><a href="seeded-latent-dirichlet-allocation.html#cb229-8" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb229-9"><a href="seeded-latent-dirichlet-allocation.html#cb229-9" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb229-10"><a href="seeded-latent-dirichlet-allocation.html#cb229-10" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/ggplot-seededlda-1.png" width="672" /></p>
 <p>Here, we find that Culture was the most favoured topic, followed by the Economy and Values. Finally, we can then have a look at the most likely terms for each topic, sorted by each of the categories in the dictionary:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="seeded-latent-dirichlet-allocation.html#cb227-1" tabindex="-1"></a>terms <span class="ot">&lt;-</span> <span class="fu">terms</span>(seededmodel)</span>
-<span id="cb227-2"><a href="seeded-latent-dirichlet-allocation.html#cb227-2" tabindex="-1"></a>terms_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(terms)</span>
-<span id="cb227-3"><a href="seeded-latent-dirichlet-allocation.html#cb227-3" tabindex="-1"></a>terms_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(terms_table)</span>
-<span id="cb227-4"><a href="seeded-latent-dirichlet-allocation.html#cb227-4" tabindex="-1"></a><span class="fu">head</span>(terms_df)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="seeded-latent-dirichlet-allocation.html#cb230-1" tabindex="-1"></a>terms <span class="ot">&lt;-</span> <span class="fu">terms</span>(seededmodel)</span>
+<span id="cb230-2"><a href="seeded-latent-dirichlet-allocation.html#cb230-2" tabindex="-1"></a>terms_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(terms)</span>
+<span id="cb230-3"><a href="seeded-latent-dirichlet-allocation.html#cb230-3" tabindex="-1"></a>terms_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(terms_table)</span>
+<span id="cb230-4"><a href="seeded-latent-dirichlet-allocation.html#cb230-4" tabindex="-1"></a><span class="fu">head</span>(terms_df)</span></code></pre></div>
 <pre><code>##   Var1    Var2    Freq
 ## 1    A CULTURE  people
 ## 2    B CULTURE      us
 ## 3    C CULTURE     new
 ## 4    D CULTURE america
 ## 5    E CULTURE  nation
-## 6    F CULTURE    must</code></pre>
+## 6    F CULTURE   world</code></pre>
 <p>Here, we find that in the first cluster (denoted as ‘A’), the word ‘people’ was most likely (from all words that belonged to Culture). Thus, within this cluster, talking about culture often contained references to the people. In the same way, we can make similar observations for the other categories.</p>
 </div>
             </section>
@@ -387,7 +388,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

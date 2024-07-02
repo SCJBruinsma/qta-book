@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.4 Text Statistics | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="6.4 Text Statistics | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.4 Text Statistics | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -263,59 +264,61 @@ div.csl-indent {
 <div id="text-statistics" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Text Statistics<a href="text-statistics.html#text-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Finally, <code>quanteda</code> also allows us to calculate quite some textual statistics. These are all collected in the <code>quanteda.textstats</code> helper package. Here, we will look at several of them, starting with a simple overview of our corpus in the terms of a summary. This tells us the number of characters, sentences, tokens, etc. for each of the texts:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="text-statistics.html#cb81-1" tabindex="-1"></a><span class="fu">library</span>(quanteda.textstats)</span>
-<span id="cb81-2"><a href="text-statistics.html#cb81-2" tabindex="-1"></a>corpus_summary <span class="ot">&lt;-</span> <span class="fu">textstat_summary</span>(data_corpus)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="text-statistics.html#cb82-1" tabindex="-1"></a><span class="fu">library</span>(quanteda.textstats)</span></code></pre></div>
+<pre><code>## Warning: package &#39;quanteda.textstats&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="text-statistics.html#cb84-1" tabindex="-1"></a>corpus_summary <span class="ot">&lt;-</span> <span class="fu">textstat_summary</span>(data_corpus)</span></code></pre></div>
 <p>If we want, we can then use this data to make some simple graphs telling us various things about the texts in our corpus. As an example, let’s look at the number of sentences in the various paragraphs:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="text-statistics.html#cb82-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>corpus_summary, <span class="fu">aes</span>(<span class="at">x=</span>document, <span class="at">y=</span>sents, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb82-2"><a href="text-statistics.html#cb82-2" tabindex="-1"></a> <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb82-3"><a href="text-statistics.html#cb82-3" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb82-4"><a href="text-statistics.html#cb82-4" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Number of Characters&quot;</span>)<span class="sc">+</span></span>
-<span id="cb82-5"><a href="text-statistics.html#cb82-5" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Paragraph&quot;</span>)<span class="sc">+</span></span>
-<span id="cb82-6"><a href="text-statistics.html#cb82-6" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb82-7"><a href="text-statistics.html#cb82-7" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/ggplot-summary-1.png" width="672" /></p>
-<p>Other things we can look at are the readability and lexical diversity of the texts. The former one of these refers to how readable a text is (i.e. how easy or difficult it is to read), while the latter tells us how many different types of words there are in the texts and thus how <em>diverse</em> the text is in word choice and use. Given that there are many ways to calculate both metrics, please have a look at the help file to see which one works best for you. Here, we will use the most popular:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="text-statistics.html#cb83-1" tabindex="-1"></a>corpus_readability <span class="ot">&lt;-</span> <span class="fu">textstat_readability</span>(data_corpus, <span class="at">measure =</span> <span class="fu">c</span>(<span class="st">&quot;Flesch.Kincaid&quot;</span>, <span class="st">&quot;Dale.Chall.old&quot;</span>))</span>
-<span id="cb83-2"><a href="text-statistics.html#cb83-2" tabindex="-1"></a>corpus_lexdiv <span class="ot">&lt;-</span> <span class="fu">textstat_lexdiv</span>(data_tokens, <span class="fu">c</span>(<span class="st">&quot;CTTR&quot;</span>, <span class="st">&quot;TTR&quot;</span>, <span class="st">&quot;MATTR&quot;</span>), <span class="at">MATTR_window =</span> <span class="dv">100</span>)</span></code></pre></div>
-<pre><code>## Warning: MATTR_window exceeds some documents&#39; token lengths, resetting to 6</code></pre>
-<p>As before, we can plot this data in a graph to see how lexical diversity developed over the course of the article:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="text-statistics.html#cb85-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>corpus_lexdiv, <span class="fu">aes</span>(<span class="at">x=</span>document, <span class="at">y=</span>CTTR, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="text-statistics.html#cb85-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>corpus_summary, <span class="fu">aes</span>(<span class="at">x=</span>document, <span class="at">y=</span>sents, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb85-2"><a href="text-statistics.html#cb85-2" tabindex="-1"></a> <span class="fu">geom_line</span>()<span class="sc">+</span></span>
 <span id="cb85-3"><a href="text-statistics.html#cb85-3" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb85-4"><a href="text-statistics.html#cb85-4" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Lexical Diversity (CTTR)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb85-4"><a href="text-statistics.html#cb85-4" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Number of Characters&quot;</span>)<span class="sc">+</span></span>
 <span id="cb85-5"><a href="text-statistics.html#cb85-5" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Paragraph&quot;</span>)<span class="sc">+</span></span>
 <span id="cb85-6"><a href="text-statistics.html#cb85-6" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
 <span id="cb85-7"><a href="text-statistics.html#cb85-7" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/ggplot-summary-1.png" width="672" /></p>
+<p>Other things we can look at are the readability and lexical diversity of the texts. The former one of these refers to how readable a text is (i.e. how easy or difficult it is to read), while the latter tells us how many different types of words there are in the texts and thus how <em>diverse</em> the text is in word choice and use. Given that there are many ways to calculate both metrics, please have a look at the help file to see which one works best for you. Here, we will use the most popular:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="text-statistics.html#cb86-1" tabindex="-1"></a>corpus_readability <span class="ot">&lt;-</span> <span class="fu">textstat_readability</span>(data_corpus, <span class="at">measure =</span> <span class="st">&quot;Flesch.Kincaid&quot;</span>)</span>
+<span id="cb86-2"><a href="text-statistics.html#cb86-2" tabindex="-1"></a>corpus_lexdiv <span class="ot">&lt;-</span> <span class="fu">textstat_lexdiv</span>(data_tokens, <span class="at">measure =</span> <span class="st">&quot;CTTR&quot;</span>)</span></code></pre></div>
+<p>As before, we can plot this data in a graph to see how lexical diversity developed over the course of the article:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="text-statistics.html#cb87-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>corpus_lexdiv, <span class="fu">aes</span>(<span class="at">x=</span>document, <span class="at">y=</span>CTTR, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb87-2"><a href="text-statistics.html#cb87-2" tabindex="-1"></a> <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb87-3"><a href="text-statistics.html#cb87-3" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb87-4"><a href="text-statistics.html#cb87-4" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Lexical Diversity (CTTR)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb87-5"><a href="text-statistics.html#cb87-5" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Paragraph&quot;</span>)<span class="sc">+</span></span>
+<span id="cb87-6"><a href="text-statistics.html#cb87-6" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb87-7"><a href="text-statistics.html#cb87-7" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 1 row containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
 <p><img src="_main_files/figure-html/ggplot-lexdiv-1.png" width="672" /></p>
 <p>Another thing we can do is look at the similarities and distances between documents. With this, we can answer questions such as: how <em>different</em> are these documents from each other? And if different (or similar), how different (or similar)? The idea is that the larger the similarity is, the smaller the distance is as well. A good way to understand the idea of similarity is to consider how many operations you need to perform to change one text into the other. The more “replace” options you have to carry out, the more different the text. As for the distances, it is best to consider the texts as having positions on a Cartesian plane (with positions based on their word counts). The distance between these two points (either Euclidean, Manhattan or other) is then the distance between the texts.</p>
 <p>Let’s start with a look at these similarities (note again that there are many different methods to calculate this):</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="text-statistics.html#cb86-1" tabindex="-1"></a>corpus_similarties <span class="ot">&lt;-</span> <span class="fu">textstat_simil</span>(data_dfm, <span class="at">method =</span> <span class="st">&quot;correlation&quot;</span>, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>)</span>
-<span id="cb86-2"><a href="text-statistics.html#cb86-2" tabindex="-1"></a>corpus_similarties <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_similarties)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="text-statistics.html#cb89-1" tabindex="-1"></a>corpus_similarties <span class="ot">&lt;-</span> <span class="fu">textstat_simil</span>(data_dfm, <span class="at">method =</span> <span class="st">&quot;correlation&quot;</span>, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>)</span>
+<span id="cb89-2"><a href="text-statistics.html#cb89-2" tabindex="-1"></a>corpus_similarties <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_similarties)</span></code></pre></div>
 <p>Note that while we look here at the documents, we could also look at individual words (set <code>margin="features</code>). For now, let us look at the distances between the documents, choosing the Euclidean distance between the documents as our metric:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="text-statistics.html#cb87-1" tabindex="-1"></a>corpus_distances <span class="ot">&lt;-</span> <span class="fu">textstat_dist</span>(data_dfm, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>, <span class="at">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
-<span id="cb87-2"><a href="text-statistics.html#cb87-2" tabindex="-1"></a>corpus_distances_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_distances)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="text-statistics.html#cb90-1" tabindex="-1"></a>corpus_distances <span class="ot">&lt;-</span> <span class="fu">textstat_dist</span>(data_dfm, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>, <span class="at">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
+<span id="cb90-2"><a href="text-statistics.html#cb90-2" tabindex="-1"></a>corpus_distances_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_distances)</span></code></pre></div>
 <p>If we want to, we can even convert this data into a dendrogram. We do this by taking the information on the distances out of the <code>corpus_distances</code> object, make them into a triangular matrix, and plot them:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="text-statistics.html#cb88-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(<span class="fu">as.dist</span>(corpus_distances)), <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="text-statistics.html#cb91-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(<span class="fu">as.dist</span>(corpus_distances)), <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/plot-distances-1.png" width="672" /></p>
 <p>Finally, let us look at the entropy of our texts. The entropy of a document measures the ‘amount’ of information each letter of the text produces. To get an idea of what this means, consider the ‘e’ is an often occurring letter in an English text, while ‘z’ is not. Thus, a word with a ‘z’ in it, it more unique and thus likely to carry unique and interesting information. The ‘higher’ the entropy of a text, the less ‘information’ is in it:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="text-statistics.html#cb89-1" tabindex="-1"></a>corpus_entropy_docs <span class="ot">&lt;-</span> <span class="fu">textstat_entropy</span>(data_dfm, <span class="st">&quot;documents&quot;</span>)</span>
-<span id="cb89-2"><a href="text-statistics.html#cb89-2" tabindex="-1"></a>corpus_entropy_docs <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_entropy_docs)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="text-statistics.html#cb92-1" tabindex="-1"></a>corpus_entropy_docs <span class="ot">&lt;-</span> <span class="fu">textstat_entropy</span>(data_dfm, <span class="st">&quot;documents&quot;</span>)</span>
+<span id="cb92-2"><a href="text-statistics.html#cb92-2" tabindex="-1"></a>corpus_entropy_docs <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_entropy_docs)</span></code></pre></div>
 <p>While not as common as the other distance metrics, entropy is sometimes used to measure the similarity between texts. Thus, it can be useful if we want to know the importance of certain words. This is because if a certain word is not important, we could consider it to be a stop word:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="text-statistics.html#cb90-1" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> <span class="fu">textstat_entropy</span>(data_dfm, <span class="st">&quot;features&quot;</span>)</span>
-<span id="cb90-2"><a href="text-statistics.html#cb90-2" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_entropy_feats)</span>
-<span id="cb90-3"><a href="text-statistics.html#cb90-3" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> corpus_entropy_feats[<span class="fu">order</span>(<span class="sc">-</span>corpus_entropy_feats<span class="sc">$</span>entropy),]</span>
-<span id="cb90-4"><a href="text-statistics.html#cb90-4" tabindex="-1"></a><span class="fu">head</span>(corpus_entropy_feats, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="text-statistics.html#cb93-1" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> <span class="fu">textstat_entropy</span>(data_dfm, <span class="st">&quot;features&quot;</span>)</span>
+<span id="cb93-2"><a href="text-statistics.html#cb93-2" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_entropy_feats)</span>
+<span id="cb93-3"><a href="text-statistics.html#cb93-3" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> corpus_entropy_feats[<span class="fu">order</span>(<span class="sc">-</span>corpus_entropy_feats<span class="sc">$</span>entropy),]</span>
+<span id="cb93-4"><a href="text-statistics.html#cb93-4" tabindex="-1"></a><span class="fu">head</span>(corpus_entropy_feats, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##       feature  entropy
 ## 8      soviet 6.620700
-## 2         war 6.397613
-## 9       union 6.043494
-## 7      states 5.967375
-## 6      united 5.871028
-## 52   military 5.597828
-## 1        cold 5.454971
-## 102 communist 5.374768
-## 12    western 5.323775
-## 463        us 5.284528</code></pre>
+## 2         war 6.443909
+## 9       union 6.081728
+## 7      states 5.923134
+## 6      united 5.823699
+## 57   military 5.612866
+## 1        cold 5.573738
+## 107 communist 5.374768
+## 222        us 5.293932
+## 12    western 5.289149</code></pre>
 <p>Looking at the data, we find that ‘soviet’, ‘war’ and ‘union’ have pretty high entropies. This indicates that the words added little to the information of the documents, and would-be candidates for removal from our corpus.</p>
 
 </div>
@@ -368,7 +371,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

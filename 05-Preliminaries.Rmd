@@ -150,8 +150,8 @@ ggplot(data=corpus_summary, aes(x=document, y=sents, group=1)) +
 Other things we can look at are the readability and lexical diversity of the texts. The former one of these refers to how readable a text is (i.e. how easy or difficult it is to read), while the latter tells us how many different types of words there are in the texts and thus how *diverse* the text is in word choice and use. Given that there are many ways to calculate both metrics, please have a look at the help file to see which one works best for you. Here, we will use the most popular:
 
 ```{r inaugural-readability}
-corpus_readability <- textstat_readability(data_corpus, measure = c("Flesch.Kincaid", "Dale.Chall.old"))
-corpus_lexdiv <- textstat_lexdiv(data_tokens, c("CTTR", "TTR", "MATTR"), MATTR_window = 100)
+corpus_readability <- textstat_readability(data_corpus, measure = "Flesch.Kincaid")
+corpus_lexdiv <- textstat_lexdiv(data_tokens, measure = "CTTR")
 ```
 
 As before, we can plot this data in a graph to see how lexical diversity developed over the course of the article:

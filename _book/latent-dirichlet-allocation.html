@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.1 Latent Dirichlet Allocation | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="11.1 Latent Dirichlet Allocation | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.1 Latent Dirichlet Allocation | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -263,87 +264,86 @@ div.csl-indent {
 <div id="latent-dirichlet-allocation" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">11.1</span> Latent Dirichlet Allocation<a href="latent-dirichlet-allocation.html#latent-dirichlet-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Latent Dirichlet Allocation, or LDA, relies on the idea is that each text is a mix of topics, and each word belongs to one of these. To run LDA, we will use the <code>topicmodels</code> package, and use the inaugural speeches as an example. First, we will use the <code>convert</code> function to convert the data frequency matrix to a data term matrix as this is what <code>topicmodels</code> uses:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="latent-dirichlet-allocation.html#cb211-1" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span></code></pre></div>
-<pre><code>## Warning: package &#39;topicmodels&#39; was built under R version 4.3.2</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="latent-dirichlet-allocation.html#cb213-1" tabindex="-1"></a>inaugural_dtm <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_inaugural_dfm, <span class="at">to =</span> <span class="st">&quot;topicmodels&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="latent-dirichlet-allocation.html#cb216-1" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb216-2"><a href="latent-dirichlet-allocation.html#cb216-2" tabindex="-1"></a>inaugural_dtm <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_inaugural_dfm, <span class="at">to =</span> <span class="st">&quot;topicmodels&quot;</span>)</span></code></pre></div>
 <p>Then, we fit an LDA model with 10 topics. First, we have to define some a priori parameters for the model. Here, we will use the Gibbs sampling method to fit the LDA model <span class="citation">(<a href="#ref-Griffiths2004a">Griffiths &amp; Steyvers, 2004</a>)</span> over the alternative VEM approach <span class="citation">(<a href="#ref-Blei2003a">Blei et al., 2003</a>)</span>. Gibbs sampling performs a random walk over the distribution so we need to set a seed to ensure reproducible results. In this particular example, we set five seeds for five independent runs. We also set a burn-in period of 2000 as the first iterations will not reflect the distribution well, and take the 200th iteration of the following 1000:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="latent-dirichlet-allocation.html#cb214-1" tabindex="-1"></a>burnin <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb214-2"><a href="latent-dirichlet-allocation.html#cb214-2" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb214-3"><a href="latent-dirichlet-allocation.html#cb214-3" tabindex="-1"></a>thin <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb214-4"><a href="latent-dirichlet-allocation.html#cb214-4" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>,<span class="dv">5</span>,<span class="dv">24</span>,<span class="dv">158</span>,<span class="dv">2500</span>)</span>
-<span id="cb214-5"><a href="latent-dirichlet-allocation.html#cb214-5" tabindex="-1"></a>nstart <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb214-6"><a href="latent-dirichlet-allocation.html#cb214-6" tabindex="-1"></a>best <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="latent-dirichlet-allocation.html#cb217-1" tabindex="-1"></a>burnin <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb217-2"><a href="latent-dirichlet-allocation.html#cb217-2" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb217-3"><a href="latent-dirichlet-allocation.html#cb217-3" tabindex="-1"></a>thin <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb217-4"><a href="latent-dirichlet-allocation.html#cb217-4" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>,<span class="dv">5</span>,<span class="dv">24</span>,<span class="dv">158</span>,<span class="dv">2500</span>)</span>
+<span id="cb217-5"><a href="latent-dirichlet-allocation.html#cb217-5" tabindex="-1"></a>nstart <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb217-6"><a href="latent-dirichlet-allocation.html#cb217-6" tabindex="-1"></a>best <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div>
 <p>The LDA algorithm estimates topic-word probabilities as well as topic-document probabilities that we can extract and visualize. Here, we will start with the topic-word probabilities called <code>beta</code>. To do this, we will use the <code>tidytext</code> package which is part of the tidyverse family of packages. Central to the logic of tidyverse packages is that it does not rely on a document term matrix but represents the data in a long format <span class="citation">(<a href="#ref-Welbers2017a">Welbers et al., 2017, p. 252</a>)</span>. Although this makes it less memory efficient, this lends itself to effective visualisation. The whole logic of these packages is that it works with data which has columns (variables) and rows with single observations. While this is the logic most people know, but it is not always the quickest (and is also not used by <code>quanteda</code>). Yet, it always allows you to look at your data in a way most will understand. First, we run the LDA and have a look at the first 10 terms:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="latent-dirichlet-allocation.html#cb215-1" tabindex="-1"></a>inaugural_lda10 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(inaugural_dtm, <span class="at">k=</span><span class="dv">10</span>,</span>
-<span id="cb215-2"><a href="latent-dirichlet-allocation.html#cb215-2" tabindex="-1"></a>                       <span class="at">method=</span><span class="st">&quot;Gibbs&quot;</span>,</span>
-<span id="cb215-3"><a href="latent-dirichlet-allocation.html#cb215-3" tabindex="-1"></a>                       <span class="at">control=</span><span class="fu">list</span>(<span class="at">burnin=</span>burnin,</span>
-<span id="cb215-4"><a href="latent-dirichlet-allocation.html#cb215-4" tabindex="-1"></a>                                    <span class="at">iter=</span>iter,</span>
-<span id="cb215-5"><a href="latent-dirichlet-allocation.html#cb215-5" tabindex="-1"></a>                                    <span class="at">thin=</span>thin,</span>
-<span id="cb215-6"><a href="latent-dirichlet-allocation.html#cb215-6" tabindex="-1"></a>                                    <span class="at">seed=</span>seed,</span>
-<span id="cb215-7"><a href="latent-dirichlet-allocation.html#cb215-7" tabindex="-1"></a>                                    <span class="at">nstart=</span>nstart,</span>
-<span id="cb215-8"><a href="latent-dirichlet-allocation.html#cb215-8" tabindex="-1"></a>                                    <span class="at">best=</span>best))</span>
-<span id="cb215-9"><a href="latent-dirichlet-allocation.html#cb215-9" tabindex="-1"></a></span>
-<span id="cb215-10"><a href="latent-dirichlet-allocation.html#cb215-10" tabindex="-1"></a><span class="fu">terms</span>(inaugural_lda10, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##       Topic 1   Topic 2   Topic 3     Topic 4     Topic 5   Topic 6        
-##  [1,] &quot;peace&quot;   &quot;us&quot;      &quot;business&quot;  &quot;americans&quot; &quot;every&quot;   &quot;never&quot;        
-##  [2,] &quot;world&quot;   &quot;new&quot;     &quot;may&quot;       &quot;citizens&quot;  &quot;great&quot;   &quot;must&quot;         
-##  [3,] &quot;nations&quot; &quot;people&quot;  &quot;congress&quot;  &quot;freedom&quot;   &quot;nation&quot;  &quot;republic&quot;     
-##  [4,] &quot;free&quot;    &quot;america&quot; &quot;policy&quot;    &quot;country&quot;   &quot;men&quot;     &quot;civilization&quot; 
-##  [5,] &quot;freedom&quot; &quot;must&quot;    &quot;states&quot;    &quot;president&quot; &quot;life&quot;    &quot;order&quot;        
-##  [6,] &quot;can&quot;     &quot;world&quot;   &quot;executive&quot; &quot;never&quot;     &quot;good&quot;    &quot;war&quot;          
-##  [7,] &quot;shall&quot;   &quot;can&quot;     &quot;made&quot;      &quot;common&quot;    &quot;part&quot;    &quot;concern&quot;      
-##  [8,] &quot;life&quot;    &quot;nation&quot;  &quot;necessary&quot; &quot;courage&quot;   &quot;upon&quot;    &quot;understanding&quot;
-##  [9,] &quot;may&quot;     &quot;one&quot;     &quot;trade&quot;     &quot;day&quot;       &quot;action&quot;  &quot;tasks&quot;        
-## [10,] &quot;hope&quot;    &quot;time&quot;    &quot;hope&quot;      &quot;across&quot;    &quot;purpose&quot; &quot;production&quot;   
-##       Topic 7      Topic 8       Topic 9      Topic 10   
-##  [1,] &quot;change&quot;     &quot;united&quot;      &quot;government&quot; &quot;first&quot;    
-##  [2,] &quot;generation&quot; &quot;liberty&quot;     &quot;upon&quot;       &quot;need&quot;     
-##  [3,] &quot;journey&quot;    &quot;human&quot;       &quot;can&quot;        &quot;love&quot;     
-##  [4,] &quot;hands&quot;      &quot;democracy&quot;   &quot;people&quot;     &quot;days&quot;     
-##  [5,] &quot;weapons&quot;    &quot;believe&quot;     &quot;country&quot;    &quot;things&quot;   
-##  [6,] &quot;forth&quot;      &quot;states&quot;      &quot;progress&quot;   &quot;back&quot;     
-##  [7,] &quot;powerful&quot;   &quot;alone&quot;       &quot;must&quot;       &quot;hand&quot;     
-##  [8,] &quot;enduring&quot;   &quot;security&quot;    &quot;law&quot;        &quot;friends&quot;  
-##  [9,] &quot;greatness&quot;  &quot;millions&quot;    &quot;system&quot;     &quot;unity&quot;    
-## [10,] &quot;words&quot;      &quot;opportunity&quot; &quot;political&quot;  &quot;president&quot;</code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="latent-dirichlet-allocation.html#cb218-1" tabindex="-1"></a>inaugural_lda10 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(inaugural_dtm, <span class="at">k=</span><span class="dv">10</span>,</span>
+<span id="cb218-2"><a href="latent-dirichlet-allocation.html#cb218-2" tabindex="-1"></a>                       <span class="at">method=</span><span class="st">&quot;Gibbs&quot;</span>,</span>
+<span id="cb218-3"><a href="latent-dirichlet-allocation.html#cb218-3" tabindex="-1"></a>                       <span class="at">control=</span><span class="fu">list</span>(<span class="at">burnin=</span>burnin,</span>
+<span id="cb218-4"><a href="latent-dirichlet-allocation.html#cb218-4" tabindex="-1"></a>                                    <span class="at">iter=</span>iter,</span>
+<span id="cb218-5"><a href="latent-dirichlet-allocation.html#cb218-5" tabindex="-1"></a>                                    <span class="at">thin=</span>thin,</span>
+<span id="cb218-6"><a href="latent-dirichlet-allocation.html#cb218-6" tabindex="-1"></a>                                    <span class="at">seed=</span>seed,</span>
+<span id="cb218-7"><a href="latent-dirichlet-allocation.html#cb218-7" tabindex="-1"></a>                                    <span class="at">nstart=</span>nstart,</span>
+<span id="cb218-8"><a href="latent-dirichlet-allocation.html#cb218-8" tabindex="-1"></a>                                    <span class="at">best=</span>best))</span>
+<span id="cb218-9"><a href="latent-dirichlet-allocation.html#cb218-9" tabindex="-1"></a></span>
+<span id="cb218-10"><a href="latent-dirichlet-allocation.html#cb218-10" tabindex="-1"></a><span class="fu">terms</span>(inaugural_lda10, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##       Topic 1      Topic 2    Topic 3     Topic 4     Topic 5   Topic 6    
+##  [1,] &quot;government&quot; &quot;nations&quot;  &quot;women&quot;     &quot;business&quot;  &quot;us&quot;      &quot;freedom&quot;  
+##  [2,] &quot;justice&quot;    &quot;world&quot;    &quot;love&quot;      &quot;race&quot;      &quot;can&quot;     &quot;liberty&quot;  
+##  [3,] &quot;progress&quot;   &quot;peace&quot;    &quot;many&quot;      &quot;may&quot;       &quot;new&quot;     &quot;every&quot;    
+##  [4,] &quot;system&quot;     &quot;free&quot;     &quot;much&quot;      &quot;necessary&quot; &quot;nation&quot;  &quot;americans&quot;
+##  [5,] &quot;laws&quot;       &quot;freedom&quot;  &quot;days&quot;      &quot;made&quot;      &quot;america&quot; &quot;still&quot;    
+##  [6,] &quot;greater&quot;    &quot;peoples&quot;  &quot;story&quot;     &quot;passed&quot;    &quot;must&quot;    &quot;rights&quot;   
+##  [7,] &quot;economic&quot;   &quot;may&quot;      &quot;moment&quot;    &quot;proper&quot;    &quot;world&quot;   &quot;care&quot;     
+##  [8,] &quot;prosperity&quot; &quot;people&quot;   &quot;like&quot;      &quot;tariff&quot;    &quot;people&quot;  &quot;came&quot;     
+##  [9,] &quot;public&quot;     &quot;strength&quot; &quot;americans&quot; &quot;feeling&quot;   &quot;time&quot;    &quot;states&quot;   
+## [10,] &quot;many&quot;       &quot;united&quot;   &quot;thank&quot;     &quot;increase&quot;  &quot;one&quot;     &quot;ideals&quot;   
+##       Topic 7      Topic 8    Topic 9      Topic 10       
+##  [1,] &quot;can&quot;        &quot;life&quot;     &quot;man&quot;        &quot;republic&quot;     
+##  [2,] &quot;must&quot;       &quot;upon&quot;     &quot;change&quot;     &quot;never&quot;        
+##  [3,] &quot;government&quot; &quot;men&quot;      &quot;earth&quot;      &quot;war&quot;          
+##  [4,] &quot;upon&quot;       &quot;shall&quot;    &quot;done&quot;       &quot;may&quot;          
+##  [5,] &quot;law&quot;        &quot;purpose&quot;  &quot;believe&quot;    &quot;must&quot;         
+##  [6,] &quot;shall&quot;      &quot;good&quot;     &quot;seek&quot;       &quot;civilization&quot; 
+##  [7,] &quot;congress&quot;   &quot;great&quot;    &quot;economy&quot;    &quot;lies&quot;         
+##  [8,] &quot;country&quot;    &quot;without&quot;  &quot;generation&quot; &quot;order&quot;        
+##  [9,] &quot;people&quot;     &quot;problems&quot; &quot;union&quot;      &quot;understanding&quot;
+## [10,] &quot;states&quot;     &quot;duty&quot;     &quot;small&quot;      &quot;sound&quot;</code></pre>
 <p>Here, we can see that the first topic is most concerned with words referring to peace and freedom, the second with references to the people, the third with businesses, as so on. While we can interpret our topics this way, a better way might be to visualise the results. For this, we will use the <code>tidy</code> command to prepare the dataset for visualisation. Then, we tell the command to use the information from the <code>beta</code> column, which contains the probability of a word occurring in a certain topic:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="latent-dirichlet-allocation.html#cb217-1" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb217-2"><a href="latent-dirichlet-allocation.html#cb217-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb217-3"><a href="latent-dirichlet-allocation.html#cb217-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb217-4"><a href="latent-dirichlet-allocation.html#cb217-4" tabindex="-1"></a></span>
-<span id="cb217-5"><a href="latent-dirichlet-allocation.html#cb217-5" tabindex="-1"></a>inaugural_lda10_topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(inaugural_lda10, <span class="at">matrix=</span><span class="st">&quot;beta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="latent-dirichlet-allocation.html#cb220-1" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb220-2"><a href="latent-dirichlet-allocation.html#cb220-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb220-3"><a href="latent-dirichlet-allocation.html#cb220-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb220-4"><a href="latent-dirichlet-allocation.html#cb220-4" tabindex="-1"></a></span>
+<span id="cb220-5"><a href="latent-dirichlet-allocation.html#cb220-5" tabindex="-1"></a>inaugural_lda10_topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(inaugural_lda10, <span class="at">matrix=</span><span class="st">&quot;beta&quot;</span>)</span></code></pre></div>
 <p>If we would look into the dataset now, we would see that it has 63130 observations with 3 variables. These are the number of the topic, the word (the term) and the <code>beta</code> - the chance that the word occurs in that topic. We now want to visualise only the top ten words for each topic in a bar plot. Also, we want the graphs of each of these ten topics to appear in a single graph. To make this happen, we first have to select the top ten words for each topic. We do so again using a pipe (which is the <code>%&gt;%</code> command). This pipe transports an output of a command to another one before saving it. So here, we take our data set and group it by topic using the <code>group_by</code> command. This command groups the dataset into 10 groups, each for every topic. What this allows us is to calculate things that we otherwise calculate for the whole data-set but here calculate for the groups instead. We then do so and select the top 10 terms (based on their beta value), using <code>top_n</code>. We then ungroup again (to make R view it as a single data-set), and use the <code>arrange</code> function to ensure the data-set sorts the topics in an increasing and the beta values in a decreasing fashion. Finally, we save this into a new object:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="latent-dirichlet-allocation.html#cb218-1" tabindex="-1"></a>inaugural_lda10_topterms <span class="ot">&lt;-</span> inaugural_lda10_topics <span class="sc">%&gt;%</span></span>
-<span id="cb218-2"><a href="latent-dirichlet-allocation.html#cb218-2" tabindex="-1"></a> <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb218-3"><a href="latent-dirichlet-allocation.html#cb218-3" tabindex="-1"></a> <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span></span>
-<span id="cb218-4"><a href="latent-dirichlet-allocation.html#cb218-4" tabindex="-1"></a> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb218-5"><a href="latent-dirichlet-allocation.html#cb218-5" tabindex="-1"></a> <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="latent-dirichlet-allocation.html#cb221-1" tabindex="-1"></a>inaugural_lda10_topterms <span class="ot">&lt;-</span> inaugural_lda10_topics <span class="sc">%&gt;%</span></span>
+<span id="cb221-2"><a href="latent-dirichlet-allocation.html#cb221-2" tabindex="-1"></a> <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb221-3"><a href="latent-dirichlet-allocation.html#cb221-3" tabindex="-1"></a> <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span></span>
+<span id="cb221-4"><a href="latent-dirichlet-allocation.html#cb221-4" tabindex="-1"></a> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb221-5"><a href="latent-dirichlet-allocation.html#cb221-5" tabindex="-1"></a> <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span></code></pre></div>
 <p>If we now look at the data set, we see that it is much smaller and has the topics ordered. Yet, before we can plot this we have to ensure that (seen from top to bottom), all the beta for the first topic come first, then for the second topic, and so on. To do so, we use the <code>mutate</code> command, and redefine the term variable so that it is re-ordered based first on the term and then on the beta value. The result is a data frame with first the first topic, then the second topic etc., and with the beta values ordered within each topic. We then make the figure, with the terms on the horizontal axis and the beta values and the vertical axes, and have the bars this generates coloured by topic. Also, we switch off the legend (which we do not need) and use the <code>facet_wrap</code> command to split up the total graph (which would have 107 bars otherwise - 107 bars and not a 100 because some terms had the same value for beta). We set the options for the scales to be <code>free</code> as it might be that the beta values for some topics are larger or smaller than for the others. Finally, we flip the graphs and make the x-axis the y-axis and vice versa, as this makes the picture more clear:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="latent-dirichlet-allocation.html#cb219-1" tabindex="-1"></a>inaugural_lda10_topterms <span class="sc">%&gt;%</span></span>
-<span id="cb219-2"><a href="latent-dirichlet-allocation.html#cb219-2" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">reorder</span>(term, beta)) <span class="sc">%&gt;%</span></span>
-<span id="cb219-3"><a href="latent-dirichlet-allocation.html#cb219-3" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta, <span class="at">fill=</span><span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb219-4"><a href="latent-dirichlet-allocation.html#cb219-4" tabindex="-1"></a> <span class="fu">geom_col</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb219-5"><a href="latent-dirichlet-allocation.html#cb219-5" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb219-6"><a href="latent-dirichlet-allocation.html#cb219-6" tabindex="-1"></a> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb219-7"><a href="latent-dirichlet-allocation.html#cb219-7" tabindex="-1"></a> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="latent-dirichlet-allocation.html#cb222-1" tabindex="-1"></a>inaugural_lda10_topterms <span class="sc">%&gt;%</span></span>
+<span id="cb222-2"><a href="latent-dirichlet-allocation.html#cb222-2" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">reorder</span>(term, beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb222-3"><a href="latent-dirichlet-allocation.html#cb222-3" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta, <span class="at">fill=</span><span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb222-4"><a href="latent-dirichlet-allocation.html#cb222-4" tabindex="-1"></a> <span class="fu">geom_col</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb222-5"><a href="latent-dirichlet-allocation.html#cb222-5" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb222-6"><a href="latent-dirichlet-allocation.html#cb222-6" tabindex="-1"></a> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb222-7"><a href="latent-dirichlet-allocation.html#cb222-7" tabindex="-1"></a> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/lda-tidy-graph1-1.png" width="672" /></p>
 <p>What is clear here is that looking at only the words in each topic only says so much. In the first topic, the term ‘peace’ is more important than anything else, and so is ‘us’ in topic number 2. Also, in topic number ten, we see that both ‘first’ and ‘need’ are of equal importance.</p>
 <p>Another question we can ask is how much of each topic is in each of the documents. Put in another way: do certain documents talk more about certain topics than others? To see this, we first generate a new data frame with this information, known as the <code>gamma</code> value for each document:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="latent-dirichlet-allocation.html#cb220-1" tabindex="-1"></a>inaugural_lda10_documents <span class="ot">&lt;-</span> <span class="fu">tidy</span>(inaugural_lda10, <span class="at">matrix=</span><span class="st">&quot;gamma&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="latent-dirichlet-allocation.html#cb223-1" tabindex="-1"></a>inaugural_lda10_documents <span class="ot">&lt;-</span> <span class="fu">tidy</span>(inaugural_lda10, <span class="at">matrix=</span><span class="st">&quot;gamma&quot;</span>)</span></code></pre></div>
 <p>We then go through similar steps to make the data set ready for use and prepare the graph. For the graph, the only steps we do different are to force R to label each topic on the axis (as otherwise it will treat it as a continuous variable and come up with useless values such as 7.5), and to give it a different look (using the <code>theme_classic()</code> command):</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="latent-dirichlet-allocation.html#cb221-1" tabindex="-1"></a>inaugural_lda10_toptopics <span class="ot">&lt;-</span> inaugural_lda10_documents <span class="sc">%&gt;%</span></span>
-<span id="cb221-2"><a href="latent-dirichlet-allocation.html#cb221-2" tabindex="-1"></a> <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span></span>
-<span id="cb221-3"><a href="latent-dirichlet-allocation.html#cb221-3" tabindex="-1"></a> <span class="fu">top_n</span>(<span class="dv">10</span>, gamma) <span class="sc">%&gt;%</span></span>
-<span id="cb221-4"><a href="latent-dirichlet-allocation.html#cb221-4" tabindex="-1"></a> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb221-5"><a href="latent-dirichlet-allocation.html#cb221-5" tabindex="-1"></a> <span class="fu">arrange</span>(topic, <span class="sc">-</span>gamma)</span></code></pre></div>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="latent-dirichlet-allocation.html#cb222-1" tabindex="-1"></a>inaugural_lda10_toptopics <span class="sc">%&gt;%</span></span>
-<span id="cb222-2"><a href="latent-dirichlet-allocation.html#cb222-2" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">reorder</span>(topic, gamma)) <span class="sc">%&gt;%</span></span>
-<span id="cb222-3"><a href="latent-dirichlet-allocation.html#cb222-3" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(topic, gamma, <span class="at">fill=</span><span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb222-4"><a href="latent-dirichlet-allocation.html#cb222-4" tabindex="-1"></a> <span class="fu">geom_col</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb222-5"><a href="latent-dirichlet-allocation.html#cb222-5" tabindex="-1"></a> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
-<span id="cb222-6"><a href="latent-dirichlet-allocation.html#cb222-6" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb222-7"><a href="latent-dirichlet-allocation.html#cb222-7" tabindex="-1"></a> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb222-8"><a href="latent-dirichlet-allocation.html#cb222-8" tabindex="-1"></a> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="latent-dirichlet-allocation.html#cb224-1" tabindex="-1"></a>inaugural_lda10_toptopics <span class="ot">&lt;-</span> inaugural_lda10_documents <span class="sc">%&gt;%</span></span>
+<span id="cb224-2"><a href="latent-dirichlet-allocation.html#cb224-2" tabindex="-1"></a> <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span></span>
+<span id="cb224-3"><a href="latent-dirichlet-allocation.html#cb224-3" tabindex="-1"></a> <span class="fu">top_n</span>(<span class="dv">10</span>, gamma) <span class="sc">%&gt;%</span></span>
+<span id="cb224-4"><a href="latent-dirichlet-allocation.html#cb224-4" tabindex="-1"></a> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb224-5"><a href="latent-dirichlet-allocation.html#cb224-5" tabindex="-1"></a> <span class="fu">arrange</span>(topic, <span class="sc">-</span>gamma)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="latent-dirichlet-allocation.html#cb225-1" tabindex="-1"></a>inaugural_lda10_toptopics <span class="sc">%&gt;%</span></span>
+<span id="cb225-2"><a href="latent-dirichlet-allocation.html#cb225-2" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">reorder</span>(topic, gamma)) <span class="sc">%&gt;%</span></span>
+<span id="cb225-3"><a href="latent-dirichlet-allocation.html#cb225-3" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(topic, gamma, <span class="at">fill=</span><span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb225-4"><a href="latent-dirichlet-allocation.html#cb225-4" tabindex="-1"></a> <span class="fu">geom_col</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb225-5"><a href="latent-dirichlet-allocation.html#cb225-5" tabindex="-1"></a> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb225-6"><a href="latent-dirichlet-allocation.html#cb225-6" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb225-7"><a href="latent-dirichlet-allocation.html#cb225-7" tabindex="-1"></a> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb225-8"><a href="latent-dirichlet-allocation.html#cb225-8" tabindex="-1"></a> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/lda-tidy-graph2-1.png" width="672" /></p>
 <p>Here, we see that in 1929 Hoover talked most often about topic 9 (focusing on government), Biden in 2021 focused on words like ‘us’ and ‘people’, while in 1945 Roosevelt seemed to favour both the people and topics referring to peace. Again, our exact conclusions of course depend on how we interpret the topics.</p>
 </div>
@@ -407,7 +407,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

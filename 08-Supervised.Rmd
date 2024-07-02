@@ -162,12 +162,7 @@ Here, the table shows the prediction of the algorithm from top to bottom and the
 
 For the Naive Bayes example, we will use data from the [Manifesto Project](https://manifestoproject.wzb.eu/) [@Volkens2019a], also known as the Comparative Manifesto Project (CMP), Manifesto Research Group (MRG), and MARPOR (Manifesto Research on Political Representation)). To use this data, ensure you have signed up and downloaded the API key, loaded the package and set the key:
 
-```{r nb-key-noshow, include=FALSE}
-library(manifestoR)
-mp_setapikey("C:/Users/jacobuss/Dropbox/manifesto_apikey.txt")
-```
-
-```{r nb-key-show, message=FALSE, results=FALSE, eval=FALSE, warning=FALSE}
+```{r nb-key-show, message=FALSE, results=FALSE, eval=TRUE, warning=FALSE}
 library(manifestoR)
 mp_setapikey("manifesto_apikey.txt")
 ```

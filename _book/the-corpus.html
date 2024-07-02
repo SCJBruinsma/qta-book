@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.1 The Corpus | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="6.1 The Corpus | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.1 The Corpus | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -275,36 +276,37 @@ div.csl-indent {
 <span id="cb64-8"><a href="the-corpus.html#cb64-8" tabindex="-1"></a>data_coldwar <span class="ot">&lt;-</span> data_coldwar[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span></code></pre></div>
 <p>Note that the resulting <code>data_coldwar</code> vector is unnamed, so <code>quanteda</code> will generate those names for us. Now, we simply put this into the <code>corpus</code> command:</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="the-corpus.html#cb65-1" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code></pre></div>
-<pre><code>## Package version: 3.3.1
-## Unicode version: 13.0
-## ICU version: 69.1</code></pre>
+<pre><code>## Warning: package &#39;quanteda&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## Package version: 4.0.2
+## Unicode version: 15.1
+## ICU version: 74.1</code></pre>
 <pre><code>## Parallel computing: 8 of 8 threads used.</code></pre>
 <pre><code>## See https://quanteda.io for tutorials and examples.</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="the-corpus.html#cb69-1" tabindex="-1"></a>data_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(data_coldwar)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="the-corpus.html#cb70-1" tabindex="-1"></a>data_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(data_coldwar)</span></code></pre></div>
 <p>Apart from importing texts ourselves, <code>quanteda</code> contains several corpora as well. Here, we use one of these, which contains the inaugural speeches of all the US Presidents. For this, we first have to load the main package and then load the data into R:</p>
 <p>Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the <em>data frequency matrix</em> (dfm). This is a matrix that contains the documents in the rows and the word counts for each word in the columns.</p>
 <p>Before we can do so, we have to split up our texts into unique words. To do this, we first have to construct a <code>tokens</code> object. In the command that we use to do this, we can specify how we want to split our texts (here we use the standard option) and how we want to clean our data. For example, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="the-corpus.html#cb70-1" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb70-2"><a href="the-corpus.html#cb70-2" tabindex="-1"></a> data_corpus,</span>
-<span id="cb70-3"><a href="the-corpus.html#cb70-3" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
-<span id="cb70-4"><a href="the-corpus.html#cb70-4" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb70-5"><a href="the-corpus.html#cb70-5" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb70-6"><a href="the-corpus.html#cb70-6" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb70-7"><a href="the-corpus.html#cb70-7" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb70-8"><a href="the-corpus.html#cb70-8" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb70-9"><a href="the-corpus.html#cb70-9" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb70-10"><a href="the-corpus.html#cb70-10" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb70-11"><a href="the-corpus.html#cb70-11" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb70-12"><a href="the-corpus.html#cb70-12" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb70-13"><a href="the-corpus.html#cb70-13" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="the-corpus.html#cb71-1" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
+<span id="cb71-2"><a href="the-corpus.html#cb71-2" tabindex="-1"></a> data_corpus,</span>
+<span id="cb71-3"><a href="the-corpus.html#cb71-3" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
+<span id="cb71-4"><a href="the-corpus.html#cb71-4" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb71-5"><a href="the-corpus.html#cb71-5" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb71-6"><a href="the-corpus.html#cb71-6" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb71-7"><a href="the-corpus.html#cb71-7" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb71-8"><a href="the-corpus.html#cb71-8" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb71-9"><a href="the-corpus.html#cb71-9" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb71-10"><a href="the-corpus.html#cb71-10" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb71-11"><a href="the-corpus.html#cb71-11" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb71-12"><a href="the-corpus.html#cb71-12" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb71-13"><a href="the-corpus.html#cb71-13" tabindex="-1"></a>)</span></code></pre></div>
 <p>We can also remove certain stopwords so that words like “and” or “the” do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type <code>stopwords("english")</code> in the console. Stopwords for other languages are also available (such as German, French and Spanish). There are even more stopwords in the <code>stopwords</code> package, which works well with <code>quanteda</code>. For now, we will use the English ones. As all the stopwords here are lower-case, we will have to lower case our words as well. Also notice that we also do this for any acronyms in our text (so, “NATO” will become “nato”):</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="the-corpus.html#cb71-1" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_tokens,</span>
-<span id="cb71-2"><a href="the-corpus.html#cb71-2" tabindex="-1"></a>                              <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb71-3"><a href="the-corpus.html#cb71-3" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_tokens,</span>
-<span id="cb71-4"><a href="the-corpus.html#cb71-4" tabindex="-1"></a>                             <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>),</span>
-<span id="cb71-5"><a href="the-corpus.html#cb71-5" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="the-corpus.html#cb72-1" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_tokens,</span>
+<span id="cb72-2"><a href="the-corpus.html#cb72-2" tabindex="-1"></a>                              <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb72-3"><a href="the-corpus.html#cb72-3" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_tokens,</span>
+<span id="cb72-4"><a href="the-corpus.html#cb72-4" tabindex="-1"></a>                             <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>),</span>
+<span id="cb72-5"><a href="the-corpus.html#cb72-5" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span></code></pre></div>
 <p>Then, we can construct our dfm:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="the-corpus.html#cb72-1" tabindex="-1"></a>data_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_tokens)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="the-corpus.html#cb73-1" tabindex="-1"></a>data_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_tokens)</span></code></pre></div>
 </div>
             </section>
 
@@ -354,7 +356,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.3 Visualisations and Descriptives | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="6.3 Visualisations and Descriptives | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.3 Visualisations and Descriptives | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -263,22 +264,22 @@ div.csl-indent {
 <div id="visualisations-and-descriptives" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Visualisations and Descriptives<a href="visualisations-and-descriptives.html#visualisations-and-descriptives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Another thing we can do is generate various visualisations to understand our data. One interesting thing can be to see which words occur most often. We can do this using the <code>topfeatures</code> function. For this, we first have to save the 50 most frequently occurring words in our texts (note that there is also the <code>textstat_frequency</code> function in the <code>quanteda.textstats</code> helper package that can do this):</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="visualisations-and-descriptives.html#cb77-1" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">topfeatures</span>(data_dfm, <span class="dv">50</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="visualisations-and-descriptives.html#cb78-1" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">topfeatures</span>(data_dfm, <span class="dv">50</span>)</span></code></pre></div>
 <p>We then have to transform this object into a data frame, and sort it by decreasing frequency:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="visualisations-and-descriptives.html#cb78-1" tabindex="-1"></a>features_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">term =</span> <span class="fu">names</span>(features),<span class="at">frequency =</span> <span class="fu">unname</span>(features)))</span>
-<span id="cb78-2"><a href="visualisations-and-descriptives.html#cb78-2" tabindex="-1"></a>features_plot<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">with</span>(features_plot, <span class="fu">reorder</span>(term, <span class="sc">-</span>frequency))</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="visualisations-and-descriptives.html#cb79-1" tabindex="-1"></a>features_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">term =</span> <span class="fu">names</span>(features),<span class="at">frequency =</span> <span class="fu">unname</span>(features)))</span>
+<span id="cb79-2"><a href="visualisations-and-descriptives.html#cb79-2" tabindex="-1"></a>features_plot<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">with</span>(features_plot, <span class="fu">reorder</span>(term, <span class="sc">-</span>frequency))</span></code></pre></div>
 <p>Then we can plot the results:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="visualisations-and-descriptives.html#cb79-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb79-2"><a href="visualisations-and-descriptives.html#cb79-2" tabindex="-1"></a><span class="fu">ggplot</span>(features_plot) <span class="sc">+</span> </span>
-<span id="cb79-3"><a href="visualisations-and-descriptives.html#cb79-3" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>term, <span class="at">y=</span>frequency)) <span class="sc">+</span></span>
-<span id="cb79-4"><a href="visualisations-and-descriptives.html#cb79-4" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb79-5"><a href="visualisations-and-descriptives.html#cb79-5" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="visualisations-and-descriptives.html#cb80-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb80-2"><a href="visualisations-and-descriptives.html#cb80-2" tabindex="-1"></a><span class="fu">ggplot</span>(features_plot) <span class="sc">+</span> </span>
+<span id="cb80-3"><a href="visualisations-and-descriptives.html#cb80-3" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>term, <span class="at">y=</span>frequency)) <span class="sc">+</span></span>
+<span id="cb80-4"><a href="visualisations-and-descriptives.html#cb80-4" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb80-5"><a href="visualisations-and-descriptives.html#cb80-5" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/topfeatures-ggplot-1.png" width="672" /></p>
 <p>We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 30 times. We can do this with the <code>dfm_trim</code> function. Then, we can use this trimmed dfm to generate the word cloud:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="visualisations-and-descriptives.html#cb80-1" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb80-2"><a href="visualisations-and-descriptives.html#cb80-2" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="visualisations-and-descriptives.html#cb80-3" tabindex="-1"></a>wordcloud_dfm_trim <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(data_dfm, <span class="at">min_termfreq =</span> <span class="dv">10</span>)</span>
-<span id="cb80-4"><a href="visualisations-and-descriptives.html#cb80-4" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(wordcloud_dfm_trim)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="visualisations-and-descriptives.html#cb81-1" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb81-2"><a href="visualisations-and-descriptives.html#cb81-2" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="visualisations-and-descriptives.html#cb81-3" tabindex="-1"></a>wordcloud_dfm_trim <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(data_dfm, <span class="at">min_termfreq =</span> <span class="dv">10</span>)</span>
+<span id="cb81-4"><a href="visualisations-and-descriptives.html#cb81-4" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(wordcloud_dfm_trim)</span></code></pre></div>
 <p><img src="_main_files/figure-html/wordcloud-inaugural-1.png" width="672" /></p>
 </div>
             </section>
@@ -329,7 +330,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

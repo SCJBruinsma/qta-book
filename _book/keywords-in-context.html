@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.2 Keywords in Context | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="6.2 Keywords in Context | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.2 Keywords in Context | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -263,23 +264,23 @@ div.csl-indent {
 <div id="keywords-in-context" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Keywords in Context<a href="keywords-in-context.html#keywords-in-context" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One simple - but effective - way to learn more about our texts is by looking at keywords-in-context (kwic). Here, we look at with which other words a certain word appears in our texts. This is also known as looking at the <em>concordance</em> of our text. To do so is easy with our tokens data frame. Let’s take all those words that start with ‘secur’ and look at which three words occur before and after this word. We can then run:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="keywords-in-context.html#cb73-1" tabindex="-1"></a>kwic_output <span class="ot">&lt;-</span> <span class="fu">kwic</span>(data_tokens, <span class="at">pattern =</span> <span class="st">&quot;secur*&quot;</span>, <span class="at">valuetype =</span> <span class="st">&quot;glob&quot;</span>, <span class="at">window =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="keywords-in-context.html#cb74-1" tabindex="-1"></a>kwic_output <span class="ot">&lt;-</span> <span class="fu">kwic</span>(data_tokens, <span class="at">pattern =</span> <span class="st">&quot;secur*&quot;</span>, <span class="at">valuetype =</span> <span class="st">&quot;glob&quot;</span>, <span class="at">window =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p>In the outputted object, we find a column labelled <code>pre</code> and another labelled <code>post</code>. These refer to the words that came either before or after the word ’secur*’. We can easily take these out and combine them:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="keywords-in-context.html#cb74-1" tabindex="-1"></a>text_pre <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>pre</span>
-<span id="cb74-2"><a href="keywords-in-context.html#cb74-2" tabindex="-1"></a>text_post <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>post</span>
-<span id="cb74-3"><a href="keywords-in-context.html#cb74-3" tabindex="-1"></a>text_word <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>keyword</span>
-<span id="cb74-4"><a href="keywords-in-context.html#cb74-4" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">paste</span>(text_pre, text_word, text_post))</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="keywords-in-context.html#cb75-1" tabindex="-1"></a>text_pre <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>pre</span>
+<span id="cb75-2"><a href="keywords-in-context.html#cb75-2" tabindex="-1"></a>text_post <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>post</span>
+<span id="cb75-3"><a href="keywords-in-context.html#cb75-3" tabindex="-1"></a>text_word <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>keyword</span>
+<span id="cb75-4"><a href="keywords-in-context.html#cb75-4" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">paste</span>(text_pre, text_word, text_post))</span></code></pre></div>
 <p>We then combine this information with the name of the document it came from so that we know which text the word is from:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="keywords-in-context.html#cb75-1" tabindex="-1"></a>extracted <span class="ot">&lt;-</span> <span class="fu">cbind</span>(kwic_output<span class="sc">$</span>docname, text)</span>
-<span id="cb75-2"><a href="keywords-in-context.html#cb75-2" tabindex="-1"></a><span class="fu">names</span>(extracted) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;docname&quot;</span>, <span class="st">&quot;text&quot;</span>)</span>
-<span id="cb75-3"><a href="keywords-in-context.html#cb75-3" tabindex="-1"></a><span class="fu">head</span>(extracted)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="keywords-in-context.html#cb76-1" tabindex="-1"></a>extracted <span class="ot">&lt;-</span> <span class="fu">cbind</span>(kwic_output<span class="sc">$</span>docname, text)</span>
+<span id="cb76-2"><a href="keywords-in-context.html#cb76-2" tabindex="-1"></a><span class="fu">names</span>(extracted) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;docname&quot;</span>, <span class="st">&quot;text&quot;</span>)</span>
+<span id="cb76-3"><a href="keywords-in-context.html#cb76-3" tabindex="-1"></a><span class="fu">head</span>(extracted)</span></code></pre></div>
 <pre><code>##   docname                                                                 text
-## 1   text4             making allowances peace security ushering period détente
-## 2  text25 establishment maintenance post-war security scholars contend western
-## 3  text25        western allies desired security system democratic governments
-## 4  text25  churchill&#39;s mainly centered securing control mediterranean ensuring
-## 5  text32    peace enforcement capacity security council effectively paralyzed
-## 6  text42        leaders establishing secret security force prevent subversion</code></pre>
+## 1  text10             making allowances peace security ushering period détente
+## 2  text27 establishment maintenance post-war security scholars contend western
+## 3  text27        western allies desired security system democratic governments
+## 4  text27  churchill&#39;s mainly centered securing control mediterranean ensuring
+## 5  text34    peace enforcement capacity security council effectively paralyzed
+## 6  text44        leaders establishing secret security force prevent subversion</code></pre>
 </div>
             </section>
 
@@ -329,7 +330,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

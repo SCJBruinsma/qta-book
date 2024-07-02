@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.2 Wordfish | Introduction to Quantitative Text Analysis</title>
   <meta name="description" content="9.2 Wordfish | Introduction to Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.2 Wordfish | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
@@ -51,19 +51,20 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="assets/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="assets/datatables-binding-0.30/datatables.js"></script>
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="assets/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="assets/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
-<link href="assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="assets/datatables-binding-0.33/datatables.js"></script>
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -73,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -263,81 +264,81 @@ div.csl-indent {
 <div id="wordfish" class="section level2 hasAnchor" number="9.2">
 <h2><span class="header-section-number">9.2</span> Wordfish<a href="wordfish.html#wordfish" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Different from Wordscores, for Wordfish we do not need any reference text. Instead of this, the method using a model (based on a Poisson distribution) to calculate the scores for the texts. The only thing we have to tell Wordfish is which texts define the extremes of our scale. While this might seems very practical, it also leaves us with a problem: which scale do we want? For example, let us have another look at the corpus of inaugural speeches of American presidents we saw earlier. What scale should we expect? Let us, for now, say that we care about a general left-right position. As benchmarks, we then set the 1965 Johnson speech as the most “left” and the 1985 Reagan speech as the most “right”. Also, we set a seed as the model draws random numbers and we want our work to be replicable:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="wordfish.html#cb155-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb155-2"><a href="wordfish.html#cb155-2" tabindex="-1"></a></span>
-<span id="cb155-3"><a href="wordfish.html#cb155-3" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb155-4"><a href="wordfish.html#cb155-4" tabindex="-1"></a></span>
-<span id="cb155-5"><a href="wordfish.html#cb155-5" tabindex="-1"></a><span class="fu">data</span>(data_corpus_inaugural)</span>
-<span id="cb155-6"><a href="wordfish.html#cb155-6" tabindex="-1"></a>corpus_inaugural <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(data_corpus_inaugural, Year <span class="sc">&gt;</span> <span class="dv">1900</span>)</span>
-<span id="cb155-7"><a href="wordfish.html#cb155-7" tabindex="-1"></a></span>
-<span id="cb155-8"><a href="wordfish.html#cb155-8" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb155-9"><a href="wordfish.html#cb155-9" tabindex="-1"></a> corpus_inaugural,</span>
-<span id="cb155-10"><a href="wordfish.html#cb155-10" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
-<span id="cb155-11"><a href="wordfish.html#cb155-11" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb155-12"><a href="wordfish.html#cb155-12" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb155-13"><a href="wordfish.html#cb155-13" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb155-14"><a href="wordfish.html#cb155-14" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb155-15"><a href="wordfish.html#cb155-15" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb155-16"><a href="wordfish.html#cb155-16" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb155-17"><a href="wordfish.html#cb155-17" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb155-18"><a href="wordfish.html#cb155-18" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb155-19"><a href="wordfish.html#cb155-19" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb155-20"><a href="wordfish.html#cb155-20" tabindex="-1"></a>)</span>
-<span id="cb155-21"><a href="wordfish.html#cb155-21" tabindex="-1"></a></span>
-<span id="cb155-22"><a href="wordfish.html#cb155-22" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_inaugural_tokens, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb155-23"><a href="wordfish.html#cb155-23" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_inaugural_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
-<span id="cb155-24"><a href="wordfish.html#cb155-24" tabindex="-1"></a></span>
-<span id="cb155-25"><a href="wordfish.html#cb155-25" tabindex="-1"></a>data_inaugural_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_inaugural_tokens)</span>
-<span id="cb155-26"><a href="wordfish.html#cb155-26" tabindex="-1"></a></span>
-<span id="cb155-27"><a href="wordfish.html#cb155-27" tabindex="-1"></a>data_inaugural_dfm<span class="sc">@</span>Dimnames<span class="sc">$</span>docs</span>
-<span id="cb155-28"><a href="wordfish.html#cb155-28" tabindex="-1"></a>wordfish <span class="ot">&lt;-</span> <span class="fu">textmodel_wordfish</span>(data_inaugural_dfm, <span class="at">dir =</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">22</span>))</span>
-<span id="cb155-29"><a href="wordfish.html#cb155-29" tabindex="-1"></a><span class="fu">summary</span>(wordfish)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="wordfish.html#cb160-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb160-2"><a href="wordfish.html#cb160-2" tabindex="-1"></a></span>
+<span id="cb160-3"><a href="wordfish.html#cb160-3" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb160-4"><a href="wordfish.html#cb160-4" tabindex="-1"></a></span>
+<span id="cb160-5"><a href="wordfish.html#cb160-5" tabindex="-1"></a><span class="fu">data</span>(data_corpus_inaugural)</span>
+<span id="cb160-6"><a href="wordfish.html#cb160-6" tabindex="-1"></a>corpus_inaugural <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(data_corpus_inaugural, Year <span class="sc">&gt;</span> <span class="dv">1900</span>)</span>
+<span id="cb160-7"><a href="wordfish.html#cb160-7" tabindex="-1"></a></span>
+<span id="cb160-8"><a href="wordfish.html#cb160-8" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
+<span id="cb160-9"><a href="wordfish.html#cb160-9" tabindex="-1"></a> corpus_inaugural,</span>
+<span id="cb160-10"><a href="wordfish.html#cb160-10" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
+<span id="cb160-11"><a href="wordfish.html#cb160-11" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb160-12"><a href="wordfish.html#cb160-12" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb160-13"><a href="wordfish.html#cb160-13" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb160-14"><a href="wordfish.html#cb160-14" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb160-15"><a href="wordfish.html#cb160-15" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb160-16"><a href="wordfish.html#cb160-16" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb160-17"><a href="wordfish.html#cb160-17" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb160-18"><a href="wordfish.html#cb160-18" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb160-19"><a href="wordfish.html#cb160-19" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb160-20"><a href="wordfish.html#cb160-20" tabindex="-1"></a>)</span>
+<span id="cb160-21"><a href="wordfish.html#cb160-21" tabindex="-1"></a></span>
+<span id="cb160-22"><a href="wordfish.html#cb160-22" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_inaugural_tokens, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb160-23"><a href="wordfish.html#cb160-23" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_inaugural_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb160-24"><a href="wordfish.html#cb160-24" tabindex="-1"></a></span>
+<span id="cb160-25"><a href="wordfish.html#cb160-25" tabindex="-1"></a>data_inaugural_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_inaugural_tokens)</span>
+<span id="cb160-26"><a href="wordfish.html#cb160-26" tabindex="-1"></a></span>
+<span id="cb160-27"><a href="wordfish.html#cb160-27" tabindex="-1"></a>data_inaugural_dfm<span class="sc">@</span>Dimnames<span class="sc">$</span>docs</span>
+<span id="cb160-28"><a href="wordfish.html#cb160-28" tabindex="-1"></a>wordfish <span class="ot">&lt;-</span> <span class="fu">textmodel_wordfish</span>(data_inaugural_dfm, <span class="at">dir =</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">22</span>))</span>
+<span id="cb160-29"><a href="wordfish.html#cb160-29" tabindex="-1"></a><span class="fu">summary</span>(wordfish)</span></code></pre></div>
 <p>Here, <code>theta</code> gives us the position of the text. As with Wordscores, we can also calculate the confidence intervals (note that <code>theta</code> is now called <code>fit</code>):</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="wordfish.html#cb156-1" tabindex="-1"></a>pred_wordfish <span class="ot">&lt;-</span> <span class="fu">predict</span>(wordfish, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
-<span id="cb156-2"><a href="wordfish.html#cb156-2" tabindex="-1"></a><span class="fu">head</span>(pred_wordfish)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="wordfish.html#cb161-1" tabindex="-1"></a>pred_wordfish <span class="ot">&lt;-</span> <span class="fu">predict</span>(wordfish, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb161-2"><a href="wordfish.html#cb161-2" tabindex="-1"></a><span class="fu">head</span>(pred_wordfish)</span></code></pre></div>
 <pre><code>## $fit
-##                        fit         lwr        upr
-## 1901-McKinley    1.5264549  1.45790117  1.5950087
-## 1905-Roosevelt   0.5503249  0.40223178  0.6984181
-## 1909-Taft        2.1183666  2.08740335  2.1493298
-## 1913-Wilson      0.9487067  0.84753556  1.0498779
-## 1917-Wilson      0.8645950  0.75120033  0.9779896
-## 1921-Harding     1.3071772  1.24653710  1.3678173
-## 1925-Coolidge    1.4402120  1.38616969  1.4942542
-## 1929-Hoover      1.5400842  1.48638959  1.5937789
-## 1933-Roosevelt   1.1202695  1.03130137  1.2092377
-## 1937-Roosevelt   0.6488960  0.54692619  0.7508658
-## 1941-Roosevelt   0.1151337 -0.01441162  0.2446789
-## 1945-Roosevelt  -0.1673134 -0.36404388  0.0294171
-## 1949-Truman      0.8431987  0.75592790  0.9304694
-## 1953-Eisenhower  0.2792604  0.18727234  0.3712484
-## 1957-Eisenhower  0.1598369  0.04700292  0.2726709
-## 1961-Kennedy    -0.5387860 -0.64916020 -0.4284118
-## 1965-Johnson    -0.7804433 -0.88215746 -0.6787291
-## 1969-Nixon      -0.9598015 -1.03655447 -0.8830485
-## 1973-Nixon      -0.4416846 -0.54428665 -0.3390825
-## 1977-Carter     -0.3436878 -0.46940309 -0.2179725
-## 1981-Reagan     -0.6960482 -0.77775955 -0.6143369
-## 1985-Reagan     -0.6409237 -0.71946264 -0.5623847
-## 1989-Bush       -0.8890203 -0.96614097 -0.8118997
-## 1993-Clinton    -1.1441087 -1.22269262 -1.0655248
-## 1997-Clinton    -0.8663188 -0.94294521 -0.7896924
-## 2001-Bush       -0.7422147 -0.83928343 -0.6451460
-## 2005-Bush       -0.4094409 -0.50296128 -0.3159205
-## 2009-Obama      -1.0796208 -1.14695763 -1.0122840
-## 2013-Obama      -1.0531958 -1.12609628 -0.9802953
-## 2017-Trump      -1.3810308 -1.45235286 -1.3097088
-## 2021-Biden      -1.3288773 -1.38765502 -1.2700996</code></pre>
+##                        fit         lwr         upr
+## 1901-McKinley    1.5264409  1.45790457  1.59497725
+## 1905-Roosevelt   0.5506952  0.40261155  0.69877876
+## 1909-Taft        2.1180136  2.08705631  2.14897090
+## 1913-Wilson      0.9494614  0.84832377  1.05059905
+## 1917-Wilson      0.8648796  0.75150283  0.97825636
+## 1921-Harding     1.3071861  1.24655829  1.36781392
+## 1925-Coolidge    1.4398978  1.38585947  1.49393615
+## 1929-Hoover      1.5400830  1.48640261  1.59376344
+## 1933-Roosevelt   1.1206324  1.03168956  1.20957530
+## 1937-Roosevelt   0.6493799  0.54742236  0.75133754
+## 1941-Roosevelt   0.1153382 -0.01421607  0.24489242
+## 1945-Roosevelt  -0.1670750 -0.36383112  0.02968117
+## 1949-Truman      0.8432860  0.75602390  0.93054816
+## 1953-Eisenhower  0.2792466  0.18725486  0.37123825
+## 1957-Eisenhower  0.1574969  0.04465718  0.27033658
+## 1961-Kennedy    -0.5395875 -0.64994887 -0.42922607
+## 1965-Johnson    -0.7821091 -0.88376502 -0.68045324
+## 1969-Nixon      -0.9602454 -1.03699050 -0.88350021
+## 1973-Nixon      -0.4420077 -0.54461368 -0.33940174
+## 1977-Carter     -0.3423320 -0.46809663 -0.21656746
+## 1981-Reagan     -0.6953845 -0.77712614 -0.61364280
+## 1985-Reagan     -0.6413867 -0.71992268 -0.56285068
+## 1989-Bush       -0.8785297 -0.95604292 -0.80101647
+## 1993-Clinton    -1.1462836 -1.22477539 -1.06779189
+## 1997-Clinton    -0.8669737 -0.94358633 -0.79036108
+## 2001-Bush       -0.7438888 -0.84090471 -0.64687286
+## 2005-Bush       -0.4113008 -0.50479109 -0.31781044
+## 2009-Obama      -1.0807899 -1.14809049 -1.01348932
+## 2013-Obama      -1.0547830 -1.12762813 -0.98193782
+## 2017-Trump      -1.3804172 -1.45178196 -1.30905236
+## 2021-Biden      -1.3289432 -1.38772817 -1.27015814</code></pre>
 <p>As with Wordscores, we can also plot graphs for Wordfish, using the same commands. The first graph we will again be looking at is the distribution of the words, which here forms an ‘Eifel Tower’-like graph:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="wordfish.html#cb158-1" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(wordfish,</span>
-<span id="cb158-2"><a href="wordfish.html#cb158-2" tabindex="-1"></a>                 <span class="at">margin =</span> <span class="st">&quot;features&quot;</span>,</span>
-<span id="cb158-3"><a href="wordfish.html#cb158-3" tabindex="-1"></a>                 <span class="at">highlighted =</span> <span class="fu">c</span>(<span class="st">&quot;america&quot;</span>,<span class="st">&quot;jobs&quot;</span>,<span class="st">&quot;taxes&quot;</span>,<span class="st">&quot;election&quot;</span>)</span>
-<span id="cb158-4"><a href="wordfish.html#cb158-4" tabindex="-1"></a>                 )</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="wordfish.html#cb163-1" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(wordfish,</span>
+<span id="cb163-2"><a href="wordfish.html#cb163-2" tabindex="-1"></a>                 <span class="at">margin =</span> <span class="st">&quot;features&quot;</span>,</span>
+<span id="cb163-3"><a href="wordfish.html#cb163-3" tabindex="-1"></a>                 <span class="at">highlighted =</span> <span class="fu">c</span>(<span class="st">&quot;america&quot;</span>,<span class="st">&quot;jobs&quot;</span>,<span class="st">&quot;taxes&quot;</span>,<span class="st">&quot;election&quot;</span>)</span>
+<span id="cb163-4"><a href="wordfish.html#cb163-4" tabindex="-1"></a>                 )</span></code></pre></div>
 <p><img src="_main_files/figure-html/wordfish-textplot-features-1.png" width="672" /></p>
 <p>And then we can do the same for the documents as well. Note that we can also make a similar graph to the one we made ourselves above (just replace <code>pred_mv</code> with <code>pred_wordfish</code>):</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="wordfish.html#cb159-1" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(wordfish,</span>
-<span id="cb159-2"><a href="wordfish.html#cb159-2" tabindex="-1"></a>                 <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span></span>
-<span id="cb159-3"><a href="wordfish.html#cb159-3" tabindex="-1"></a>                 )</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="wordfish.html#cb164-1" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(wordfish,</span>
+<span id="cb164-2"><a href="wordfish.html#cb164-2" tabindex="-1"></a>                 <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span></span>
+<span id="cb164-3"><a href="wordfish.html#cb164-3" tabindex="-1"></a>                 )</span></code></pre></div>
 <p><img src="_main_files/figure-html/wordfish-textplot-documents-1.png" width="672" /></p>
 <p>Looking at the results here gives us an interesting picture. Remember that we chose our benchmark texts to look at the left-right position of our texts? Here, we see that both these texts (the 1965 Johnson and 1985 Reagan) are quite close to each other. Sticking with our interpretation that Reagan is more right-wing than Johnson, this would mean that the 1909 Taft address was the most right-wing and the 2017 Trump text the most left-wing. Whether this is true is of course up to our interpretation.</p>
 </div>
@@ -389,7 +390,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
