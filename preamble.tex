@@ -1,0 +1,10 @@
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepacke{bm}
+\usetikzlibrary{fit,positioning,arrows.meta}
+
+\tikzset{
+connect/.style={arrows=-{Triangle}, black, thick},
+main/.style={circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm},
+plate/.style={draw, shape=rectangle,  thick, minimum width=3.1cm, text width=3.1cm, align=right,inner sep=10pt, inner ysep=10pt, append after command={node[above left= 3pt of \tikzlastnode.south east] {#1}}}
+}

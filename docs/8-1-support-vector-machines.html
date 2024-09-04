@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="8.1 Support Vector Machines | Quantitative Text Analysis" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+
+
+<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+
+<meta name="date" content="2021-07-28" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Theory and Methods for Quantitative Text Analysis">
+
+<title>8.1 Support Vector Machines | Quantitative Text Analysis</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#welcome">Welcome!</a></li>
+<li><a href="1-getting-started.html#getting-started"><span class="toc-section-number">1</span> Getting Started</a>
+<ul>
+<li><a href="1-1-r-on-windows.html#r-on-windows"><span class="toc-section-number">1.1</span> R on Windows</a></li>
+<li><a href="1-2-r-on-linux.html#r-on-linux"><span class="toc-section-number">1.2</span> R on Linux</a></li>
+<li><a href="1-3-r-on-macos.html#r-on-macos"><span class="toc-section-number">1.3</span> R on macOS</a></li>
+<li><a href="1-4-r-in-the-cloud.html#r-in-the-cloud"><span class="toc-section-number">1.4</span> R in the Cloud</a></li>
+</ul></li>
+<li><a href="2-installing-packages.html#installing-packages"><span class="toc-section-number">2</span> Installing Packages</a>
+<ul>
+<li><a href="2-1-installing-from-cran.html#installing-from-cran"><span class="toc-section-number">2.1</span> Installing from CRAN</a></li>
+<li><a href="2-2-installing-from-github.html#installing-from-github"><span class="toc-section-number">2.2</span> Installing from GitHub</a></li>
+<li><a href="2-3-packages-for-quantitative-text-analysis-in-r.html#packages-for-quantitative-text-analysis-in-r"><span class="toc-section-number">2.3</span> Packages for Quantitative Text Analysis in R</a></li>
+<li><a href="2-4-issues-bugs-and-errors.html#issues-bugs-and-errors"><span class="toc-section-number">2.4</span> Issues, Bugs and Errors</a></li>
+</ul></li>
+<li><a href="3-importing-data.html#importing-data"><span class="toc-section-number">3</span> Importing Data</a>
+<ul>
+<li><a href="3-1-text-in-r.html#text-in-r"><span class="toc-section-number">3.1</span> Text in R</a></li>
+<li><a href="3-2-import-txt-files.html#import-.txt-files"><span class="toc-section-number">3.2</span> Import .txt Files</a></li>
+<li><a href="3-3-import-pdf-files.html#import-.pdf-files"><span class="toc-section-number">3.3</span> Import .pdf Files</a></li>
+<li><a href="3-4-import-csv-files.html#import-.csv-files"><span class="toc-section-number">3.4</span> Import .csv Files</a></li>
+<li><a href="3-5-import-from-an-api.html#import-from-an-api"><span class="toc-section-number">3.5</span> Import from an API</a></li>
+<li><a href="3-6-import-using-web-scraping.html#import-using-web-scraping"><span class="toc-section-number">3.6</span> Import using Web Scraping</a></li>
+</ul></li>
+<li><a href="4-reliability-and-validity.html#reliability-and-validity"><span class="toc-section-number">4</span> Reliability and Validity</a>
+<ul>
+<li><a href="4-1-inter-coder-agreement.html#inter-coder-agreement"><span class="toc-section-number">4.1</span> Inter-Coder Agreement</a></li>
+<li><a href="4-2-visualizing-quality.html#visualizing-quality"><span class="toc-section-number">4.2</span> Visualizing Quality</a></li>
+</ul></li>
+<li><a href="5-preliminaries.html#preliminaries"><span class="toc-section-number">5</span> Preliminaries</a>
+<ul>
+<li><a href="5-1-the-corpus.html#the-corpus"><span class="toc-section-number">5.1</span> The Corpus</a></li>
+<li><a href="5-2-keywords-in-context.html#keywords-in-context"><span class="toc-section-number">5.2</span> Keywords in Context</a></li>
+<li><a href="5-3-visualisations-and-descriptives.html#visualisations-and-descriptives"><span class="toc-section-number">5.3</span> Visualisations and Descriptives</a></li>
+<li><a href="5-4-text-statistics.html#text-statistics"><span class="toc-section-number">5.4</span> Text Statistics</a></li>
+</ul></li>
+<li><a href="6-dictionary-analysis.html#dictionary-analysis"><span class="toc-section-number">6</span> Dictionary Analysis</a>
+<ul>
+<li><a href="6-1-classical-dictionary-analysis.html#classical-dictionary-analysis"><span class="toc-section-number">6.1</span> Classical Dictionary Analysis</a></li>
+<li><a href="6-2-sentiment-analysis.html#sentiment-analysis"><span class="toc-section-number">6.2</span> Sentiment Analysis</a>
+<ul>
+<li><a href="6-2-sentiment-analysis.html#movie-reviews"><span class="toc-section-number">6.2.1</span> Movie Reviews</a></li>
+<li><a href="6-2-sentiment-analysis.html#twitter"><span class="toc-section-number">6.2.2</span> Twitter</a></li>
+</ul></li>
+</ul></li>
+<li><a href="7-scaling.html#scaling"><span class="toc-section-number">7</span> Scaling</a>
+<ul>
+<li><a href="7-1-wordscores.html#wordscores"><span class="toc-section-number">7.1</span> Wordscores</a></li>
+<li><a href="7-2-wordfish.html#wordfish"><span class="toc-section-number">7.2</span> Wordfish</a></li>
+<li><a href="7-3-correspondence-analysis.html#correspondence-analysis"><span class="toc-section-number">7.3</span> Correspondence Analysis</a></li>
+</ul></li>
+<li><a href="8-supervised-methods.html#supervised-methods"><span class="toc-section-number">8</span> Supervised Methods</a>
+<ul>
+<li><a href="8-1-support-vector-machines.html#support-vector-machines"><span class="toc-section-number">8.1</span> Support Vector Machines</a>
+<ul>
+<li><a href="8-1-support-vector-machines.html#svm-with-rtexttools"><span class="toc-section-number">8.1.1</span> SVM with RTextTools</a></li>
+<li><a href="8-1-support-vector-machines.html#svm-with-quanteda"><span class="toc-section-number">8.1.2</span> SVM with Quanteda</a></li>
+</ul></li>
+<li><a href="8-2-naive-bayes.html#naive-bayes"><span class="toc-section-number">8.2</span> Naive Bayes</a></li>
+</ul></li>
+<li><a href="9-unsupervised-methods.html#unsupervised-methods"><span class="toc-section-number">9</span> Unsupervised Methods</a>
+<ul>
+<li><a href="9-1-latent-dirichlet-allocation.html#latent-dirichlet-allocation"><span class="toc-section-number">9.1</span> Latent Dirichlet Allocation</a></li>
+<li><a href="9-2-seeded-latent-dirichlet-allocation.html#seeded-latent-dirichlet-allocation"><span class="toc-section-number">9.2</span> Seeded Latent Dirichlet Allocation</a></li>
+<li><a href="9-3-structural-topic-model.html#structural-topic-model"><span class="toc-section-number">9.3</span> Structural Topic Model</a></li>
+</ul></li>
+<li><a href="10-texttricks.html#texttricks"><span class="toc-section-number">10</span> Texttricks</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="support-vector-machines" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Support Vector Machines</h2>
+<p>To show how SVM works, we will look at an example of SVM in <code>quanteda</code> and one in <code>RTextTools</code>, and an example of NB in <code>quanteda</code>.</p>
+<div id="svm-with-rtexttools" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> SVM with RTextTools</h3>
+<p>For the SVM, we will start with an example using our Twitter data and the <code>RTextTools</code> package. First, we load the Twitter data:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="8-1-support-vector-machines.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;RTextTools&quot;</span>)</span>
+<span id="cb181-2"><a href="8-1-support-vector-machines.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;car&quot;</span>)</span>
+<span id="cb181-3"><a href="8-1-support-vector-machines.html#cb181-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-4"><a href="8-1-support-vector-machines.html#cb181-4" aria-hidden="true" tabindex="-1"></a>urlfile <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/Tweets.csv&quot;</span></span>
+<span id="cb181-5"><a href="8-1-support-vector-machines.html#cb181-5" aria-hidden="true" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(urlfile))</span>
+<span id="cb181-6"><a href="8-1-support-vector-machines.html#cb181-6" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;http.*&quot;</span>,<span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb181-7"><a href="8-1-support-vector-machines.html#cb181-7" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;https.*&quot;</span>,<span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb181-8"><a href="8-1-support-vector-machines.html#cb181-8" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">$&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-9"><a href="8-1-support-vector-machines.html#cb181-9" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;@</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-10"><a href="8-1-support-vector-machines.html#cb181-10" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-11"><a href="8-1-support-vector-machines.html#cb181-11" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[ |</span><span class="sc">\t</span><span class="st">]{2,}&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-12"><a href="8-1-support-vector-machines.html#cb181-12" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;^ &quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-13"><a href="8-1-support-vector-machines.html#cb181-13" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; $&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-14"><a href="8-1-support-vector-machines.html#cb181-14" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;RT&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb181-15"><a href="8-1-support-vector-machines.html#cb181-15" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;href&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb181-16"><a href="8-1-support-vector-machines.html#cb181-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-17"><a href="8-1-support-vector-machines.html#cb181-17" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> tweets<span class="sc">$</span>airline_sentiment</span>
+<span id="cb181-18"><a href="8-1-support-vector-machines.html#cb181-18" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(labels, <span class="st">&quot;&#39;positive&#39;=1;&#39;negative&#39;=-1;&#39;neutral&#39;=0&quot;</span>)</span></code></pre></div>
+<p>The goal of the supervised learning task is to use part of this dataset to train a certain algorithm and then use the trained algorithm to assign categories to the remaining sentences. Since we know the coded categories for the remaining sentences, we will be able to evaluate how well this training was in guessing/estimating what the codes for these sentences were. We start by creating a document term matrix;</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="8-1-support-vector-machines.html#cb182-1" aria-hidden="true" tabindex="-1"></a>doc_matrix <span class="ot">&lt;-</span> <span class="fu">create_matrix</span>(tweets<span class="sc">$</span>text, <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, <span class="at">removeNumbers =</span> <span class="cn">TRUE</span>, <span class="at">stemWords =</span> <span class="cn">TRUE</span>, <span class="at">removeSparseTerms =</span> <span class="fl">0.998</span>)</span>
+<span id="cb182-2"><a href="8-1-support-vector-machines.html#cb182-2" aria-hidden="true" tabindex="-1"></a>doc_matrix</span></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 14640, terms: 694)&gt;&gt;
+## Non-/sparse entries: 84547/10075613
+## Sparsity           : 99%
+## Maximal term length: 18
+## Weighting          : term frequency (tf)</code></pre>
+<p>Note that <code>RTextTools</code> gives you plenty of options in preprocessing. Apart from the options used above, we can also strip whitespace, remove punctuation, and remove stopwords. Stemming and stopword removal is language-specific, so when we select the language in the option above <code>(language=''english'')</code>, <code>RTextTools</code> will carry this out according to our language of choice. As of now, the package supports Danish, Dutch, English, Finnish, French, German, Italian, Norwegian, Portuguese, Russian, Spanish, and Swedish.</p>
+<p>We then create a container parsing the document matrix into a training set, and a test set. We will use the training set will to train the algorithm and the test set to test how well this algorithm was trained. The following command instructs R to use the first 4000 sentences for the training set the remaining 449 sentences for the test set. Moreover, we specify to append to the document matrix the variable that contains the assigned coders:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="8-1-support-vector-machines.html#cb184-1" aria-hidden="true" tabindex="-1"></a>container <span class="ot">&lt;-</span> <span class="fu">create_container</span>(doc_matrix, labels, <span class="at">trainSize =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>, <span class="at">testSize =</span> <span class="dv">10001</span><span class="sc">:</span><span class="dv">14640</span>, <span class="at">virgin =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>We can then train a model using one of the available algorithms. For instance, we can use the Support Vector Machines algorithm (SVM) as follows:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="8-1-support-vector-machines.html#cb185-1" aria-hidden="true" tabindex="-1"></a>SVM <span class="ot">&lt;-</span> <span class="fu">train_model</span>(container, <span class="st">&quot;SVM&quot;</span>)</span></code></pre></div>
+<p>Other algorithms available are glmnet (GLMNET), maximum entropy (MAXENT), scaled linear discriminant analysis (SLDA), bagging (BAGGING), boosting (BOOSTING), random forest (RF), neural networks (NNET), classification tree (TREE).</p>
+<p>We then use the model we trained to classify the texts in the test set. The following command instructs R to classify the documents in the test set of the container using the SVM model that we trained earlier.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="8-1-support-vector-machines.html#cb186-1" aria-hidden="true" tabindex="-1"></a>SVM_CLASSIFY <span class="ot">&lt;-</span> <span class="fu">classify_model</span>(container, SVM)</span></code></pre></div>
+<p>We can also view the classification that the SVM model performed as follows. The first column corresponds to the label that coders assigned to each of the tweets in the training set. The second column then gives the probability that the SVM algorithm assigned to that particular category. As you can see, while the probability for some sentences is quite high, for others it is quite low. This even while the classification always chooses the category with the highest probability.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="8-1-support-vector-machines.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(SVM_CLASSIFY)</span></code></pre></div>
+<p>The next step is to check the classification performance of our model. To do this, we first request a function that returns a container with different summaries. For instance, we can request summaries based on the labels attached to the sentences, the documents (or in this case, the sentences) by label, or based on the algorithm.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="8-1-support-vector-machines.html#cb188-1" aria-hidden="true" tabindex="-1"></a>analytics <span class="ot">&lt;-</span> <span class="fu">create_analytics</span>(container, SVM_CLASSIFY)</span>
+<span id="cb188-2"><a href="8-1-support-vector-machines.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(analytics)</span></code></pre></div>
+<pre><code>## ENSEMBLE SUMMARY
+## 
+##        n-ENSEMBLE COVERAGE n-ENSEMBLE RECALL
+## n &gt;= 1                   1               0.8
+## 
+## 
+## ALGORITHM PERFORMANCE
+## 
+## SVM_PRECISION    SVM_RECALL    SVM_FSCORE 
+##     0.6800000     0.6733333     0.6733333</code></pre>
+<p>Here, precision gives the proportion of bills that SVM classified as belonging to a category that does belong to that category (true positives) to all the bills that are classified in that category (irrespective of where they belong). Recall, then, is the proportion of bills that SVM classifies as belonging to a category and belong to this category (true positives) to all the bills that belong to this category (true positives plus false negatives). The F score is a weighted average between precision and recall ranging from 0 to 1.</p>
+<p>Finally, we can compare the scores between the labels given by the coders and those based on our SVM:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="8-1-support-vector-machines.html#cb190-1" aria-hidden="true" tabindex="-1"></a>compare <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(labels[<span class="dv">10001</span><span class="sc">:</span><span class="dv">14640</span>], SVM_CLASSIFY<span class="sc">$</span>SVM_LABEL))</span>
+<span id="cb190-2"><a href="8-1-support-vector-machines.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compare)</span></code></pre></div>
+<pre><code>##     V2
+## V1     -1    0    1
+##   -1 3013  296  110
+##   0   289  347   55
+##   1   131   59  340</code></pre>
+</div>
+<div id="svm-with-quanteda" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> SVM with Quanteda</h3>
+<p>Instead of using a separate package, we can also use <code>quanteda</code> to carry out an SVM. For this, we load some movie reviews, select 1000 of them at random, and place them into our corpus:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="8-1-support-vector-machines.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb192-2"><a href="8-1-support-vector-machines.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-3"><a href="8-1-support-vector-machines.html#cb192-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb192-4"><a href="8-1-support-vector-machines.html#cb192-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.classifiers)</span>
+<span id="cb192-5"><a href="8-1-support-vector-machines.html#cb192-5" aria-hidden="true" tabindex="-1"></a>corpus_reviews <span class="ot">&lt;-</span> <span class="fu">corpus_sample</span>(data_corpus_LMRD, <span class="dv">1000</span>)</span></code></pre></div>
+<p>Our aim here will be to see how well the SVM algorithm can predict the rating of the reviews. To do this, we first have to create a new variable <code>prediction</code>. This variable contains the same scores as the original rating. Then, we remove 30% of the scores and replace them with NA. We do so by creating a <code>missing</code> variable that contains 30% 0s and 70% 1s. We then place the 0s with NAs. These NA scores are then the ones we want the algorithm to predict. Finally, we add the new variable to the corpus:</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="8-1-support-vector-machines.html#cb193-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> corpus_reviews<span class="sc">$</span>rating</span>
+<span id="cb193-2"><a href="8-1-support-vector-machines.html#cb193-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-3"><a href="8-1-support-vector-machines.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb193-4"><a href="8-1-support-vector-machines.html#cb193-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-5"><a href="8-1-support-vector-machines.html#cb193-5" aria-hidden="true" tabindex="-1"></a>missing <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="fl">0.7</span>)</span>
+<span id="cb193-6"><a href="8-1-support-vector-machines.html#cb193-6" aria-hidden="true" tabindex="-1"></a>prediction[missing <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb193-7"><a href="8-1-support-vector-machines.html#cb193-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-8"><a href="8-1-support-vector-machines.html#cb193-8" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(corpus_reviews, <span class="st">&quot;prediction&quot;</span>) <span class="ot">&lt;-</span> prediction</span></code></pre></div>
+<p>We then transform the corpus into a data frame, and also remove stopwords, numbers and punctuation:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="8-1-support-vector-machines.html#cb194-1" aria-hidden="true" tabindex="-1"></a>data_reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
+<span id="cb194-2"><a href="8-1-support-vector-machines.html#cb194-2" aria-hidden="true" tabindex="-1"></a> corpus_reviews,</span>
+<span id="cb194-3"><a href="8-1-support-vector-machines.html#cb194-3" aria-hidden="true" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
+<span id="cb194-4"><a href="8-1-support-vector-machines.html#cb194-4" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb194-5"><a href="8-1-support-vector-machines.html#cb194-5" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb194-6"><a href="8-1-support-vector-machines.html#cb194-6" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb194-7"><a href="8-1-support-vector-machines.html#cb194-7" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb194-8"><a href="8-1-support-vector-machines.html#cb194-8" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb194-9"><a href="8-1-support-vector-machines.html#cb194-9" aria-hidden="true" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb194-10"><a href="8-1-support-vector-machines.html#cb194-10" aria-hidden="true" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb194-11"><a href="8-1-support-vector-machines.html#cb194-11" aria-hidden="true" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb194-12"><a href="8-1-support-vector-machines.html#cb194-12" aria-hidden="true" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb194-13"><a href="8-1-support-vector-machines.html#cb194-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Creating a tokens object from a corpus input...</code></pre>
+<pre><code>##  ...starting tokenization</code></pre>
+<pre><code>##  ...train/neg/6869_1.txt to train/neg/12010_4.txt</code></pre>
+<pre><code>##  ...preserving hyphens</code></pre>
+<pre><code>##  ...preserving social media tags (#, @)</code></pre>
+<pre><code>##  ...segmenting into words</code></pre>
+<pre><code>##  ...22,472 unique types</code></pre>
+<pre><code>##  ...removing separators, punctuation, symbols, numbers, URLs</code></pre>
+<pre><code>##  ...complete, elapsed time: 0.403 seconds.</code></pre>
+<pre><code>## Finished constructing tokens from 1,000 documents.</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="8-1-support-vector-machines.html#cb205-1" aria-hidden="true" tabindex="-1"></a>data_reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_reviews_tokens, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb205-2"><a href="8-1-support-vector-machines.html#cb205-2" aria-hidden="true" tabindex="-1"></a>data_reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_reviews_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb205-3"><a href="8-1-support-vector-machines.html#cb205-3" aria-hidden="true" tabindex="-1"></a>dfm_reviews <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_reviews_tokens)</span></code></pre></div>
+<p>Now we can run the SVM algorithm. To do so, we tell the model on which dfm we want to run our model, and which variable contains the scores to train the algorithm. Here, this is our <code>prediction</code> variable with the missing data:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="8-1-support-vector-machines.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)</span>
+<span id="cb206-2"><a href="8-1-support-vector-machines.html#cb206-2" aria-hidden="true" tabindex="-1"></a>svm_reviews <span class="ot">&lt;-</span> <span class="fu">textmodel_svm</span>(dfm_reviews, <span class="at">y =</span> <span class="fu">docvars</span>(dfm_reviews, <span class="st">&quot;prediction&quot;</span>))</span>
+<span id="cb206-3"><a href="8-1-support-vector-machines.html#cb206-3" aria-hidden="true" tabindex="-1"></a>svm_reviews</span></code></pre></div>
+<pre><code>## 
+## Call:
+## textmodel_svm.dfm(x = dfm_reviews, y = docvars(dfm_reviews, &quot;prediction&quot;))
+## 
+## 707 training documents; 129,120 fitted features.
+## Method: L2-regularized L2-loss support vector classification dual (L2R_L2LOSS_SVC_DUAL)</code></pre>
+<p>Here we see that the algorithm used 720 texts to train the model (the one with a score) and fitted 133,728 features. The latter refers to the total number of words in the training texts and not only the unique ones. Now we can use this model to predict the ratings we removed earlier:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="8-1-support-vector-machines.html#cb208-1" aria-hidden="true" tabindex="-1"></a>svm_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_reviews)</span></code></pre></div>
+<p>While we can of course look at the resulting numbers, we can also place them in a two-way table with the actual rating, to see how well the algorithm did:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="8-1-support-vector-machines.html#cb209-1" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> corpus_reviews<span class="sc">$</span>rating</span>
+<span id="cb209-2"><a href="8-1-support-vector-machines.html#cb209-2" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(svm_predict, rating))</span>
+<span id="cb209-3"><a href="8-1-support-vector-machines.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(table_data<span class="sc">$</span>svm_predict,table_data<span class="sc">$</span>rating)</span></code></pre></div>
+<pre><code>##     
+##        1   2   3   4   7   8   9  10
+##   1  175  15  10  11   4   3   1   7
+##   2   13  65   5   3   0   0   0   3
+##   3    5   2  82   4   1   4   0   3
+##   4    4   5   5  90   1   6   2   4
+##   7    0   1   2   2  75   6   0   2
+##   8    2   1   1   0   3  83   5   6
+##   9    3   0   1   6   4  11  74   8
+##   10   1   2   3   2   3   9  14 137</code></pre>
+<p>Here, the table shows the prediction of the algorithm from top to bottom and the original rating from left to right. What we want is that all cases are on the diagonal: in that case, the prediction is the same as the original rating. Here, this happens in the majority of cases. Also, only in a few cases is the algorithm far off.</p>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="8-supervised-methods.html"><button class="btn btn-default">Previous</button></a>
+<a href="8-2-naive-bayes.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

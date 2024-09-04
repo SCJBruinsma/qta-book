@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Dictionary Analysis | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Dictionary Analysis | Introduction to Quantitative Text Analysis" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Dictionary Analysis | Introduction to Quantitative Text Analysis" />
+  
+  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
+
+<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+
+
+<meta name="date" content="2022-05-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="preliminaries.html"/>
+<link rel="next" href="scaling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.17/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Quantitative Text Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#r-on-windows"><i class="fa fa-check"></i><b>1.1</b> R on Windows</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#r-on-linux"><i class="fa fa-check"></i><b>1.2</b> R on Linux</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-on-macos"><i class="fa fa-check"></i><b>1.3</b> R on macOS</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#r-in-the-cloud"><i class="fa fa-check"></i><b>1.4</b> R in the Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>2</b> Installing Packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-cran"><i class="fa fa-check"></i><b>2.1</b> Installing from CRAN</a></li>
+<li class="chapter" data-level="2.2" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-github"><i class="fa fa-check"></i><b>2.2</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="2.3" data-path="installing-packages.html"><a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r"><i class="fa fa-check"></i><b>2.3</b> Packages for Quantitative Text Analysis in R</a></li>
+<li class="chapter" data-level="2.4" data-path="installing-packages.html"><a href="installing-packages.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>3</b> Importing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-data.html"><a href="importing-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-data.html"><a href="importing-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.2</b> Import .txt Files</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-data.html"><a href="importing-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.3</b> Import .pdf Files</a></li>
+<li class="chapter" data-level="3.4" data-path="importing-data.html"><a href="importing-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
+<li class="chapter" data-level="3.5" data-path="importing-data.html"><a href="importing-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
+<li class="chapter" data-level="3.6" data-path="importing-data.html"><a href="importing-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and Validity</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="reliability-validity.html"><a href="reliability-validity.html#inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Inter-Coder Agreement</a></li>
+<li class="chapter" data-level="4.2" data-path="reliability-validity.html"><a href="reliability-validity.html#visualizing-quality"><i class="fa fa-check"></i><b>4.2</b> Visualizing Quality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>5</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="preliminaries.html"><a href="preliminaries.html#the-corpus"><i class="fa fa-check"></i><b>5.1</b> The Corpus</a></li>
+<li class="chapter" data-level="5.2" data-path="preliminaries.html"><a href="preliminaries.html#keywords-in-context"><i class="fa fa-check"></i><b>5.2</b> Keywords in Context</a></li>
+<li class="chapter" data-level="5.3" data-path="preliminaries.html"><a href="preliminaries.html#visualisations-and-descriptives"><i class="fa fa-check"></i><b>5.3</b> Visualisations and Descriptives</a></li>
+<li class="chapter" data-level="5.4" data-path="preliminaries.html"><a href="preliminaries.html#text-statistics"><i class="fa fa-check"></i><b>5.4</b> Text Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>6</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#classical-dictionary-analysis"><i class="fa fa-check"></i><b>6.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="6.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>6.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>6.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#twitter"><i class="fa fa-check"></i><b>6.2.2</b> Twitter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>7</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>7.1</b> Wordscores</a></li>
+<li class="chapter" data-level="7.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>7.2</b> Wordfish</a></li>
+<li class="chapter" data-level="7.3" data-path="scaling.html"><a href="scaling.html#correspondence-analysis"><i class="fa fa-check"></i><b>7.3</b> Correspondence Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>8</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>8.1</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>8.1.1</b> SVM with RTextTools</a></li>
+<li class="chapter" data-level="8.1.2" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-quanteda"><i class="fa fa-check"></i><b>8.1.2</b> SVM with Quanteda</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>8.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>9</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.1</b> Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="9.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.2</b> Seeded Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="9.3" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#structural-topic-model"><i class="fa fa-check"></i><b>9.3</b> Structural Topic Model</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>10</b> Texttricks</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="bastiaan.bruinsma@gmail.com" target="blank">Bastiaan Bruinsma</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Quantitative Text Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dictionary-analysis" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Dictionary Analysis<a href="dictionary-analysis.html#dictionary-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>One of the simplest forms of quantitative text analysis is dictionary analysis. The idea here is to look at the rate at which keywords appear in a text to classify documents into categories. Also, we can measure the extent to which documents belong to particular categories. As we do so without making any assumptions, dictionary methods present a non-statistical to text analysis. A well-known example is measuring the tone in newspaper articles, speeches, children’s writings, and so on by using sentiment analysis dictionaries. Another example is the measuring of policy content in different documents as illustrated by the Policy Agendas Project dictionary <span class="citation">(<a href="#ref-Albaugh2013a" role="doc-biblioref">Albaugh et al., 2013</a>)</span>.</p>
+<p>Here, we will carry out three such analyses, the first a standard analysis and the other two focusing on sentiment. For the former, we will use political party manifestos, while for the latter we will use movie reviews and Twitter data.</p>
+<div id="classical-dictionary-analysis" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Classical Dictionary Analysis<a href="dictionary-analysis.html#classical-dictionary-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As for our dictionaries, we can either make the dictionary ourselves or use an off-the-shelf version. For the latter, we can either import the files we already have into R or use some of the versions that come with the <code>quanteda.dictionaries</code> package. For this, we first load the package:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="dictionary-analysis.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span></code></pre></div>
+<p>We then apply one of these dictionaries to the document feature matrix we made earlier. As a dictionary, we will use the one made by <span class="citation">Laver &amp; Garry (<a href="#ref-Laver2000a" role="doc-biblioref">2000</a>)</span>, meant for estimating policy positions from political texts. We first load this dictionary into R and then run it on the dfm using the <code>dfm_lookup</code> command:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="dictionary-analysis.html#cb97-1" aria-hidden="true" tabindex="-1"></a>data_dictionary_LaverGarry</span>
+<span id="cb97-2"><a href="dictionary-analysis.html#cb97-2" aria-hidden="true" tabindex="-1"></a>dictionary_results <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(data_inaugural_dfm, data_dictionary_LaverGarry)</span>
+<span id="cb97-3"><a href="dictionary-analysis.html#cb97-3" aria-hidden="true" tabindex="-1"></a>dictionary_results</span></code></pre></div>
+<p>Apart from off-the-shelf dictionaries, it is also possible to create our own which could suit our research question better. One approach is to use prior theory to come up with different categories and their associated words. Another approach is to use reference texts to come up with categories and words. We can also combine different dictionaries as illustrated by <span class="citation">Young &amp; Soroka (<a href="#ref-Young2012a" role="doc-biblioref">2012</a>)</span>, or different dictionaries and keywords from categories in a manual coding scheme <span class="citation">(<a href="#ref-Lind2019a" role="doc-biblioref">Lind et al., 2019</a>)</span>. Finally, we can use expert or crowd coding assessments to determine the words that best match different categories in a dictionary <span class="citation">(<a href="#ref-Haselmayer2017a" role="doc-biblioref">Haselmayer &amp; Jenny, 2017</a>)</span>.</p>
+<p>If we want to create our own dictionary in <code>quanteda</code> we use the same commands as above, but we first have to create the dictionary. To do so, we specify the words in a named list. This list contains keys (the words we want to look for) and the categories to which they belong. We then transform this list into a dictionary. Here, we choose some words which we believe will allow us to identify the different parties with ease:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="dictionary-analysis.html#cb98-1" aria-hidden="true" tabindex="-1"></a>dic_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">economy =</span> <span class="fu">c</span>(<span class="st">&quot;tax*&quot;</span>, <span class="st">&quot;vat&quot;</span>, <span class="st">&quot;trade&quot;</span>), </span>
+<span id="cb98-2"><a href="dictionary-analysis.html#cb98-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">social =</span> <span class="fu">c</span>(<span class="st">&quot;Medicare&quot;</span>, <span class="st">&quot;GP&quot;</span>, <span class="st">&quot;health&quot;</span>), </span>
+<span id="cb98-3"><a href="dictionary-analysis.html#cb98-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">devolution =</span> <span class="fu">c</span>(<span class="st">&quot;states&quot;</span>,<span class="st">&quot;senate&quot;</span>,<span class="st">&quot;independence&quot;</span>), </span>
+<span id="cb98-4"><a href="dictionary-analysis.html#cb98-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">government =</span> <span class="fu">c</span>(<span class="st">&quot;Washington&quot;</span>,<span class="st">&quot;Congress&quot;</span>,<span class="st">&quot;White House&quot;</span>)</span>
+<span id="cb98-5"><a href="dictionary-analysis.html#cb98-5" aria-hidden="true" tabindex="-1"></a>                 )</span>
+<span id="cb98-6"><a href="dictionary-analysis.html#cb98-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-7"><a href="dictionary-analysis.html#cb98-7" aria-hidden="true" tabindex="-1"></a>dic_created <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(dic_list, <span class="at">tolower =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb98-8"><a href="dictionary-analysis.html#cb98-8" aria-hidden="true" tabindex="-1"></a>dic_created</span></code></pre></div>
+<pre><code>## Dictionary object with 4 key entries.
+## - [economy]:
+##   - tax*, vat, trade
+## - [social]:
+##   - Medicare, GP, health
+## - [devolution]:
+##   - states, senate, independence
+## - [government]:
+##   - Washington, Congress, White House</code></pre>
+<p>If you compare the <code>dic_list</code> file with the <code>data_dictionary_LaverGarry</code> file, you will find that it has the same structure. To see the result, we can use the same command:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="dictionary-analysis.html#cb100-1" aria-hidden="true" tabindex="-1"></a>dictionary_created <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(data_inaugural_dfm, dic_created)</span>
+<span id="cb100-2"><a href="dictionary-analysis.html#cb100-2" aria-hidden="true" tabindex="-1"></a>dictionary_created</span></code></pre></div>
+<pre><code>## Document-feature matrix of: 31 documents, 4 features (42.74% sparse) and 4 docvars.
+##                 features
+## docs             economy social devolution government
+##   1901-McKinley        2      0          9          9
+##   1905-Roosevelt       0      0          0          1
+##   1909-Taft           17      0         12         14
+##   1913-Wilson          1      2          1          0
+##   1917-Wilson          1      0          2          0
+##   1921-Harding         7      0          2          1
+## [ reached max_ndoc ... 25 more documents ]</code></pre>
+<p>Also note that if you would like to convert this dfm into a regular dataframe, you can use the <code>convert</code> command included in <code>quanteda</code>:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="dictionary-analysis.html#cb102-1" aria-hidden="true" tabindex="-1"></a>dictionary_df <span class="ot">&lt;-</span> <span class="fu">convert</span>(dictionary_created, <span class="at">to =</span> <span class="st">&quot;data.frame&quot;</span>)</span></code></pre></div>
+<p>Moreover, while we could look at this dataframe by either calling it in the console or looking at it in the Environment, we can also make it into an HTML widget, using the <code>DT</code> and <code>data.table</code> packages:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="dictionary-analysis.html#cb103-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(dictionary_df)</span></code></pre></div>
+<div id="htmlwidget-66f1b90ef95bdf0211d5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66f1b90ef95bdf0211d5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],["1901-McKinley","1905-Roosevelt","1909-Taft","1913-Wilson","1917-Wilson","1921-Harding","1925-Coolidge","1929-Hoover","1933-Roosevelt","1937-Roosevelt","1941-Roosevelt","1945-Roosevelt","1949-Truman","1953-Eisenhower","1957-Eisenhower","1961-Kennedy","1965-Johnson","1969-Nixon","1973-Nixon","1977-Carter","1981-Reagan","1985-Reagan","1989-Bush","1993-Clinton","1997-Clinton","2001-Bush","2005-Bush","2009-Obama","2013-Obama","2017-Trump","2021-Biden"],[2,0,17,1,1,7,13,0,4,0,0,0,3,1,0,0,0,0,0,0,4,6,1,0,1,1,0,0,1,2,0],[0,0,0,2,0,0,0,4,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,2,1,2,2,0,1],[9,0,12,1,2,2,9,7,3,4,5,0,6,1,1,2,0,1,0,1,6,5,2,1,0,1,8,1,3,2,1],[9,1,14,0,0,1,3,3,4,0,1,0,0,0,0,0,0,0,2,0,2,2,6,4,2,0,1,0,1,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>doc_id<\/th>\n      <th>economy<\/th>\n      <th>social<\/th>\n      <th>devolution<\/th>\n      <th>government<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="sentiment-analysis" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Sentiment Analysis<a href="dictionary-analysis.html#sentiment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The logic of dictionaries is that we can use them to see which kind of topics are present in our documents. Yet, we can also use them to provide us with measurements that are most often related to scaling. One way to do so is with <em>sentiment analysis</em>. Here, we look at whether a certain piece of text is happy, angry, positive, negative, and so on. One case in which this can help us is with movie reviews. These reviews give us a description of a movie and then tell us their opinion. Another is when we look at Twitter data, to capture the ‘mood of the moment’. Here, we will look at both, starting with the movie reviews.</p>
+<div id="movie-reviews" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Movie Reviews<a href="dictionary-analysis.html#movie-reviews" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, we load some reviews into R. The corpus we use here contains 50,000 movie reviews, each with a 1-10 rating (amongst others). As 50,000 reviews make the analysis quite slow, we will first select 30 reviews at random from this corpus. We do so via <code>corpus_sample</code>, after which we transform it via a tokens object into a dfm:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="dictionary-analysis.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.classifiers)</span>
+<span id="cb104-2"><a href="dictionary-analysis.html#cb104-2" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> <span class="fu">corpus_sample</span>(data_corpus_LMRD, <span class="dv">30</span>)</span>
+<span id="cb104-3"><a href="dictionary-analysis.html#cb104-3" aria-hidden="true" tabindex="-1"></a>reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(reviews)</span>
+<span id="cb104-4"><a href="dictionary-analysis.html#cb104-4" aria-hidden="true" tabindex="-1"></a>reviews_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(reviews_tokens)</span></code></pre></div>
+<p>The next step is to load in a sentiment analysis dictionary. Here, we will use the Lexicoder Sentiment Dictionary, included in <code>quanteda</code> and run it on the dfm:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="dictionary-analysis.html#cb105-1" aria-hidden="true" tabindex="-1"></a>data_dictionary_LSD2015</span>
+<span id="cb105-2"><a href="dictionary-analysis.html#cb105-2" aria-hidden="true" tabindex="-1"></a>results_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(reviews_dfm, data_dictionary_LSD2015)</span>
+<span id="cb105-3"><a href="dictionary-analysis.html#cb105-3" aria-hidden="true" tabindex="-1"></a>results_dfm</span></code></pre></div>
+<p>The next step is to convert the results to a data frame and view them:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="dictionary-analysis.html#cb106-1" aria-hidden="true" tabindex="-1"></a>sentiment <span class="ot">&lt;-</span> <span class="fu">convert</span>(results_dfm, <span class="at">to=</span><span class="st">&quot;data.frame&quot;</span>)</span>
+<span id="cb106-2"><a href="dictionary-analysis.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sentiment)</span></code></pre></div>
+<pre><code>##                  doc_id negative positive neg_positive neg_negative
+## 1  train/pos/2773_7.txt       31       18            0            0
+## 2  train/neg/7599_3.txt       15       15            0            0
+## 3   test/pos/5935_7.txt        6       19            0            0
+## 4 train/pos/7356_10.txt        2        5            0            0
+## 5  test/pos/7892_10.txt       21        6            0            0
+## 6  train/pos/8708_8.txt        9        5            0            0</code></pre>
+<p>Since movie reviews usually come with some sort of rating (often in the form of stars), we can see if this relates to the sentiment of the review. To do so, we have to take the rating out of the dfm and place it in a new data frame with the positive and negative sentiments:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="dictionary-analysis.html#cb108-1" aria-hidden="true" tabindex="-1"></a>star_data <span class="ot">&lt;-</span> reviews_dfm<span class="sc">@</span>docvars<span class="sc">$</span>rating</span>
+<span id="cb108-2"><a href="dictionary-analysis.html#cb108-2" aria-hidden="true" tabindex="-1"></a>stargraph <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(star_data, sentiment<span class="sc">$</span>negative, sentiment<span class="sc">$</span>positive))</span>
+<span id="cb108-3"><a href="dictionary-analysis.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(stargraph) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;stars&quot;</span>,<span class="st">&quot;negative&quot;</span>,<span class="st">&quot;positive&quot;</span>)</span></code></pre></div>
+<p>To compare the sentiment with the stars, we first have to combine the senitments into a scale. Of the many ways to do so, the simplest is to take the difference between the positive and negative words (positive – negative). Another option is to take the ratio of positive words against both positive and negative (positive/positive+negative). Here, we do both:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="dictionary-analysis.html#cb109-1" aria-hidden="true" tabindex="-1"></a>sentiment_difference <span class="ot">&lt;-</span> stargraph<span class="sc">$</span>positive<span class="sc">-</span>stargraph<span class="sc">$</span>negative</span>
+<span id="cb109-2"><a href="dictionary-analysis.html#cb109-2" aria-hidden="true" tabindex="-1"></a>sentiment_ratio <span class="ot">&lt;-</span> (stargraph<span class="sc">$</span>positive<span class="sc">/</span> (stargraph<span class="sc">$</span>positive <span class="sc">+</span> stargraph<span class="sc">$</span>negative))</span>
+<span id="cb109-3"><a href="dictionary-analysis.html#cb109-3" aria-hidden="true" tabindex="-1"></a>stargraph <span class="ot">&lt;-</span> <span class="fu">cbind</span>(stargraph, sentiment_difference,sentiment_ratio)</span></code></pre></div>
+<p>Then, we can plot the ratings and the scaled sentiment measures together with a linear regression line:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="dictionary-analysis.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb110-2"><a href="dictionary-analysis.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="dictionary-analysis.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stargraph,<span class="fu">aes</span>(<span class="at">x =</span> sentiment_difference, <span class="at">y =</span> stars)) <span class="sc">+</span></span>
+<span id="cb110-4"><a href="dictionary-analysis.html#cb110-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb110-5"><a href="dictionary-analysis.html#cb110-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb110-6"><a href="dictionary-analysis.html#cb110-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">10.5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="sc">+</span></span>
+<span id="cb110-7"><a href="dictionary-analysis.html#cb110-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Positive minus Negative&quot;</span>) <span class="sc">+</span></span>
+<span id="cb110-8"><a href="dictionary-analysis.html#cb110-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="sc">+</span></span>
+<span id="cb110-9"><a href="dictionary-analysis.html#cb110-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-moviereviews-posmin-1.png" width="672" /></p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="dictionary-analysis.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stargraph,<span class="fu">aes</span>(<span class="at">x =</span> sentiment_ratio, <span class="at">y =</span> stars)) <span class="sc">+</span></span>
+<span id="cb112-2"><a href="dictionary-analysis.html#cb112-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb112-3"><a href="dictionary-analysis.html#cb112-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb112-4"><a href="dictionary-analysis.html#cb112-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">10.5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="sc">+</span></span>
+<span id="cb112-5"><a href="dictionary-analysis.html#cb112-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="sc">+</span></span>
+<span id="cb112-6"><a href="dictionary-analysis.html#cb112-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Ratio of Positive to Total&quot;</span>) <span class="sc">+</span></span>
+<span id="cb112-7"><a href="dictionary-analysis.html#cb112-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Stars&quot;</span>) <span class="sc">+</span></span>
+<span id="cb112-8"><a href="dictionary-analysis.html#cb112-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-moviereviews-stars-1.png" width="672" /></p>
+<p>Finally, let us look at how we can make any more inferences, by estimating confidence intervals around the point estimates. For this, we again add a column, this time one with the total of positive and negative words as scored by the dictionary. We do so by copying the data frame to a new data frame and adding a new column filled with NA values:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="dictionary-analysis.html#cb114-1" aria-hidden="true" tabindex="-1"></a>reviews_bootstrap <span class="ot">&lt;-</span> sentiment</span>
+<span id="cb114-2"><a href="dictionary-analysis.html#cb114-2" aria-hidden="true" tabindex="-1"></a>reviews_bootstrap<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>We then again specify the number of reviews, the replications that we want and change the data frame into an array:</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="dictionary-analysis.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(combinat)</span>
+<span id="cb115-2"><a href="dictionary-analysis.html#cb115-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-3"><a href="dictionary-analysis.html#cb115-3" aria-hidden="true" tabindex="-1"></a>nman <span class="ot">&lt;-</span> <span class="fu">nrow</span>(reviews_bootstrap)</span>
+<span id="cb115-4"><a href="dictionary-analysis.html#cb115-4" aria-hidden="true" tabindex="-1"></a>nrepl <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb115-5"><a href="dictionary-analysis.html#cb115-5" aria-hidden="true" tabindex="-1"></a>manifBSn <span class="ot">&lt;-</span> manifBSnRand <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">as.matrix</span>(reviews_bootstrap[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]),</span>
+<span id="cb115-6"><a href="dictionary-analysis.html#cb115-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">c</span>(nman, <span class="dv">2</span>, nrepl <span class="sc">+</span> <span class="dv">1</span>), </span>
+<span id="cb115-7"><a href="dictionary-analysis.html#cb115-7" aria-hidden="true" tabindex="-1"></a> <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span>nman,<span class="fu">names</span>(reviews_bootstrap[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), </span>
+<span id="cb115-8"><a href="dictionary-analysis.html#cb115-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">0</span><span class="sc">:</span>nrepl))</span></code></pre></div>
+<p>Then, we bootstrap the word counts for each movie review and compute percentages for each category using a multinomial draw:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="dictionary-analysis.html#cb116-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(manifBSn), , <span class="dv">1</span>], <span class="dv">1</span>, sum)</span>
+<span id="cb116-2"><a href="dictionary-analysis.html#cb116-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> manifBSn[, , <span class="dv">1</span>]<span class="sc">/</span>n</span>
+<span id="cb116-3"><a href="dictionary-analysis.html#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="dictionary-analysis.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nrepl) {</span>
+<span id="cb116-5"><a href="dictionary-analysis.html#cb116-5" aria-hidden="true" tabindex="-1"></a> manifBSn[, , i] <span class="ot">&lt;-</span> <span class="fu">rmultinomial</span>(n, p)</span>
+<span id="cb116-6"><a href="dictionary-analysis.html#cb116-6" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
+<p>We can then ask R to compute the quantities of interest. These are standard errors for each category, as well as the percentage coded for each category <span class="citation">(<a href="#ref-Mikhaylov2012a" role="doc-biblioref">Mikhaylov et al., 2012</a>)</span>:</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="dictionary-analysis.html#cb117-1" aria-hidden="true" tabindex="-1"></a>NegativeSE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[, <span class="st">&quot;negative&quot;</span>, ]<span class="sc">/</span>n <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb117-2"><a href="dictionary-analysis.html#cb117-2" aria-hidden="true" tabindex="-1"></a>PositiveSE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[, <span class="st">&quot;positive&quot;</span>, ]<span class="sc">/</span>n <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb117-3"><a href="dictionary-analysis.html#cb117-3" aria-hidden="true" tabindex="-1"></a>perNegative <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[, <span class="st">&quot;negative&quot;</span>, ]<span class="sc">/</span>n <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb117-4"><a href="dictionary-analysis.html#cb117-4" aria-hidden="true" tabindex="-1"></a>perPositive <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[, <span class="st">&quot;positive&quot;</span>, ]<span class="sc">/</span>n <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>, mean)</span></code></pre></div>
+<p>We then save these quantities of interest in a new data frame:</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="dictionary-analysis.html#cb118-1" aria-hidden="true" tabindex="-1"></a>dataBS <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(reviews_bootstrap[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], NegativeSE,PositiveSE, perNegative, perPositive))</span></code></pre></div>
+<p>Then, we first calculate the confidence intervals and add these:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="dictionary-analysis.html#cb119-1" aria-hidden="true" tabindex="-1"></a>pos_hi <span class="ot">&lt;-</span> dataBS<span class="sc">$</span>perPositive <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> dataBS<span class="sc">$</span>PositiveSE)</span>
+<span id="cb119-2"><a href="dictionary-analysis.html#cb119-2" aria-hidden="true" tabindex="-1"></a>pos_lo <span class="ot">&lt;-</span> dataBS<span class="sc">$</span>perPositive <span class="sc">-</span> (<span class="fl">1.96</span> <span class="sc">*</span> dataBS<span class="sc">$</span>PositiveSE)</span>
+<span id="cb119-3"><a href="dictionary-analysis.html#cb119-3" aria-hidden="true" tabindex="-1"></a>neg_lo <span class="ot">&lt;-</span> dataBS<span class="sc">$</span>perNegative <span class="sc">-</span> (<span class="fl">1.96</span> <span class="sc">*</span> dataBS<span class="sc">$</span>NegativeSE)</span>
+<span id="cb119-4"><a href="dictionary-analysis.html#cb119-4" aria-hidden="true" tabindex="-1"></a>neg_hi <span class="ot">&lt;-</span> dataBS<span class="sc">$</span>perNegative <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> dataBS<span class="sc">$</span>NegativeSE)</span>
+<span id="cb119-5"><a href="dictionary-analysis.html#cb119-5" aria-hidden="true" tabindex="-1"></a>dataBS <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dataBS, pos_hi, pos_lo, neg_lo, neg_hi)</span></code></pre></div>
+<p>Finally, we can then make the graph. Here, we plot each of the positive and negative points and then overlay them with their error bars:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="dictionary-analysis.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb120-2"><a href="dictionary-analysis.html#cb120-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-3"><a href="dictionary-analysis.html#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb120-4"><a href="dictionary-analysis.html#cb120-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">data =</span> dataBS,<span class="fu">aes</span>(<span class="at">x =</span> perPositive, <span class="at">y =</span> doc_id), <span class="at">shape =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb120-5"><a href="dictionary-analysis.html#cb120-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">data =</span> dataBS,<span class="fu">aes</span>(<span class="at">x =</span> perNegative, <span class="at">y =</span> doc_id), <span class="at">shape =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb120-6"><a href="dictionary-analysis.html#cb120-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_errorbarh</span>(<span class="at">data =</span> dataBS,<span class="fu">aes</span>(<span class="at">x =</span> perPositive, <span class="at">xmax =</span> pos_hi,<span class="at">xmin =</span> pos_lo, <span class="at">y =</span> doc_id)) <span class="sc">+</span></span>
+<span id="cb120-7"><a href="dictionary-analysis.html#cb120-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_errorbarh</span>(<span class="at">data =</span> dataBS,<span class="fu">aes</span>(<span class="at">x =</span> perNegative, <span class="at">xmax =</span> neg_hi,<span class="at">xmin =</span> neg_lo, <span class="at">y =</span> doc_id)) <span class="sc">+</span></span>
+<span id="cb120-8"><a href="dictionary-analysis.html#cb120-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Percent positive/negative with 95% CIs&quot;</span>) <span class="sc">+</span></span>
+<span id="cb120-9"><a href="dictionary-analysis.html#cb120-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;review&quot;</span>)<span class="sc">+</span></span>
+<span id="cb120-10"><a href="dictionary-analysis.html#cb120-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<pre><code>## Warning: Ignoring unknown aesthetics: x
+## Ignoring unknown aesthetics: x</code></pre>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-moviereviews-posneg-1.png" width="672" /></p>
+<p>As we can see in this particular example, the fact that some documents are shorter than others introduces a lot of uncertainty in the estimates. As evident from the overlapping confidence intervals, for most reviews, the percentage of negative words is not very different from the percentage of positive words. In other words: the sentiment for these reviews is rather mixed.</p>
+</div>
+<div id="twitter" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Twitter<a href="dictionary-analysis.html#twitter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, let us turn to an example using Twitter data. Here, we will look at the major problems that have occurred to several of the major US airlines. For this, researchers scraped data from Twitter between 16 and 24 February of 2015. Then, using the Crowdflower platform, they asked contributors to classify each tweet (their sentiment) as either negative, positive, or neutral, and, if negative, what their reason was for classifying it as such. Besides this, the data also contains information on how ‘confident’ coders were about their classification and reason, some information on the Airline, and some info on the Tweet. Finally, we get some information on the “gold” tweets, which Crowdflower uses to figure out how well their coders are doing.</p>
+<p>While we can download the data from the website (<a href="https://www.kaggle.com/crowdflower/twitter-airline-sentiment" class="uri">https://www.kaggle.com/crowdflower/twitter-airline-sentiment</a>), for ease-of-use, we also placed it on GitHub:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="dictionary-analysis.html#cb122-1" aria-hidden="true" tabindex="-1"></a>urlfile <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/Tweets.csv&quot;</span></span>
+<span id="cb122-2"><a href="dictionary-analysis.html#cb122-2" aria-hidden="true" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(urlfile))</span></code></pre></div>
+<p>Given that this is Twitter data, we have to do quite some cleaning to filter out everything we do not want. While we earlier saw that we can perform cleaning on a corpus, we can also clean our text while still in a data frame. We can do this with R’s in-house <code>gsub</code> command, which can replace any part of a string. To understand how this works, say that we want to remove all the mentions of websites from our tweets. We then do as such:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="dictionary-analysis.html#cb123-1" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;http.*&quot;</span>,<span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span></code></pre></div>
+<p>Thus, we substitute those strings that start with <code>http.*</code> (the asterisk denotes a wildcard, which means that anything can follow) and replace it with <code></code> (that is, nothing). We do this for any string that is in <code>tweets$text</code>. Using this technique, we also remove slashes, punctuation, various symbols, <code>RT</code> (retweets), and references (<code>href</code>):</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="dictionary-analysis.html#cb124-1" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;https.*&quot;</span>,<span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb124-2"><a href="dictionary-analysis.html#cb124-2" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">$&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-3"><a href="dictionary-analysis.html#cb124-3" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;@</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-4"><a href="dictionary-analysis.html#cb124-4" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-5"><a href="dictionary-analysis.html#cb124-5" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[ |</span><span class="sc">\t</span><span class="st">]{2,}&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-6"><a href="dictionary-analysis.html#cb124-6" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;^ &quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-7"><a href="dictionary-analysis.html#cb124-7" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; $&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-8"><a href="dictionary-analysis.html#cb124-8" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;RT&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb124-9"><a href="dictionary-analysis.html#cb124-9" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;href&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span></code></pre></div>
+<p>We then transform our dataframe into a corpus (specifying that our text is in the <code>tweets$text</code> field), transform this into a tokens object, lower all the words, remove the stop words, and finally make it into a dfm:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="dictionary-analysis.html#cb125-1" aria-hidden="true" tabindex="-1"></a>corpus_tweets <span class="ot">&lt;-</span> <span class="fu">corpus</span>(tweets, <span class="at">text_field =</span> <span class="st">&quot;text&quot;</span>)</span>
+<span id="cb125-2"><a href="dictionary-analysis.html#cb125-2" aria-hidden="true" tabindex="-1"></a>data_tweets_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(corpus_tweets)</span>
+<span id="cb125-3"><a href="dictionary-analysis.html#cb125-3" aria-hidden="true" tabindex="-1"></a>data_tweets_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_tweets_tokens, <span class="at">keep_acronyms =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb125-4"><a href="dictionary-analysis.html#cb125-4" aria-hidden="true" tabindex="-1"></a>data_tweets_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_tweets_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb125-5"><a href="dictionary-analysis.html#cb125-5" aria-hidden="true" tabindex="-1"></a>data_tweets_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_tweets_tokens)</span></code></pre></div>
+<p>Now we can apply our dictionary. We can do this in two ways: applying it to the dfm, or applying it to the tokens object. Both should give roughly similar results. Yet, given that <code>dfm_lookup()</code> cannot detect multi-word expressions (as the dfm gets rid of all word order), we can use the <code>tokens_lookup()</code> and then convert this into a dfm, to compensate for this. One reason to do this here is that the LSD2015 dictionary contains some multi-word expressions that <code>dfm_lookup()</code> might miss. As a comparison, let us have a look at both:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="dictionary-analysis.html#cb126-1" aria-hidden="true" tabindex="-1"></a>results_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_lookup</span>(data_tweets_tokens, data_dictionary_LSD2015)</span>
+<span id="cb126-2"><a href="dictionary-analysis.html#cb126-2" aria-hidden="true" tabindex="-1"></a>results_tokens <span class="ot">&lt;-</span> <span class="fu">dfm</span>(results_tokens)</span>
+<span id="cb126-3"><a href="dictionary-analysis.html#cb126-3" aria-hidden="true" tabindex="-1"></a>results_tokens <span class="ot">&lt;-</span> <span class="fu">convert</span>(results_tokens, <span class="at">to=</span><span class="st">&quot;data.frame&quot;</span>)</span>
+<span id="cb126-4"><a href="dictionary-analysis.html#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-5"><a href="dictionary-analysis.html#cb126-5" aria-hidden="true" tabindex="-1"></a>results_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(data_tweets_dfm, data_dictionary_LSD2015)</span>
+<span id="cb126-6"><a href="dictionary-analysis.html#cb126-6" aria-hidden="true" tabindex="-1"></a>results_dfm <span class="ot">&lt;-</span> <span class="fu">convert</span>(results_dfm, <span class="at">to=</span><span class="st">&quot;data.frame&quot;</span>)</span></code></pre></div>
+<p>Now let us see how well our dictionary has done. To see this, we compare the sentiment of the tweet according to the dictionary with the sentiment assigned by the coder. We take this information out of our original data, and recode it (so it has got numerical values):</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="dictionary-analysis.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb127-2"><a href="dictionary-analysis.html#cb127-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="dictionary-analysis.html#cb127-3" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> tweets<span class="sc">$</span>airline_sentiment</span>
+<span id="cb127-4"><a href="dictionary-analysis.html#cb127-4" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(labels, <span class="st">&quot;&#39;positive&#39;=1;&#39;negative&#39;=-1;&#39;neutral&#39;=0&quot;</span>)</span>
+<span id="cb127-5"><a href="dictionary-analysis.html#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(labels)</span></code></pre></div>
+<p>A quick look at the data (with <code>table()</code>) reveals that the majority of the tweets are negative, a fair share neutral, and finally some positive ones. Now, let us bind this data to the output of our dictionary analysis, and calculate an overall score for each tweet. We do this by subtracting the positive score from the negative score (that is, the higher the score, the more positive the tweet):</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="dictionary-analysis.html#cb128-1" aria-hidden="true" tabindex="-1"></a>comparison_tokens <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(results_tokens<span class="sc">$</span>positive, results_tokens<span class="sc">$</span>negative, labels))</span>
+<span id="cb128-2"><a href="dictionary-analysis.html#cb128-2" aria-hidden="true" tabindex="-1"></a>difference_tokens <span class="ot">&lt;-</span> results_tokens<span class="sc">$</span>positive <span class="sc">-</span> results_tokens<span class="sc">$</span>negative</span>
+<span id="cb128-3"><a href="dictionary-analysis.html#cb128-3" aria-hidden="true" tabindex="-1"></a>comparison_tokens <span class="ot">&lt;-</span> <span class="fu">cbind</span>(comparison_tokens, difference_tokens)</span>
+<span id="cb128-4"><a href="dictionary-analysis.html#cb128-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-5"><a href="dictionary-analysis.html#cb128-5" aria-hidden="true" tabindex="-1"></a>comparison_dfm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(results_dfm<span class="sc">$</span>positive, results_dfm<span class="sc">$</span>negative, labels))</span>
+<span id="cb128-6"><a href="dictionary-analysis.html#cb128-6" aria-hidden="true" tabindex="-1"></a>difference_dfm <span class="ot">&lt;-</span> results_dfm<span class="sc">$</span>positive <span class="sc">-</span> results_dfm<span class="sc">$</span>negative</span>
+<span id="cb128-7"><a href="dictionary-analysis.html#cb128-7" aria-hidden="true" tabindex="-1"></a>comparison_dfm <span class="ot">&lt;-</span> <span class="fu">cbind</span>(comparison_dfm, difference_dfm)</span></code></pre></div>
+<p>Finally, we can place this all in a graph, in which we plot both the human judgement scores and the scores we calculated by subtracting the positive and negative codes. Also, we plot a simple linear equation to better understand the relation:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="dictionary-analysis.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb129-2"><a href="dictionary-analysis.html#cb129-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-3"><a href="dictionary-analysis.html#cb129-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison_tokens ,<span class="fu">aes</span>(<span class="at">x =</span> difference_tokens, <span class="at">y =</span> labels)) <span class="sc">+</span></span>
+<span id="cb129-4"><a href="dictionary-analysis.html#cb129-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_jitter</span>(<span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb129-5"><a href="dictionary-analysis.html#cb129-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb129-6"><a href="dictionary-analysis.html#cb129-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Positive minus Negative&quot;</span>) <span class="sc">+</span></span>
+<span id="cb129-7"><a href="dictionary-analysis.html#cb129-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Human judgment&quot;</span>) <span class="sc">+</span></span>
+<span id="cb129-8"><a href="dictionary-analysis.html#cb129-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggtitle</span>(<span class="st">&quot;Using Tokens&quot;</span>)<span class="sc">+</span></span>
+<span id="cb129-9"><a href="dictionary-analysis.html#cb129-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-tweets-tokensdfm-1.png" width="672" /></p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="dictionary-analysis.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison_dfm, <span class="fu">aes</span>(<span class="at">x =</span> difference_dfm, <span class="at">y =</span> labels)) <span class="sc">+</span></span>
+<span id="cb130-2"><a href="dictionary-analysis.html#cb130-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_jitter</span>(<span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb130-3"><a href="dictionary-analysis.html#cb130-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb130-4"><a href="dictionary-analysis.html#cb130-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Positive minus Negative&quot;</span>) <span class="sc">+</span></span>
+<span id="cb130-5"><a href="dictionary-analysis.html#cb130-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Human Judgment&quot;</span>) <span class="sc">+</span></span>
+<span id="cb130-6"><a href="dictionary-analysis.html#cb130-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggtitle</span>(<span class="st">&quot;Using DFM&quot;</span>)<span class="sc">+</span></span>
+<span id="cb130-7"><a href="dictionary-analysis.html#cb130-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-tweets-tokensdfm-2.png" width="672" /></p>
+<p>As we can see, there is a positive relation (0.6947 for the tokens and 0.6914 for the dfm), which is quite good considering our approach does not involve any human coders at all.</p>
+
+</div>
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="2">
+<div id="ref-Albaugh2013a" class="csl-entry">
+Albaugh, Q., Sevenans, J., Soroka, S., &amp; Loewen, P. J. (2013). <span class="nocase">The Automated Coding of Policy Agendas: A Dictionary-based Approach</span>. <em>6th Annual Comparative Agendas Conference, Antwerp, Belgium</em>.
+</div>
+<div id="ref-Haselmayer2017a" class="csl-entry">
+Haselmayer, M., &amp; Jenny, M. (2017). Sentiment analysis of political communication: Combining a dictionary approach with crowdcoding. <em>Quality &amp; Quantity</em>, <em>51</em>(6), 2623–2646. <a href="https://doi.org/10.1007/s11135-016-0412-4">https://doi.org/10.1007/s11135-016-0412-4</a>
+</div>
+<div id="ref-Laver2000a" class="csl-entry">
+Laver, M., &amp; Garry, J. (2000). Estimating policy positions from political texts. <em>American Journal of Political Science</em>, <em>44</em>(3), 619–634. <a href="https://doi.org/10.2307/2669268">https://doi.org/10.2307/2669268</a>
+</div>
+<div id="ref-Lind2019a" class="csl-entry">
+Lind, F., Eberl, J.-M., Heidenreich, T., &amp; Boomgaarden, H. G. (2019). When the journey is as important as the goal: A roadmap to multilingual dictionary construction. <em>International Journal of Communication</em>, <em>13</em>, 4000–4020.
+</div>
+<div id="ref-Mikhaylov2012a" class="csl-entry">
+Mikhaylov, S., Laver, M., &amp; Benoit, K. (2012). Coder reliability and misclassification in the human coding of party manifestos. <em>Political Analysis</em>, <em>20</em>(1), 78–91. <a href="https://doi.org/10.1093/pan/mpr047">https://doi.org/10.1093/pan/mpr047</a>
+</div>
+<div id="ref-Young2012a" class="csl-entry">
+Young, L., &amp; Soroka, S. (2012). <em>Lexicoder sentiment dictionary</em>. <a href="http://www.snsoroka.com/data-lexicoder/">http://www.snsoroka.com/data-lexicoder/</a>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="preliminaries.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scaling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

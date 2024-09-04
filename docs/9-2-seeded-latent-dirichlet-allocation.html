@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="9.2 Seeded Latent Dirichlet Allocation | Quantitative Text Analysis" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+
+
+<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+
+<meta name="date" content="2021-07-28" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Theory and Methods for Quantitative Text Analysis">
+
+<title>9.2 Seeded Latent Dirichlet Allocation | Quantitative Text Analysis</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#welcome">Welcome!</a></li>
+<li><a href="1-getting-started.html#getting-started"><span class="toc-section-number">1</span> Getting Started</a>
+<ul>
+<li><a href="1-1-r-on-windows.html#r-on-windows"><span class="toc-section-number">1.1</span> R on Windows</a></li>
+<li><a href="1-2-r-on-linux.html#r-on-linux"><span class="toc-section-number">1.2</span> R on Linux</a></li>
+<li><a href="1-3-r-on-macos.html#r-on-macos"><span class="toc-section-number">1.3</span> R on macOS</a></li>
+<li><a href="1-4-r-in-the-cloud.html#r-in-the-cloud"><span class="toc-section-number">1.4</span> R in the Cloud</a></li>
+</ul></li>
+<li><a href="2-installing-packages.html#installing-packages"><span class="toc-section-number">2</span> Installing Packages</a>
+<ul>
+<li><a href="2-1-installing-from-cran.html#installing-from-cran"><span class="toc-section-number">2.1</span> Installing from CRAN</a></li>
+<li><a href="2-2-installing-from-github.html#installing-from-github"><span class="toc-section-number">2.2</span> Installing from GitHub</a></li>
+<li><a href="2-3-packages-for-quantitative-text-analysis-in-r.html#packages-for-quantitative-text-analysis-in-r"><span class="toc-section-number">2.3</span> Packages for Quantitative Text Analysis in R</a></li>
+<li><a href="2-4-issues-bugs-and-errors.html#issues-bugs-and-errors"><span class="toc-section-number">2.4</span> Issues, Bugs and Errors</a></li>
+</ul></li>
+<li><a href="3-importing-data.html#importing-data"><span class="toc-section-number">3</span> Importing Data</a>
+<ul>
+<li><a href="3-1-text-in-r.html#text-in-r"><span class="toc-section-number">3.1</span> Text in R</a></li>
+<li><a href="3-2-import-txt-files.html#import-.txt-files"><span class="toc-section-number">3.2</span> Import .txt Files</a></li>
+<li><a href="3-3-import-pdf-files.html#import-.pdf-files"><span class="toc-section-number">3.3</span> Import .pdf Files</a></li>
+<li><a href="3-4-import-csv-files.html#import-.csv-files"><span class="toc-section-number">3.4</span> Import .csv Files</a></li>
+<li><a href="3-5-import-from-an-api.html#import-from-an-api"><span class="toc-section-number">3.5</span> Import from an API</a></li>
+<li><a href="3-6-import-using-web-scraping.html#import-using-web-scraping"><span class="toc-section-number">3.6</span> Import using Web Scraping</a></li>
+</ul></li>
+<li><a href="4-reliability-and-validity.html#reliability-and-validity"><span class="toc-section-number">4</span> Reliability and Validity</a>
+<ul>
+<li><a href="4-1-inter-coder-agreement.html#inter-coder-agreement"><span class="toc-section-number">4.1</span> Inter-Coder Agreement</a></li>
+<li><a href="4-2-visualizing-quality.html#visualizing-quality"><span class="toc-section-number">4.2</span> Visualizing Quality</a></li>
+</ul></li>
+<li><a href="5-preliminaries.html#preliminaries"><span class="toc-section-number">5</span> Preliminaries</a>
+<ul>
+<li><a href="5-1-the-corpus.html#the-corpus"><span class="toc-section-number">5.1</span> The Corpus</a></li>
+<li><a href="5-2-keywords-in-context.html#keywords-in-context"><span class="toc-section-number">5.2</span> Keywords in Context</a></li>
+<li><a href="5-3-visualisations-and-descriptives.html#visualisations-and-descriptives"><span class="toc-section-number">5.3</span> Visualisations and Descriptives</a></li>
+<li><a href="5-4-text-statistics.html#text-statistics"><span class="toc-section-number">5.4</span> Text Statistics</a></li>
+</ul></li>
+<li><a href="6-dictionary-analysis.html#dictionary-analysis"><span class="toc-section-number">6</span> Dictionary Analysis</a>
+<ul>
+<li><a href="6-1-classical-dictionary-analysis.html#classical-dictionary-analysis"><span class="toc-section-number">6.1</span> Classical Dictionary Analysis</a></li>
+<li><a href="6-2-sentiment-analysis.html#sentiment-analysis"><span class="toc-section-number">6.2</span> Sentiment Analysis</a>
+<ul>
+<li><a href="6-2-sentiment-analysis.html#movie-reviews"><span class="toc-section-number">6.2.1</span> Movie Reviews</a></li>
+<li><a href="6-2-sentiment-analysis.html#twitter"><span class="toc-section-number">6.2.2</span> Twitter</a></li>
+</ul></li>
+</ul></li>
+<li><a href="7-scaling.html#scaling"><span class="toc-section-number">7</span> Scaling</a>
+<ul>
+<li><a href="7-1-wordscores.html#wordscores"><span class="toc-section-number">7.1</span> Wordscores</a></li>
+<li><a href="7-2-wordfish.html#wordfish"><span class="toc-section-number">7.2</span> Wordfish</a></li>
+<li><a href="7-3-correspondence-analysis.html#correspondence-analysis"><span class="toc-section-number">7.3</span> Correspondence Analysis</a></li>
+</ul></li>
+<li><a href="8-supervised-methods.html#supervised-methods"><span class="toc-section-number">8</span> Supervised Methods</a>
+<ul>
+<li><a href="8-1-support-vector-machines.html#support-vector-machines"><span class="toc-section-number">8.1</span> Support Vector Machines</a>
+<ul>
+<li><a href="8-1-support-vector-machines.html#svm-with-rtexttools"><span class="toc-section-number">8.1.1</span> SVM with RTextTools</a></li>
+<li><a href="8-1-support-vector-machines.html#svm-with-quanteda"><span class="toc-section-number">8.1.2</span> SVM with Quanteda</a></li>
+</ul></li>
+<li><a href="8-2-naive-bayes.html#naive-bayes"><span class="toc-section-number">8.2</span> Naive Bayes</a></li>
+</ul></li>
+<li><a href="9-unsupervised-methods.html#unsupervised-methods"><span class="toc-section-number">9</span> Unsupervised Methods</a>
+<ul>
+<li><a href="9-1-latent-dirichlet-allocation.html#latent-dirichlet-allocation"><span class="toc-section-number">9.1</span> Latent Dirichlet Allocation</a></li>
+<li><a href="9-2-seeded-latent-dirichlet-allocation.html#seeded-latent-dirichlet-allocation"><span class="toc-section-number">9.2</span> Seeded Latent Dirichlet Allocation</a></li>
+<li><a href="9-3-structural-topic-model.html#structural-topic-model"><span class="toc-section-number">9.3</span> Structural Topic Model</a></li>
+</ul></li>
+<li><a href="10-texttricks.html#texttricks"><span class="toc-section-number">10</span> Texttricks</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="seeded-latent-dirichlet-allocation" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Seeded Latent Dirichlet Allocation</h2>
+<p>An alternative to the above approach is one known as seeded-LDA. This approach uses seed words that can steer the LDA in the right direction. One origin of these seed words can be a dictionary that tells the algorithm which words belong together in various categories. To use it, we will first load the packages and set a seed:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seededlda)</span></code></pre></div>
+<pre><code>## 
+## Caricamento pacchetto: &#39;seededlda&#39;</code></pre>
+<pre><code>## I seguenti oggetti sono mascherati da &#39;package:topicmodels&#39;:
+## 
+##     terms, topics</code></pre>
+<pre><code>## Il seguente oggetto è mascherato da &#39;package:stats&#39;:
+## 
+##     terms</code></pre>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
+<span id="cb246-2"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb246-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-3"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb246-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span></code></pre></div>
+<p>Next, we need to specify a selection of seed words in dictionary form. While we can construct a dictionary ourselves, here we choose to use the Laver and Garry dictionary we saw earlier. We then use this dictionary to run our seeded LDA:</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb247-1" aria-hidden="true" tabindex="-1"></a>dictionary_LaverGarry <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(data_dictionary_LaverGarry)</span>
+<span id="cb247-2"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb247-2" aria-hidden="true" tabindex="-1"></a>seededmodel <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(data_inaugural_dfm, <span class="at">dictionary =</span> dictionary_LaverGarry)</span>
+<span id="cb247-3"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="fu">terms</span>(seededmodel, <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>##       CULTURE     ECONOMY       ENVIRONMENT      GROUPS    INSTITUTIONS    
+##  [1,] &quot;people&quot;    &quot;work&quot;        &quot;production&quot;     &quot;women&quot;   &quot;president&quot;     
+##  [2,] &quot;us&quot;        &quot;economic&quot;    &quot;productive&quot;     &quot;race&quot;    &quot;administration&quot;
+##  [3,] &quot;art&quot;       &quot;opportunity&quot; &quot;planet&quot;         &quot;racial&quot;  &quot;continue&quot;      
+##  [4,] &quot;music&quot;     &quot;children&quot;    &quot;population&quot;     &quot;woman&quot;   &quot;office&quot;        
+##  [5,] &quot;operating&quot; &quot;economy&quot;     &quot;products&quot;       &quot;racism&quot;  &quot;executive&quot;     
+##  [6,] &quot;operation&quot; &quot;industrial&quot;  &quot;environment&quot;    &quot;ethnic&quot;  &quot;rule&quot;          
+##  [7,] &quot;new&quot;       &quot;trade&quot;       &quot;clean&quot;          &quot;racing&quot;  &quot;voices&quot;        
+##  [8,] &quot;america&quot;   &quot;confidence&quot;  &quot;productivity&quot;   &quot;day&quot;     &quot;legislation&quot;   
+##  [9,] &quot;nation&quot;    &quot;equal&quot;       &quot;produce&quot;        &quot;body&quot;    &quot;authority&quot;     
+## [10,] &quot;let&quot;       &quot;cost&quot;        &quot;product&quot;        &quot;built&quot;   &quot;democratic&quot;    
+## [11,] &quot;american&quot;  &quot;poverty&quot;     &quot;cleaner&quot;        &quot;fire&quot;    &quot;modern&quot;        
+## [12,] &quot;today&quot;     &quot;care&quot;        &quot;productions&quot;    &quot;task&quot;    &quot;agencies&quot;      
+## [13,] &quot;must&quot;      &quot;welfare&quot;     &quot;produced&quot;       &quot;evil&quot;    &quot;rules&quot;         
+## [14,] &quot;world&quot;     &quot;education&quot;   &quot;cleanse&quot;        &quot;mind&quot;    &quot;election&quot;      
+## [15,] &quot;one&quot;       &quot;commerce&quot;    &quot;productiveness&quot; &quot;spirit&quot;  &quot;sovereignty&quot;   
+## [16,] &quot;know&quot;      &quot;age&quot;         &quot;car&quot;            &quot;whether&quot; &quot;reforms&quot;       
+## [17,] &quot;americans&quot; &quot;health&quot;      &quot;chemical&quot;       &quot;put&quot;     &quot;voice&quot;         
+## [18,] &quot;now&quot;       &quot;private&quot;     &quot;warming&quot;        &quot;speaks&quot;  &quot;elected&quot;       
+## [19,] &quot;time&quot;      &quot;equality&quot;    &quot;depletion&quot;      &quot;serve&quot;   &quot;process&quot;       
+## [20,] &quot;can&quot;       &quot;jobs&quot;        &quot;republic&quot;       &quot;carried&quot; &quot;reform&quot;        
+##       LAW_AND_ORDER   RURAL          URBAN      VALUES        
+##  [1,] &quot;force&quot;         &quot;agriculture&quot;  &quot;town&quot;     &quot;history&quot;     
+##  [2,] &quot;forces&quot;        &quot;feed&quot;         &quot;towns&quot;    &quot;human&quot;       
+##  [3,] &quot;determined&quot;    &quot;agricultural&quot; &quot;story&quot;    &quot;rights&quot;      
+##  [4,] &quot;determination&quot; &quot;farm&quot;         &quot;thank&quot;    &quot;principles&quot;  
+##  [5,] &quot;conviction&quot;    &quot;farms&quot;        &quot;friends&quot;  &quot;past&quot;        
+##  [6,] &quot;court&quot;         &quot;forests&quot;      &quot;young&quot;    &quot;leadership&quot;  
+##  [7,] &quot;determine&quot;     &quot;farmers&quot;      &quot;hear&quot;     &quot;humanity&quot;    
+##  [8,] &quot;terror&quot;        &quot;villages&quot;     &quot;learned&quot;  &quot;maintain&quot;    
+##  [9,] &quot;forced&quot;        &quot;horseback&quot;    &quot;bless&quot;    &quot;preserve&quot;    
+## [10,] &quot;courts&quot;        &quot;farmer&quot;       &quot;prayer&quot;   &quot;defend&quot;      
+## [11,] &quot;dealing&quot;       &quot;countryside&quot;  &quot;must&quot;     &quot;leaders&quot;     
+## [12,] &quot;seize&quot;         &quot;village&quot;      &quot;together&quot; &quot;principle&quot;   
+## [13,] &quot;drugs&quot;         &quot;lanes&quot;        &quot;days&quot;     &quot;proud&quot;       
+## [14,] &quot;officers&quot;      &quot;landscape&quot;    &quot;lost&quot;     &quot;threat&quot;      
+## [15,] &quot;penalties&quot;     &quot;man&quot;          &quot;dreams&quot;   &quot;pride&quot;       
+## [16,] &quot;convictions&quot;   &quot;change&quot;       &quot;protect&quot;  &quot;heritage&quot;    
+## [17,] &quot;guarding&quot;      &quot;light&quot;        &quot;hearts&quot;   &quot;historic&quot;    
+## [18,] &quot;lawless&quot;       &quot;greatness&quot;    &quot;right&quot;    &quot;preserved&quot;   
+## [19,] &quot;illegal&quot;       &quot;hands&quot;        &quot;back&quot;     &quot;integrity&quot;   
+## [20,] &quot;victims&quot;       &quot;friends&quot;      &quot;personal&quot; &quot;preservation&quot;</code></pre>
+<p>Note that using the dictionary has ensured that we only use the categories that occur in the dictionary. This means that we can look at which topics are in each inaugural speech and which terms were most likely for each of the topics. Let us start with the topics first:</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-1" aria-hidden="true" tabindex="-1"></a>topics <span class="ot">&lt;-</span> <span class="fu">topics</span>(seededmodel)</span>
+<span id="cb249-2"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-2" aria-hidden="true" tabindex="-1"></a>topics_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(topics)</span>
+<span id="cb249-3"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-3" aria-hidden="true" tabindex="-1"></a>topics_prop_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">prop.table</span>(topics_table))</span>
+<span id="cb249-4"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-5"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>topics_prop_table, <span class="fu">aes</span>(<span class="at">x=</span>topics, <span class="at">y=</span>Freq))<span class="sc">+</span></span>
+<span id="cb249-6"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb249-7"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Topics&quot;</span>, <span class="at">y=</span><span class="st">&quot;Topic Percentage&quot;</span>)<span class="sc">+</span></span>
+<span id="cb249-8"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb249-9"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb249-10"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb249-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="Intro-to-Quantitative-Text-Analysis_files/figure-html/unnamed-chunk-163-1.png" width="672"  /></p>
+<p>Here, we find that Culture was the most favoured topic, followed by the Economy and Values. Finally, we can then have a look at the most likely terms for each topic, sorted by each of the categories in the dictionary:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb250-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> <span class="fu">terms</span>(seededmodel)</span>
+<span id="cb250-2"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb250-2" aria-hidden="true" tabindex="-1"></a>terms_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(terms)</span>
+<span id="cb250-3"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb250-3" aria-hidden="true" tabindex="-1"></a>terms_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(terms_table)</span>
+<span id="cb250-4"><a href="9-2-seeded-latent-dirichlet-allocation.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(terms_df)</span></code></pre></div>
+<pre><code>##   Var1    Var2      Freq
+## 1    A CULTURE    people
+## 2    B CULTURE        us
+## 3    C CULTURE       art
+## 4    D CULTURE     music
+## 5    E CULTURE operating
+## 6    F CULTURE operation</code></pre>
+<p>Here, we find that in the first cluster (denoted as “A”), the word “people” was most likely (from all words that belonged to Culture). Thus, within this cluster, talking about culture often contained references to the people. In the same way, we can make similar observations for the other categories.</p>
+</div>
+<p style="text-align: center;">
+<a href="9-1-latent-dirichlet-allocation.html"><button class="btn btn-default">Previous</button></a>
+<a href="9-3-structural-topic-model.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

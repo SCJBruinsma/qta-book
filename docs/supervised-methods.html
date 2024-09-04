@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Supervised Methods | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Supervised Methods | Introduction to Quantitative Text Analysis" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Supervised Methods | Introduction to Quantitative Text Analysis" />
+  
+  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
+
+<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+
+
+<meta name="date" content="2022-05-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="scaling.html"/>
+<link rel="next" href="unsupervised-methods.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.17/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Quantitative Text Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#r-on-windows"><i class="fa fa-check"></i><b>1.1</b> R on Windows</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#r-on-linux"><i class="fa fa-check"></i><b>1.2</b> R on Linux</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-on-macos"><i class="fa fa-check"></i><b>1.3</b> R on macOS</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#r-in-the-cloud"><i class="fa fa-check"></i><b>1.4</b> R in the Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>2</b> Installing Packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-cran"><i class="fa fa-check"></i><b>2.1</b> Installing from CRAN</a></li>
+<li class="chapter" data-level="2.2" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-github"><i class="fa fa-check"></i><b>2.2</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="2.3" data-path="installing-packages.html"><a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r"><i class="fa fa-check"></i><b>2.3</b> Packages for Quantitative Text Analysis in R</a></li>
+<li class="chapter" data-level="2.4" data-path="installing-packages.html"><a href="installing-packages.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>3</b> Importing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-data.html"><a href="importing-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-data.html"><a href="importing-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.2</b> Import .txt Files</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-data.html"><a href="importing-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.3</b> Import .pdf Files</a></li>
+<li class="chapter" data-level="3.4" data-path="importing-data.html"><a href="importing-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
+<li class="chapter" data-level="3.5" data-path="importing-data.html"><a href="importing-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
+<li class="chapter" data-level="3.6" data-path="importing-data.html"><a href="importing-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and Validity</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="reliability-validity.html"><a href="reliability-validity.html#inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Inter-Coder Agreement</a></li>
+<li class="chapter" data-level="4.2" data-path="reliability-validity.html"><a href="reliability-validity.html#visualizing-quality"><i class="fa fa-check"></i><b>4.2</b> Visualizing Quality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>5</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="preliminaries.html"><a href="preliminaries.html#the-corpus"><i class="fa fa-check"></i><b>5.1</b> The Corpus</a></li>
+<li class="chapter" data-level="5.2" data-path="preliminaries.html"><a href="preliminaries.html#keywords-in-context"><i class="fa fa-check"></i><b>5.2</b> Keywords in Context</a></li>
+<li class="chapter" data-level="5.3" data-path="preliminaries.html"><a href="preliminaries.html#visualisations-and-descriptives"><i class="fa fa-check"></i><b>5.3</b> Visualisations and Descriptives</a></li>
+<li class="chapter" data-level="5.4" data-path="preliminaries.html"><a href="preliminaries.html#text-statistics"><i class="fa fa-check"></i><b>5.4</b> Text Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>6</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#classical-dictionary-analysis"><i class="fa fa-check"></i><b>6.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="6.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>6.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>6.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#twitter"><i class="fa fa-check"></i><b>6.2.2</b> Twitter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>7</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>7.1</b> Wordscores</a></li>
+<li class="chapter" data-level="7.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>7.2</b> Wordfish</a></li>
+<li class="chapter" data-level="7.3" data-path="scaling.html"><a href="scaling.html#correspondence-analysis"><i class="fa fa-check"></i><b>7.3</b> Correspondence Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>8</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>8.1</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>8.1.1</b> SVM with RTextTools</a></li>
+<li class="chapter" data-level="8.1.2" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-quanteda"><i class="fa fa-check"></i><b>8.1.2</b> SVM with Quanteda</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>8.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>9</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.1</b> Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="9.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.2</b> Seeded Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="9.3" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#structural-topic-model"><i class="fa fa-check"></i><b>9.3</b> Structural Topic Model</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>10</b> Texttricks</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="bastiaan.bruinsma@gmail.com" target="blank">Bastiaan Bruinsma</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Quantitative Text Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="supervised-methods" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Supervised Methods<a href="supervised-methods.html#supervised-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>While with scaling we try to place our texts on a scale, with supervised methods we go back to what we did with dictionary analysis: classification. Within <code>quanteda</code> there are many different models for supervised methods, of which we will cover two. These are <em>Support Vector Machines</em> (SVM) and <em>Naive Bayes</em> (NB). The first classifies texts by looking at their position on a hyperplane, the second by their (Bayesian) probabilities.</p>
+<div id="support-vector-machines" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Support Vector Machines<a href="supervised-methods.html#support-vector-machines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To show how SVM works, we will look at an example of SVM in <code>quanteda</code> and one in <code>RTextTools</code>, and an example of NB in <code>quanteda</code>.</p>
+<div id="svm-with-rtexttools" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> SVM with RTextTools<a href="supervised-methods.html#svm-with-rtexttools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the SVM, we will start with an example using our Twitter data and the <code>RTextTools</code> package. First, we load the Twitter data:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="supervised-methods.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;RTextTools&quot;</span>)</span>
+<span id="cb169-2"><a href="supervised-methods.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;car&quot;</span>)</span>
+<span id="cb169-3"><a href="supervised-methods.html#cb169-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-4"><a href="supervised-methods.html#cb169-4" aria-hidden="true" tabindex="-1"></a>urlfile <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/Tweets.csv&quot;</span></span>
+<span id="cb169-5"><a href="supervised-methods.html#cb169-5" aria-hidden="true" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(urlfile))</span>
+<span id="cb169-6"><a href="supervised-methods.html#cb169-6" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;http.*&quot;</span>,<span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb169-7"><a href="supervised-methods.html#cb169-7" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;https.*&quot;</span>,<span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb169-8"><a href="supervised-methods.html#cb169-8" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">$&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-9"><a href="supervised-methods.html#cb169-9" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;@</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-10"><a href="supervised-methods.html#cb169-10" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[[:punct:]]&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-11"><a href="supervised-methods.html#cb169-11" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[ |</span><span class="sc">\t</span><span class="st">]{2,}&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-12"><a href="supervised-methods.html#cb169-12" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;^ &quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-13"><a href="supervised-methods.html#cb169-13" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; $&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-14"><a href="supervised-methods.html#cb169-14" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;RT&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text) </span>
+<span id="cb169-15"><a href="supervised-methods.html#cb169-15" aria-hidden="true" tabindex="-1"></a>tweets<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;href&quot;</span>, <span class="st">&quot;&quot;</span>, tweets<span class="sc">$</span>text)</span>
+<span id="cb169-16"><a href="supervised-methods.html#cb169-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-17"><a href="supervised-methods.html#cb169-17" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> tweets<span class="sc">$</span>airline_sentiment</span>
+<span id="cb169-18"><a href="supervised-methods.html#cb169-18" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(labels, <span class="st">&quot;&#39;positive&#39;=1;&#39;negative&#39;=-1;&#39;neutral&#39;=0&quot;</span>)</span></code></pre></div>
+<p>The goal of the supervised learning task is to use part of this dataset to train a certain algorithm and then use the trained algorithm to assign categories to the remaining sentences. Since we know the coded categories for the remaining sentences, we will be able to evaluate how well this training was in guessing/estimating what the codes for these sentences were. We start by creating a document term matrix;</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="supervised-methods.html#cb170-1" aria-hidden="true" tabindex="-1"></a>doc_matrix <span class="ot">&lt;-</span> <span class="fu">create_matrix</span>(tweets<span class="sc">$</span>text,</span>
+<span id="cb170-2"><a href="supervised-methods.html#cb170-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, </span>
+<span id="cb170-3"><a href="supervised-methods.html#cb170-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">removeNumbers =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb170-4"><a href="supervised-methods.html#cb170-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">stemWords =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb170-5"><a href="supervised-methods.html#cb170-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">removeSparseTerms =</span> <span class="fl">0.998</span>)</span>
+<span id="cb170-6"><a href="supervised-methods.html#cb170-6" aria-hidden="true" tabindex="-1"></a>doc_matrix</span></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 14640, terms: 694)&gt;&gt;
+## Non-/sparse entries: 84547/10075613
+## Sparsity           : 99%
+## Maximal term length: 18
+## Weighting          : term frequency (tf)</code></pre>
+<p>Note that <code>RTextTools</code> gives you plenty of options in preprocessing. Apart from the options used above, we can also strip whitespace, remove punctuation, and remove stopwords. Stemming and stopword removal is language-specific, so when we select the language in the option above <code>(language=''english'')</code>, <code>RTextTools</code> will carry this out according to our language of choice. As of now, the package supports Danish, Dutch, English, Finnish, French, German, Italian, Norwegian, Portuguese, Russian, Spanish, and Swedish.</p>
+<p>We then create a container parsing the document matrix into a training set, and a test set. We will use the training set will to train the algorithm and the test set to test how well this algorithm was trained. The following command instructs R to use the first 4000 sentences for the training set the remaining 449 sentences for the test set. Moreover, we specify to append to the document matrix the variable that contains the assigned coders:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="supervised-methods.html#cb172-1" aria-hidden="true" tabindex="-1"></a>container <span class="ot">&lt;-</span> <span class="fu">create_container</span>(doc_matrix,</span>
+<span id="cb172-2"><a href="supervised-methods.html#cb172-2" aria-hidden="true" tabindex="-1"></a>                              labels,</span>
+<span id="cb172-3"><a href="supervised-methods.html#cb172-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">trainSize =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>, </span>
+<span id="cb172-4"><a href="supervised-methods.html#cb172-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">testSize =</span> <span class="dv">10001</span><span class="sc">:</span><span class="dv">14640</span>, </span>
+<span id="cb172-5"><a href="supervised-methods.html#cb172-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">virgin =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>We can then train a model using one of the available algorithms. For instance, we can use the Support Vector Machines algorithm (SVM) as follows:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="supervised-methods.html#cb173-1" aria-hidden="true" tabindex="-1"></a>SVM <span class="ot">&lt;-</span> <span class="fu">train_model</span>(container, <span class="st">&quot;SVM&quot;</span>)</span></code></pre></div>
+<p>Other algorithms are available if you change the SVM option. Options exist for Lasso and Elastic-Net Regularized Generalized Linear Models (<code>GLMNET</code>), maximum entropy (<code>MAXENT</code>), scaled linear discriminant analysis (<code>SLDA</code>), bagging (<code>BAGGING</code>), boosting (<code>BOOSTING</code>), random forests (<code>RF</code>), neural networks (<code>NNET</code>), or classification trees (<code>TREE</code>).</p>
+<p>We then use the model we trained to classify the texts in the test set. The following command instructs R to classify the documents in the test set of the container using the SVM model that we trained earlier.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="supervised-methods.html#cb174-1" aria-hidden="true" tabindex="-1"></a>SVM_CLASSIFY <span class="ot">&lt;-</span> <span class="fu">classify_model</span>(container, SVM)</span></code></pre></div>
+<p>We can also view the classification that the SVM model performed as follows. The first column corresponds to the label that coders assigned to each of the tweets in the training set. The second column then gives the probability that the SVM algorithm assigned to that particular category. As you can see, while the probability for some sentences is quite high, for others it is quite low. This even while the classification always chooses the category with the highest probability.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="supervised-methods.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(SVM_CLASSIFY)</span></code></pre></div>
+<p>The next step is to check the classification performance of our model. To do this, we first request a function that returns a container with different summaries. For instance, we can request summaries based on the labels attached to the sentences, the documents (or in this case, the sentences) by label, or based on the algorithm.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="supervised-methods.html#cb176-1" aria-hidden="true" tabindex="-1"></a>analytics <span class="ot">&lt;-</span> <span class="fu">create_analytics</span>(container, SVM_CLASSIFY)</span>
+<span id="cb176-2"><a href="supervised-methods.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(analytics)</span></code></pre></div>
+<pre><code>## ENSEMBLE SUMMARY
+## 
+##        n-ENSEMBLE COVERAGE n-ENSEMBLE RECALL
+## n &gt;= 1                   1               0.8
+## 
+## 
+## ALGORITHM PERFORMANCE
+## 
+## SVM_PRECISION    SVM_RECALL    SVM_FSCORE 
+##     0.6800000     0.6733333     0.6733333</code></pre>
+<p>Here, precision gives the proportion of bills that SVM classified as belonging to a category that does belong to that category (true positives) to all the bills that are classified in that category (irrespective of where they belong). Recall, then, is the proportion of bills that SVM classifies as belonging to a category and belong to this category (true positives) to all the bills that belong to this category (true positives plus false negatives). The F score is a weighted average between precision and recall ranging from 0 to 1.</p>
+<p>Finally, we can compare the scores between the labels given by the coders and those based on our SVM:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="supervised-methods.html#cb178-1" aria-hidden="true" tabindex="-1"></a>compare <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(labels[<span class="dv">10001</span><span class="sc">:</span><span class="dv">14640</span>], SVM_CLASSIFY<span class="sc">$</span>SVM_LABEL))</span>
+<span id="cb178-2"><a href="supervised-methods.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compare)</span></code></pre></div>
+<pre><code>##     V2
+## V1     -1    0    1
+##   -1 3013  296  110
+##   0   289  347   55
+##   1   131   59  340</code></pre>
+</div>
+<div id="svm-with-quanteda" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> SVM with Quanteda<a href="supervised-methods.html#svm-with-quanteda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Instead of using a separate package, we can also use <code>quanteda</code> to carry out an SVM. For this, we load some movie reviews, select 1000 of them at random, and place them into our corpus:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="supervised-methods.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb180-2"><a href="supervised-methods.html#cb180-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-3"><a href="supervised-methods.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb180-4"><a href="supervised-methods.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.classifiers)</span>
+<span id="cb180-5"><a href="supervised-methods.html#cb180-5" aria-hidden="true" tabindex="-1"></a>corpus_reviews <span class="ot">&lt;-</span> <span class="fu">corpus_sample</span>(data_corpus_LMRD, <span class="dv">1000</span>)</span></code></pre></div>
+<p>Our aim here will be to see how well the SVM algorithm can predict the rating of the reviews. To do this, we first have to create a new variable <code>prediction</code>. This variable contains the same scores as the original rating. Then, we remove 30% of the scores and replace them with NA. We do so by creating a <code>missing</code> variable that contains 30% 0s and 70% 1s. We then place the 0s with NAs. These NA scores are then the ones we want the algorithm to predict. Finally, we add the new variable to the corpus:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="supervised-methods.html#cb181-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> corpus_reviews<span class="sc">$</span>rating</span>
+<span id="cb181-2"><a href="supervised-methods.html#cb181-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-3"><a href="supervised-methods.html#cb181-3" aria-hidden="true" tabindex="-1"></a>missing <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="fl">0.7</span>)</span>
+<span id="cb181-4"><a href="supervised-methods.html#cb181-4" aria-hidden="true" tabindex="-1"></a>prediction[missing <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb181-5"><a href="supervised-methods.html#cb181-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-6"><a href="supervised-methods.html#cb181-6" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(corpus_reviews, <span class="st">&quot;prediction&quot;</span>) <span class="ot">&lt;-</span> prediction</span></code></pre></div>
+<p>We then transform the corpus into a data frame, and also remove stopwords, numbers and punctuation:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="supervised-methods.html#cb182-1" aria-hidden="true" tabindex="-1"></a>data_reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
+<span id="cb182-2"><a href="supervised-methods.html#cb182-2" aria-hidden="true" tabindex="-1"></a> corpus_reviews,</span>
+<span id="cb182-3"><a href="supervised-methods.html#cb182-3" aria-hidden="true" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
+<span id="cb182-4"><a href="supervised-methods.html#cb182-4" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb182-5"><a href="supervised-methods.html#cb182-5" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb182-6"><a href="supervised-methods.html#cb182-6" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb182-7"><a href="supervised-methods.html#cb182-7" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb182-8"><a href="supervised-methods.html#cb182-8" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb182-9"><a href="supervised-methods.html#cb182-9" aria-hidden="true" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb182-10"><a href="supervised-methods.html#cb182-10" aria-hidden="true" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb182-11"><a href="supervised-methods.html#cb182-11" aria-hidden="true" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb182-12"><a href="supervised-methods.html#cb182-12" aria-hidden="true" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb182-13"><a href="supervised-methods.html#cb182-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb182-14"><a href="supervised-methods.html#cb182-14" aria-hidden="true" tabindex="-1"></a>data_reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_reviews_tokens, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb182-15"><a href="supervised-methods.html#cb182-15" aria-hidden="true" tabindex="-1"></a>data_reviews_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_reviews_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb182-16"><a href="supervised-methods.html#cb182-16" aria-hidden="true" tabindex="-1"></a>dfm_reviews <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_reviews_tokens)</span></code></pre></div>
+<p>Now we can run the SVM algorithm. To do so, we tell the model on which dfm we want to run our model, and which variable contains the scores to train the algorithm. Here, this is our <code>prediction</code> variable with the missing data:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="supervised-methods.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)</span>
+<span id="cb183-2"><a href="supervised-methods.html#cb183-2" aria-hidden="true" tabindex="-1"></a>svm_reviews <span class="ot">&lt;-</span> <span class="fu">textmodel_svm</span>(dfm_reviews, <span class="at">y =</span> <span class="fu">docvars</span>(dfm_reviews, <span class="st">&quot;prediction&quot;</span>))</span>
+<span id="cb183-3"><a href="supervised-methods.html#cb183-3" aria-hidden="true" tabindex="-1"></a>svm_reviews</span></code></pre></div>
+<pre><code>## 
+## Call:
+## textmodel_svm.dfm(x = dfm_reviews, y = docvars(dfm_reviews, &quot;prediction&quot;))
+## 
+## 672 training documents; 121,608 fitted features.
+## Method: L2-regularized L2-loss support vector classification dual (L2R_L2LOSS_SVC_DUAL)</code></pre>
+<p>Here we see that the algorithm used 672 texts to train the model (the one with a score) and fitted 133,728 features. The latter refers to the total number of words in the training texts and not only the unique ones. Now we can use this model to predict the ratings we removed earlier:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="supervised-methods.html#cb185-1" aria-hidden="true" tabindex="-1"></a>svm_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_reviews)</span></code></pre></div>
+<p>While we can of course look at the resulting numbers, we can also place them in a two-way table with the actual rating, to see how well the algorithm did:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="supervised-methods.html#cb186-1" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> corpus_reviews<span class="sc">$</span>rating</span>
+<span id="cb186-2"><a href="supervised-methods.html#cb186-2" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(svm_predict, rating))</span>
+<span id="cb186-3"><a href="supervised-methods.html#cb186-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(table_data<span class="sc">$</span>svm_predict,table_data<span class="sc">$</span>rating)</span></code></pre></div>
+<pre><code>##     
+##        1   2   3   4   7   8   9  10
+##   1  172  15   9  15   4   3   3   3
+##   2    7  69   6   5   2   2   1   3
+##   3    7   0  82   4   1   3   0   1
+##   4    5   2   5  86   7   6   0   4
+##   7    3   1   1   1  56   3   3   2
+##   8    0   2   2   2   8  90   7   6
+##   9    4   0   0   3   6   9  76  13
+##   10   5   2   4   2   7   6   6 138</code></pre>
+<p>Here, the table shows the prediction of the algorithm from top to bottom and the original rating from left to right. What we want is that all cases are on the diagonal: in that case, the prediction is the same as the original rating. Here, this happens in the majority of cases. Also, only in a few cases is the algorithm far off.</p>
+</div>
+</div>
+<div id="naive-bayes" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Naive Bayes<a href="supervised-methods.html#naive-bayes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For the Naive Bayes example, we will use data from the <a href="https://manifestoproject.wzb.eu/">Manifesto Project</a> <span class="citation">(<a href="#ref-Volkens2019a" role="doc-biblioref">Volkens et al., 2019</a>)</span>, also known as the Comparative Manifesto Project (CMP), Manifesto Research Group (MRG), and MARPOR (Manifesto Research on Political Representation)). To use this data, ensure you have signed up and downloaded the API key, loaded the package and set the key:</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="supervised-methods.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(manifestoR)</span>
+<span id="cb188-2"><a href="supervised-methods.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mp_setapikey</span>(<span class="st">&quot;manifesto_apikey.txt&quot;</span>)</span></code></pre></div>
+<p>While we can download the whole dataset, as it is rather large, it makes more sense to only download a part of it. Here, we take the manifestos for the United Kingdom in 2015. To tell R we want only these documents, we make a small data frame listing the party and the year we want, and then place this into the <code>mp_corpus</code> command. Note that instead of the names of the parties, the Manifesto Project assigns unique codes to each party. To see which code belongs to which party, see: <a href="https://manifesto-project.wzb.eu/down/data/2019a/codebooks/parties_MPDataset_MPDS2019a.pdf" class="uri">https://manifesto-project.wzb.eu/down/data/2019a/codebooks/parties_MPDataset_MPDS2019a.pdf</a>. Also, note that the date includes both the year and month of the election:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="supervised-methods.html#cb189-1" aria-hidden="true" tabindex="-1"></a>manifestos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">party=</span><span class="fu">c</span>(<span class="dv">51320</span>, <span class="dv">51620</span>, <span class="dv">51110</span>, <span class="dv">51421</span>, <span class="dv">51901</span>, <span class="dv">51902</span>, <span class="dv">51951</span>), <span class="at">date=</span><span class="fu">c</span>(<span class="dv">201505</span>, <span class="dv">201505</span>, <span class="dv">201505</span>, <span class="dv">201505</span>, <span class="dv">201505</span>, <span class="dv">201505</span>, <span class="dv">201505</span>))</span>
+<span id="cb189-2"><a href="supervised-methods.html#cb189-2" aria-hidden="true" tabindex="-1"></a>manifesto_corpus <span class="ot">&lt;-</span> <span class="fu">mp_corpus</span>(manifestos)</span></code></pre></div>
+<pre><code>## Connecting to Manifesto Project DB API... corpus version: 2021-1 
+## Connecting to Manifesto Project DB API... corpus version: 2021-1</code></pre>
+<p>For now, we are only interested in the (quasi)-sentences the of the manifestos, the codes the coders gave them, and names of the parties. To make everything more clear, we will take these elements from the corpus, combine them into a new data-frame, and remove all the NA values. We do this because otherwise the data would also include the headers and titles of the document, which do not have any codes assigned to them:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="supervised-methods.html#cb191-1" aria-hidden="true" tabindex="-1"></a>text_51320 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51320_201505&quot;</span>]])</span>
+<span id="cb191-2"><a href="supervised-methods.html#cb191-2" aria-hidden="true" tabindex="-1"></a>text_51620 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51620_201505&quot;</span>]])</span>
+<span id="cb191-3"><a href="supervised-methods.html#cb191-3" aria-hidden="true" tabindex="-1"></a>text_51110 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51110_201505&quot;</span>]])</span>
+<span id="cb191-4"><a href="supervised-methods.html#cb191-4" aria-hidden="true" tabindex="-1"></a>text_51421 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51421_201505&quot;</span>]])</span>
+<span id="cb191-5"><a href="supervised-methods.html#cb191-5" aria-hidden="true" tabindex="-1"></a>text_51901 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51901_201505&quot;</span>]])</span>
+<span id="cb191-6"><a href="supervised-methods.html#cb191-6" aria-hidden="true" tabindex="-1"></a>text_51902 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51902_201505&quot;</span>]])</span>
+<span id="cb191-7"><a href="supervised-methods.html#cb191-7" aria-hidden="true" tabindex="-1"></a>text_51951 <span class="ot">&lt;-</span> <span class="fu">content</span>(manifesto_corpus[[<span class="st">&quot;51951_201505&quot;</span>]])</span>
+<span id="cb191-8"><a href="supervised-methods.html#cb191-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-9"><a href="supervised-methods.html#cb191-9" aria-hidden="true" tabindex="-1"></a>texts <span class="ot">&lt;-</span> <span class="fu">c</span>(text_51320,text_51620,text_51110,text_51421,text_51901,text_51902,text_51951)</span>
+<span id="cb191-10"><a href="supervised-methods.html#cb191-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-11"><a href="supervised-methods.html#cb191-11" aria-hidden="true" tabindex="-1"></a>party_51320 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51320</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51320))</span>
+<span id="cb191-12"><a href="supervised-methods.html#cb191-12" aria-hidden="true" tabindex="-1"></a>party_51620 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51620</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51620))</span>
+<span id="cb191-13"><a href="supervised-methods.html#cb191-13" aria-hidden="true" tabindex="-1"></a>party_51110 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51110</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51110))</span>
+<span id="cb191-14"><a href="supervised-methods.html#cb191-14" aria-hidden="true" tabindex="-1"></a>party_51421 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51421</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51421))</span>
+<span id="cb191-15"><a href="supervised-methods.html#cb191-15" aria-hidden="true" tabindex="-1"></a>party_51901 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51901</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51901))</span>
+<span id="cb191-16"><a href="supervised-methods.html#cb191-16" aria-hidden="true" tabindex="-1"></a>party_51902 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51902</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51902))</span>
+<span id="cb191-17"><a href="supervised-methods.html#cb191-17" aria-hidden="true" tabindex="-1"></a>party_51951 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">51951</span>,<span class="at">length.out=</span><span class="fu">length</span>(text_51951))</span>
+<span id="cb191-18"><a href="supervised-methods.html#cb191-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-19"><a href="supervised-methods.html#cb191-19" aria-hidden="true" tabindex="-1"></a>party <span class="ot">&lt;-</span> <span class="fu">c</span>(party_51320,party_51620,party_51110,party_51421,party_51901,party_51902,party_51951)</span>
+<span id="cb191-20"><a href="supervised-methods.html#cb191-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-21"><a href="supervised-methods.html#cb191-21" aria-hidden="true" tabindex="-1"></a>cmp_code <span class="ot">&lt;-</span> <span class="fu">codes</span>(manifesto_corpus)</span>
+<span id="cb191-22"><a href="supervised-methods.html#cb191-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-23"><a href="supervised-methods.html#cb191-23" aria-hidden="true" tabindex="-1"></a>manifesto_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(texts,cmp_code,party)</span></code></pre></div>
+<p>Before we go on, we have to transform the columns in our data-frame. This is because R considers two of them (<em>texts</em> and <em>cmp_code</em>) to be a factor, and also still uses the codes for the <em>party</em> variable. To solve the latter, we first transform <em>party</em> into a factor type, then assign the party names to each of the codes (Conservatives, Labour, Liberal Democrats, SNP, Plaid Cymru, The Greens, and UKIP), and then change the column to character type. We then change the <strong>texts</strong> column to character and the <strong>cmp_code</strong> column to numeric. We also create a back-up of our current dfm for later, and finally remove any missing data:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="supervised-methods.html#cb192-1" aria-hidden="true" tabindex="-1"></a>manifesto_data<span class="sc">$</span>party <span class="ot">&lt;-</span> <span class="fu">factor</span>(manifesto_data<span class="sc">$</span>party,<span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">51110</span>, <span class="dv">51320</span>, <span class="dv">51421</span>, <span class="dv">51620</span>, <span class="dv">51901</span>, <span class="dv">51902</span>, <span class="dv">51951</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;GREEN&quot;</span>, <span class="st">&quot;LABOUR&quot;</span>, <span class="st">&quot;LIBDEM&quot;</span>, <span class="st">&quot;CON&quot;</span>, <span class="st">&quot;PC&quot;</span>, <span class="st">&quot;SNP&quot;</span>, <span class="st">&quot;UKIP&quot;</span>)) </span>
+<span id="cb192-2"><a href="supervised-methods.html#cb192-2" aria-hidden="true" tabindex="-1"></a>manifesto_data<span class="sc">$</span>party <span class="ot">&lt;-</span> <span class="fu">as.character</span>(manifesto_data<span class="sc">$</span>party)</span>
+<span id="cb192-3"><a href="supervised-methods.html#cb192-3" aria-hidden="true" tabindex="-1"></a>manifesto_data<span class="sc">$</span>texts <span class="ot">&lt;-</span> <span class="fu">as.character</span>(manifesto_data<span class="sc">$</span>texts)</span>
+<span id="cb192-4"><a href="supervised-methods.html#cb192-4" aria-hidden="true" tabindex="-1"></a>manifesto_data<span class="sc">$</span>cmp_code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(manifesto_data<span class="sc">$</span>cmp_code))</span>
+<span id="cb192-5"><a href="supervised-methods.html#cb192-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-6"><a href="supervised-methods.html#cb192-6" aria-hidden="true" tabindex="-1"></a>manifesto_data_raw <span class="ot">&lt;-</span> manifesto_data</span>
+<span id="cb192-7"><a href="supervised-methods.html#cb192-7" aria-hidden="true" tabindex="-1"></a>manifesto_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(manifesto_data)</span></code></pre></div>
+<p>To get an idea of how much a party “owns” a code, we can calculate the row percentages. These inform us how much of the appearance of a certain code is due to a single party. To calculate these, we use the <code>prop.table</code> command. Here, the <code>,1</code> at the end tells R to look at the rows (no value would give the cell proportions, and 2 would give the column proportions). We then multiply the proportions by 100 to get the percentages. Then, we place the output in a data-frame, and provide some names to the columns using the <code>names</code> command:</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="supervised-methods.html#cb193-1" aria-hidden="true" tabindex="-1"></a>prop_row <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>((<span class="fu">prop.table</span>(<span class="fu">table</span>(manifesto_data<span class="sc">$</span>cmp_code,manifesto_data<span class="sc">$</span>party),<span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb193-2"><a href="supervised-methods.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(prop_row) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Code&quot;</span>, <span class="st">&quot;Party&quot;</span>, <span class="st">&quot;Percentage&quot;</span>)</span></code></pre></div>
+<p>While we can look at the results by looking at the <code>prop_row</code> object, it is clearer to do this in a graph. To build this graph, in the command we first specify the data, the x variable (the codes), the y variable (the percentages), and the filling of the bar (which should be the party colours). These party colours we provide in the next line (in hexadecimal notation). Then we tell <code>ggplot</code> to draw the bar chart and <code>stack</code> the bars on top of each other (the alternative is to <code>dodge</code>, in which R places the bars next to each other). Then, we specify our theme, turn the text for the codes 90 degrees, and move the codes a little bit so they are under their respective bars:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="supervised-methods.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb194-2"><a href="supervised-methods.html#cb194-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-3"><a href="supervised-methods.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>prop_row, <span class="fu">aes</span>(<span class="at">x=</span>Code, <span class="at">y=</span>Percentage, <span class="at">fill=</span>Party)) <span class="sc">+</span></span>
+<span id="cb194-4"><a href="supervised-methods.html#cb194-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_manual</span>(<span class="st">&quot;&quot;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#0087DC&quot;</span>,<span class="st">&quot;#67B437&quot;</span>,<span class="st">&quot;#DC241F&quot;</span>,<span class="st">&quot;#FAA61A&quot;</span>,<span class="st">&quot;#008142&quot;</span>,<span class="st">&quot;#FDF38E&quot;</span>,<span class="st">&quot;#780077&quot;</span>))<span class="sc">+</span></span>
+<span id="cb194-5"><a href="supervised-methods.html#cb194-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="sc">+</span></span>
+<span id="cb194-6"><a href="supervised-methods.html#cb194-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb194-7"><a href="supervised-methods.html#cb194-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb194-8"><a href="supervised-methods.html#cb194-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))<span class="sc">+</span></span>
+<span id="cb194-9"><a href="supervised-methods.html#cb194-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="fl">0.40</span>))</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-nb-codes-1.png" width="672" /></p>
+<p>Now, we can see that some parties dominate some categories, while for others the spread is more even. For example, UKIP dominates the categories 406 and 407 - dealing with positive and negative mentions of protectionism, while the Conservatives do the same with category 103 (<em>Anti-Imperialism</em>). Note though, that these are percentages. This means that the reason the Conservatives dominate category 103 is as they have two (quasi)-sentences with that category. The others do not have the category at all (702 on <em>Negative Mentioning of Labour Groups</em> has the same issue). Other categories, such as 403 (<em>Market Regulation</em>) and 502 (<em>Positive Mentions of Culture</em>) are way better spread out over all the parties.</p>
+<p>Another thing we can look at is what part of a party’s manifesto belongs to any of the codes. This can help us answer the question: “what are the parties talking about?” To see this, we have to calculate the column percentages:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="supervised-methods.html#cb195-1" aria-hidden="true" tabindex="-1"></a>prop_col <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>((<span class="fu">prop.table</span>(<span class="fu">table</span>(manifesto_data<span class="sc">$</span>cmp_code,manifesto_data<span class="sc">$</span>party), <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb195-2"><a href="supervised-methods.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(prop_col) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Code&quot;</span>, <span class="st">&quot;Party&quot;</span>, <span class="st">&quot;Percentage&quot;</span>)</span></code></pre></div>
+<p>If we now type <code>prop_col</code>, we can see what percentage of a party manifesto was about a certain code. Yet, given that there are 57 possible codes, it is more practical to cluster these in some way. Here, we do this using the Domains to which they belonged in the codebook. In total there are 7 domains (<a href="https://manifesto-project.wzb.eu/down/papers/handbook_2014_version_5.pdf" class="uri">https://manifesto-project.wzb.eu/down/papers/handbook_2014_version_5.pdf</a>), and a category that contains the 0 code. To cluster the codes, we make a new variable called <code>Domain</code>. To do so, we first transform the codes into a numeric format, create an empty variable called <code>Domain</code>, and then replace the NA values in this empty category with the name of the domain based on the values in the Code variable. This we do using various operators R uses: <code>&gt;=</code> means greater than and equal to, while <code>&lt;=</code> means smaller than and equal to. Then, we make this new variable into a factor, and sort this factor in the way the codes occur:</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="supervised-methods.html#cb196-1" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(prop_col<span class="sc">$</span>Code))</span>
+<span id="cb196-2"><a href="supervised-methods.html#cb196-2" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb196-3"><a href="supervised-methods.html#cb196-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-4"><a href="supervised-methods.html#cb196-4" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">101</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">110</span>] <span class="ot">&lt;-</span> <span class="st">&quot;External Relations&quot;</span></span>
+<span id="cb196-5"><a href="supervised-methods.html#cb196-5" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">201</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">204</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Freedom and Democracy&quot;</span></span>
+<span id="cb196-6"><a href="supervised-methods.html#cb196-6" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">301</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">305</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Political System&quot;</span></span>
+<span id="cb196-7"><a href="supervised-methods.html#cb196-7" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">401</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">416</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Economy&quot;</span></span>
+<span id="cb196-8"><a href="supervised-methods.html#cb196-8" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">501</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">507</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Welfare and Quality of Life&quot;</span></span>
+<span id="cb196-9"><a href="supervised-methods.html#cb196-9" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">601</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">608</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Fabric of Society&quot;</span></span>
+<span id="cb196-10"><a href="supervised-methods.html#cb196-10" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">&gt;=</span> <span class="dv">701</span> <span class="sc">&amp;</span> prop_col<span class="sc">$</span>Code <span class="sc">&lt;=</span> <span class="dv">706</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Social Groups&quot;</span></span>
+<span id="cb196-11"><a href="supervised-methods.html#cb196-11" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain[prop_col<span class="sc">$</span>Code <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;NA&quot;</span></span>
+<span id="cb196-12"><a href="supervised-methods.html#cb196-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-13"><a href="supervised-methods.html#cb196-13" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(prop_col<span class="sc">$</span>Domain)</span>
+<span id="cb196-14"><a href="supervised-methods.html#cb196-14" aria-hidden="true" tabindex="-1"></a>prop_col<span class="sc">$</span>Domain <span class="ot">&lt;-</span> <span class="fu">factor</span>(prop_col<span class="sc">$</span>Domain,<span class="fu">levels</span>(prop_col<span class="sc">$</span>Domain)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">5</span>)])</span></code></pre></div>
+<p>We then construct a plot as we did above:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="supervised-methods.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>prop_col, <span class="fu">aes</span>(<span class="at">x=</span>Party, <span class="at">y=</span>Percentage, <span class="at">fill=</span>Domain)) <span class="sc">+</span></span>
+<span id="cb197-2"><a href="supervised-methods.html#cb197-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="sc">+</span></span>
+<span id="cb197-3"><a href="supervised-methods.html#cb197-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb197-4"><a href="supervised-methods.html#cb197-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb197-5"><a href="supervised-methods.html#cb197-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))<span class="sc">+</span></span>
+<span id="cb197-6"><a href="supervised-methods.html#cb197-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="fl">0.40</span>))</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-nb-domains-1.png" width="672" /></p>
+<p>Here, we see that the Domain of <em>Welfare and Quality of Life</em> was the most dominant in all the manifestos, with the <em>Economy</em> coming second. Also, especially UKIP paid a lot of attention to <em>External Relations</em>, while the Green party paid little attention to the <em>Fabric of Society</em>. In all, this gives us a good idea of what type of data we are dealing with.</p>
+<p>Now let’s get back to the classification. For this, we need to transform the corpus from the <code>manifestoR</code> package into a corpus for the <code>quanteda</code> package. To do so, we first have to transform the former into a data frame, and then turn it into a corpus. We then look at the first 10 entries:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="supervised-methods.html#cb198-1" aria-hidden="true" tabindex="-1"></a>corpus_data <span class="ot">&lt;-</span> <span class="fu">mp_corpus</span>(manifestos) <span class="sc">%&gt;%</span> </span>
+<span id="cb198-2"><a href="supervised-methods.html#cb198-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.data.frame</span>(<span class="at">with.meta=</span><span class="cn">TRUE</span>)</span>
+<span id="cb198-3"><a href="supervised-methods.html#cb198-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-4"><a href="supervised-methods.html#cb198-4" aria-hidden="true" tabindex="-1"></a>manifesto_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(corpus_data)</span>
+<span id="cb198-5"><a href="supervised-methods.html#cb198-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-6"><a href="supervised-methods.html#cb198-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(manifesto_corpus, <span class="dv">10</span>)</span></code></pre></div>
+<p>Here, we see that the corpus treats each sentence as a separate document (which is confusing). We can still identify to which party they belong due to the <code>party</code> variable, which shows the party code. The <code>cmp_code</code> variable shows the code assigned to the sentence (here it is all NA as the first sentences have the 0 category). To run the NB, instead of providing our training documents using a vector with NA values, we have to split our data set into a training and a test set. For this, we first generate a string of 8000 random numbers between 0 and 10780 (the total number of sentences). We do so to prevent our training or test set to exist only of sentences from a single party document:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="supervised-methods.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb199-2"><a href="supervised-methods.html#cb199-2" aria-hidden="true" tabindex="-1"></a>id_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10780</span>, <span class="dv">8000</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb199-3"><a href="supervised-methods.html#cb199-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(id_train, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1]  2369  5273  9290  1252  8826 10289   356  7700  3954 10095</code></pre>
+<p>Then we generate a unique number for each of the 10780 sentences in our corpus. This so we can later match them to the sentences we would like to place in our training set or our test set:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="supervised-methods.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(manifesto_corpus, <span class="st">&quot;id_numeric&quot;</span>) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(manifesto_corpus)</span></code></pre></div>
+<p>We should now see this new variable <code>id_numeric</code> appear in our corpus. We can now construct our training and test set using these id’s. For the training set, the logic is to create a subset of the main corpus and to take only those sentences whose <code>id_numeric</code> is also in <code>id_train</code>. For the test set, we do the same, only now taking only those sentences whose <code>id_numeric</code> is not in <code>id_train</code> (note that the <code>!</code> mark signifies this). Then, we use the <code>%&gt;%</code> pipe to transform the resulting object via a tokens object into a dfm:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="supervised-methods.html#cb202-1" aria-hidden="true" tabindex="-1"></a>manifesto_train <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(manifesto_corpus, id_numeric <span class="sc">%in%</span> id_train) <span class="sc">%&gt;%</span></span>
+<span id="cb202-2"><a href="supervised-methods.html#cb202-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">tokens</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb202-3"><a href="supervised-methods.html#cb202-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">dfm</span>()</span>
+<span id="cb202-4"><a href="supervised-methods.html#cb202-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-5"><a href="supervised-methods.html#cb202-5" aria-hidden="true" tabindex="-1"></a>manifesto_test <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(manifesto_corpus, <span class="sc">!</span>id_numeric <span class="sc">%in%</span> id_train) <span class="sc">%&gt;%</span></span>
+<span id="cb202-6"><a href="supervised-methods.html#cb202-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">tokens</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb202-7"><a href="supervised-methods.html#cb202-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">dfm</span>()</span></code></pre></div>
+<p>We then run the model using the <code>textmodel_nb</code> command, and ask it to use as classifiers the codes in the <code>cmp_code</code> variable:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="supervised-methods.html#cb203-1" aria-hidden="true" tabindex="-1"></a>manifesto_nb <span class="ot">&lt;-</span> <span class="fu">textmodel_nb</span>(manifesto_train, <span class="fu">docvars</span>(manifesto_train, <span class="st">&quot;cmp_code&quot;</span>))</span>
+<span id="cb203-2"><a href="supervised-methods.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(manifesto_nb)</span></code></pre></div>
+<p>Notice that this command gives us a prediction of how likely it is that an individual word belongs to a certain code (the estimated feature scores). While this can be interesting, what we want to know here is how good the algorithm was. This is when we move from the training of the model using the training set to the prediction of the test set.</p>
+<p>A problem is that Naive Bayes can only use features that were both in the training and the test set. To ensure this happens, we use the <code>dfm_match</code> option, which matches all the features in our dfm to a specified vector of features:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="supervised-methods.html#cb204-1" aria-hidden="true" tabindex="-1"></a>manifesto_matched <span class="ot">&lt;-</span> <span class="fu">dfm_match</span>(manifesto_test, <span class="at">features =</span> <span class="fu">featnames</span>(manifesto_train))</span></code></pre></div>
+<p>If we look at this new corpus we see that little has changed (there are still 2780 features). This means that all features that were in the test set were also there in the training set. This is good news as this means the algorithm has all the information needed for a good prediction. Yet, the lower the number of sentences, the less likely this is to occur, so matching is always a good idea.</p>
+<p>Now we can predict the missing codes in the test set (now the manifesto_matched dfm) using the model we trained earlier. The resulting classes are what the model predicts (we already set this when we trained the model). If we would then open the <code>predicted_class</code> object we can see to which code R assigned each sentence. Yet, as before, this is a little too much information. Moreover, we do not want to know what the model assigned the sentence to, but how this corresponds to the original code. To see this, we take the actual classes from the <code>manifesto_matched</code> dfm and place them with the predicted classes into a cross table:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="supervised-methods.html#cb205-1" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="ot">&lt;-</span> <span class="fu">predict</span>(manifesto_nb, <span class="at">newdata =</span> manifesto_matched)</span>
+<span id="cb205-2"><a href="supervised-methods.html#cb205-2" aria-hidden="true" tabindex="-1"></a>actual_class <span class="ot">&lt;-</span> <span class="fu">docvars</span>(manifesto_matched, <span class="st">&quot;cmp_code&quot;</span>)</span>
+<span id="cb205-3"><a href="supervised-methods.html#cb205-3" aria-hidden="true" tabindex="-1"></a>table_class <span class="ot">&lt;-</span> <span class="fu">table</span>(actual_class, predicted_class)</span>
+<span id="cb205-4"><a href="supervised-methods.html#cb205-4" aria-hidden="true" tabindex="-1"></a>table_class</span></code></pre></div>
+<p>While this is already better (we have to pay attention to the diagonal), the large number of codes still makes this hard to read. So, as before, we can better visualise these results - here with the help of a heatmap. To do this, we first transform our table into a data frame that gives us all the possible combinations of codes and their occurrence. We put this into the command and also use a scaling gradient that gets darker when the value in a cell is higher:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="supervised-methods.html#cb206-1" aria-hidden="true" tabindex="-1"></a>table_class <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table_class)</span>
+<span id="cb206-2"><a href="supervised-methods.html#cb206-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-3"><a href="supervised-methods.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> table_class, <span class="fu">aes</span>(<span class="at">x =</span> predicted_class, <span class="at">y =</span> actual_class)) <span class="sc">+</span></span>
+<span id="cb206-4"><a href="supervised-methods.html#cb206-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Freq)) <span class="sc">+</span></span>
+<span id="cb206-5"><a href="supervised-methods.html#cb206-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_gradient</span>(<span class="at">high =</span> <span class="st">&quot;black&quot;</span>, <span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">name=</span><span class="st">&quot;Value&quot;</span>)<span class="sc">+</span></span>
+<span id="cb206-6"><a href="supervised-methods.html#cb206-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Predicted Class&quot;</span>)<span class="sc">+</span></span>
+<span id="cb206-7"><a href="supervised-methods.html#cb206-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Actual Class&quot;</span>)<span class="sc">+</span></span>
+<span id="cb206-8"><a href="supervised-methods.html#cb206-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb206-9"><a href="supervised-methods.html#cb206-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb206-10"><a href="supervised-methods.html#cb206-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))<span class="sc">+</span></span>
+<span id="cb206-11"><a href="supervised-methods.html#cb206-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="fl">0.40</span>))</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-nb-heatmap-1.png" width="672" /></p>
+<p>Here, we can see that a high number of cases are on the diagonal, which indicates that the algorithm did a good job. Yet, it also classified a large number of sentences into the 503 and 504 categories, while they belonged to any of the other categories.</p>
+<p>Besides this, we can also summarize how good the algorithm is through Krippendorff’s <span class="math inline">\(\alpha\)</span>. To do so, we take the predicted codes, transform them from factors to numeric values, and store them in an object. Then, we bind them together with the actual codes and place them into a data frame. Finally, we transpose the data frame (so that rows are now columns) and make it into a matrix:</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="supervised-methods.html#cb207-1" aria-hidden="true" tabindex="-1"></a>predict <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(predicted_class))</span>
+<span id="cb207-2"><a href="supervised-methods.html#cb207-2" aria-hidden="true" tabindex="-1"></a>reliability <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(actual_class, predict))</span>
+<span id="cb207-3"><a href="supervised-methods.html#cb207-3" aria-hidden="true" tabindex="-1"></a>reliability_t <span class="ot">&lt;-</span> <span class="fu">t</span>(reliability)</span>
+<span id="cb207-4"><a href="supervised-methods.html#cb207-4" aria-hidden="true" tabindex="-1"></a>reliability <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(reliability_t)</span></code></pre></div>
+<p>Then, we load the <code>kripp.boot</code> package, and calculate the nominal version of Krippendorff’s <span class="math inline">\(\alpha\)</span>, as we are working with nominal codes:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="supervised-methods.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kripp.boot)</span>
+<span id="cb208-2"><a href="supervised-methods.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kripp.boot</span>(reliability, <span class="at">iter =</span> <span class="dv">500</span>, <span class="at">method =</span> <span class="st">&quot;nominal&quot;</span>)</span></code></pre></div>
+<p>As an alternative, we can use the <code>DescTools</code> package:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="supervised-methods.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb209-2"><a href="supervised-methods.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">KrippAlpha</span>(reliability, <span class="at">method =</span> <span class="st">&quot;nominal&quot;</span>)</span></code></pre></div>
+<p>Here we see that the number of subjects was 2780 (the number of sentences in the test set), the number of coders 2 (the actual and the predicted codes), and the value of <span class="math inline">\(\alpha\)</span> 0.318 with an interval between 0.297 and 0.337. While this might not look particularly encouraging, when we realise that <span class="citation">Mikhaylov et al. (<a href="#ref-Mikhaylov2012a" role="doc-biblioref">2012</a>)</span> estimate the agreement among trained coders by the Manifesto Project to be between 0.350 and 0.400, then 0.305 is quite a good score for a simple model!</p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="2">
+<div id="ref-Mikhaylov2012a" class="csl-entry">
+Mikhaylov, S., Laver, M., &amp; Benoit, K. (2012). Coder reliability and misclassification in the human coding of party manifestos. <em>Political Analysis</em>, <em>20</em>(1), 78–91. <a href="https://doi.org/10.1093/pan/mpr047">https://doi.org/10.1093/pan/mpr047</a>
+</div>
+<div id="ref-Volkens2019a" class="csl-entry">
+Volkens, A., Krause, W., Lehmann, P., Matthieß, T., Merz, N., Regel, S., &amp; Weßels, B. (2019). <em><span>The Manifesto Data Collection. Manifesto Project (MRG/CMP/MARPOR)</span></em>. Berlin: Wissenschaftszentrum Berlin f<span>ü</span>r Sozialforschung (WZB). <a href="https://doi.org/10.25522/manifesto.mpds.2019b">https://doi.org/10.25522/manifesto.mpds.2019b</a>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="scaling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="unsupervised-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

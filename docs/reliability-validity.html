@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Reliability and Validity | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Reliability and Validity | Introduction to Quantitative Text Analysis" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Reliability and Validity | Introduction to Quantitative Text Analysis" />
+  
+  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
+
+<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+
+
+<meta name="date" content="2022-05-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importing-data.html"/>
+<link rel="next" href="preliminaries.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.17/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Quantitative Text Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#r-on-windows"><i class="fa fa-check"></i><b>1.1</b> R on Windows</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#r-on-linux"><i class="fa fa-check"></i><b>1.2</b> R on Linux</a></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-on-macos"><i class="fa fa-check"></i><b>1.3</b> R on macOS</a></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#r-in-the-cloud"><i class="fa fa-check"></i><b>1.4</b> R in the Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>2</b> Installing Packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-cran"><i class="fa fa-check"></i><b>2.1</b> Installing from CRAN</a></li>
+<li class="chapter" data-level="2.2" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-github"><i class="fa fa-check"></i><b>2.2</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="2.3" data-path="installing-packages.html"><a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r"><i class="fa fa-check"></i><b>2.3</b> Packages for Quantitative Text Analysis in R</a></li>
+<li class="chapter" data-level="2.4" data-path="installing-packages.html"><a href="installing-packages.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>3</b> Importing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-data.html"><a href="importing-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-data.html"><a href="importing-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.2</b> Import .txt Files</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-data.html"><a href="importing-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.3</b> Import .pdf Files</a></li>
+<li class="chapter" data-level="3.4" data-path="importing-data.html"><a href="importing-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
+<li class="chapter" data-level="3.5" data-path="importing-data.html"><a href="importing-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
+<li class="chapter" data-level="3.6" data-path="importing-data.html"><a href="importing-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and Validity</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="reliability-validity.html"><a href="reliability-validity.html#inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Inter-Coder Agreement</a></li>
+<li class="chapter" data-level="4.2" data-path="reliability-validity.html"><a href="reliability-validity.html#visualizing-quality"><i class="fa fa-check"></i><b>4.2</b> Visualizing Quality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>5</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="preliminaries.html"><a href="preliminaries.html#the-corpus"><i class="fa fa-check"></i><b>5.1</b> The Corpus</a></li>
+<li class="chapter" data-level="5.2" data-path="preliminaries.html"><a href="preliminaries.html#keywords-in-context"><i class="fa fa-check"></i><b>5.2</b> Keywords in Context</a></li>
+<li class="chapter" data-level="5.3" data-path="preliminaries.html"><a href="preliminaries.html#visualisations-and-descriptives"><i class="fa fa-check"></i><b>5.3</b> Visualisations and Descriptives</a></li>
+<li class="chapter" data-level="5.4" data-path="preliminaries.html"><a href="preliminaries.html#text-statistics"><i class="fa fa-check"></i><b>5.4</b> Text Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>6</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#classical-dictionary-analysis"><i class="fa fa-check"></i><b>6.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="6.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>6.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>6.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="6.2.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#twitter"><i class="fa fa-check"></i><b>6.2.2</b> Twitter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>7</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>7.1</b> Wordscores</a></li>
+<li class="chapter" data-level="7.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>7.2</b> Wordfish</a></li>
+<li class="chapter" data-level="7.3" data-path="scaling.html"><a href="scaling.html#correspondence-analysis"><i class="fa fa-check"></i><b>7.3</b> Correspondence Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>8</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>8.1</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>8.1.1</b> SVM with RTextTools</a></li>
+<li class="chapter" data-level="8.1.2" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-quanteda"><i class="fa fa-check"></i><b>8.1.2</b> SVM with Quanteda</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>8.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>9</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.1</b> Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="9.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.2</b> Seeded Latent Dirichlet Allocation</a></li>
+<li class="chapter" data-level="9.3" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#structural-topic-model"><i class="fa fa-check"></i><b>9.3</b> Structural Topic Model</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>10</b> Texttricks</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="bastiaan.bruinsma@gmail.com" target="blank">Bastiaan Bruinsma</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Quantitative Text Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reliability-validity" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Reliability and Validity<a href="reliability-validity.html#reliability-validity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<blockquote>
+<p>The Four Principles of Quantitative Text Analysis:<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>All quantitative models of language are wrong—but some are useful.<br />
+</li>
+<li>Quantitative methods for text amplify resources and augment humans.<br />
+</li>
+<li>There is no globally best method for automated text analysis.<br />
+</li>
+<li>Validate, Validate, Validate.<br />
+</li>
+</ol>
+<p>— Grimmer &amp; Stewart (2013): <em>Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts</em><br />
+<br />
+</p>
+</blockquote>
+<p>We could say that the central tenet of quantitative text analysis, which sets it apart from other approaches to analyzing text, is that it strives to be objective and replicable. In measurement theory, we use the terms <em>Reliability</em> and <em>Validity</em> to convey this message.</p>
+<p>Reliability refers to consistency, that is, the degree to which we get similar results whenever we apply a measuring instrument to measure a given concept. This is similar to the concept of <em>Replicability</em>. Validity, on the other hand, refers to unbiasedness, that is, the degree to which our measure does really measure the concept which intends to measure. In other words, validity looks at whether the measuring instrument that we are using is objective.</p>
+<p><span class="citation">Carmines &amp; Zeller (<a href="#ref-Carmines1979a" role="doc-biblioref">1979</a>)</span> distinguish among three types of validity. <em>Content Validity</em>, which refers to whether our measure represents all facets of the construct of interest; <em>Criterion Validity</em>, which looks at whether our measure correlates with other measures of the same concept, and <em>Construct Validity</em>, which looks at whether our measure behaves as expected within a given theoretical context.
+We should also say here, that these three types of validity are not interchangeable. In the ideal case, one has to prove that their results pass all three validity tests. In the words of <span class="citation">Grimmer &amp; Stewart (<a href="#ref-Grimmer2013a" role="doc-biblioref">2013</a>)</span>: “Validate, validate, validate”!</p>
+<p><span class="citation">Krippendorff (<a href="#ref-Krippendorff2004a" role="doc-biblioref">2004</a>)</span> distinguishes among three types of reliability. The first is <em>Stability</em>, which he considers as the weakest form of coding reliability. This we can measure by having our text coded more than once by the same coder. The higher the differences between the different codings, the lower our reliability. The second is <em>Reproducibility</em>, which reflects the agreement among independent coders on the same text. Finally, the third is <em>Accuracy</em>, which he considers as the strongest form of coding reliability. For this, we look at the agreement between coders, as with reproducibility, but now use a given standard. Yet, as benchmarks are rare, reproducibility is often the highest form we can go for. The agreement between coders we need for this is also known as inter-coder agreement.</p>
+<div id="inter-coder-agreement" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Inter-Coder Agreement<a href="reliability-validity.html#inter-coder-agreement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="citation">Hayes &amp; Krippendorff (<a href="#ref-Hayes2007a" role="doc-biblioref">2007, p. 79</a>)</span> argue that a good measure of the agreement should at least address five criteria. The first is that it should apply to many coders, and not only two. Also, when we use the method for more coders, there should be no difference in how many coders we include. The second is that the method should only take into account the actual number of categories the coders used and not all that were available. This as while the designers designed the coding scheme on what they thought the data would look like, the coders use the scheme based on what the data is. Third, it should be numerical, meaning that we can use it to make a scale between 0 (absence of agreement) and 1 (perfect agreement). Fourth, it should be appropriate for the level of measurement. So, if our data is ordinal or nominal, we should not use a measure that assumes metric data. This ensures that the metric uses all the data and that it does not add or not use other information. Fifth, we should be able to compute (or know), the sampling behaviour of the measure.</p>
+<p>With these criteria in mind, we see that popular methods, such as % agreement or Pearson’s <em>r</em>, can be misleading. Especially for the latter - as it is a quite popular method - this often leads to problems, as <span class="citation">Krippendorff (<a href="#ref-Krippendorff2004a" role="doc-biblioref">2004</a>)</span> shows:</p>
+<br />
+
+<div class="figure"><span style="display:block;" id="fig:figure-observers-tikz"></span>
+<img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/figure-observers-tikz-1.png" alt="Perfect Disagreement between Two Coders [@Krippendorff2004a]" width="100%" />
+<p class="caption">
+Figure 4.1: Perfect Disagreement between Two Coders <span class="citation">(<a href="#ref-Krippendorff2004a" role="doc-biblioref">Krippendorff, 2004</a>)</span>
+</p>
+</div>
+<p><br />
+</p>
+<p>Here, Figure <a href="reliability-validity.html#fig:figure-observers-tikz">4.1</a> shows, on the left, two coders: A and B. The dots in the figure show the choices both coders made, while the dotted line shows the line of perfect agreement. If a dot is on this line, it means that both Coder A and Coder B made the same choice. In this case, they disagreed in all cases. When Coder A chose <em>a</em>, Coder B chose <em>e</em>, when Coder A chose <em>b</em>, Coder B chose <em>a</em>, and so on. Yet, when we would calculate Pearson’s <em>r</em> for this, we would find a result as shown on the right-hand side of the figure. Seen this way, the agreement between both coders does not seem a problem at all. The reason for this is that Pearson’s <em>r</em> works with the distances between the categories <em>without</em> taking into account their location. So, for a positive relationship, the only thing Pearson’s <em>r</em> requires is that for every increase or decrease for one coder, there is a similar increase or decrease for the other. This happens here with four of the five categories. The result is thus a high Pearson’s <em>r</em>, though the actual agreement should be 0.</p>
+<p>Pearson’s <em>r</em> thus cannot fulfil all our criteria. A measure that can is Krippendorff’s <span class="math inline">\(\alpha\)</span> <span class="citation">(<a href="#ref-Krippendorff2004a" role="doc-biblioref">Krippendorff, 2004</a>)</span>. This measure can not only give us the agreement we need, but can also do so for nominal, ordinal, interval, and ratio level data, as well as data with many coders and missing values. Besides, we can compute 95% confidence intervals around <span class="math inline">\(\alpha\)</span> using bootstrapping, which we can use to show the degree of uncertainty around our reliability estimates.</p>
+<p>Despite this, Krippendorff’s <span class="math inline">\(\alpha\)</span> is not free of problems. One main problem occurs when coders agree on only a few categories and use these categories a considerable number of times. This leads to an inflation of <span class="math inline">\(\alpha\)</span>, making it is higher than it should be <span class="citation">(<a href="#ref-Krippendorff2004a" role="doc-biblioref">Krippendorff, 2004</a>)</span>, as in the following example:</p>
+<br />
+
+<div class="figure"><span style="display:block;" id="fig:figure-kripp-tikz"></span>
+<img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/figure-kripp-tikz-1.png" alt="Possible Inflation of Krippendorff's` $\alpha$ [@Krippendorff2004a]" width="100%" />
+<p class="caption">
+Figure 4.2: Possible Inflation of Krippendorff’s` <span class="math inline">\(\alpha\)</span> <span class="citation">(<a href="#ref-Krippendorff2004a" role="doc-biblioref">Krippendorff, 2004</a>)</span>
+</p>
+</div>
+<p><br />
+</p>
+<p>Here, the top left of Figure <a href="#fig:figure-kripp"><strong>??</strong></a> shows coders A and B, who have to code into three categories: 0, 1, or 2. In this example, categories 1 and 2 carry a certain meaning, while category 0 means that the coders did not know what to assign the case to. Of the 86 cases, both coders code 80 cases in the 0 category. This means that there are only 6 cases on which they can agree or disagree about a code that carries some meaning. Yet, if we calculate <span class="math inline">\(\alpha\)</span>, the result - 0.686 - takes into account all the categories. One solution for this is to add up categories 1 and 2, as the figure in the middle shows. Here, the coders agree in 84 of the 86 cases (on the diagonal line) and disagree in only 2 of them. Calculating <span class="math inline">\(\alpha\)</span> now shows that it would increase to 0.789. Finally, we can remove the 0 category and again view 1 and 2 as separate categories (as the most right-hand figure shows). Yet, the result of this is quite disastrous. While the coders agree in 3 of the 4 cases, the resulting <span class="math inline">\(\alpha\)</span> equals 0.000, as coder B did not use category 1 at all.</p>
+<p>Apart from these issues, Krippendorff’s <span class="math inline">\(\alpha\)</span> is a stable and useful measure. A value of <span class="math inline">\(\alpha\)</span> = 1 indicates perfect reliability, while a value of <span class="math inline">\(\alpha\)</span> = 0 indicates the absence of reliability. This means that if <span class="math inline">\(\alpha\)</span> = 0, there is no relationship between the values. It is possible for <span class="math inline">\(\alpha\)</span> &lt; 0, which means that the disagreements between the values are larger than they would be by chance and are systematic. As for thresholds, <span class="citation">Krippendorff (<a href="#ref-Krippendorff2004a" role="doc-biblioref">2004</a>)</span> proposes to use either 0.80 or 0.67 for results to be reliable. Such low reliability often has many causes. One thing might be that the coding scheme is not appropriate for the documents. This means that coders had categories that they had no use for, and lacked categories they needed. Another reason might be that the coders lacked training. Thus, they did not understand how to use the coding scheme or how the coding process works. This often leads to frustration on part of the coders, as in these cases the process often becomes time-consuming and too demanding to carry out.</p>
+<p>To calculate Krippendorff’s <span class="math inline">\(\alpha\)</span>, we can use the following software:</p>
+<ul>
+<li>KALPHA custom dialogue (SPSS)</li>
+<li><strong>kalpha</strong> user-written package (Stata)</li>
+<li>KALPHA macro (SAS)</li>
+<li><code>kripp.alpha</code> command in <code>kripp.boot</code> package (R) - amongst others</li>
+</ul>
+<p>Let us try this in R using an example. Here, we will look at the results of a coding reliability test where 12 coders assigned the sentences of the 1997 European Commission work programme in the 20 categories of a policy areas coding scheme. We can find the results for this on GitHub. To get the data, we tell R where to find it, then to read that file as a .csv file and write it to a new object:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="reliability-validity.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb43-2"><a href="reliability-validity.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="reliability-validity.html#cb43-3" aria-hidden="true" tabindex="-1"></a>urlfile <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/SCJBruinsma/qta-files/master/reliability_results.csv&quot;</span></span>
+<span id="cb43-4"><a href="reliability-validity.html#cb43-4" aria-hidden="true" tabindex="-1"></a>reliability_results <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">url</span>(urlfile), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Notice that in the data frame we created, the coders are in the columns and the sentences in the rows. As the <code>kripp.boot</code> package requires it to be the other way around and in matrix form, we first transpose the data and then place it in a matrix. Finally, we run the command and specify we want the nominal version:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="reliability-validity.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;kripp.boot&quot;</span>)</span>
+<span id="cb44-2"><a href="reliability-validity.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="reliability-validity.html#cb44-3" aria-hidden="true" tabindex="-1"></a>reliability_results_t <span class="ot">&lt;-</span> <span class="fu">t</span>(reliability_results)</span>
+<span id="cb44-4"><a href="reliability-validity.html#cb44-4" aria-hidden="true" tabindex="-1"></a>reliability <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(reliability_results_t)</span>
+<span id="cb44-5"><a href="reliability-validity.html#cb44-5" aria-hidden="true" tabindex="-1"></a>kalpha <span class="ot">&lt;-</span> <span class="fu">kripp.boot</span>(reliability, <span class="at">iter =</span> <span class="dv">1000</span>, <span class="at">method =</span> <span class="st">&quot;nominal&quot;</span>)</span>
+<span id="cb44-6"><a href="reliability-validity.html#cb44-6" aria-hidden="true" tabindex="-1"></a>kalpha<span class="sc">$</span>mean.alpha</span></code></pre></div>
+<p>Note also that <code>kripp.boot</code> is a GitHub package. You can still calculate the value (but without the confidence interval) with another package:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="reliability-validity.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
+<span id="cb45-2"><a href="reliability-validity.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="reliability-validity.html#cb45-3" aria-hidden="true" tabindex="-1"></a>reliability_results_t <span class="ot">&lt;-</span> <span class="fu">t</span>(reliability_results)</span>
+<span id="cb45-4"><a href="reliability-validity.html#cb45-4" aria-hidden="true" tabindex="-1"></a>reliability <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(reliability_results_t)</span>
+<span id="cb45-5"><a href="reliability-validity.html#cb45-5" aria-hidden="true" tabindex="-1"></a>kalpha <span class="ot">&lt;-</span> <span class="fu">KrippAlpha</span>(reliability, <span class="at">method =</span> <span class="st">&quot;nominal&quot;</span>)</span>
+<span id="cb45-6"><a href="reliability-validity.html#cb45-6" aria-hidden="true" tabindex="-1"></a>kalpha<span class="sc">$</span>value</span></code></pre></div>
+<p>As we can see, the results point out that the agreement among the coders is 0.634 with an upper limit of 0.650 and a lower limit of 0.618 which is short of Krippendorff’s cut-off point of 0.667.</p>
+</div>
+<div id="visualizing-quality" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Visualizing Quality<a href="reliability-validity.html#visualizing-quality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="citation">Lamprianou (<a href="#ref-Lamprianou2020a" role="doc-biblioref">2020</a>)</span> notes that existing reliability indices may mask coding problems and that the reliability of coding is not stable across coding units (as illustrated in the example given for Krippendorff’s <span class="math inline">\(\alpha\)</span> above). To investigate the quality of coding he proposes using social network analysis (SNA) and exponential random graph models (ERGM). Here, we illustrate a different approach, based on the idea of sensitivity analysis.</p>
+<p>The idea of this is to compare the codings of each coder against all others (and also against a benchmark or a gold standard). To do so, we need to bootstrap the coding reliability results to create an uncertainty measure around each coder’s results, following the approach proposed by <span class="citation">Benoit et al. (<a href="#ref-Benoit2009a" role="doc-biblioref">2009</a>)</span>. The idea here is to use a non-parametric bootstrap for the codings of each coder (using 1000 draws with replacement) at the category level and then calculate the confidence intervals. Their width then depends on both the number of sentences coded by each coder (n) in each category and the number of coding categories that are not empty. Thus, larger documents and fewer empty categories result in narrower confidence intervals, while a small number of categories leads to wider intervals <span class="citation">(<a href="#ref-Lowe2011a" role="doc-biblioref">Lowe &amp; Benoit, 2011</a>)</span>.</p>
+<p>To start, the first thing we do is load two packages we need into R using the <code>library</code> command:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="reliability-validity.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb46-2"><a href="reliability-validity.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(combinat)</span></code></pre></div>
+<p>In the following example we perform the sensitivity analysis on the coded sentences of the 1997 European Commission work programme, as seen earlier. Yet here, row represents a coder, and each column represents a coding category (<code>c0</code> to <code>c19</code>). In each cell, we see the number of sentences that each coder coded in each category, with the column <code>n</code> giving the sum of each row:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="reliability-validity.html#cb47-1" aria-hidden="true" tabindex="-1"></a>coderid <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;coder1&quot;</span>,<span class="st">&quot;coder2&quot;</span>,<span class="st">&quot;coder3&quot;</span>,<span class="st">&quot;coder4&quot;</span>,<span class="st">&quot;coder5&quot;</span>,<span class="st">&quot;coder6&quot;</span>,<span class="st">&quot;coder7&quot;</span>,<span class="st">&quot;coder8&quot;</span>,<span class="st">&quot;coder9&quot;</span>,<span class="st">&quot;coder10&quot;</span>,<span class="st">&quot;coder11&quot;</span>,<span class="st">&quot;coder12&quot;</span>)</span>
+<span id="cb47-2"><a href="reliability-validity.html#cb47-2" aria-hidden="true" tabindex="-1"></a>c0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">9</span>,<span class="dv">29</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">11</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">0</span>)</span>
+<span id="cb47-3"><a href="reliability-validity.html#cb47-3" aria-hidden="true" tabindex="-1"></a>c01 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">0</span>)</span>
+<span id="cb47-4"><a href="reliability-validity.html#cb47-4" aria-hidden="true" tabindex="-1"></a>c02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">6</span>)</span>
+<span id="cb47-5"><a href="reliability-validity.html#cb47-5" aria-hidden="true" tabindex="-1"></a>c03 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">26</span>,<span class="dv">13</span>,<span class="dv">22</span>,<span class="dv">8</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">25</span>,<span class="dv">14</span>,<span class="dv">21</span>)</span>
+<span id="cb47-6"><a href="reliability-validity.html#cb47-6" aria-hidden="true" tabindex="-1"></a>c04 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>)</span>
+<span id="cb47-7"><a href="reliability-validity.html#cb47-7" aria-hidden="true" tabindex="-1"></a>c05 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb47-8"><a href="reliability-validity.html#cb47-8" aria-hidden="true" tabindex="-1"></a>c06 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">22</span>,<span class="dv">12</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">6</span>,<span class="dv">20</span>)</span>
+<span id="cb47-9"><a href="reliability-validity.html#cb47-9" aria-hidden="true" tabindex="-1"></a>c07 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb47-10"><a href="reliability-validity.html#cb47-10" aria-hidden="true" tabindex="-1"></a>c08 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb47-11"><a href="reliability-validity.html#cb47-11" aria-hidden="true" tabindex="-1"></a>c09 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">6</span>)</span>
+<span id="cb47-12"><a href="reliability-validity.html#cb47-12" aria-hidden="true" tabindex="-1"></a>c10 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">23</span>,<span class="dv">22</span>,<span class="dv">23</span>,<span class="dv">18</span>,<span class="dv">23</span>,<span class="dv">22</span>,<span class="dv">23</span>,<span class="dv">23</span>,<span class="dv">25</span>,<span class="dv">24</span>,<span class="dv">22</span>)</span>
+<span id="cb47-13"><a href="reliability-validity.html#cb47-13" aria-hidden="true" tabindex="-1"></a>c11 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">31</span>,<span class="dv">31</span>,<span class="dv">33</span>,<span class="dv">40</span>,<span class="dv">25</span>,<span class="dv">23</span>,<span class="dv">25</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">16</span>,<span class="dv">40</span>,<span class="dv">31</span>)</span>
+<span id="cb47-14"><a href="reliability-validity.html#cb47-14" aria-hidden="true" tabindex="-1"></a>c12 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb47-15"><a href="reliability-validity.html#cb47-15" aria-hidden="true" tabindex="-1"></a>c13 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>)</span>
+<span id="cb47-16"><a href="reliability-validity.html#cb47-16" aria-hidden="true" tabindex="-1"></a>c14 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">13</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">18</span>,<span class="dv">14</span>,<span class="dv">2</span>,<span class="dv">22</span>,<span class="dv">12</span>,<span class="dv">14</span>)</span>
+<span id="cb47-17"><a href="reliability-validity.html#cb47-17" aria-hidden="true" tabindex="-1"></a>c15 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">13</span>,<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">7</span>)</span>
+<span id="cb47-18"><a href="reliability-validity.html#cb47-18" aria-hidden="true" tabindex="-1"></a>c16 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb47-19"><a href="reliability-validity.html#cb47-19" aria-hidden="true" tabindex="-1"></a>c17 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb47-20"><a href="reliability-validity.html#cb47-20" aria-hidden="true" tabindex="-1"></a>c18 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>,<span class="dv">33</span>,<span class="dv">27</span>,<span class="dv">8</span>,<span class="dv">26</span>,<span class="dv">28</span>,<span class="dv">31</span>,<span class="dv">22</span>,<span class="dv">28</span>,<span class="dv">23</span>,<span class="dv">14</span>,<span class="dv">16</span>)</span>
+<span id="cb47-21"><a href="reliability-validity.html#cb47-21" aria-hidden="true" tabindex="-1"></a>c19 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb47-22"><a href="reliability-validity.html#cb47-22" aria-hidden="true" tabindex="-1"></a>c20 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb47-23"><a href="reliability-validity.html#cb47-23" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">164</span>, <span class="dv">164</span>, <span class="dv">164</span>, <span class="dv">163</span>, <span class="dv">164</span>, <span class="dv">164</span>, <span class="dv">155</span>, <span class="dv">164</span>, <span class="dv">164</span>, <span class="dv">164</span>, <span class="dv">164</span>, <span class="dv">164</span>)</span>
+<span id="cb47-24"><a href="reliability-validity.html#cb47-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-25"><a href="reliability-validity.html#cb47-25" aria-hidden="true" tabindex="-1"></a>data_uncertainty <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(coderid, c0,c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,n, <span class="at">stringsAsFactors=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p>We then tell R how many coders we have. As this number is equal to the number of rows we have, we can get this number using the <code>nrow</code> command. We also specify the number of bootstraps we want to carry out (1000) and transform our data frame into an array. We do the latter as R needs the data in this format later on:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="reliability-validity.html#cb48-1" aria-hidden="true" tabindex="-1"></a>nman <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data_uncertainty)</span>
+<span id="cb48-2"><a href="reliability-validity.html#cb48-2" aria-hidden="true" tabindex="-1"></a>nrepl <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb48-3"><a href="reliability-validity.html#cb48-3" aria-hidden="true" tabindex="-1"></a>manifBSn <span class="ot">&lt;-</span> manifBSnRand <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">as.matrix</span>(data_uncertainty[,<span class="dv">2</span><span class="sc">:</span><span class="dv">21</span>]),</span>
+<span id="cb48-4"><a href="reliability-validity.html#cb48-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">c</span>(nman, <span class="dv">20</span>, nrepl<span class="sc">+</span><span class="dv">1</span>),</span>
+<span id="cb48-5"><a href="reliability-validity.html#cb48-5" aria-hidden="true" tabindex="-1"></a> <span class="at">dimnames=</span><span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span>nman,<span class="fu">names</span>(data_uncertainty[,<span class="dv">2</span><span class="sc">:</span><span class="dv">21</span>]), </span>
+<span id="cb48-6"><a href="reliability-validity.html#cb48-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">0</span><span class="sc">:</span>nrepl))</span></code></pre></div>
+<p>We then bootstrap the sentence counts for each coder and compute percentages for each category using a multinomial draw. First, we define <code>p</code>, which is the proportion of each category over all the coders. Then, we input this value together with the total number of codes <code>n</code> into the <code>rmultinomial</code> command, which gives the random draws. As we want to do this a 1000 times, we place this command into a <code>for</code> loop:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="reliability-validity.html#cb49-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> manifBSn[,,<span class="dv">1</span>]<span class="sc">/</span>n</span>
+<span id="cb49-2"><a href="reliability-validity.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="reliability-validity.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nrepl) {</span>
+<span id="cb49-4"><a href="reliability-validity.html#cb49-4" aria-hidden="true" tabindex="-1"></a> manifBSn[,,i] <span class="ot">&lt;-</span> <span class="fu">rmultinomial</span>(n, p)</span>
+<span id="cb49-5"><a href="reliability-validity.html#cb49-5" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
+<p>With this data, we can then ask R to compute the quantities of interest. These are standard errors for each category, as well as the percentage coded for each category:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="reliability-validity.html#cb50-1" aria-hidden="true" tabindex="-1"></a>c0SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c0&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-2"><a href="reliability-validity.html#cb50-2" aria-hidden="true" tabindex="-1"></a>c01SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c01&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-3"><a href="reliability-validity.html#cb50-3" aria-hidden="true" tabindex="-1"></a>c02SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c02&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-4"><a href="reliability-validity.html#cb50-4" aria-hidden="true" tabindex="-1"></a>c03SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c03&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-5"><a href="reliability-validity.html#cb50-5" aria-hidden="true" tabindex="-1"></a>c04SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c04&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-6"><a href="reliability-validity.html#cb50-6" aria-hidden="true" tabindex="-1"></a>c05SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c05&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-7"><a href="reliability-validity.html#cb50-7" aria-hidden="true" tabindex="-1"></a>c06SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c06&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-8"><a href="reliability-validity.html#cb50-8" aria-hidden="true" tabindex="-1"></a>c07SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c07&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-9"><a href="reliability-validity.html#cb50-9" aria-hidden="true" tabindex="-1"></a>c08SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c08&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-10"><a href="reliability-validity.html#cb50-10" aria-hidden="true" tabindex="-1"></a>c09SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c09&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd) </span>
+<span id="cb50-11"><a href="reliability-validity.html#cb50-11" aria-hidden="true" tabindex="-1"></a>c10SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c10&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-12"><a href="reliability-validity.html#cb50-12" aria-hidden="true" tabindex="-1"></a>c11SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c11&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-13"><a href="reliability-validity.html#cb50-13" aria-hidden="true" tabindex="-1"></a>c12SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c12&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-14"><a href="reliability-validity.html#cb50-14" aria-hidden="true" tabindex="-1"></a>c13SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c13&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-15"><a href="reliability-validity.html#cb50-15" aria-hidden="true" tabindex="-1"></a>c14SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c14&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-16"><a href="reliability-validity.html#cb50-16" aria-hidden="true" tabindex="-1"></a>c15SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c15&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-17"><a href="reliability-validity.html#cb50-17" aria-hidden="true" tabindex="-1"></a>c16SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c16&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-18"><a href="reliability-validity.html#cb50-18" aria-hidden="true" tabindex="-1"></a>c17SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c17&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-19"><a href="reliability-validity.html#cb50-19" aria-hidden="true" tabindex="-1"></a>c18SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c18&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-20"><a href="reliability-validity.html#cb50-20" aria-hidden="true" tabindex="-1"></a>c19SE <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c19&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, sd)</span>
+<span id="cb50-21"><a href="reliability-validity.html#cb50-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-22"><a href="reliability-validity.html#cb50-22" aria-hidden="true" tabindex="-1"></a>per0 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c0&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-23"><a href="reliability-validity.html#cb50-23" aria-hidden="true" tabindex="-1"></a>per01 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c01&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-24"><a href="reliability-validity.html#cb50-24" aria-hidden="true" tabindex="-1"></a>per02 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c02&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-25"><a href="reliability-validity.html#cb50-25" aria-hidden="true" tabindex="-1"></a>per03 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c03&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-26"><a href="reliability-validity.html#cb50-26" aria-hidden="true" tabindex="-1"></a>per04 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c04&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-27"><a href="reliability-validity.html#cb50-27" aria-hidden="true" tabindex="-1"></a>per05 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c05&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-28"><a href="reliability-validity.html#cb50-28" aria-hidden="true" tabindex="-1"></a>per06 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c06&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-29"><a href="reliability-validity.html#cb50-29" aria-hidden="true" tabindex="-1"></a>per07 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c07&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-30"><a href="reliability-validity.html#cb50-30" aria-hidden="true" tabindex="-1"></a>per08 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c08&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-31"><a href="reliability-validity.html#cb50-31" aria-hidden="true" tabindex="-1"></a>per09 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c09&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-32"><a href="reliability-validity.html#cb50-32" aria-hidden="true" tabindex="-1"></a>per10 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c10&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-33"><a href="reliability-validity.html#cb50-33" aria-hidden="true" tabindex="-1"></a>per11 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c11&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-34"><a href="reliability-validity.html#cb50-34" aria-hidden="true" tabindex="-1"></a>per12 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c12&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-35"><a href="reliability-validity.html#cb50-35" aria-hidden="true" tabindex="-1"></a>per13 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c13&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-36"><a href="reliability-validity.html#cb50-36" aria-hidden="true" tabindex="-1"></a>per14 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c14&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-37"><a href="reliability-validity.html#cb50-37" aria-hidden="true" tabindex="-1"></a>per15 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c15&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-38"><a href="reliability-validity.html#cb50-38" aria-hidden="true" tabindex="-1"></a>per16 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c16&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-39"><a href="reliability-validity.html#cb50-39" aria-hidden="true" tabindex="-1"></a>per17 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c17&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-40"><a href="reliability-validity.html#cb50-40" aria-hidden="true" tabindex="-1"></a>per18 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c18&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span>
+<span id="cb50-41"><a href="reliability-validity.html#cb50-41" aria-hidden="true" tabindex="-1"></a>per19 <span class="ot">&lt;-</span> <span class="fu">apply</span>(manifBSn[,<span class="st">&quot;c19&quot;</span>,]<span class="sc">/</span>n<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>, mean)</span></code></pre></div>
+<p>We then bind all these quantities together in a single data frame:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="reliability-validity.html#cb51-1" aria-hidden="true" tabindex="-1"></a>dataBS <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(data_uncertainty[, <span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>], c0SE, c01SE, c02SE, c03SE, c04SE,</span>
+<span id="cb51-2"><a href="reliability-validity.html#cb51-2" aria-hidden="true" tabindex="-1"></a>    c05SE, c06SE, c07SE, c08SE, c09SE, c10SE, c11SE, c12SE, c13SE, c14SE, c15SE,</span>
+<span id="cb51-3"><a href="reliability-validity.html#cb51-3" aria-hidden="true" tabindex="-1"></a>    c16SE, c17SE, c18SE, c19SE, per0, per01, per02, per03, per04, per05, per06, per07,</span>
+<span id="cb51-4"><a href="reliability-validity.html#cb51-4" aria-hidden="true" tabindex="-1"></a>    per08, per09, per10, per11, per12, per13, per14, per15, per16, per17, per18,</span>
+<span id="cb51-5"><a href="reliability-validity.html#cb51-5" aria-hidden="true" tabindex="-1"></a>    per19))</span></code></pre></div>
+<p>While we can now inspect the results by looking at the data, it becomes more clear when we visualise this. While R has some inbuilt tools for visualisation (in the <code>graphics</code> package), these tools are rather crude. Thus, here we will use the <code>ggplot2</code> package, which extends our options, and which has an intuitive structure:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="reliability-validity.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>First, we make sure that the variable <code>coderid</code> is a factor and make sure that it is in the right order:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="reliability-validity.html#cb53-1" aria-hidden="true" tabindex="-1"></a>dataBS<span class="sc">$</span>coderid <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dataBS<span class="sc">$</span>coderid)</span>
+<span id="cb53-2"><a href="reliability-validity.html#cb53-2" aria-hidden="true" tabindex="-1"></a>dataBS<span class="sc">$</span>coderid <span class="ot">&lt;-</span> <span class="fu">factor</span>(dataBS<span class="sc">$</span>coderid, <span class="fu">levels</span>(dataBS<span class="sc">$</span>coderid)[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)])</span></code></pre></div>
+<p>Then, we calculate the 95% confidence intervals for each category. We do so using the percent of each category and the respective standard error, and add these values to our data-set:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="reliability-validity.html#cb54-1" aria-hidden="true" tabindex="-1"></a>c0_lo <span class="ot">&lt;-</span> per0 <span class="sc">-</span> (<span class="fl">1.96</span> <span class="sc">*</span> c0SE)</span>
+<span id="cb54-2"><a href="reliability-validity.html#cb54-2" aria-hidden="true" tabindex="-1"></a>c0_hi <span class="ot">&lt;-</span> per0 <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> c0SE)</span>
+<span id="cb54-3"><a href="reliability-validity.html#cb54-3" aria-hidden="true" tabindex="-1"></a>c01_lo <span class="ot">&lt;-</span> per01 <span class="sc">-</span> (<span class="fl">1.96</span> <span class="sc">*</span> c01SE)</span>
+<span id="cb54-4"><a href="reliability-validity.html#cb54-4" aria-hidden="true" tabindex="-1"></a>c01_hi <span class="ot">&lt;-</span> per01 <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> c01SE)</span>
+<span id="cb54-5"><a href="reliability-validity.html#cb54-5" aria-hidden="true" tabindex="-1"></a>c02_lo <span class="ot">&lt;-</span> per02 <span class="sc">-</span> (<span class="fl">1.96</span> <span class="sc">*</span> c02SE)</span>
+<span id="cb54-6"><a href="reliability-validity.html#cb54-6" aria-hidden="true" tabindex="-1"></a>c02_hi <span class="ot">&lt;-</span> per02 <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> c02SE)</span>
+<span id="cb54-7"><a href="reliability-validity.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="reliability-validity.html#cb54-8" aria-hidden="true" tabindex="-1"></a>dataBS <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dataBS, c0_lo, c0_hi, c01_lo, c01_hi, c02_lo, c02_hi)</span></code></pre></div>
+<p>Finally, we generate the graphs for each individual category:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="reliability-validity.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataBS,<span class="fu">aes</span>(per0, coderid))<span class="sc">+</span></span>
+<span id="cb55-2"><a href="reliability-validity.html#cb55-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb55-3"><a href="reliability-validity.html#cb55-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmax =</span> c0_hi, <span class="at">xmin =</span> c0_lo),<span class="at">height =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb55-4"><a href="reliability-validity.html#cb55-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Percentage coded to category 0&quot;</span>)<span class="sc">+</span></span>
+<span id="cb55-5"><a href="reliability-validity.html#cb55-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Coder ID&quot;</span>)<span class="sc">+</span></span>
+<span id="cb55-6"><a href="reliability-validity.html#cb55-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/coder-category0-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="reliability-validity.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataBS,<span class="fu">aes</span>(per01, coderid))<span class="sc">+</span></span>
+<span id="cb56-2"><a href="reliability-validity.html#cb56-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb56-3"><a href="reliability-validity.html#cb56-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmax =</span> c01_hi, <span class="at">xmin =</span> c01_lo),<span class="at">height =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb56-4"><a href="reliability-validity.html#cb56-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Percentage coded to category 01&quot;</span>)<span class="sc">+</span></span>
+<span id="cb56-5"><a href="reliability-validity.html#cb56-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Coder ID&quot;</span>)<span class="sc">+</span></span>
+<span id="cb56-6"><a href="reliability-validity.html#cb56-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/coder-category1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="reliability-validity.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataBS,<span class="fu">aes</span>(per02, coderid))<span class="sc">+</span></span>
+<span id="cb57-2"><a href="reliability-validity.html#cb57-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb57-3"><a href="reliability-validity.html#cb57-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmax =</span> c02_hi, <span class="at">xmin =</span> c02_lo),<span class="at">height =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb57-4"><a href="reliability-validity.html#cb57-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Percentage coded to category 02&quot;</span>)<span class="sc">+</span></span>
+<span id="cb57-5"><a href="reliability-validity.html#cb57-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Coder ID&quot;</span>)<span class="sc">+</span></span>
+<span id="cb57-6"><a href="reliability-validity.html#cb57-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/coder-category2-1.png" width="672" /></p>
+<p>Each figure shows the percentage that each of the coders coded in the respective category of the coding scheme. We thus use the confidence intervals around the estimates to look at the degree of uncertainty around each estimate. We can read the plots by looking if the dashed line is within the confidence intervals for each coder. The more the coders deviate from the benchmark or standard, the less likely it is that they understood the coding scheme in the same way. It also means that it is more likely that a coder would have coded the work programme much different from the benchmark coder. Thus, such a sensitivity analysis is like having a single reliability coefficient for each coding category.</p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="2">
+<div id="ref-Benoit2009a" class="csl-entry">
+Benoit, K., Laver, M., &amp; Mikhaylov, S. (2009). Treating words as data with error: Uncertainty in text statements of policy positions. <em>American Journal of Political Science</em>, <em>53</em>(2), 495–513. <a href="https://doi.org/10.1111/j.1540-5907.2009.00383.x">https://doi.org/10.1111/j.1540-5907.2009.00383.x</a>
+</div>
+<div id="ref-Carmines1979a" class="csl-entry">
+Carmines, E. G., &amp; Zeller, R. A. (1979). <em>Reliability and validity assessment</em>. Sage. <a href="https://doi.org/10.4135/9781412985642">https://doi.org/10.4135/9781412985642</a>
+</div>
+<div id="ref-Grimmer2013a" class="csl-entry">
+Grimmer, J., &amp; Stewart, B. M. (2013). Text as data: The promise and pitfals of automatic content analysis methods for political texts. <em>Political Analysis</em>, <em>21</em>(3), 267–297. <a href="https://doi.org/10.1093/pan/mps028">https://doi.org/10.1093/pan/mps028</a>
+</div>
+<div id="ref-Hayes2007a" class="csl-entry">
+Hayes, A. F., &amp; Krippendorff, K. (2007). Answering the call for a standard reliability measure for coding data. <em>Communication Methods and Measures</em>, <em>1</em>(1), 77–89. <a href="https://doi.org/10.1080/19312450709336664">https://doi.org/10.1080/19312450709336664</a>
+</div>
+<div id="ref-Krippendorff2004a" class="csl-entry">
+Krippendorff, K. (2004). <em><span class="nocase">Content Analysis - an Introduction to Its Methodology</span></em> (2nd ed.). Sage.
+</div>
+<div id="ref-Lamprianou2020a" class="csl-entry">
+Lamprianou, I. (2020). Measuring and visualizing coders’ reliability: New approaches and guidelines from experimental data. <em>Sociological Methods &amp; Research</em>. <a href="https://doi.org/10.1177/0049124120926198">https://doi.org/10.1177/0049124120926198</a>
+</div>
+<div id="ref-Lowe2011a" class="csl-entry">
+Lowe, W., &amp; Benoit, K. (2011). Estimating uncertainty in quantitative text analysis. <em>Annual Meeting of the Midwest Political Science Association</em>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="preliminaries.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
