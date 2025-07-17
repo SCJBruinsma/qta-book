@@ -4,43 +4,42 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Installing Packages | Introduction to Quantitative Text Analysis</title>
-  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <title>1.2 Installing Packages | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="1.2 Installing Packages | Introduction to Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Installing Packages | Introduction to Quantitative Text Analysis" />
+  <meta property="og:title" content="1.2 Installing Packages | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Installing Packages | Introduction to Quantitative Text Analysis" />
+  <meta name="twitter:title" content="1.2 Installing Packages | Introduction to Quantitative Text Analysis" />
   
-  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
   
 
-<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+<meta name="author" content="Kostas Gemenis and Bastiaan Bruinsma" />
 
 
-<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="getting-started.html"/>
-<link rel="next" href="importing-data.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link rel="prev" href="installing-r.html"/>
+<link rel="next" href="required.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,22 +48,14 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.17/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -74,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -100,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -113,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -127,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -151,7 +146,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -168,73 +163,105 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
-<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<li class="chapter" data-level="1" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#r-on-windows"><i class="fa fa-check"></i><b>1.1</b> R on Windows</a></li>
-<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#r-on-linux"><i class="fa fa-check"></i><b>1.2</b> R on Linux</a></li>
-<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-on-macos"><i class="fa fa-check"></i><b>1.3</b> R on macOS</a></li>
-<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#r-in-the-cloud"><i class="fa fa-check"></i><b>1.4</b> R in the Cloud</a></li>
+<li class="chapter" data-level="1.1" data-path="installing-r.html"><a href="installing-r.html"><i class="fa fa-check"></i><b>1.1</b> Installing R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="installing-r.html"><a href="installing-r.html#windows"><i class="fa fa-check"></i><b>1.1.1</b> Windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="installing-r.html"><a href="installing-r.html#linux"><i class="fa fa-check"></i><b>1.1.2</b> Linux</a></li>
+<li class="chapter" data-level="1.1.3" data-path="installing-r.html"><a href="installing-r.html#macos"><i class="fa fa-check"></i><b>1.1.3</b> macOS</a></li>
+<li class="chapter" data-level="1.1.4" data-path="installing-r.html"><a href="installing-r.html#cloud"><i class="fa fa-check"></i><b>1.1.4</b> Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>2</b> Installing Packages</a>
+<li class="chapter" data-level="1.2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>1.2</b> Installing Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-cran"><i class="fa fa-check"></i><b>2.1</b> Installing from CRAN</a></li>
-<li class="chapter" data-level="2.2" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-github"><i class="fa fa-check"></i><b>2.2</b> Installing from GitHub</a></li>
-<li class="chapter" data-level="2.3" data-path="installing-packages.html"><a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r"><i class="fa fa-check"></i><b>2.3</b> Packages for Quantitative Text Analysis in R</a></li>
-<li class="chapter" data-level="2.4" data-path="installing-packages.html"><a href="installing-packages.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
+<li class="chapter" data-level="1.2.1" data-path="installing-packages.html"><a href="installing-packages.html#cran"><i class="fa fa-check"></i><b>1.2.1</b> CRAN</a></li>
+<li class="chapter" data-level="1.2.2" data-path="installing-packages.html"><a href="installing-packages.html#github"><i class="fa fa-check"></i><b>1.2.2</b> GitHub</a></li>
+<li class="chapter" data-level="1.2.3" data-path="installing-packages.html"><a href="installing-packages.html#writing-packages"><i class="fa fa-check"></i><b>1.2.3</b> Writing Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>3</b> Importing Data</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="importing-data.html"><a href="importing-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-data.html"><a href="importing-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.2</b> Import .txt Files</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-data.html"><a href="importing-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.3</b> Import .pdf Files</a></li>
-<li class="chapter" data-level="3.4" data-path="importing-data.html"><a href="importing-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
-<li class="chapter" data-level="3.5" data-path="importing-data.html"><a href="importing-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
-<li class="chapter" data-level="3.6" data-path="importing-data.html"><a href="importing-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="1.3" data-path="required.html"><a href="required.html"><i class="fa fa-check"></i><b>1.3</b> Required Packages</a></li>
+<li class="chapter" data-level="1.4" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>1.4</b> Troubleshooting</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and Validity</a>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="reliability-validity.html"><a href="reliability-validity.html#inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Inter-Coder Agreement</a></li>
-<li class="chapter" data-level="4.2" data-path="reliability-validity.html"><a href="reliability-validity.html#visualizing-quality"><i class="fa fa-check"></i><b>4.2</b> Visualizing Quality</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>5</b> Preliminaries</a>
+<li class="chapter" data-level="2.1" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>2.1</b> Concepts</a></li>
+<li class="chapter" data-level="2.2" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>2.2</b> Workflow</a></li>
+<li class="chapter" data-level="2.3" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>2.3</b> Validation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="preliminaries.html"><a href="preliminaries.html#the-corpus"><i class="fa fa-check"></i><b>5.1</b> The Corpus</a></li>
-<li class="chapter" data-level="5.2" data-path="preliminaries.html"><a href="preliminaries.html#keywords-in-context"><i class="fa fa-check"></i><b>5.2</b> Keywords in Context</a></li>
-<li class="chapter" data-level="5.3" data-path="preliminaries.html"><a href="preliminaries.html#visualisations-and-descriptives"><i class="fa fa-check"></i><b>5.3</b> Visualisations and Descriptives</a></li>
-<li class="chapter" data-level="5.4" data-path="preliminaries.html"><a href="preliminaries.html#text-statistics"><i class="fa fa-check"></i><b>5.4</b> Text Statistics</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>6</b> Dictionary Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#classical-dictionary-analysis"><i class="fa fa-check"></i><b>6.1</b> Classical Dictionary Analysis</a></li>
-<li class="chapter" data-level="6.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>6.2</b> Sentiment Analysis</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>6.2.1</b> Movie Reviews</a></li>
-<li class="chapter" data-level="6.2.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#twitter"><i class="fa fa-check"></i><b>6.2.2</b> Twitter</a></li>
+<li class="chapter" data-level="2.3.1" data-path="validation.html"><a href="validation.html#validity"><i class="fa fa-check"></i><b>2.3.1</b> Validity</a></li>
+<li class="chapter" data-level="2.3.2" data-path="validation.html"><a href="validation.html#reliability"><i class="fa fa-check"></i><b>2.3.2</b> Reliability</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>7</b> Scaling Methods</a>
+<li class="chapter" data-level="3" data-path="import.html"><a href="import.html"><i class="fa fa-check"></i><b>3</b> Text in R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>7.1</b> Wordscores</a></li>
-<li class="chapter" data-level="7.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>7.2</b> Wordfish</a></li>
-<li class="chapter" data-level="7.3" data-path="scaling.html"><a href="scaling.html#correspondence-analysis"><i class="fa fa-check"></i><b>7.3</b> Correspondence Analysis</a></li>
+<li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3.1</b> Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="import-.html"><a href="import-.html"><i class="fa fa-check"></i><b>3.2</b> Import .txt</a></li>
+<li class="chapter" data-level="3.3" data-path="import-.html"><a href="import-.html#import-.pdf"><i class="fa fa-check"></i><b>3.3</b> Import .pdf</a></li>
+<li class="chapter" data-level="3.4" data-path="import-.html"><a href="import-.html#import-.csv"><i class="fa fa-check"></i><b>3.4</b> Import .csv</a></li>
+<li class="chapter" data-level="3.5" data-path="import-from-an-api.html"><a href="import-from-an-api.html"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
+<li class="chapter" data-level="3.6" data-path="import-using-web-scraping.html"><a href="import-using-web-scraping.html"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="3.7" data-path="import-json-and-xml.html"><a href="import-json-and-xml.html"><i class="fa fa-check"></i><b>3.7</b> Import JSON and XML</a></li>
+<li class="chapter" data-level="3.8" data-path="import-from-databases.html"><a href="import-from-databases.html"><i class="fa fa-check"></i><b>3.8</b> Import from Databases</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>8</b> Supervised Methods</a>
+<li class="chapter" data-level="4" data-path="describe.html"><a href="describe.html"><i class="fa fa-check"></i><b>4</b> Describe</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>8.1</b> Support Vector Machines</a>
+<li class="chapter" data-level="4.1" data-path="corpus-and-dfm.html"><a href="corpus-and-dfm.html"><i class="fa fa-check"></i><b>4.1</b> Corpus and DFM</a></li>
+<li class="chapter" data-level="4.2" data-path="text-pre-processing.html"><a href="text-pre-processing.html"><i class="fa fa-check"></i><b>4.2</b> Text Pre-processing</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>8.1.1</b> SVM with RTextTools</a></li>
-<li class="chapter" data-level="8.1.2" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-quanteda"><i class="fa fa-check"></i><b>8.1.2</b> SVM with Quanteda</a></li>
+<li class="chapter" data-level="4.2.1" data-path="text-pre-processing.html"><a href="text-pre-processing.html#tokenisation-and-initial-cleaning"><i class="fa fa-check"></i><b>4.2.1</b> Tokenisation and Initial Cleaning</a></li>
+<li class="chapter" data-level="4.2.2" data-path="text-pre-processing.html"><a href="text-pre-processing.html#lower-casing"><i class="fa fa-check"></i><b>4.2.2</b> Lower-casing</a></li>
+<li class="chapter" data-level="4.2.3" data-path="text-pre-processing.html"><a href="text-pre-processing.html#stopword-removal"><i class="fa fa-check"></i><b>4.2.3</b> Stopword Removal</a></li>
+<li class="chapter" data-level="4.2.4" data-path="text-pre-processing.html"><a href="text-pre-processing.html#n-grams-and-collocations"><i class="fa fa-check"></i><b>4.2.4</b> N-grams and Collocations</a></li>
+<li class="chapter" data-level="4.2.5" data-path="text-pre-processing.html"><a href="text-pre-processing.html#stemming-and-lemmatisation"><i class="fa fa-check"></i><b>4.2.5</b> Stemming and Lemmatisation</a></li>
+<li class="chapter" data-level="4.2.6" data-path="text-pre-processing.html"><a href="text-pre-processing.html#removing-sparse-features-dfm-trimming"><i class="fa fa-check"></i><b>4.2.6</b> Removing Sparse Features (DFM Trimming)</a></li>
+<li class="chapter" data-level="4.2.7" data-path="text-pre-processing.html"><a href="text-pre-processing.html#additional-pre-processing"><i class="fa fa-check"></i><b>4.2.7</b> Additional Pre-Processing</a></li>
+<li class="chapter" data-level="4.2.8" data-path="text-pre-processing.html"><a href="text-pre-processing.html#evaluating-pre-processing"><i class="fa fa-check"></i><b>4.2.8</b> Evaluating Pre-Processing</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>8.2</b> Naive Bayes</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>9</b> Unsupervised Methods</a>
+<li class="chapter" data-level="4.3" data-path="descriptives-and-visualisations.html"><a href="descriptives-and-visualisations.html"><i class="fa fa-check"></i><b>4.3</b> Descriptives and Visualisations</a></li>
+<li class="chapter" data-level="4.4" data-path="text-statistics.html"><a href="text-statistics.html"><i class="fa fa-check"></i><b>4.4</b> Text Statistics</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.1</b> Latent Dirichlet Allocation</a></li>
-<li class="chapter" data-level="9.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.2</b> Seeded Latent Dirichlet Allocation</a></li>
-<li class="chapter" data-level="9.3" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#structural-topic-model"><i class="fa fa-check"></i><b>9.3</b> Structural Topic Model</a></li>
+<li class="chapter" data-level="4.4.1" data-path="text-statistics.html"><a href="text-statistics.html#summary"><i class="fa fa-check"></i><b>4.4.1</b> Summary</a></li>
+<li class="chapter" data-level="4.4.2" data-path="text-statistics.html"><a href="text-statistics.html#frequencies"><i class="fa fa-check"></i><b>4.4.2</b> Frequencies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="text-statistics.html"><a href="text-statistics.html#lexical-diversity"><i class="fa fa-check"></i><b>4.4.3</b> Lexical diversity</a></li>
+<li class="chapter" data-level="4.4.4" data-path="text-statistics.html"><a href="text-statistics.html#readability"><i class="fa fa-check"></i><b>4.4.4</b> Readability</a></li>
+<li class="chapter" data-level="4.4.5" data-path="text-statistics.html"><a href="text-statistics.html#similarity-and-distance"><i class="fa fa-check"></i><b>4.4.5</b> Similarity and Distance</a></li>
+<li class="chapter" data-level="4.4.6" data-path="text-statistics.html"><a href="text-statistics.html#keyness"><i class="fa fa-check"></i><b>4.4.6</b> Keyness</a></li>
+<li class="chapter" data-level="4.4.7" data-path="text-statistics.html"><a href="text-statistics.html#entropy"><i class="fa fa-check"></i><b>4.4.7</b> Entropy</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>10</b> Texttricks</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4.5" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>5</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="classical-dictionary-analysis.html"><a href="classical-dictionary-analysis.html"><i class="fa fa-check"></i><b>5.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>5.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#twitter"><i class="fa fa-check"></i><b>5.2.2</b> Twitter</a></li>
+<li class="chapter" data-level="5.2.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#vader"><i class="fa fa-check"></i><b>5.2.3</b> VADER</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="wordscores.html"><a href="wordscores.html"><i class="fa fa-check"></i><b>6.1</b> Wordscores</a></li>
+<li class="chapter" data-level="6.2" data-path="wordfish.html"><a href="wordfish.html"><i class="fa fa-check"></i><b>6.2</b> Wordfish</a></li>
+<li class="chapter" data-level="6.3" data-path="correspondence-analysis.html"><a href="correspondence-analysis.html"><i class="fa fa-check"></i><b>6.3</b> Correspondence Analysis</a></li>
+<li class="chapter" data-level="6.4" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="support-vector-machines-svm.html"><a href="support-vector-machines-svm.html"><i class="fa fa-check"></i><b>7.1</b> Support Vector Machines (SVM)</a></li>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="naive-bayes-nb.html"><a href="naive-bayes-nb.html"><i class="fa fa-check"></i><b>7.3</b> Naive Bayes (NB)</a></li>
+<li class="chapter" data-level="7.4" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="latent-dirichlet-allocation-lda.html"><a href="latent-dirichlet-allocation-lda.html"><i class="fa fa-check"></i><b>8.1</b> Latent Dirichlet Allocation (LDA)</a></li>
+<li class="chapter" data-level="8.2" data-path="seeded-latent-dirichlet-allocation-slda.html"><a href="seeded-latent-dirichlet-allocation-slda.html"><i class="fa fa-check"></i><b>8.2</b> Seeded Latent Dirichlet Allocation (sLDA)</a></li>
+<li class="chapter" data-level="8.3" data-path="structural-topic-model-stm.html"><a href="structural-topic-model-stm.html"><i class="fa fa-check"></i><b>8.3</b> Structural Topic Model (STM)</a></li>
+<li class="chapter" data-level="8.4" data-path="latent-semantic-analysis-lsa.html"><a href="latent-semantic-analysis-lsa.html"><i class="fa fa-check"></i><b>8.4</b> Latent Semantic Analysis (LSA)</a></li>
+<li class="chapter" data-level="8.5" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="bastiaan.bruinsma@gmail.com" target="blank">Bastiaan Bruinsma</a></li>
 
@@ -255,89 +282,47 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="installing-packages" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Installing Packages<a href="installing-packages.html#installing-packages" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>R on its own is a pretty bare-bones experience. What makes it work are the many packages that exist for it. These packages come in two kinds: those with an official release and those in development.</p>
-<div id="installing-from-cran" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Installing from CRAN<a href="installing-packages.html#installing-from-cran" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For an official release, the package needs to be part of CRAN: the <em>Comprehensive R Archive Network</em>. CRAN is a website that collects and hosts all the material R needs, such as the different distributions, packages, and more. The main advantage of being official is that this means that the package has gone through a vetting process. This ensures that the package does not contain any major bugs, has README and NEWS files, and has a clear version number. Also, these packages often have companying articles in <a href="https://www.https://journal.r-project.org/"><em>The R Journal</em></a> and <a href="https://www.jstatsoft.org/index"><em>The Journal of Statistical Software</em></a>.</p>
-<p>To install official packages, we can use the <code>install.packages</code> command or the <strong>Packages</strong> tab in RStudio. If we run <code>install.packages("package", dependencies=TRUE)</code>, we also install any other packages a package depends on. Finally, to update, we can either go to the <strong>Packages</strong> tab in RStudio and click on the <strong>Update</strong> button. We can also type <code>update.packages()</code> in the <strong>Console </strong> for the same result. Try to ensure that you update your package often to prevent unnecessary bugs and problems.</p>
+<div id="installing-packages" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Installing Packages<a href="installing-packages.html#installing-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the strengths of R is its packages. Being bare bones on its own, these packages extend R’s capabilities to virtually any task imaginable. These packages generally come in three forms: those with an official stable release hosted on the <a href="https://cran.r-project.org/"><em>Comprehensive R Archive Network</em> (CRAN)</a>, those still in development, often found on platforms like GitHub, and those we write ourselves. We will look at each of these in turn.</p>
+<div id="cran" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> CRAN<a href="installing-packages.html#cran" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>CRAN is the principal repository for stable, official R packages and is essentially a distributed network of servers hosting R distributions, contributed packages, documentation, and related materials. Before a package appears here, it has gone through a review process that helps ensure that it is stable, free of critical bugs, adheres to certain coding standards, includes essential documentation (such as README and NEWS files), and has a unique version number. Also, many of the packages here come with an accompanying article in journals like <a href="https://journal.r-project.org/"><em>The R Journal</em></a> or <a href="https://www.jstatsoft.org/index"><em>The Journal of Statistical Software</em></a>, which provide the logic behind the package, practical explanations of the code, and illustrative examples.</p>
+<p>The standard function for installing packages from CRAN is <code>install.packages()</code>. To install a single package, provide its name within double quotes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="installing-packages.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<p>You can install multiple packages simultaneously by providing a character vector of package names using <code>c</code> and separating them with commas. Note that we also include <code>dependencies = TRUE</code> here. Doing so makes R automatically check for any other packages (dependencies) we need for our package to work correctly. We highly recommend including this to avoid errors caused by missing dependencies:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="installing-packages.html#cb2-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;readr&quot;</span>), <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>By default, R installs packages in a standard library location on our system. Use <code>.libPaths()</code> to see where this is. The default location is usually fine, but you can specify another location using the <code>lib</code> argument if needed.</p>
+<p>We should also keep our packages updated, as newer versions often provide us with new features, bug fixes, and performance enhancements. To check for and install updates for all our installed packages, run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="installing-packages.html#cb3-1" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code></pre></div>
+<p>This will scan all installed packages, compare their versions with those available from CRAN, and present us with a list of packages we can update. In RStudio, we can also click the <em>Update</em> button in the <em>Packages</em> tab, which will open a window listing all packages with available updates. It is good practice to update packages regularly (e.g. monthly) to minimise the chance of encountering bugs already fixed in newer versions. To see which packages are outdated without starting the update process, type <code>old.packages()</code> in the console.</p>
 </div>
-<div id="installing-from-github" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Installing from GitHub<a href="installing-packages.html#installing-from-github" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Some packages that have not yet had an official release are in development on <a href="https://github.com/"><strong>GitHub</strong></a>. As a result, these packages change very often and are more unstable than their official counterparts. We can install packages from Github using the <code>devtools</code> package. To install this, type:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="installing-packages.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p>Here, <code>dependencies=TRUE</code> ensures that if we need other packages to make <code>devtools</code> work, R will install these as well. Depending on your operating system, you might have to install some other software for <code>devtools</code> to work.</p>
-<p>On Windows, <code>devtools</code> requires the <strong>RTools</strong> software. To install this, go to <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>, download the latest <strong>recommended</strong> version (in green), and install it. Then re-open R again and install <code>devtools</code> as shown above.</p>
-<p>On Linux, how you need to install <code>devtools</code> depends on the flavour of Linux that you have. Most often, installing it through the RStudio console will work fine. If not, the problem is most likely a missing package in your Linux distribution. To address this, close R, open a terminal and type:</p>
-<ol style="list-style-type: decimal">
-<li><code>sudo apt-get update</code></li>
-<li><code>sudo apt-get upgrade</code></li>
-<li><code>sudo apt install build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev</code></li>
-<li>Close the terminal, open R, and install <code>devtools</code> as shown above.</li>
-</ol>
-<p>On OSX (or macOS), <code>devtools</code> requires the <em>XCode</em> software. To install this, follow these steps:</p>
-<ol style="list-style-type: decimal">
-<li>Launch the terminal (which you can find in <em>/Applications/Utilities/</em>), and type:</li>
-<li>In the terminal, type: <code>xcode-select --install</code></li>
-<li>A software update window should pop up. Here, click <strong>Install</strong> and agree to the Terms of Service.</li>
-<li>Go to R and install <code>devtools</code> as shown above.</li>
-</ol>
+<div id="github" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> GitHub<a href="installing-packages.html#github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If a package is still under active development or has not yet gone through the CRAN submission process, we can download it from platforms like GitHub. In addition, GitHub also hosts the latest versions of official packages before their official release, giving us access to the latest features and bug fixes, with the caveat that they may be less stable or more prone to problems than their CRAN counterparts. We cannot install these packages directly, but must use the <code>devtools</code> package to install them, which also allows us to install packages from other sources such as Bioconductor or GitLab:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="installing-packages.html#cb4-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>As we are now installing packages from “source” (that is, they are not on CRAN), we need to have the necessary tools to build them before we can use them (compilers, libraries, etc.). What you need varies by operating system:</p>
+<ul>
+<li><p><strong>Windows</strong>: From the <a href="https://cran.r-project.org/bin/windows/Rtools/">CRAN RTools</a> page, download the latest recommended version of RTools that matches your R version and run it, making sure that you add RTools to your system’s PATH.</p></li>
+<li><p><strong>macOS</strong>: You need the Xcode Command Line Tools. To install this, open the Terminal application (found in <code>/Applications/Utilities/</code>) and enter <code>xcode-select --install.</code>A software update window should appear. Follow the prompts to install the tools and accept the license agreement.</p></li>
+<li><p><strong>Linux</strong>: Depending on our Linux flavour, you need several development libraries and compilers. To install them, run the following in your console:</p>
+<p><code>sudo apt-get update</code></p>
+<p><code>sudo apt-get upgrade</code></p>
+<p><code>sudo apt install build-essential libcurl4-gnus-dev libxml2-dev libssl-dev</code></p>
+<p>These commands update the package lists, upgrade existing software, and install essential build tools (<code>build-essential</code>) and libraries (<code>libcurl</code>, <code>libxml2</code>, <code>libssl</code>) needed for compiling R packages from source. The package names can differ slightly between Linux distributions (like Fedora, CentOS, etc.).</p></li>
+</ul>
+<p>Once you have <code>devtools</code> and the necessary build tools, you can use <code>install_github()</code> to install the packages. You can find the <em>github_username</em> and <em>repository_name</em> on the GitHub page that hosts the package:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="installing-packages.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(devtools) <span class="co"># Loads the devtools package</span></span>
+<span id="cb5-2"><a href="installing-packages.html#cb5-2" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;github_username/repository_name&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
-<div id="packages-for-quantitative-text-analysis-in-r" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Packages for Quantitative Text Analysis in R<a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are various packages we can use for quantitative text analysis in R, such as <code>tm</code>, <code>tidytext</code>, <code>corpus</code> and <code>koRpus</code>. Yet here we will use the <code>quanteda</code> <span class="citation">(<a href="#ref-Benoit2018a" role="doc-biblioref">Benoit et al., 2018</a>)</span> that is at the moment in its second version. The advantage of <code>quanteda</code> over the others is that it integrates many of the text analysis functions of R that were before spread out over many different packages <span class="citation">(<a href="#ref-Welbers2017a" role="doc-biblioref">Welbers et al., 2017</a>)</span>. Besides, it is easy to combine with other packages, has simple and logical commands, and a well-maintained <a href="www.quanteda.io">website</a>.</p>
-<p>The current version of <code>quanteda</code> as of writing is 3.2.1. This version works best with R version 4.0.1 or higher. To check if your system has this, type <code>R.Version()</code> in your console. The result will be a list. Look for <code>$version.string</code> to see which version number your version of R is. If you do not have the latest version, see the steps above on how to download this.</p>
-<p>To install the package, type:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="installing-packages.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;quanteda&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>Note that because we wrote <code>dependencies = TRUE</code>, this command also installed three other <code>quanteda</code> helper packages that serve to expand upon the basic tools that are already within <code>quanteda</code>. In the future, expect more of these helper packages to expand the package even more. Yet, before these helper packages get an official release, we can already find them, in development, on GitHub. Here, we install two of them - <code>quanteda.classifiers</code> which we will use for supervised learning methods, and <code>quanteda.dictionaries</code> which we will use for dictionary analysis:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="installing-packages.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb3-2"><a href="installing-packages.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;quanteda/quanteda.classifiers&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-3"><a href="installing-packages.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;kbenoit/quanteda.dictionaries&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>Apart from <code>quanteda</code> we then need these other packages as well:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="installing-packages.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;mikegruz/kripp.boot&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="installing-packages.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ca&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-3"><a href="installing-packages.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;combinat&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-4"><a href="installing-packages.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-5"><a href="installing-packages.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;FactoMineR&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-6"><a href="installing-packages.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;factoextra&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-7"><a href="installing-packages.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Factoshiny&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-8"><a href="installing-packages.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Hmisc&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-9"><a href="installing-packages.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;httr&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-10"><a href="installing-packages.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;jsonlite&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-11"><a href="installing-packages.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;manifestoR&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-12"><a href="installing-packages.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readr&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-13"><a href="installing-packages.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readtext&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-14"><a href="installing-packages.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;reshape2&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-15"><a href="installing-packages.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;RTextTools&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-16"><a href="installing-packages.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;R.temis&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-17"><a href="installing-packages.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rvest&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-18"><a href="installing-packages.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;seededlda&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-19"><a href="installing-packages.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;stm&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-20"><a href="installing-packages.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-21"><a href="installing-packages.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;topicmodels&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>After installation, you will find these packages, as well as the <code>quanteda</code> and <code>devtools</code> packages, under the <strong>Packages</strong> tab in RStudio.</p>
-</div>
-<div id="issues-bugs-and-errors" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Issues, Bugs and Errors<a href="installing-packages.html#issues-bugs-and-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As it is free software, errors are not uncommon in R. Often they arise when you misspell the code or use the wrong code for the job at hand. In these cases, R prints a message (in red) telling you why it cannot do what you ask of it. Sometimes, this message is quite clear, such as telling you to install an extra package. Other times, it is more complicated and requires some extra work. In these cases, there are four questions you should ask yourself:</p>
-<ol style="list-style-type: decimal">
-<li>Did I load all the packages I need?</li>
-<li>Are all my packages up-to-date?</li>
-<li>Did I spell the commands correct?</li>
-<li>Is the data in the right shape or format?</li>
-</ol>
-<p>If none of these provides a solution, you can always look up on-line if others have run into the same issue. Often, copy-pasting your error into a search engine can provide you with other instances, and most often a solution. One well-known place for solutions is <a href="https://stackoverflow.com/">Stack Overflow</a>. Here, you can share your problem with others and see if someone can offer a solution. Make sure though to read through the problems already posted first, to ensure that you do not post the same problem twice.</p>
-
-</div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="2">
-<div id="ref-Benoit2018a" class="csl-entry">
-Benoit, K., Watanabe, K., Wang, H., Nulty, P., Obeng, A., Müller, S., &amp; Matsuo, A. (2018). Quanteda: An r package for the quantitative analysis of textual data. <em>Journal of Open Source Software</em>, <em>3</em>(30), 774. <a href="https://doi.org/10.21105/joss.00774">https://doi.org/10.21105/joss.00774</a>
-</div>
-<div id="ref-Welbers2017a" class="csl-entry">
-Welbers, K., Van Atteveldt, W., &amp; Benoit, K. (2017). <span class="nocase">Text Analysis in R</span>. <em>Communication Methods and Measures</em>, <em>11</em>(4), 245–265. <a href="https://doi.org/10.1080/19312458.2017.1387238">https://doi.org/10.1080/19312458.2017.1387238</a>
+<div id="writing-packages" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Writing Packages<a href="installing-packages.html#writing-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If no package does exactly what we need, we can write it ourselves. This can be a good idea if there are certain pieces of code that we need to run multiple times, or that we want to share with others. As the name suggests, packages are collections of <em>functions</em>, pieces of code that we define using the <code>function()</code> command:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="installing-packages.html#cb6-1" tabindex="-1"></a>my_function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(argument1, argument2, ...) {</span>
+<span id="cb6-2"><a href="installing-packages.html#cb6-2" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="co"># Commands to be executed using the arguments</span></span>
+<span id="cb6-3"><a href="installing-packages.html#cb6-3" tabindex="-1"></a>  <span class="fu">return</span>(result)   <span class="co"># Returns the result</span></span>
+<span id="cb6-4"><a href="installing-packages.html#cb6-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Functions are invaluable for making your code modular and repeatable, and you will use them often while using R. However, once you have a collection of related functions (and possibly data) that you use frequently or want to share with others, you should consider organising them into a <em>package</em>. This involves structuring your code and documentation in a particular directory layout and including specific metadata files (such as <code>DESCRIPTION</code> and <code>NAMESPACE</code>) that aim to make your code easily installable, loadable, and discoverable by others. For more information, see Hadley Wickham’s book <a href="https://r-pkgs.org/">R Packages</a> or the guide by <a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">Hilary Parker</a>.</p>
 </div>
 </div>
             </section>
@@ -345,60 +330,60 @@ Welbers, K., Van Atteveldt, W., &amp; Benoit, K. (2017). <span class="nocase">Te
           </div>
         </div>
       </div>
-<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="importing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="installing-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="required.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-},
-"toolbar": {
-"position": "static"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "toolbar": {
+    "position": "static"
+  }
 });
 });
 </script>
@@ -409,7 +394,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

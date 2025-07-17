@@ -4,43 +4,42 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Unsupervised Methods | Introduction to Quantitative Text Analysis</title>
-  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <title>Chapter 8 Unsupervised Methods | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="Chapter 8 Unsupervised Methods | Introduction to Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Unsupervised Methods | Introduction to Quantitative Text Analysis" />
+  <meta property="og:title" content="Chapter 8 Unsupervised Methods | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Unsupervised Methods | Introduction to Quantitative Text Analysis" />
+  <meta name="twitter:title" content="Chapter 8 Unsupervised Methods | Introduction to Quantitative Text Analysis" />
   
-  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
   
 
-<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+<meta name="author" content="Kostas Gemenis and Bastiaan Bruinsma" />
 
 
-<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="supervised-methods.html"/>
-<link rel="next" href="texttricks.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link rel="prev" href="exercises-3.html"/>
+<link rel="next" href="latent-dirichlet-allocation-lda.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,22 +48,14 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.17/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -74,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -100,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -113,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -127,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -151,7 +146,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -168,73 +163,105 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
-<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<li class="chapter" data-level="1" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#r-on-windows"><i class="fa fa-check"></i><b>1.1</b> R on Windows</a></li>
-<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#r-on-linux"><i class="fa fa-check"></i><b>1.2</b> R on Linux</a></li>
-<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-on-macos"><i class="fa fa-check"></i><b>1.3</b> R on macOS</a></li>
-<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#r-in-the-cloud"><i class="fa fa-check"></i><b>1.4</b> R in the Cloud</a></li>
+<li class="chapter" data-level="1.1" data-path="installing-r.html"><a href="installing-r.html"><i class="fa fa-check"></i><b>1.1</b> Installing R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="installing-r.html"><a href="installing-r.html#windows"><i class="fa fa-check"></i><b>1.1.1</b> Windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="installing-r.html"><a href="installing-r.html#linux"><i class="fa fa-check"></i><b>1.1.2</b> Linux</a></li>
+<li class="chapter" data-level="1.1.3" data-path="installing-r.html"><a href="installing-r.html#macos"><i class="fa fa-check"></i><b>1.1.3</b> macOS</a></li>
+<li class="chapter" data-level="1.1.4" data-path="installing-r.html"><a href="installing-r.html#cloud"><i class="fa fa-check"></i><b>1.1.4</b> Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>2</b> Installing Packages</a>
+<li class="chapter" data-level="1.2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>1.2</b> Installing Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-cran"><i class="fa fa-check"></i><b>2.1</b> Installing from CRAN</a></li>
-<li class="chapter" data-level="2.2" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-github"><i class="fa fa-check"></i><b>2.2</b> Installing from GitHub</a></li>
-<li class="chapter" data-level="2.3" data-path="installing-packages.html"><a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r"><i class="fa fa-check"></i><b>2.3</b> Packages for Quantitative Text Analysis in R</a></li>
-<li class="chapter" data-level="2.4" data-path="installing-packages.html"><a href="installing-packages.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
+<li class="chapter" data-level="1.2.1" data-path="installing-packages.html"><a href="installing-packages.html#cran"><i class="fa fa-check"></i><b>1.2.1</b> CRAN</a></li>
+<li class="chapter" data-level="1.2.2" data-path="installing-packages.html"><a href="installing-packages.html#github"><i class="fa fa-check"></i><b>1.2.2</b> GitHub</a></li>
+<li class="chapter" data-level="1.2.3" data-path="installing-packages.html"><a href="installing-packages.html#writing-packages"><i class="fa fa-check"></i><b>1.2.3</b> Writing Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>3</b> Importing Data</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="importing-data.html"><a href="importing-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-data.html"><a href="importing-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.2</b> Import .txt Files</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-data.html"><a href="importing-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.3</b> Import .pdf Files</a></li>
-<li class="chapter" data-level="3.4" data-path="importing-data.html"><a href="importing-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
-<li class="chapter" data-level="3.5" data-path="importing-data.html"><a href="importing-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
-<li class="chapter" data-level="3.6" data-path="importing-data.html"><a href="importing-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="1.3" data-path="required.html"><a href="required.html"><i class="fa fa-check"></i><b>1.3</b> Required Packages</a></li>
+<li class="chapter" data-level="1.4" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>1.4</b> Troubleshooting</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and Validity</a>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="reliability-validity.html"><a href="reliability-validity.html#inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Inter-Coder Agreement</a></li>
-<li class="chapter" data-level="4.2" data-path="reliability-validity.html"><a href="reliability-validity.html#visualizing-quality"><i class="fa fa-check"></i><b>4.2</b> Visualizing Quality</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>5</b> Preliminaries</a>
+<li class="chapter" data-level="2.1" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>2.1</b> Concepts</a></li>
+<li class="chapter" data-level="2.2" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>2.2</b> Workflow</a></li>
+<li class="chapter" data-level="2.3" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>2.3</b> Validation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="preliminaries.html"><a href="preliminaries.html#the-corpus"><i class="fa fa-check"></i><b>5.1</b> The Corpus</a></li>
-<li class="chapter" data-level="5.2" data-path="preliminaries.html"><a href="preliminaries.html#keywords-in-context"><i class="fa fa-check"></i><b>5.2</b> Keywords in Context</a></li>
-<li class="chapter" data-level="5.3" data-path="preliminaries.html"><a href="preliminaries.html#visualisations-and-descriptives"><i class="fa fa-check"></i><b>5.3</b> Visualisations and Descriptives</a></li>
-<li class="chapter" data-level="5.4" data-path="preliminaries.html"><a href="preliminaries.html#text-statistics"><i class="fa fa-check"></i><b>5.4</b> Text Statistics</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>6</b> Dictionary Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#classical-dictionary-analysis"><i class="fa fa-check"></i><b>6.1</b> Classical Dictionary Analysis</a></li>
-<li class="chapter" data-level="6.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>6.2</b> Sentiment Analysis</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>6.2.1</b> Movie Reviews</a></li>
-<li class="chapter" data-level="6.2.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#twitter"><i class="fa fa-check"></i><b>6.2.2</b> Twitter</a></li>
+<li class="chapter" data-level="2.3.1" data-path="validation.html"><a href="validation.html#validity"><i class="fa fa-check"></i><b>2.3.1</b> Validity</a></li>
+<li class="chapter" data-level="2.3.2" data-path="validation.html"><a href="validation.html#reliability"><i class="fa fa-check"></i><b>2.3.2</b> Reliability</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>7</b> Scaling Methods</a>
+<li class="chapter" data-level="3" data-path="import.html"><a href="import.html"><i class="fa fa-check"></i><b>3</b> Text in R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>7.1</b> Wordscores</a></li>
-<li class="chapter" data-level="7.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>7.2</b> Wordfish</a></li>
-<li class="chapter" data-level="7.3" data-path="scaling.html"><a href="scaling.html#correspondence-analysis"><i class="fa fa-check"></i><b>7.3</b> Correspondence Analysis</a></li>
+<li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3.1</b> Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="import-.html"><a href="import-.html"><i class="fa fa-check"></i><b>3.2</b> Import .txt</a></li>
+<li class="chapter" data-level="3.3" data-path="import-.html"><a href="import-.html#import-.pdf"><i class="fa fa-check"></i><b>3.3</b> Import .pdf</a></li>
+<li class="chapter" data-level="3.4" data-path="import-.html"><a href="import-.html#import-.csv"><i class="fa fa-check"></i><b>3.4</b> Import .csv</a></li>
+<li class="chapter" data-level="3.5" data-path="import-from-an-api.html"><a href="import-from-an-api.html"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
+<li class="chapter" data-level="3.6" data-path="import-using-web-scraping.html"><a href="import-using-web-scraping.html"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="3.7" data-path="import-json-and-xml.html"><a href="import-json-and-xml.html"><i class="fa fa-check"></i><b>3.7</b> Import JSON and XML</a></li>
+<li class="chapter" data-level="3.8" data-path="import-from-databases.html"><a href="import-from-databases.html"><i class="fa fa-check"></i><b>3.8</b> Import from Databases</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>8</b> Supervised Methods</a>
+<li class="chapter" data-level="4" data-path="describe.html"><a href="describe.html"><i class="fa fa-check"></i><b>4</b> Describe</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>8.1</b> Support Vector Machines</a>
+<li class="chapter" data-level="4.1" data-path="corpus-and-dfm.html"><a href="corpus-and-dfm.html"><i class="fa fa-check"></i><b>4.1</b> Corpus and DFM</a></li>
+<li class="chapter" data-level="4.2" data-path="text-pre-processing.html"><a href="text-pre-processing.html"><i class="fa fa-check"></i><b>4.2</b> Text Pre-processing</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>8.1.1</b> SVM with RTextTools</a></li>
-<li class="chapter" data-level="8.1.2" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-quanteda"><i class="fa fa-check"></i><b>8.1.2</b> SVM with Quanteda</a></li>
+<li class="chapter" data-level="4.2.1" data-path="text-pre-processing.html"><a href="text-pre-processing.html#tokenisation-and-initial-cleaning"><i class="fa fa-check"></i><b>4.2.1</b> Tokenisation and Initial Cleaning</a></li>
+<li class="chapter" data-level="4.2.2" data-path="text-pre-processing.html"><a href="text-pre-processing.html#lower-casing"><i class="fa fa-check"></i><b>4.2.2</b> Lower-casing</a></li>
+<li class="chapter" data-level="4.2.3" data-path="text-pre-processing.html"><a href="text-pre-processing.html#stopword-removal"><i class="fa fa-check"></i><b>4.2.3</b> Stopword Removal</a></li>
+<li class="chapter" data-level="4.2.4" data-path="text-pre-processing.html"><a href="text-pre-processing.html#n-grams-and-collocations"><i class="fa fa-check"></i><b>4.2.4</b> N-grams and Collocations</a></li>
+<li class="chapter" data-level="4.2.5" data-path="text-pre-processing.html"><a href="text-pre-processing.html#stemming-and-lemmatisation"><i class="fa fa-check"></i><b>4.2.5</b> Stemming and Lemmatisation</a></li>
+<li class="chapter" data-level="4.2.6" data-path="text-pre-processing.html"><a href="text-pre-processing.html#removing-sparse-features-dfm-trimming"><i class="fa fa-check"></i><b>4.2.6</b> Removing Sparse Features (DFM Trimming)</a></li>
+<li class="chapter" data-level="4.2.7" data-path="text-pre-processing.html"><a href="text-pre-processing.html#additional-pre-processing"><i class="fa fa-check"></i><b>4.2.7</b> Additional Pre-Processing</a></li>
+<li class="chapter" data-level="4.2.8" data-path="text-pre-processing.html"><a href="text-pre-processing.html#evaluating-pre-processing"><i class="fa fa-check"></i><b>4.2.8</b> Evaluating Pre-Processing</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>8.2</b> Naive Bayes</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>9</b> Unsupervised Methods</a>
+<li class="chapter" data-level="4.3" data-path="descriptives-and-visualisations.html"><a href="descriptives-and-visualisations.html"><i class="fa fa-check"></i><b>4.3</b> Descriptives and Visualisations</a></li>
+<li class="chapter" data-level="4.4" data-path="text-statistics.html"><a href="text-statistics.html"><i class="fa fa-check"></i><b>4.4</b> Text Statistics</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.1</b> Latent Dirichlet Allocation</a></li>
-<li class="chapter" data-level="9.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.2</b> Seeded Latent Dirichlet Allocation</a></li>
-<li class="chapter" data-level="9.3" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#structural-topic-model"><i class="fa fa-check"></i><b>9.3</b> Structural Topic Model</a></li>
+<li class="chapter" data-level="4.4.1" data-path="text-statistics.html"><a href="text-statistics.html#summary"><i class="fa fa-check"></i><b>4.4.1</b> Summary</a></li>
+<li class="chapter" data-level="4.4.2" data-path="text-statistics.html"><a href="text-statistics.html#frequencies"><i class="fa fa-check"></i><b>4.4.2</b> Frequencies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="text-statistics.html"><a href="text-statistics.html#lexical-diversity"><i class="fa fa-check"></i><b>4.4.3</b> Lexical diversity</a></li>
+<li class="chapter" data-level="4.4.4" data-path="text-statistics.html"><a href="text-statistics.html#readability"><i class="fa fa-check"></i><b>4.4.4</b> Readability</a></li>
+<li class="chapter" data-level="4.4.5" data-path="text-statistics.html"><a href="text-statistics.html#similarity-and-distance"><i class="fa fa-check"></i><b>4.4.5</b> Similarity and Distance</a></li>
+<li class="chapter" data-level="4.4.6" data-path="text-statistics.html"><a href="text-statistics.html#keyness"><i class="fa fa-check"></i><b>4.4.6</b> Keyness</a></li>
+<li class="chapter" data-level="4.4.7" data-path="text-statistics.html"><a href="text-statistics.html#entropy"><i class="fa fa-check"></i><b>4.4.7</b> Entropy</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>10</b> Texttricks</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4.5" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>5</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="classical-dictionary-analysis.html"><a href="classical-dictionary-analysis.html"><i class="fa fa-check"></i><b>5.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>5.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#twitter"><i class="fa fa-check"></i><b>5.2.2</b> Twitter</a></li>
+<li class="chapter" data-level="5.2.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#vader"><i class="fa fa-check"></i><b>5.2.3</b> VADER</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="wordscores.html"><a href="wordscores.html"><i class="fa fa-check"></i><b>6.1</b> Wordscores</a></li>
+<li class="chapter" data-level="6.2" data-path="wordfish.html"><a href="wordfish.html"><i class="fa fa-check"></i><b>6.2</b> Wordfish</a></li>
+<li class="chapter" data-level="6.3" data-path="correspondence-analysis.html"><a href="correspondence-analysis.html"><i class="fa fa-check"></i><b>6.3</b> Correspondence Analysis</a></li>
+<li class="chapter" data-level="6.4" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="support-vector-machines-svm.html"><a href="support-vector-machines-svm.html"><i class="fa fa-check"></i><b>7.1</b> Support Vector Machines (SVM)</a></li>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="naive-bayes-nb.html"><a href="naive-bayes-nb.html"><i class="fa fa-check"></i><b>7.3</b> Naive Bayes (NB)</a></li>
+<li class="chapter" data-level="7.4" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="latent-dirichlet-allocation-lda.html"><a href="latent-dirichlet-allocation-lda.html"><i class="fa fa-check"></i><b>8.1</b> Latent Dirichlet Allocation (LDA)</a></li>
+<li class="chapter" data-level="8.2" data-path="seeded-latent-dirichlet-allocation-slda.html"><a href="seeded-latent-dirichlet-allocation-slda.html"><i class="fa fa-check"></i><b>8.2</b> Seeded Latent Dirichlet Allocation (sLDA)</a></li>
+<li class="chapter" data-level="8.3" data-path="structural-topic-model-stm.html"><a href="structural-topic-model-stm.html"><i class="fa fa-check"></i><b>8.3</b> Structural Topic Model (STM)</a></li>
+<li class="chapter" data-level="8.4" data-path="latent-semantic-analysis-lsa.html"><a href="latent-semantic-analysis-lsa.html"><i class="fa fa-check"></i><b>8.4</b> Latent Semantic Analysis (LSA)</a></li>
+<li class="chapter" data-level="8.5" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="bastiaan.bruinsma@gmail.com" target="blank">Bastiaan Bruinsma</a></li>
 
@@ -255,381 +282,77 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="unsupervised-methods" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Unsupervised Methods<a href="unsupervised-methods.html#unsupervised-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>While supervised models often work fine for text classification, one disadvantage is that we need to set specifics for the model. As an alternative, we can not specify anything and have R find out which classifications work. There are various algorithms to do so, of which we here will focus on Latent Dirichlet Allocation (LDA); a ‘seeded’ version of LDA that uses information from other sources to improve the results of the LDA; and a Structural Topic Model.</p>
-<div id="latent-dirichlet-allocation" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Latent Dirichlet Allocation<a href="unsupervised-methods.html#latent-dirichlet-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Latent Dirichlet Allocation, or LDA, relies on the idea is that each text is a mix of topics, and each word belongs to one of these. To run LDA, we will use the <code>topicmodels</code> package, and use the inaugural speeches as an example. First, we will use the <code>convert</code> function to convert the data frequency matrix to a data term matrix as this is what <code>topicmodels</code> uses:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="unsupervised-methods.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
-<span id="cb210-2"><a href="unsupervised-methods.html#cb210-2" aria-hidden="true" tabindex="-1"></a>inaugural_dtm <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_inaugural_dfm, <span class="at">to =</span> <span class="st">&quot;topicmodels&quot;</span>)</span></code></pre></div>
-<p>Then, we fit an LDA model with 10 topics. First, we have to define some a priori parameters for the model. Here, we will use the Gibbs sampling method to fit the LDA model <span class="citation">(<a href="#ref-Griffiths2004a" role="doc-biblioref">Griffiths &amp; Steyvers, 2004</a>)</span> over the alternative VEM approach <span class="citation">(<a href="#ref-Blei2003a" role="doc-biblioref">Blei et al., 2003</a>)</span>. Gibbs sampling performs a random walk over the distribution so we need to set a seed to ensure reproducible results. In this particular example, we set five seeds for five independent runs. We also set a burn-in period of 2000 as the first iterations will not reflect the distribution well, and take the 200th iteration of the following 1000:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="unsupervised-methods.html#cb211-1" aria-hidden="true" tabindex="-1"></a>burnin <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb211-2"><a href="unsupervised-methods.html#cb211-2" aria-hidden="true" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb211-3"><a href="unsupervised-methods.html#cb211-3" aria-hidden="true" tabindex="-1"></a>thin <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb211-4"><a href="unsupervised-methods.html#cb211-4" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>,<span class="dv">5</span>,<span class="dv">24</span>,<span class="dv">158</span>,<span class="dv">2500</span>)</span>
-<span id="cb211-5"><a href="unsupervised-methods.html#cb211-5" aria-hidden="true" tabindex="-1"></a>nstart <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb211-6"><a href="unsupervised-methods.html#cb211-6" aria-hidden="true" tabindex="-1"></a>best <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div>
-<p>The LDA algorithm estimates topic-word probabilities as well as topic-document probabilities that we can extract and visualize. Here, we will start with the topic-word probabilities called <code>beta</code>. To do this, we will use the <code>tidytext</code> package which is part of the tidyverse family of packages. Central to the logic of tidyverse packages is that it does not rely on a document term matrix but represents the data in a long format <span class="citation">(<a href="#ref-Welbers2017a" role="doc-biblioref">Welbers et al., 2017, p. 252</a>)</span>. Although this makes it less memory efficient, this lends itself to effective visualisation. The whole logic of these packages is that it works with data which has columns (variables) and rows with single observations. While this is the logic most people know, but it is not always the quickest (and is also not used by <code>quanteda</code>). Yet, it always allows you to look at your data in a way most will understand. First, we run the LDA and have a look at the first 10 terms:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="unsupervised-methods.html#cb212-1" aria-hidden="true" tabindex="-1"></a>inaugural_lda10 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(inaugural_dtm, <span class="at">k=</span><span class="dv">10</span>,</span>
-<span id="cb212-2"><a href="unsupervised-methods.html#cb212-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">method=</span><span class="st">&quot;Gibbs&quot;</span>,</span>
-<span id="cb212-3"><a href="unsupervised-methods.html#cb212-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">control=</span><span class="fu">list</span>(<span class="at">burnin=</span>burnin,</span>
-<span id="cb212-4"><a href="unsupervised-methods.html#cb212-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">iter=</span>iter,</span>
-<span id="cb212-5"><a href="unsupervised-methods.html#cb212-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">thin=</span>thin,</span>
-<span id="cb212-6"><a href="unsupervised-methods.html#cb212-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">seed=</span>seed,</span>
-<span id="cb212-7"><a href="unsupervised-methods.html#cb212-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">nstart=</span>nstart,</span>
-<span id="cb212-8"><a href="unsupervised-methods.html#cb212-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">best=</span>best))</span>
-<span id="cb212-9"><a href="unsupervised-methods.html#cb212-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb212-10"><a href="unsupervised-methods.html#cb212-10" aria-hidden="true" tabindex="-1"></a><span class="fu">terms</span>(inaugural_lda10, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##       Topic 1   Topic 2   Topic 3     Topic 4     Topic 5   Topic 6        
-##  [1,] &quot;peace&quot;   &quot;us&quot;      &quot;business&quot;  &quot;americans&quot; &quot;every&quot;   &quot;never&quot;        
-##  [2,] &quot;world&quot;   &quot;new&quot;     &quot;may&quot;       &quot;citizens&quot;  &quot;great&quot;   &quot;must&quot;         
-##  [3,] &quot;nations&quot; &quot;people&quot;  &quot;congress&quot;  &quot;freedom&quot;   &quot;nation&quot;  &quot;republic&quot;     
-##  [4,] &quot;free&quot;    &quot;america&quot; &quot;policy&quot;    &quot;country&quot;   &quot;men&quot;     &quot;civilization&quot; 
-##  [5,] &quot;freedom&quot; &quot;must&quot;    &quot;states&quot;    &quot;president&quot; &quot;life&quot;    &quot;order&quot;        
-##  [6,] &quot;can&quot;     &quot;world&quot;   &quot;executive&quot; &quot;never&quot;     &quot;good&quot;    &quot;war&quot;          
-##  [7,] &quot;shall&quot;   &quot;can&quot;     &quot;made&quot;      &quot;common&quot;    &quot;part&quot;    &quot;concern&quot;      
-##  [8,] &quot;life&quot;    &quot;nation&quot;  &quot;necessary&quot; &quot;courage&quot;   &quot;upon&quot;    &quot;understanding&quot;
-##  [9,] &quot;may&quot;     &quot;one&quot;     &quot;trade&quot;     &quot;day&quot;       &quot;action&quot;  &quot;tasks&quot;        
-## [10,] &quot;hope&quot;    &quot;time&quot;    &quot;hope&quot;      &quot;across&quot;    &quot;purpose&quot; &quot;production&quot;   
-##       Topic 7      Topic 8       Topic 9      Topic 10   
-##  [1,] &quot;change&quot;     &quot;united&quot;      &quot;government&quot; &quot;first&quot;    
-##  [2,] &quot;generation&quot; &quot;liberty&quot;     &quot;upon&quot;       &quot;need&quot;     
-##  [3,] &quot;journey&quot;    &quot;human&quot;       &quot;can&quot;        &quot;love&quot;     
-##  [4,] &quot;hands&quot;      &quot;democracy&quot;   &quot;people&quot;     &quot;days&quot;     
-##  [5,] &quot;weapons&quot;    &quot;believe&quot;     &quot;country&quot;    &quot;things&quot;   
-##  [6,] &quot;forth&quot;      &quot;states&quot;      &quot;progress&quot;   &quot;back&quot;     
-##  [7,] &quot;powerful&quot;   &quot;alone&quot;       &quot;must&quot;       &quot;hand&quot;     
-##  [8,] &quot;enduring&quot;   &quot;security&quot;    &quot;law&quot;        &quot;friends&quot;  
-##  [9,] &quot;greatness&quot;  &quot;millions&quot;    &quot;system&quot;     &quot;unity&quot;    
-## [10,] &quot;words&quot;      &quot;opportunity&quot; &quot;political&quot;  &quot;president&quot;</code></pre>
-<p>Here, we can see that the first topic is most concerned with words referring to peace and freedom, the second with references to the people, the third with businesses, as so on. While we can interpret our topics this way, a better way might be to visualise the results. For this, we will use the <code>tidy</code> command to prepare the dataset for visualisation. Then, we tell the command to use the information from the <code>beta</code> column, which contains the probability of a word occurring in a certain topic:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="unsupervised-methods.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb214-2"><a href="unsupervised-methods.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb214-3"><a href="unsupervised-methods.html#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb214-4"><a href="unsupervised-methods.html#cb214-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb214-5"><a href="unsupervised-methods.html#cb214-5" aria-hidden="true" tabindex="-1"></a>inaugural_lda10_topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(inaugural_lda10, <span class="at">matrix=</span><span class="st">&quot;beta&quot;</span>)</span></code></pre></div>
-<p>If we would look into the dataset now, we would see that it has 63130 observations with 3 variables. These are the number of the topic, the word (the term) and the <code>beta</code> - the chance that the word occurs in that topic. We now want to visualise only the top ten words for each topic in a bar plot. Also, we want the graphs of each of these ten topics to appear in a single graph. To make this happen, we first have to select the top ten words for each topic. We do so again using a pipe (which is the <code>%&gt;%</code> command). This pipe transports an output of a command to another one before saving it. So here, we take our data set and group it by topic using the <code>group_by</code> command. This command groups the dataset into 10 groups, each for every topic. What this allows us is to calculate things that we otherwise calculate for the whole data-set but here calculate for the groups instead. We then do so and select the top 10 terms (based on their beta value), using <code>top_n</code>. We then ungroup again (to make R view it as a single data-set), and use the <code>arrange</code> function to ensure the data-set sorts the topics in an increasing and the beta values in a decreasing fashion. Finally, we save this into a new object:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="unsupervised-methods.html#cb215-1" aria-hidden="true" tabindex="-1"></a>inaugural_lda10_topterms <span class="ot">&lt;-</span> inaugural_lda10_topics <span class="sc">%&gt;%</span></span>
-<span id="cb215-2"><a href="unsupervised-methods.html#cb215-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb215-3"><a href="unsupervised-methods.html#cb215-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span></span>
-<span id="cb215-4"><a href="unsupervised-methods.html#cb215-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb215-5"><a href="unsupervised-methods.html#cb215-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span></code></pre></div>
-<p>If we now look at the data set, we see that it is much smaller and has the topics ordered. Yet, before we can plot this we have to ensure that (seen from top to bottom), all the beta for the first topic come first, then for the second topic, and so on. To do so, we use the <code>mutate</code> command, and redefine the term variable so that it is re-ordered based first on the term and then on the beta value. The result is a data frame with first the first topic, then the second topic etc., and with the beta values ordered within each topic. We then make the figure, with the terms on the horizontal axis and the beta values and the vertical axes, and have the bars this generates coloured by topic. Also, we switch off the legend (which we do not need) and use the <code>facet_wrap</code> command to split up the total graph (which would have 107 bars otherwise - 107 bars and not a 100 because some terms had the same value for beta). We set the options for the scales to be <code>free</code> as it might be that the beta values for some topics are larger or smaller than for the others. Finally, we flip the graphs and make the x-axis the y-axis and vice versa, as this makes the picture more clear:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="unsupervised-methods.html#cb216-1" aria-hidden="true" tabindex="-1"></a>inaugural_lda10_topterms <span class="sc">%&gt;%</span></span>
-<span id="cb216-2"><a href="unsupervised-methods.html#cb216-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">reorder</span>(term, beta)) <span class="sc">%&gt;%</span></span>
-<span id="cb216-3"><a href="unsupervised-methods.html#cb216-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta, <span class="at">fill=</span><span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb216-4"><a href="unsupervised-methods.html#cb216-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_col</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb216-5"><a href="unsupervised-methods.html#cb216-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb216-6"><a href="unsupervised-methods.html#cb216-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb216-7"><a href="unsupervised-methods.html#cb216-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/lda-tidy-graph1-1.png" width="672" /></p>
-<p>What is clear here is that looking at only the words in each topic only says so much. In the first topic, the term ‘peace’ is more important than anything else, and so is ‘us’ in topic number 2. Also, in topic number ten, we see that both ‘first’ and ‘need’ are of equal importance.</p>
-<p>Another question we can ask is how much of each topic is in each of the documents. Put in another way: do certain documents talk more about certain topics than others? To see this, we first generate a new data frame with this information, known as the <code>gamma</code> value for each document:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="unsupervised-methods.html#cb217-1" aria-hidden="true" tabindex="-1"></a>inaugural_lda10_documents <span class="ot">&lt;-</span> <span class="fu">tidy</span>(inaugural_lda10, <span class="at">matrix=</span><span class="st">&quot;gamma&quot;</span>)</span></code></pre></div>
-<p>We then go through similar steps to make the data set ready for use and prepare the graph. For the graph, the only steps we do different are to force R to label each topic on the axis (as otherwise it will treat it as a continuous variable and come up with useless values such as 7.5), and to give it a different look (using the <code>theme_classic()</code> command):</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="unsupervised-methods.html#cb218-1" aria-hidden="true" tabindex="-1"></a>inaugural_lda10_toptopics <span class="ot">&lt;-</span> inaugural_lda10_documents <span class="sc">%&gt;%</span></span>
-<span id="cb218-2"><a href="unsupervised-methods.html#cb218-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span></span>
-<span id="cb218-3"><a href="unsupervised-methods.html#cb218-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">top_n</span>(<span class="dv">10</span>, gamma) <span class="sc">%&gt;%</span></span>
-<span id="cb218-4"><a href="unsupervised-methods.html#cb218-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb218-5"><a href="unsupervised-methods.html#cb218-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(topic, <span class="sc">-</span>gamma)</span></code></pre></div>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="unsupervised-methods.html#cb219-1" aria-hidden="true" tabindex="-1"></a>inaugural_lda10_toptopics <span class="sc">%&gt;%</span></span>
-<span id="cb219-2"><a href="unsupervised-methods.html#cb219-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">term=</span><span class="fu">reorder</span>(topic, gamma)) <span class="sc">%&gt;%</span></span>
-<span id="cb219-3"><a href="unsupervised-methods.html#cb219-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(topic, gamma, <span class="at">fill=</span><span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb219-4"><a href="unsupervised-methods.html#cb219-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_col</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb219-5"><a href="unsupervised-methods.html#cb219-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
-<span id="cb219-6"><a href="unsupervised-methods.html#cb219-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb219-7"><a href="unsupervised-methods.html#cb219-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb219-8"><a href="unsupervised-methods.html#cb219-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/lda-tidy-graph2-1.png" width="672" /></p>
-<p>Here, we see that in 1929 Hoover talked most often about topic 9 (focusing on government), Biden in 2021 focused on words like ‘us’ and ‘people’, while in 1945 Roosevelt seemed to favour both the people and topics referring to peace. Again, our exact conclusions of course depend on how we interpret the topics.</p>
-</div>
-<div id="seeded-latent-dirichlet-allocation" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Seeded Latent Dirichlet Allocation<a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>An alternative to the above approach is one known as seeded-LDA. This approach uses seed words that can steer the LDA in the right direction. One origin of these seed words can be a dictionary that tells the algorithm which words belong together in various categories. To use it, we will first load the packages and set a seed:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="unsupervised-methods.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seededlda)</span>
-<span id="cb220-2"><a href="unsupervised-methods.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
-<span id="cb220-3"><a href="unsupervised-methods.html#cb220-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-4"><a href="unsupervised-methods.html#cb220-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span></code></pre></div>
-<p>Next, we need to specify a selection of seed words in dictionary form. While we can construct a dictionary ourselves, here we choose to use the Laver and Garry dictionary we saw earlier. We then use this dictionary to run our seeded LDA:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="unsupervised-methods.html#cb221-1" aria-hidden="true" tabindex="-1"></a>dictionary_LaverGarry <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(data_dictionary_LaverGarry)</span>
-<span id="cb221-2"><a href="unsupervised-methods.html#cb221-2" aria-hidden="true" tabindex="-1"></a>seededmodel <span class="ot">&lt;-</span> <span class="fu">textmodel_seededlda</span>(data_inaugural_dfm, <span class="at">dictionary =</span> dictionary_LaverGarry)</span>
-<span id="cb221-3"><a href="unsupervised-methods.html#cb221-3" aria-hidden="true" tabindex="-1"></a><span class="fu">terms</span>(seededmodel, <span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##       CULTURE     ECONOMY       ENVIRONMENT      GROUPS    INSTITUTIONS    
-##  [1,] &quot;people&quot;    &quot;work&quot;        &quot;production&quot;     &quot;women&quot;   &quot;president&quot;     
-##  [2,] &quot;us&quot;        &quot;economic&quot;    &quot;productive&quot;     &quot;race&quot;    &quot;administration&quot;
-##  [3,] &quot;art&quot;       &quot;opportunity&quot; &quot;planet&quot;         &quot;racial&quot;  &quot;continue&quot;      
-##  [4,] &quot;music&quot;     &quot;children&quot;    &quot;population&quot;     &quot;woman&quot;   &quot;office&quot;        
-##  [5,] &quot;operating&quot; &quot;economy&quot;     &quot;products&quot;       &quot;racism&quot;  &quot;executive&quot;     
-##  [6,] &quot;operation&quot; &quot;industrial&quot;  &quot;environment&quot;    &quot;ethnic&quot;  &quot;rule&quot;          
-##  [7,] &quot;new&quot;       &quot;trade&quot;       &quot;clean&quot;          &quot;racing&quot;  &quot;voices&quot;        
-##  [8,] &quot;america&quot;   &quot;confidence&quot;  &quot;productivity&quot;   &quot;day&quot;     &quot;legislation&quot;   
-##  [9,] &quot;nation&quot;    &quot;equal&quot;       &quot;produce&quot;        &quot;body&quot;    &quot;authority&quot;     
-## [10,] &quot;let&quot;       &quot;cost&quot;        &quot;product&quot;        &quot;built&quot;   &quot;democratic&quot;    
-## [11,] &quot;american&quot;  &quot;poverty&quot;     &quot;cleaner&quot;        &quot;fire&quot;    &quot;modern&quot;        
-## [12,] &quot;today&quot;     &quot;care&quot;        &quot;productions&quot;    &quot;task&quot;    &quot;agencies&quot;      
-## [13,] &quot;must&quot;      &quot;welfare&quot;     &quot;produced&quot;       &quot;evil&quot;    &quot;rules&quot;         
-## [14,] &quot;world&quot;     &quot;education&quot;   &quot;cleanse&quot;        &quot;mind&quot;    &quot;election&quot;      
-## [15,] &quot;one&quot;       &quot;commerce&quot;    &quot;productiveness&quot; &quot;spirit&quot;  &quot;sovereignty&quot;   
-## [16,] &quot;know&quot;      &quot;age&quot;         &quot;car&quot;            &quot;whether&quot; &quot;reforms&quot;       
-## [17,] &quot;americans&quot; &quot;health&quot;      &quot;chemical&quot;       &quot;put&quot;     &quot;voice&quot;         
-## [18,] &quot;now&quot;       &quot;private&quot;     &quot;warming&quot;        &quot;speaks&quot;  &quot;elected&quot;       
-## [19,] &quot;time&quot;      &quot;equality&quot;    &quot;depletion&quot;      &quot;serve&quot;   &quot;process&quot;       
-## [20,] &quot;can&quot;       &quot;jobs&quot;        &quot;republic&quot;       &quot;carried&quot; &quot;reform&quot;        
-##       LAW_AND_ORDER   RURAL          URBAN      VALUES        
-##  [1,] &quot;force&quot;         &quot;agriculture&quot;  &quot;town&quot;     &quot;history&quot;     
-##  [2,] &quot;forces&quot;        &quot;feed&quot;         &quot;towns&quot;    &quot;human&quot;       
-##  [3,] &quot;determined&quot;    &quot;agricultural&quot; &quot;story&quot;    &quot;rights&quot;      
-##  [4,] &quot;determination&quot; &quot;farm&quot;         &quot;thank&quot;    &quot;principles&quot;  
-##  [5,] &quot;conviction&quot;    &quot;farms&quot;        &quot;friends&quot;  &quot;past&quot;        
-##  [6,] &quot;court&quot;         &quot;forests&quot;      &quot;young&quot;    &quot;leadership&quot;  
-##  [7,] &quot;determine&quot;     &quot;farmers&quot;      &quot;hear&quot;     &quot;humanity&quot;    
-##  [8,] &quot;terror&quot;        &quot;villages&quot;     &quot;learned&quot;  &quot;maintain&quot;    
-##  [9,] &quot;forced&quot;        &quot;horseback&quot;    &quot;bless&quot;    &quot;preserve&quot;    
-## [10,] &quot;courts&quot;        &quot;farmer&quot;       &quot;prayer&quot;   &quot;defend&quot;      
-## [11,] &quot;dealing&quot;       &quot;countryside&quot;  &quot;must&quot;     &quot;leaders&quot;     
-## [12,] &quot;seize&quot;         &quot;village&quot;      &quot;together&quot; &quot;principle&quot;   
-## [13,] &quot;drugs&quot;         &quot;lanes&quot;        &quot;days&quot;     &quot;proud&quot;       
-## [14,] &quot;officers&quot;      &quot;landscape&quot;    &quot;lost&quot;     &quot;threat&quot;      
-## [15,] &quot;penalties&quot;     &quot;man&quot;          &quot;dreams&quot;   &quot;pride&quot;       
-## [16,] &quot;convictions&quot;   &quot;change&quot;       &quot;protect&quot;  &quot;heritage&quot;    
-## [17,] &quot;guarding&quot;      &quot;light&quot;        &quot;hearts&quot;   &quot;historic&quot;    
-## [18,] &quot;lawless&quot;       &quot;greatness&quot;    &quot;right&quot;    &quot;preserved&quot;   
-## [19,] &quot;illegal&quot;       &quot;hands&quot;        &quot;back&quot;     &quot;integrity&quot;   
-## [20,] &quot;victims&quot;       &quot;friends&quot;      &quot;personal&quot; &quot;preservation&quot;</code></pre>
-<p>Note that using the dictionary has ensured that we only use the categories that occur in the dictionary. This means that we can look at which topics are in each inaugural speech and which terms were most likely for each of the topics. Let us start with the topics first:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="unsupervised-methods.html#cb223-1" aria-hidden="true" tabindex="-1"></a>topics <span class="ot">&lt;-</span> <span class="fu">topics</span>(seededmodel)</span>
-<span id="cb223-2"><a href="unsupervised-methods.html#cb223-2" aria-hidden="true" tabindex="-1"></a>topics_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(topics)</span>
-<span id="cb223-3"><a href="unsupervised-methods.html#cb223-3" aria-hidden="true" tabindex="-1"></a>topics_prop_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">prop.table</span>(topics_table))</span>
-<span id="cb223-4"><a href="unsupervised-methods.html#cb223-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb223-5"><a href="unsupervised-methods.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>topics_prop_table, <span class="fu">aes</span>(<span class="at">x=</span>topics, <span class="at">y=</span>Freq))<span class="sc">+</span></span>
-<span id="cb223-6"><a href="unsupervised-methods.html#cb223-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
-<span id="cb223-7"><a href="unsupervised-methods.html#cb223-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Topics&quot;</span>, <span class="at">y=</span><span class="st">&quot;Topic Percentage&quot;</span>)<span class="sc">+</span></span>
-<span id="cb223-8"><a href="unsupervised-methods.html#cb223-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb223-9"><a href="unsupervised-methods.html#cb223-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb223-10"><a href="unsupervised-methods.html#cb223-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-seededlda-1.png" width="672" /></p>
-<p>Here, we find that Culture was the most favoured topic, followed by the Economy and Values. Finally, we can then have a look at the most likely terms for each topic, sorted by each of the categories in the dictionary:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="unsupervised-methods.html#cb224-1" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> <span class="fu">terms</span>(seededmodel)</span>
-<span id="cb224-2"><a href="unsupervised-methods.html#cb224-2" aria-hidden="true" tabindex="-1"></a>terms_table <span class="ot">&lt;-</span> <span class="fu">ftable</span>(terms)</span>
-<span id="cb224-3"><a href="unsupervised-methods.html#cb224-3" aria-hidden="true" tabindex="-1"></a>terms_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(terms_table)</span>
-<span id="cb224-4"><a href="unsupervised-methods.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(terms_df)</span></code></pre></div>
-<pre><code>##   Var1    Var2      Freq
-## 1    A CULTURE    people
-## 2    B CULTURE        us
-## 3    C CULTURE       art
-## 4    D CULTURE     music
-## 5    E CULTURE operating
-## 6    F CULTURE operation</code></pre>
-<p>Here, we find that in the first cluster (denoted as ‘A’), the word ‘people’ was most likely (from all words that belonged to Culture). Thus, within this cluster, talking about culture often contained references to the people. In the same way, we can make similar observations for the other categories.</p>
-</div>
-<div id="structural-topic-model" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> Structural Topic Model<a href="unsupervised-methods.html#structural-topic-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Besides LDA, various other methods for unsupervised classification exist, such as hierarchical clustering, k-means, and various other mixed membership models. Each of them has its specific advantages and problems, and it often depends on the goal of the researcher to decide which method to use. One new and flexible method is the Structural Topic Model or STM. In R, we can find this method in the <code>stm</code> package <span class="citation">(<a href="#ref-Roberts2019a" role="doc-biblioref">Roberts et al., 2019</a>)</span>.</p>
-<p>One of the outstanding features of stm is <em>topical prevalence</em>. This means that we can include covariates to help identify the correct model and better understand the topics the model generates <span class="citation">(<a href="#ref-Roberts2014a" role="doc-biblioref">Roberts et al., 2014</a>)</span>. For example, we can add information on time to study how topics change over the years; actors on how they differ between different authors; and any other possible variable to see how they differ between them. One of the main advantages of STM is that, unlike in LDA, we are not required to set any parameters in advance. In LDA, these parameters - <span class="math inline">\(\alpha\)</span> (the degree of mixture of topics a document has) and <span class="math inline">\(\beta\)</span> (the degree of mixture of words that a topic has) - have to be set beforehand based on previous knowledge. Yet, this knowledge is not always present and we often need several iterations before we settle upon a correct number. In STM, we use the metadata to set these parameters.</p>
-<br />
-
-<div class="figure"><span style="display:block;" id="fig:stm-diagram"></span>
-<img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/stm-diagram-1.png" alt="Plate diagram for a Structucal Topic Model." width="90%" />
-<p class="caption">
-Figure 9.1: Plate diagram for a Structucal Topic Model.
-</p>
-</div>
-<p><br />
-</p>
-<p>Figure <a href="unsupervised-methods.html#fig:stm-diagram">9.1</a> shows stm in the form of a plate diagram. Here, <span class="math inline">\(X\)</span> refers to the prevalence metadata; <span class="math inline">\(\gamma\)</span>, the metadata weights; <span class="math inline">\(\Sigma\)</span>, the topic covariances; <span class="math inline">\(\theta\)</span>, the document prevalence; <span class="math inline">\(z\)</span>, the per-word topic; <span class="math inline">\(w\)</span>, the observed word; <span class="math inline">\(Y\)</span>, the content metadata; <span class="math inline">\(\beta\)</span>, the topic content; <span class="math inline">\(N\)</span>, the number of words in a document; and <span class="math inline">\(M\)</span>, the number of documents in the corpus.</p>
-<p>To run stm in R, we have to load the package, set a seed, convert our dfm to the stm format and place our documents, vocabulary (the tokens) and any other data in three separate objects (for later convenience):</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="unsupervised-methods.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
-<span id="cb226-2"><a href="unsupervised-methods.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb226-3"><a href="unsupervised-methods.html#cb226-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-4"><a href="unsupervised-methods.html#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb226-5"><a href="unsupervised-methods.html#cb226-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-6"><a href="unsupervised-methods.html#cb226-6" aria-hidden="true" tabindex="-1"></a>data_inaugural_stm <span class="ot">&lt;-</span> <span class="fu">convert</span>(data_inaugural_dfm, <span class="at">to =</span> <span class="st">&quot;stm&quot;</span>)</span>
-<span id="cb226-7"><a href="unsupervised-methods.html#cb226-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-8"><a href="unsupervised-methods.html#cb226-8" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">&lt;-</span> data_inaugural_stm<span class="sc">$</span>documents</span>
-<span id="cb226-9"><a href="unsupervised-methods.html#cb226-9" aria-hidden="true" tabindex="-1"></a>vocabulary <span class="ot">&lt;-</span> data_inaugural_stm<span class="sc">$</span>vocab</span>
-<span id="cb226-10"><a href="unsupervised-methods.html#cb226-10" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> data_inaugural_stm<span class="sc">$</span>meta</span></code></pre></div>
-<p>The first thing we have to do is find the number of topics we need. In the <code>stm</code> package, we can do this by using a function called <code>searchK</code>. Here, we specify a range of values that could include the ‘correct’ number of topics, which we then run and collect. Afterwards, we then look at several goodness-of-fit measures to assess which number of topics (which <em>k</em>) has the best fit for the data. These measures include exclusivity, semantic coherence, held-out likelihood, bound, lbound, and residual dispersion. Here, we run this for 2 to 15 possible topics.</p>
-<p>In our code, we specify our documents, our tokens (the vocabulary), and our meta-data. Moreover, as our prevalence, we include parameters for <code>Year</code> and <code>Party</code>, as we expect the content of the topics to differ between both the Republican and Democratic party, as well as over time:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="unsupervised-methods.html#cb227-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="unsupervised-methods.html#cb228-1" aria-hidden="true" tabindex="-1"></a>findingk <span class="ot">&lt;-</span> <span class="fu">searchK</span>(documents, vocabulary, k, <span class="at">prevalence =</span><span class="sc">~</span> Party <span class="sc">+</span> <span class="fu">s</span>(Year), <span class="at">data =</span> meta, <span class="at">verbose=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="unsupervised-methods.html#cb229-1" aria-hidden="true" tabindex="-1"></a>findingk_results <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="fu">unlist</span>(findingk<span class="sc">$</span>results), <span class="at">nrow=</span><span class="fu">length</span>(<span class="fu">unlist</span>(findingk<span class="sc">$</span>results[<span class="dv">1</span>]))))</span>
-<span id="cb229-2"><a href="unsupervised-methods.html#cb229-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">names</span>(findingk<span class="sc">$</span>results)</span>
-<span id="cb229-3"><a href="unsupervised-methods.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(findingk_results) <span class="ot">&lt;-</span> names</span></code></pre></div>
-<p>Looking at <code>findingk_results</code> we find various values. The first, exclusivity, refers to the occurrence that when words have a high probability under one topic, they have a low probability under others. Related to this is semantic coherence which happens when the most probable words in a topic should occur in the same document. Held-out (or held-out log-likelihood) is the likelihood of our model on data that was not used in the initial estimation (the lower the better), while residuals refer to the difference between a data point and the mean value that the model predicts for that data point (which we want to be 1, indicating a standard distribution). Finally, bound and lbound refer to a model’s internal measure of fit. Here, we will be looking for the number of topics, that balance the exclusivity and the semantic coherence, have a residual around 1, and a low held-out. To make this simpler, we visualise our data. In the first graph we plot all the values, while in the second, we only look at the exclusivity and the semantic coherence (as they are the most important):</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="unsupervised-methods.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb230-2"><a href="unsupervised-methods.html#cb230-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb230-3"><a href="unsupervised-methods.html#cb230-3" aria-hidden="true" tabindex="-1"></a>findingk_melt <span class="ot">&lt;-</span> <span class="fu">melt</span>(findingk_results, <span class="at">id=</span><span class="st">&quot;K&quot;</span>) </span>
-<span id="cb230-4"><a href="unsupervised-methods.html#cb230-4" aria-hidden="true" tabindex="-1"></a>findingk_melt<span class="sc">$</span>variable <span class="ot">&lt;-</span> <span class="fu">as.character</span>(findingk_melt<span class="sc">$</span>variable)</span>
-<span id="cb230-5"><a href="unsupervised-methods.html#cb230-5" aria-hidden="true" tabindex="-1"></a>findingk<span class="sc">$</span>K <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(findingk_results<span class="sc">$</span>K)</span>
-<span id="cb230-6"><a href="unsupervised-methods.html#cb230-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb230-7"><a href="unsupervised-methods.html#cb230-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(findingk_melt, <span class="fu">aes</span>(K, value)) <span class="sc">+</span></span>
-<span id="cb230-8"><a href="unsupervised-methods.html#cb230-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb230-9"><a href="unsupervised-methods.html#cb230-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb230-10"><a href="unsupervised-methods.html#cb230-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="sc">+</span></span>
-<span id="cb230-11"><a href="unsupervised-methods.html#cb230-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-stm-findk-1.png" width="672" /></p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="unsupervised-methods.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(findingk_results, <span class="fu">aes</span>(semcoh, exclus)) <span class="sc">+</span></span>
-<span id="cb231-2"><a href="unsupervised-methods.html#cb231-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb231-3"><a href="unsupervised-methods.html#cb231-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_text</span>(<span class="at">data=</span>findingk_results, <span class="at">label=</span>findingk<span class="sc">$</span>K, <span class="at">nudge_x =</span> <span class="fl">0.15</span>)<span class="sc">+</span></span>
-<span id="cb231-4"><a href="unsupervised-methods.html#cb231-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_x_continuous</span>(<span class="st">&quot;Semantic Coherence&quot;</span>)<span class="sc">+</span></span>
-<span id="cb231-5"><a href="unsupervised-methods.html#cb231-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Exclusivity&quot;</span>)<span class="sc">+</span></span>
-<span id="cb231-6"><a href="unsupervised-methods.html#cb231-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-stm-findk-2.png" width="672" /></p>
-<p>Based on these graphs, we decide upon 8 topics. The main reason for this is that for this number of topics, there is a high semantic coherence given the exclusivity. We can now run our stm model, using spectral initialization and a topical prevalence including both the Party and the Year of the inauguration. Also, we have a look at the topics, and the words with the highest probability attached to them:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="unsupervised-methods.html#cb232-1" aria-hidden="true" tabindex="-1"></a>n_topics <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb232-2"><a href="unsupervised-methods.html#cb232-2" aria-hidden="true" tabindex="-1"></a>output_stm <span class="ot">&lt;-</span> <span class="fu">stm</span>(documents, vocabulary, <span class="at">K =</span> n_topics, <span class="at">prevalence =</span><span class="sc">~</span> Party <span class="sc">+</span> <span class="fu">s</span>(Year), <span class="at">data =</span> meta, <span class="at">init.type =</span> <span class="st">&quot;Spectral&quot;</span>, <span class="at">verbose=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="unsupervised-methods.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(output_stm)</span></code></pre></div>
-<pre><code>## Topic 1 Top Words:
-##       Highest Prob: free, peace, world, shall, freedom, must, faith 
-##       FREX: strive, free, peoples, everywhere, truth, man&#39;s, learned 
-##       Lift: abhorring, absorbing, abstractions, acquire, aggressor, amass, andes 
-##       Score: anguished, productivity, strive, trial, learned, europe, defines 
-## Topic 2 Top Words:
-##       Highest Prob: us, new, world, let, can, people, america 
-##       FREX: let, century, together, new, weapons, voices, abroad 
-##       Lift: 200th, 20th, dawn, explore, micah, moon, music 
-##       Score: attempting, nuclear, let, celebrate, voices, abroad, dawn 
-## Topic 3 Top Words:
-##       Highest Prob: us, must, world, government, people, america, can 
-##       FREX: civilization, republic, experiment, normal, relationship, order, industrial 
-##       Lift: abnormal, acclaim, accompanied, accord, accumulation, acknowledgment, addressing 
-##       Score: accompanied, supreme, regards, deliberate, inspiration, unshaken, righteousness 
-## Topic 4 Top Words:
-##       Highest Prob: us, america, nation, can, must, new, people 
-##       FREX: story, thank, president, defend, everyone, children, america 
-##       Lift: blowing, breeze, democracy&#39;s, january, obama, other&#39;s, page 
-##       Score: allowing, story, breeze, talk, crucial, everyone, virus 
-## Topic 5 Top Words:
-##       Highest Prob: freedom, nation, people, america, government, know, democracy 
-##       FREX: speaks, mind, democracy, liberty, seen, came, millions 
-##       Lift: abreast, absence, admiration, agent, amount, aspires, attempts 
-##       Score: charta, speaks, paint, disaster, mind, defended, seen 
-## Topic 6 Top Words:
-##       Highest Prob: us, must, nation, people, can, new, every 
-##       FREX: generation, journey, union, change, covenant, creed, enduring 
-##       Lift: demanded, mastery, span, storms, absolutism, abundantly, afghanistan 
-##       Score: abundantly, covenant, journey, mastery, storms, demanded, span 
-## Topic 7 Top Words:
-##       Highest Prob: can, world, people, peace, nations, must, government 
-##       FREX: settlement, enforcement, countries, desire, party, international, property 
-##       Lift: aided, eighteenth, abilities, abound, abounding, absurd, acceptance 
-##       Score: abound, enforcement, contributed, settlement, property, major, eighteenth 
-## Topic 8 Top Words:
-##       Highest Prob: upon, government, shall, can, must, great, may 
-##       FREX: army, interstate, negro, executive, tariff, business, proper 
-##       Lift: affected, amendments, antitrust, army, attention, avail, banking 
-##       Score: tariff, interstate, army, negro, policy, proper, business</code></pre>
-<p>Here, we see that the word <code>us</code> is dominant in most topics, making it a candidate for removal as a stop word in a future analysis. Looking closer, we find that the first topic refers to peace, the second, third and seventh to the world, the fourth and sixth to America, and the eighth to the government.</p>
-<p>Finally, we can see whether there is any relation between these topics and any of the parameters we included. Here, let us look at any existing differences between the two parties:</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="unsupervised-methods.html#cb235-1" aria-hidden="true" tabindex="-1"></a>est_assoc_effect <span class="ot">&lt;-</span> <span class="fu">estimateEffect</span>(<span class="sc">~</span>Party, output_stm, <span class="at">metadata =</span> meta, <span class="at">prior=</span><span class="fl">1e-5</span>)</span></code></pre></div>
-<p>While we can visualise this with the <code>plot.estimateEffect</code> option, the visualisation is far from ideal. Thus, let us use some data-wrangling and make the plot ourselves:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="unsupervised-methods.html#cb236-1" aria-hidden="true" tabindex="-1"></a>estimate_data <span class="ot">&lt;-</span> <span class="fu">plot.estimateEffect</span>(est_assoc_effect, <span class="st">&quot;Party&quot;</span>, <span class="at">method =</span> <span class="st">&quot;pointestimate&quot;</span>, <span class="at">model =</span> output_stm, <span class="at">omit.plot =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb236-2"><a href="unsupervised-methods.html#cb236-2" aria-hidden="true" tabindex="-1"></a>estimate_graph_means <span class="ot">&lt;-</span> estimate_data<span class="sc">$</span>means</span>
-<span id="cb236-3"><a href="unsupervised-methods.html#cb236-3" aria-hidden="true" tabindex="-1"></a>estimate_graph_means <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">unlist</span>(estimate_graph_means), <span class="at">nrow=</span><span class="fu">length</span>(estimate_graph_means), <span class="at">byrow=</span><span class="cn">TRUE</span>))</span>
-<span id="cb236-4"><a href="unsupervised-methods.html#cb236-4" aria-hidden="true" tabindex="-1"></a>estimate_graph_means <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Republicans&quot;</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="st">&quot;Democrats&quot;</span>, <span class="dv">8</span>)), <span class="fu">c</span>(estimate_graph_means<span class="sc">$</span>X1,estimate_graph_means<span class="sc">$</span>X2))</span>
-<span id="cb236-5"><a href="unsupervised-methods.html#cb236-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb236-6"><a href="unsupervised-methods.html#cb236-6" aria-hidden="true" tabindex="-1"></a>estimate_graph_cis <span class="ot">&lt;-</span> estimate_data<span class="sc">$</span>cis</span>
-<span id="cb236-7"><a href="unsupervised-methods.html#cb236-7" aria-hidden="true" tabindex="-1"></a>estimate_graph_cis <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">unlist</span>(estimate_graph_cis), <span class="at">nrow=</span><span class="fu">length</span>(estimate_graph_cis), <span class="at">byrow=</span><span class="cn">TRUE</span>))</span>
-<span id="cb236-8"><a href="unsupervised-methods.html#cb236-8" aria-hidden="true" tabindex="-1"></a>estimate_graph_cis <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">c</span>(estimate_graph_cis<span class="sc">$</span>X1,estimate_graph_cis<span class="sc">$</span>X3), <span class="fu">c</span>(estimate_graph_cis<span class="sc">$</span>X2,estimate_graph_cis<span class="sc">$</span>X4))</span>
-<span id="cb236-9"><a href="unsupervised-methods.html#cb236-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb236-10"><a href="unsupervised-methods.html#cb236-10" aria-hidden="true" tabindex="-1"></a>Topic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>, <span class="st">&quot;Topic 2&quot;</span>, <span class="st">&quot;Topic 3&quot;</span>, <span class="st">&quot;Topic 4&quot;</span>,<span class="st">&quot;Topic 5&quot;</span>, <span class="st">&quot;Topic 6&quot;</span>, <span class="st">&quot;Topic 7&quot;</span>, <span class="st">&quot;Topic 8&quot;</span>, <span class="st">&quot;Topic 1&quot;</span>, <span class="st">&quot;Topic 2&quot;</span>, <span class="st">&quot;Topic 3&quot;</span>, <span class="st">&quot;Topic 4&quot;</span>,<span class="st">&quot;Topic 5&quot;</span>, <span class="st">&quot;Topic 6&quot;</span>, <span class="st">&quot;Topic 7&quot;</span>, <span class="st">&quot;Topic 8&quot;</span>)</span>
-<span id="cb236-11"><a href="unsupervised-methods.html#cb236-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb236-12"><a href="unsupervised-methods.html#cb236-12" aria-hidden="true" tabindex="-1"></a>estimate_graph <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Topic, estimate_graph_means,estimate_graph_cis)</span>
-<span id="cb236-13"><a href="unsupervised-methods.html#cb236-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(estimate_graph) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Topic&quot;</span>,<span class="st">&quot;Party&quot;</span>,<span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>)</span>
-<span id="cb236-14"><a href="unsupervised-methods.html#cb236-14" aria-hidden="true" tabindex="-1"></a>estimate_graph<span class="sc">$</span>Party <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(estimate_graph<span class="sc">$</span>Party)</span>
-<span id="cb236-15"><a href="unsupervised-methods.html#cb236-15" aria-hidden="true" tabindex="-1"></a>estimate_graph<span class="sc">$</span>Topic <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(estimate_graph<span class="sc">$</span>Topic)</span>
-<span id="cb236-16"><a href="unsupervised-methods.html#cb236-16" aria-hidden="true" tabindex="-1"></a>estimate_graph<span class="sc">$</span>Topic <span class="ot">&lt;-</span> <span class="fu">factor</span>(estimate_graph<span class="sc">$</span>Topic, <span class="at">levels=</span><span class="fu">rev</span>(<span class="fu">levels</span>(estimate_graph<span class="sc">$</span>Topic)))</span></code></pre></div>
-<p>Now, let us plot our intervals:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="unsupervised-methods.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(estimate_graph, <span class="fu">aes</span>(Mean, Topic)) <span class="sc">+</span></span>
-<span id="cb237-2"><a href="unsupervised-methods.html#cb237-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> min, <span class="at">xmax =</span> max, <span class="at">color =</span> Party),</span>
-<span id="cb237-3"><a href="unsupervised-methods.html#cb237-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.3</span>))<span class="sc">+</span></span>
-<span id="cb237-4"><a href="unsupervised-methods.html#cb237-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>,</span>
-<span id="cb237-5"><a href="unsupervised-methods.html#cb237-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">size=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb237-6"><a href="unsupervised-methods.html#cb237-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#0015BC&quot;</span>, <span class="st">&quot;#E9141D&quot;</span>))<span class="sc">+</span></span>
-<span id="cb237-7"><a href="unsupervised-methods.html#cb237-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-stm-intervals-1.png" width="672" /></p>
-<p>Here, we find that while the averages for the topic do seem to differ a little between both of the parties, all the intervals are overlapping, indicating that they are not that different.</p>
-
-</div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="2">
-<div id="ref-Blei2003a" class="csl-entry">
-Blei, D. M., Ng, A. Y., &amp; Jordan, M. I. (2003). Latent dirichlet allocation. <em>Journal of Machine Learning Research</em>, <em>3</em>(Jan), 993–1022.
-</div>
-<div id="ref-Griffiths2004a" class="csl-entry">
-Griffiths, T. L., &amp; Steyvers, M. (2004). Finding scientific topics. <em>Proceedings of the National Academy of Sciences</em>, <em>101</em>(suppl 1), 5228–5235. <a href="https://doi.org/10.1073/pnas.0307752101">https://doi.org/10.1073/pnas.0307752101</a>
-</div>
-<div id="ref-Roberts2019a" class="csl-entry">
-Roberts, M. E., Stewart, B. M., &amp; Tingley, D. (2019). <span class="nocase">stm: An R Package for Structural Topic Models</span>. <em>Journal of Statistical Software</em>, <em>91</em>(2). <a href="https://doi.org/10.18637/jss.v091.i02">https://doi.org/10.18637/jss.v091.i02</a>
-</div>
-<div id="ref-Roberts2014a" class="csl-entry">
-Roberts, M. E., Stewart, B. M., Tingley, D., Lucas, C., Leder-Luis, J., Gadarian, S. K., Albertson, B., &amp; Rand, D. G. (2014). Structural topic models for open-ended survey responses. <em>American Journal of Political Science</em>, <em>58</em>(4), 1064–1082. <a href="https://doi.org/10.1111/ajps.12103">https://doi.org/10.1111/ajps.12103</a>
-</div>
-<div id="ref-Welbers2017a" class="csl-entry">
-Welbers, K., Van Atteveldt, W., &amp; Benoit, K. (2017). <span class="nocase">Text Analysis in R</span>. <em>Communication Methods and Measures</em>, <em>11</em>(4), 245–265. <a href="https://doi.org/10.1080/19312458.2017.1387238">https://doi.org/10.1080/19312458.2017.1387238</a>
-</div>
+<div id="unsupervised-methods" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Unsupervised Methods<a href="unsupervised-methods.html#unsupervised-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Unlike supervised methods, which require labelled data to train a model for classifying or predicting values for new text, unsupervised learning methods in text analysis aim to discover inherent patterns and structures within text data without relying on pre-assigned labels.
+These methods are useful for exploring large unannotated corpora to identify recurring themes (topics), group similar documents (clustering) and reduce the dimensionality of the data.</p>
+<p>Supervised models excel at well-defined classification tasks where labelled data is available, but unsupervised methods allow us to uncover latent structures that we may not have anticipated or would be prohibitively expensive to label.
+This chapter focuses on probabilistic topic modelling, a popular suite of unsupervised methods for identifying abstract ‘topics’ within a body of text.
+Each document is treated as a mixture of these topics, with a word distribution characterising each.
+We will cover Latent Dirichlet Allocation (LDA), seeded LDA, which incorporates prior knowledge, the Structural Topic Model (STM), which allows the inclusion of document metadata to model topic prevalence and content, and Latent Semantic Analysis (LSA) as a dimensionality reduction technique.</p>
+<p>The original document provided a solid introduction to these methods.
+I have expanded upon the explanations of each technique, particularly focusing on the rationale behind key steps and the interpretation of results.
+I have also significantly extended the sections on model validation for LDA, STM, and LSA, as understanding how to evaluate these models is crucial for their practical application.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="supervised-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="texttricks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercises-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="latent-dirichlet-allocation-lda.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-},
-"toolbar": {
-"position": "static"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "toolbar": {
+    "position": "static"
+  }
 });
 });
 </script>
@@ -640,7 +363,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

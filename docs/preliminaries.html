@@ -4,43 +4,42 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Preliminaries | Introduction to Quantitative Text Analysis</title>
-  <meta name="description" content="Theory and Methods for Quantitative Text Analysis" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <title>Chapter 1 Preliminaries | Introduction to Quantitative Text Analysis</title>
+  <meta name="description" content="Chapter 1 Preliminaries | Introduction to Quantitative Text Analysis" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Preliminaries | Introduction to Quantitative Text Analysis" />
+  <meta property="og:title" content="Chapter 1 Preliminaries | Introduction to Quantitative Text Analysis" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Preliminaries | Introduction to Quantitative Text Analysis" />
+  <meta name="twitter:title" content="Chapter 1 Preliminaries | Introduction to Quantitative Text Analysis" />
   
-  <meta name="twitter:description" content="Theory and Methods for Quantitative Text Analysis" />
+  
   
 
-<meta name="author" content="Kostas Gemenis &amp; Bastiaan Bruinsma" />
+<meta name="author" content="Kostas Gemenis and Bastiaan Bruinsma" />
 
 
-<meta name="date" content="2022-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reliability-validity.html"/>
-<link rel="next" href="dictionary-analysis.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="installing-r.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,22 +48,14 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.17/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -74,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -100,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -113,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -127,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -151,7 +146,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -168,73 +163,105 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome!</a></li>
-<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a>
+<li class="chapter" data-level="1" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#r-on-windows"><i class="fa fa-check"></i><b>1.1</b> R on Windows</a></li>
-<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#r-on-linux"><i class="fa fa-check"></i><b>1.2</b> R on Linux</a></li>
-<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#r-on-macos"><i class="fa fa-check"></i><b>1.3</b> R on macOS</a></li>
-<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#r-in-the-cloud"><i class="fa fa-check"></i><b>1.4</b> R in the Cloud</a></li>
+<li class="chapter" data-level="1.1" data-path="installing-r.html"><a href="installing-r.html"><i class="fa fa-check"></i><b>1.1</b> Installing R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="installing-r.html"><a href="installing-r.html#windows"><i class="fa fa-check"></i><b>1.1.1</b> Windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="installing-r.html"><a href="installing-r.html#linux"><i class="fa fa-check"></i><b>1.1.2</b> Linux</a></li>
+<li class="chapter" data-level="1.1.3" data-path="installing-r.html"><a href="installing-r.html#macos"><i class="fa fa-check"></i><b>1.1.3</b> macOS</a></li>
+<li class="chapter" data-level="1.1.4" data-path="installing-r.html"><a href="installing-r.html#cloud"><i class="fa fa-check"></i><b>1.1.4</b> Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>2</b> Installing Packages</a>
+<li class="chapter" data-level="1.2" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>1.2</b> Installing Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-cran"><i class="fa fa-check"></i><b>2.1</b> Installing from CRAN</a></li>
-<li class="chapter" data-level="2.2" data-path="installing-packages.html"><a href="installing-packages.html#installing-from-github"><i class="fa fa-check"></i><b>2.2</b> Installing from GitHub</a></li>
-<li class="chapter" data-level="2.3" data-path="installing-packages.html"><a href="installing-packages.html#packages-for-quantitative-text-analysis-in-r"><i class="fa fa-check"></i><b>2.3</b> Packages for Quantitative Text Analysis in R</a></li>
-<li class="chapter" data-level="2.4" data-path="installing-packages.html"><a href="installing-packages.html#issues-bugs-and-errors"><i class="fa fa-check"></i><b>2.4</b> Issues, Bugs and Errors</a></li>
+<li class="chapter" data-level="1.2.1" data-path="installing-packages.html"><a href="installing-packages.html#cran"><i class="fa fa-check"></i><b>1.2.1</b> CRAN</a></li>
+<li class="chapter" data-level="1.2.2" data-path="installing-packages.html"><a href="installing-packages.html#github"><i class="fa fa-check"></i><b>1.2.2</b> GitHub</a></li>
+<li class="chapter" data-level="1.2.3" data-path="installing-packages.html"><a href="installing-packages.html#writing-packages"><i class="fa fa-check"></i><b>1.2.3</b> Writing Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i><b>3</b> Importing Data</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="importing-data.html"><a href="importing-data.html#text-in-r"><i class="fa fa-check"></i><b>3.1</b> Text in R</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-data.html"><a href="importing-data.html#import-.txt-files"><i class="fa fa-check"></i><b>3.2</b> Import .txt Files</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-data.html"><a href="importing-data.html#import-.pdf-files"><i class="fa fa-check"></i><b>3.3</b> Import .pdf Files</a></li>
-<li class="chapter" data-level="3.4" data-path="importing-data.html"><a href="importing-data.html#import-.csv-files"><i class="fa fa-check"></i><b>3.4</b> Import .csv Files</a></li>
-<li class="chapter" data-level="3.5" data-path="importing-data.html"><a href="importing-data.html#import-from-an-api"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
-<li class="chapter" data-level="3.6" data-path="importing-data.html"><a href="importing-data.html#import-using-web-scraping"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="1.3" data-path="required.html"><a href="required.html"><i class="fa fa-check"></i><b>1.3</b> Required Packages</a></li>
+<li class="chapter" data-level="1.4" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>1.4</b> Troubleshooting</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="reliability-validity.html"><a href="reliability-validity.html"><i class="fa fa-check"></i><b>4</b> Reliability and Validity</a>
+<li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="reliability-validity.html"><a href="reliability-validity.html#inter-coder-agreement"><i class="fa fa-check"></i><b>4.1</b> Inter-Coder Agreement</a></li>
-<li class="chapter" data-level="4.2" data-path="reliability-validity.html"><a href="reliability-validity.html#visualizing-quality"><i class="fa fa-check"></i><b>4.2</b> Visualizing Quality</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="preliminaries.html"><a href="preliminaries.html"><i class="fa fa-check"></i><b>5</b> Preliminaries</a>
+<li class="chapter" data-level="2.1" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>2.1</b> Concepts</a></li>
+<li class="chapter" data-level="2.2" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>2.2</b> Workflow</a></li>
+<li class="chapter" data-level="2.3" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>2.3</b> Validation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="preliminaries.html"><a href="preliminaries.html#the-corpus"><i class="fa fa-check"></i><b>5.1</b> The Corpus</a></li>
-<li class="chapter" data-level="5.2" data-path="preliminaries.html"><a href="preliminaries.html#keywords-in-context"><i class="fa fa-check"></i><b>5.2</b> Keywords in Context</a></li>
-<li class="chapter" data-level="5.3" data-path="preliminaries.html"><a href="preliminaries.html#visualisations-and-descriptives"><i class="fa fa-check"></i><b>5.3</b> Visualisations and Descriptives</a></li>
-<li class="chapter" data-level="5.4" data-path="preliminaries.html"><a href="preliminaries.html#text-statistics"><i class="fa fa-check"></i><b>5.4</b> Text Statistics</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>6</b> Dictionary Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#classical-dictionary-analysis"><i class="fa fa-check"></i><b>6.1</b> Classical Dictionary Analysis</a></li>
-<li class="chapter" data-level="6.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>6.2</b> Sentiment Analysis</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>6.2.1</b> Movie Reviews</a></li>
-<li class="chapter" data-level="6.2.2" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html#twitter"><i class="fa fa-check"></i><b>6.2.2</b> Twitter</a></li>
+<li class="chapter" data-level="2.3.1" data-path="validation.html"><a href="validation.html#validity"><i class="fa fa-check"></i><b>2.3.1</b> Validity</a></li>
+<li class="chapter" data-level="2.3.2" data-path="validation.html"><a href="validation.html#reliability"><i class="fa fa-check"></i><b>2.3.2</b> Reliability</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>7</b> Scaling Methods</a>
+<li class="chapter" data-level="3" data-path="import.html"><a href="import.html"><i class="fa fa-check"></i><b>3</b> Text in R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="scaling.html"><a href="scaling.html#wordscores"><i class="fa fa-check"></i><b>7.1</b> Wordscores</a></li>
-<li class="chapter" data-level="7.2" data-path="scaling.html"><a href="scaling.html#wordfish"><i class="fa fa-check"></i><b>7.2</b> Wordfish</a></li>
-<li class="chapter" data-level="7.3" data-path="scaling.html"><a href="scaling.html#correspondence-analysis"><i class="fa fa-check"></i><b>7.3</b> Correspondence Analysis</a></li>
+<li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3.1</b> Basics</a></li>
+<li class="chapter" data-level="3.2" data-path="import-.html"><a href="import-.html"><i class="fa fa-check"></i><b>3.2</b> Import .txt</a></li>
+<li class="chapter" data-level="3.3" data-path="import-.html"><a href="import-.html#import-.pdf"><i class="fa fa-check"></i><b>3.3</b> Import .pdf</a></li>
+<li class="chapter" data-level="3.4" data-path="import-.html"><a href="import-.html#import-.csv"><i class="fa fa-check"></i><b>3.4</b> Import .csv</a></li>
+<li class="chapter" data-level="3.5" data-path="import-from-an-api.html"><a href="import-from-an-api.html"><i class="fa fa-check"></i><b>3.5</b> Import from an API</a></li>
+<li class="chapter" data-level="3.6" data-path="import-using-web-scraping.html"><a href="import-using-web-scraping.html"><i class="fa fa-check"></i><b>3.6</b> Import using Web Scraping</a></li>
+<li class="chapter" data-level="3.7" data-path="import-json-and-xml.html"><a href="import-json-and-xml.html"><i class="fa fa-check"></i><b>3.7</b> Import JSON and XML</a></li>
+<li class="chapter" data-level="3.8" data-path="import-from-databases.html"><a href="import-from-databases.html"><i class="fa fa-check"></i><b>3.8</b> Import from Databases</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>8</b> Supervised Methods</a>
+<li class="chapter" data-level="4" data-path="describe.html"><a href="describe.html"><i class="fa fa-check"></i><b>4</b> Describe</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="supervised-methods.html"><a href="supervised-methods.html#support-vector-machines"><i class="fa fa-check"></i><b>8.1</b> Support Vector Machines</a>
+<li class="chapter" data-level="4.1" data-path="corpus-and-dfm.html"><a href="corpus-and-dfm.html"><i class="fa fa-check"></i><b>4.1</b> Corpus and DFM</a></li>
+<li class="chapter" data-level="4.2" data-path="text-pre-processing.html"><a href="text-pre-processing.html"><i class="fa fa-check"></i><b>4.2</b> Text Pre-processing</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-rtexttools"><i class="fa fa-check"></i><b>8.1.1</b> SVM with RTextTools</a></li>
-<li class="chapter" data-level="8.1.2" data-path="supervised-methods.html"><a href="supervised-methods.html#svm-with-quanteda"><i class="fa fa-check"></i><b>8.1.2</b> SVM with Quanteda</a></li>
+<li class="chapter" data-level="4.2.1" data-path="text-pre-processing.html"><a href="text-pre-processing.html#tokenisation-and-initial-cleaning"><i class="fa fa-check"></i><b>4.2.1</b> Tokenisation and Initial Cleaning</a></li>
+<li class="chapter" data-level="4.2.2" data-path="text-pre-processing.html"><a href="text-pre-processing.html#lower-casing"><i class="fa fa-check"></i><b>4.2.2</b> Lower-casing</a></li>
+<li class="chapter" data-level="4.2.3" data-path="text-pre-processing.html"><a href="text-pre-processing.html#stopword-removal"><i class="fa fa-check"></i><b>4.2.3</b> Stopword Removal</a></li>
+<li class="chapter" data-level="4.2.4" data-path="text-pre-processing.html"><a href="text-pre-processing.html#n-grams-and-collocations"><i class="fa fa-check"></i><b>4.2.4</b> N-grams and Collocations</a></li>
+<li class="chapter" data-level="4.2.5" data-path="text-pre-processing.html"><a href="text-pre-processing.html#stemming-and-lemmatisation"><i class="fa fa-check"></i><b>4.2.5</b> Stemming and Lemmatisation</a></li>
+<li class="chapter" data-level="4.2.6" data-path="text-pre-processing.html"><a href="text-pre-processing.html#removing-sparse-features-dfm-trimming"><i class="fa fa-check"></i><b>4.2.6</b> Removing Sparse Features (DFM Trimming)</a></li>
+<li class="chapter" data-level="4.2.7" data-path="text-pre-processing.html"><a href="text-pre-processing.html#additional-pre-processing"><i class="fa fa-check"></i><b>4.2.7</b> Additional Pre-Processing</a></li>
+<li class="chapter" data-level="4.2.8" data-path="text-pre-processing.html"><a href="text-pre-processing.html#evaluating-pre-processing"><i class="fa fa-check"></i><b>4.2.8</b> Evaluating Pre-Processing</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="supervised-methods.html"><a href="supervised-methods.html#naive-bayes"><i class="fa fa-check"></i><b>8.2</b> Naive Bayes</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>9</b> Unsupervised Methods</a>
+<li class="chapter" data-level="4.3" data-path="descriptives-and-visualisations.html"><a href="descriptives-and-visualisations.html"><i class="fa fa-check"></i><b>4.3</b> Descriptives and Visualisations</a></li>
+<li class="chapter" data-level="4.4" data-path="text-statistics.html"><a href="text-statistics.html"><i class="fa fa-check"></i><b>4.4</b> Text Statistics</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.1</b> Latent Dirichlet Allocation</a></li>
-<li class="chapter" data-level="9.2" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#seeded-latent-dirichlet-allocation"><i class="fa fa-check"></i><b>9.2</b> Seeded Latent Dirichlet Allocation</a></li>
-<li class="chapter" data-level="9.3" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html#structural-topic-model"><i class="fa fa-check"></i><b>9.3</b> Structural Topic Model</a></li>
+<li class="chapter" data-level="4.4.1" data-path="text-statistics.html"><a href="text-statistics.html#summary"><i class="fa fa-check"></i><b>4.4.1</b> Summary</a></li>
+<li class="chapter" data-level="4.4.2" data-path="text-statistics.html"><a href="text-statistics.html#frequencies"><i class="fa fa-check"></i><b>4.4.2</b> Frequencies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="text-statistics.html"><a href="text-statistics.html#lexical-diversity"><i class="fa fa-check"></i><b>4.4.3</b> Lexical diversity</a></li>
+<li class="chapter" data-level="4.4.4" data-path="text-statistics.html"><a href="text-statistics.html#readability"><i class="fa fa-check"></i><b>4.4.4</b> Readability</a></li>
+<li class="chapter" data-level="4.4.5" data-path="text-statistics.html"><a href="text-statistics.html#similarity-and-distance"><i class="fa fa-check"></i><b>4.4.5</b> Similarity and Distance</a></li>
+<li class="chapter" data-level="4.4.6" data-path="text-statistics.html"><a href="text-statistics.html#keyness"><i class="fa fa-check"></i><b>4.4.6</b> Keyness</a></li>
+<li class="chapter" data-level="4.4.7" data-path="text-statistics.html"><a href="text-statistics.html#entropy"><i class="fa fa-check"></i><b>4.4.7</b> Entropy</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="texttricks.html"><a href="texttricks.html"><i class="fa fa-check"></i><b>10</b> Texttricks</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4.5" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="dictionary-analysis.html"><a href="dictionary-analysis.html"><i class="fa fa-check"></i><b>5</b> Dictionary Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="classical-dictionary-analysis.html"><a href="classical-dictionary-analysis.html"><i class="fa fa-check"></i><b>5.1</b> Classical Dictionary Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>5.2</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#movie-reviews"><i class="fa fa-check"></i><b>5.2.1</b> Movie Reviews</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#twitter"><i class="fa fa-check"></i><b>5.2.2</b> Twitter</a></li>
+<li class="chapter" data-level="5.2.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#vader"><i class="fa fa-check"></i><b>5.2.3</b> VADER</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="scaling.html"><a href="scaling.html"><i class="fa fa-check"></i><b>6</b> Scaling Methods</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="wordscores.html"><a href="wordscores.html"><i class="fa fa-check"></i><b>6.1</b> Wordscores</a></li>
+<li class="chapter" data-level="6.2" data-path="wordfish.html"><a href="wordfish.html"><i class="fa fa-check"></i><b>6.2</b> Wordfish</a></li>
+<li class="chapter" data-level="6.3" data-path="correspondence-analysis.html"><a href="correspondence-analysis.html"><i class="fa fa-check"></i><b>6.3</b> Correspondence Analysis</a></li>
+<li class="chapter" data-level="6.4" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="supervised-methods.html"><a href="supervised-methods.html"><i class="fa fa-check"></i><b>7</b> Supervised Methods</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="support-vector-machines-svm.html"><a href="support-vector-machines-svm.html"><i class="fa fa-check"></i><b>7.1</b> Support Vector Machines (SVM)</a></li>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7.2</b> Logistic Regression</a></li>
+<li class="chapter" data-level="7.3" data-path="naive-bayes-nb.html"><a href="naive-bayes-nb.html"><i class="fa fa-check"></i><b>7.3</b> Naive Bayes (NB)</a></li>
+<li class="chapter" data-level="7.4" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>7.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="unsupervised-methods.html"><a href="unsupervised-methods.html"><i class="fa fa-check"></i><b>8</b> Unsupervised Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="latent-dirichlet-allocation-lda.html"><a href="latent-dirichlet-allocation-lda.html"><i class="fa fa-check"></i><b>8.1</b> Latent Dirichlet Allocation (LDA)</a></li>
+<li class="chapter" data-level="8.2" data-path="seeded-latent-dirichlet-allocation-slda.html"><a href="seeded-latent-dirichlet-allocation-slda.html"><i class="fa fa-check"></i><b>8.2</b> Seeded Latent Dirichlet Allocation (sLDA)</a></li>
+<li class="chapter" data-level="8.3" data-path="structural-topic-model-stm.html"><a href="structural-topic-model-stm.html"><i class="fa fa-check"></i><b>8.3</b> Structural Topic Model (STM)</a></li>
+<li class="chapter" data-level="8.4" data-path="latent-semantic-analysis-lsa.html"><a href="latent-semantic-analysis-lsa.html"><i class="fa fa-check"></i><b>8.4</b> Latent Semantic Analysis (LSA)</a></li>
+<li class="chapter" data-level="8.5" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="bastiaan.bruinsma@gmail.com" target="blank">Bastiaan Bruinsma</a></li>
 
@@ -255,255 +282,69 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preliminaries" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Preliminaries<a href="preliminaries.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Before we start with any kind of analysis, it pays to have a brief look at the preliminaries first. The goal of these preliminaries is to give us a better understanding of <em>what</em> our texts are about, who their authors are, and what we can expect to find in them. This is necessary for us to know our data. Not only is it a standard academic practice to know your data well, but it also helps us to decide if any results we will encounter later on do make sense. Here, we look at three different preliminaries: keywords-in-context, visualisations, and textual statistics. Before that though, we will have a brief look at the idea of the <em>corpus</em>, as it is central to the idea of how <code>quanteda</code> works.</p>
-<div id="the-corpus" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> The Corpus<a href="preliminaries.html#the-corpus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Within <code>quanteda</code>, the main way to store documents is in the form of a <code>corpus</code> object. This object contains all the information that comes with the texts and does not change during our analysis. Instead, we make copies of the main corpus, change them into the type we need, and run our analyses on them. The advantage of this is that we always can go back to our original data.</p>
-<p>Most often our data is in .txt format (as we saw in Chapter <a href="importing-data.html#importing-data">3</a>). If we then set the folder in which we have our texts as our <code>txt_directory</code>, we can read in all our files as such:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="preliminaries.html#cb58-1" aria-hidden="true" tabindex="-1"></a>txt_directory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">getwd</span>(), <span class="st">&quot;/Texts&quot;</span>)</span>
-<span id="cb58-2"><a href="preliminaries.html#cb58-2" aria-hidden="true" tabindex="-1"></a>data_texts <span class="ot">&lt;-</span> <span class="fu">readtext</span>(<span class="fu">paste0</span>(txt_directory, <span class="st">&quot;*&quot;</span>), <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span></code></pre></div>
-<p>Given that the <code>readtext</code> package is co-authored by those who wrote the <code>quanteda</code> package, we can easily transform the object generated by <code>readtext</code> (which is a simple data-frame with a <code>doc_id</code> and a <code>text</code> column) into a corpus. Note that you can construct such a dataframe yourselves using other methods as well. Just ensure that it has <code>doc_id</code> and <code>text</code> as column names. Then transform it into a corpus:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="preliminaries.html#cb59-1" aria-hidden="true" tabindex="-1"></a>corpus_texts <span class="ot">&lt;-</span> <span class="fu">corpus</span>(data_texts)</span></code></pre></div>
-<p>Apart from importing texts ourselves, <code>quanteda</code> contains several corpora as well. Here, we use one of these, which contains the inaugural speeches of all the US Presidents. For this, we first have to load the main package and then load the data into R:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="preliminaries.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb60-2"><a href="preliminaries.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-3"><a href="preliminaries.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(data_corpus_inaugural)</span>
-<span id="cb60-4"><a href="preliminaries.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_corpus_inaugural)</span></code></pre></div>
-<pre><code>## Corpus consisting of 6 documents and 4 docvars.
-## 1789-Washington :
-## &quot;Fellow-Citizens of the Senate and of the House of Representa...&quot;
-## 
-## 1793-Washington :
-## &quot;Fellow citizens, I am again called upon by the voice of my c...&quot;
-## 
-## 1797-Adams :
-## &quot;When it was first perceived, in early times, that no middle ...&quot;
-## 
-## 1801-Jefferson :
-## &quot;Friends and Fellow Citizens: Called upon to undertake the du...&quot;
-## 
-## 1805-Jefferson :
-## &quot;Proceeding, fellow citizens, to that qualification which the...&quot;
-## 
-## 1809-Madison :
-## &quot;Unwilling to depart from examples of the most revered author...&quot;</code></pre>
-<p>You should now see the corpus appear in the <strong>Environment</strong> tab. If you click on it, you can see, amongst others, that the corpus comes with information on the Year of the release of the speech and the president it belongs to. As the corpus is quite large, we make it a bit more manageable by only selecting the speeches from 1900 onwards. We can do this by using the <code>corpus_subset</code> command for both:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="preliminaries.html#cb62-1" aria-hidden="true" tabindex="-1"></a>corpus_inaugural <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(data_corpus_inaugural, Year <span class="sc">&gt;</span> <span class="dv">1900</span>)</span></code></pre></div>
-<p>Now we have our corpus, we can start with the analysis. As noted, we try not to carry out any analysis on the corpus itself. Instead, we keep it as it is and work on its copies. Often, this means transforming the data into another shape. One of the more popular shapes is the <em>data frequency matrix</em> (dfm). This is a matrix that contains the documents in the rows and the word counts for each word in the columns.</p>
-<p>Before we can do so, we have to split up our texts into unique words. To do this, we first have to construct a <code>tokens</code> object. In the command that we use to do this, we can specify how we want to split our texts (here we use the standard option) and how we want to clean our data. For example, we can specify that we want to convert all the texts into lowercase and remove any numbers and special characters.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="preliminaries.html#cb63-1" aria-hidden="true" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb63-2"><a href="preliminaries.html#cb63-2" aria-hidden="true" tabindex="-1"></a> corpus_inaugural,</span>
-<span id="cb63-3"><a href="preliminaries.html#cb63-3" aria-hidden="true" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
-<span id="cb63-4"><a href="preliminaries.html#cb63-4" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-5"><a href="preliminaries.html#cb63-5" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-6"><a href="preliminaries.html#cb63-6" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-7"><a href="preliminaries.html#cb63-7" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-8"><a href="preliminaries.html#cb63-8" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-9"><a href="preliminaries.html#cb63-9" aria-hidden="true" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb63-10"><a href="preliminaries.html#cb63-10" aria-hidden="true" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb63-11"><a href="preliminaries.html#cb63-11" aria-hidden="true" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb63-12"><a href="preliminaries.html#cb63-12" aria-hidden="true" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb63-13"><a href="preliminaries.html#cb63-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>We can also remove certain stopwords so that words like “and” or “the” do not influence our analysis too much. We can either specify these words ourselves or we can use a list that is already present in R. To see this list, type <code>stopwords("english")</code> in the console. Stopwords for other languages are also available (such as German, French and Spanish). There are even more stopwords in the <code>stopwords</code> package, which works well with <code>quanteda</code>. For now, we will use the English ones. As all the stopwords here are lower-case, we will have to lower case our words as well:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="preliminaries.html#cb64-1" aria-hidden="true" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_inaugural_tokens, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb64-2"><a href="preliminaries.html#cb64-2" aria-hidden="true" tabindex="-1"></a>data_inaugural_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_inaugural_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span></code></pre></div>
-<p>Then, we can construct our dfm:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="preliminaries.html#cb65-1" aria-hidden="true" tabindex="-1"></a>data_inaugural_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_inaugural_tokens)</span></code></pre></div>
-</div>
-<div id="keywords-in-context" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Keywords in Context<a href="preliminaries.html#keywords-in-context" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>One simple - but effective - way to learn more about our texts is by looking at keywords-in-context (kwic). Here, we look at with which other words a certain word appears in our texts. This is also known as looking at the <em>concordance</em> of our text. To do so is easy with our tokens data frame. Let’s take all those words that start with ‘secure’ and look at which three words occur before and after this word. We can then run:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="preliminaries.html#cb66-1" aria-hidden="true" tabindex="-1"></a>tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb66-2"><a href="preliminaries.html#cb66-2" aria-hidden="true" tabindex="-1"></a> corpus_inaugural,</span>
-<span id="cb66-3"><a href="preliminaries.html#cb66-3" aria-hidden="true" tabindex="-1"></a> <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
-<span id="cb66-4"><a href="preliminaries.html#cb66-4" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-5"><a href="preliminaries.html#cb66-5" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-6"><a href="preliminaries.html#cb66-6" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-7"><a href="preliminaries.html#cb66-7" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-8"><a href="preliminaries.html#cb66-8" aria-hidden="true" tabindex="-1"></a> <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-9"><a href="preliminaries.html#cb66-9" aria-hidden="true" tabindex="-1"></a> <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb66-10"><a href="preliminaries.html#cb66-10" aria-hidden="true" tabindex="-1"></a> <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb66-11"><a href="preliminaries.html#cb66-11" aria-hidden="true" tabindex="-1"></a> <span class="at">padding =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb66-12"><a href="preliminaries.html#cb66-12" aria-hidden="true" tabindex="-1"></a> <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb66-13"><a href="preliminaries.html#cb66-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Creating a tokens object from a corpus input...</code></pre>
-<pre><code>##  ...starting tokenization</code></pre>
-<pre><code>##  ...1901-McKinley to 2021-Biden</code></pre>
-<pre><code>##  ...preserving hyphens</code></pre>
-<pre><code>##  ...preserving social media tags (#, @)</code></pre>
-<pre><code>##  ...segmenting into words</code></pre>
-<pre><code>##  ...7,013 unique types</code></pre>
-<pre><code>##  ...removing separators, punctuation, symbols, numbers, URLs</code></pre>
-<pre><code>##  ...complete, elapsed time: 0.111 seconds.</code></pre>
-<pre><code>## Finished constructing tokens from 31 documents.</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="preliminaries.html#cb77-1" aria-hidden="true" tabindex="-1"></a>kwic_output <span class="ot">&lt;-</span> <span class="fu">kwic</span>(tokens, <span class="at">pattern =</span> <span class="st">&quot;secure*&quot;</span>, <span class="at">valuetype =</span> <span class="st">&quot;glob&quot;</span>, <span class="at">window =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p>In the outputted object, we find a column labelled <code>pre</code> and another labelled <code>post</code>. These refer to the words that came either before or after the word ’secure*’. We can easily take these out and combine them:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="preliminaries.html#cb78-1" aria-hidden="true" tabindex="-1"></a>text_pre <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>pre</span>
-<span id="cb78-2"><a href="preliminaries.html#cb78-2" aria-hidden="true" tabindex="-1"></a>text_post <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>post</span>
-<span id="cb78-3"><a href="preliminaries.html#cb78-3" aria-hidden="true" tabindex="-1"></a>text_word <span class="ot">&lt;-</span> kwic_output<span class="sc">$</span>keyword</span>
-<span id="cb78-4"><a href="preliminaries.html#cb78-4" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">paste</span>(text_pre, text_word, text_post))</span></code></pre></div>
-<p>We then combine this information with the name of the document it came from so that we know which text the word is from:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="preliminaries.html#cb79-1" aria-hidden="true" tabindex="-1"></a>extracted <span class="ot">&lt;-</span> <span class="fu">cbind</span>(kwic_output<span class="sc">$</span>docname, text)</span>
-<span id="cb79-2"><a href="preliminaries.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(extracted) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;docname&quot;</span>, <span class="st">&quot;text&quot;</span>)</span>
-<span id="cb79-3"><a href="preliminaries.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(extracted)</span></code></pre></div>
-<pre><code>##         docname                                       text
-## 1 1901-McKinley  be adapted to secure a government capable
-## 2     1909-Taft          however and to secure at the same
-## 3     1909-Taft           is needed to secure a more rapid
-## 4     1909-Taft Act This should secure an adequate revenue
-## 5     1909-Taft     of business To secure the needed speed
-## 6     1909-Taft     duties as to secure an adequate income</code></pre>
-</div>
-<div id="visualisations-and-descriptives" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Visualisations and Descriptives<a href="preliminaries.html#visualisations-and-descriptives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Another thing we can do is generate various visualisations to understand our data. One interesting thing can be to see which words occur most often. We can do this using the <code>topfeatures</code> function. For this, we first have to save the 50 most frequently occurring words in our texts (note that there is also the <code>textstat_frequency</code> function in the <code>quanteda.textstats</code> helper package that can do this):</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="preliminaries.html#cb81-1" aria-hidden="true" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">topfeatures</span>(data_inaugural_dfm, <span class="dv">50</span>)</span></code></pre></div>
-<p>We then have to transform this object into a data frame, and sort it by decreasing frequency:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="preliminaries.html#cb82-1" aria-hidden="true" tabindex="-1"></a>features_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">term =</span> <span class="fu">names</span>(features),<span class="at">frequency =</span> <span class="fu">unname</span>(features)))</span>
-<span id="cb82-2"><a href="preliminaries.html#cb82-2" aria-hidden="true" tabindex="-1"></a>features_plot<span class="sc">$</span>term <span class="ot">&lt;-</span> <span class="fu">with</span>(features_plot, <span class="fu">reorder</span>(term, <span class="sc">-</span>frequency))</span></code></pre></div>
-<p>Then we can plot the results:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="preliminaries.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb83-2"><a href="preliminaries.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(features_plot) <span class="sc">+</span> </span>
-<span id="cb83-3"><a href="preliminaries.html#cb83-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>term, <span class="at">y=</span>frequency)) <span class="sc">+</span></span>
-<span id="cb83-4"><a href="preliminaries.html#cb83-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb83-5"><a href="preliminaries.html#cb83-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/topfeatures-ggplot-1.png" width="672" /></p>
-<p>We can also generate word clouds. As these show all the words we have, we will trim our dfm first to remove all those words that occurred less than 30 times. We can do this with the <code>dfm_trim</code> function. Then, we can use this trimmed dfm to generate the word cloud:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="preliminaries.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb84-2"><a href="preliminaries.html#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="preliminaries.html#cb84-3" aria-hidden="true" tabindex="-1"></a>wordcloud_dfm_trim <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(data_inaugural_dfm, <span class="at">min_termfreq =</span> <span class="dv">30</span>)</span>
-<span id="cb84-4"><a href="preliminaries.html#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(wordcloud_dfm_trim)</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/wordcloud-inaugural-1.png" width="672" /></p>
-<p>If we would want to, we can also split up this word cloud based on which words belong to which party. For this, we have to generate a new dfm and within it, specify the groups that well which words belong to which party. Given that we have only Democratic and Republican presidents, we end up with two groups:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="preliminaries.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb85-2"><a href="preliminaries.html#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-3"><a href="preliminaries.html#cb85-3" aria-hidden="true" tabindex="-1"></a>wordcloud_dfm_comp <span class="ot">&lt;-</span> <span class="fu">dfm_group</span>(data_inaugural_dfm, <span class="at">groups =</span> Party)</span>
-<span id="cb85-4"><a href="preliminaries.html#cb85-4" aria-hidden="true" tabindex="-1"></a>wordcloud_dfm_comp <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(wordcloud_dfm_comp, <span class="at">min_termfreq =</span> <span class="dv">20</span>, <span class="at">max_words =</span> <span class="dv">40</span>)</span>
-<span id="cb85-5"><a href="preliminaries.html#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(wordcloud_dfm_comp, <span class="at">comparison =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/wordcloud-comp-inaugural-1.png" width="672" /></p>
-</div>
-<div id="text-statistics" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Text Statistics<a href="preliminaries.html#text-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Finally, <code>quanteda</code> also allows us to calculate quite some textual statistics. These are all collected in the <code>quanteda.textstats</code> helper package. Here, we will look at several of them, starting with a simple overview of our corpus in the terms of a summary. This tells us the number of characters, sentences, tokens, etc. for each of the texts:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="preliminaries.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textstats)</span>
-<span id="cb86-2"><a href="preliminaries.html#cb86-2" aria-hidden="true" tabindex="-1"></a>corpus_summary <span class="ot">&lt;-</span> <span class="fu">textstat_summary</span>(corpus_inaugural)</span></code></pre></div>
-<p>If we want, we can then use this data to make some simple graphs telling us various things about the texts in our corpus. As an example, let’s look at the number of sentences the various presidents put in their speeches:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="preliminaries.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>corpus_summary, <span class="fu">aes</span>(<span class="at">x=</span>document, <span class="at">y=</span>sents, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb87-2"><a href="preliminaries.html#cb87-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb87-3"><a href="preliminaries.html#cb87-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb87-4"><a href="preliminaries.html#cb87-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Number of Characters&quot;</span>)<span class="sc">+</span></span>
-<span id="cb87-5"><a href="preliminaries.html#cb87-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;President/Year&quot;</span>)<span class="sc">+</span></span>
-<span id="cb87-6"><a href="preliminaries.html#cb87-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb87-7"><a href="preliminaries.html#cb87-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-summary-1.png" width="672" /></p>
-<p>Other things we can look at are the readability and lexical diversity of the texts. The former one of these refers to how readable a text is (i.e. how easy or difficult it is to read), while the latter tells us how many different types of words there are in the texts and thus how <em>diverse</em> the text is in word choice and use. Given that there are many ways to calculate both metrics, please have a look at the help file to see which one works best for you. Here, we will use the most popular:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="preliminaries.html#cb88-1" aria-hidden="true" tabindex="-1"></a>corpus_readability <span class="ot">&lt;-</span> <span class="fu">textstat_readability</span>(corpus_inaugural, <span class="at">measure =</span> <span class="fu">c</span>(<span class="st">&quot;Flesch.Kincaid&quot;</span>, <span class="st">&quot;Dale.Chall.old&quot;</span>))</span>
-<span id="cb88-2"><a href="preliminaries.html#cb88-2" aria-hidden="true" tabindex="-1"></a>corpus_lexdiv <span class="ot">&lt;-</span> <span class="fu">textstat_lexdiv</span>(data_inaugural_tokens, <span class="fu">c</span>(<span class="st">&quot;CTTR&quot;</span>, <span class="st">&quot;TTR&quot;</span>, <span class="st">&quot;MATTR&quot;</span>), <span class="at">MATTR_window =</span> <span class="dv">100</span>)</span></code></pre></div>
-<p>As before, we can plot this data in a graph to see how lexical diversity developed over time:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="preliminaries.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>corpus_lexdiv, <span class="fu">aes</span>(<span class="at">x=</span>document, <span class="at">y=</span>CTTR, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb89-2"><a href="preliminaries.html#cb89-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb89-3"><a href="preliminaries.html#cb89-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb89-4"><a href="preliminaries.html#cb89-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Lexical Diversity (CTTR)&quot;</span>)<span class="sc">+</span></span>
-<span id="cb89-5"><a href="preliminaries.html#cb89-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;President/Year&quot;</span>)<span class="sc">+</span></span>
-<span id="cb89-6"><a href="preliminaries.html#cb89-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb89-7"><a href="preliminaries.html#cb89-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-lexdiv-1.png" width="672" /></p>
-<p>Another thing we can do is look at the similarities and distances between documents. With this, we can answer questions such as: how <em>different</em> are these documents from each other? And if different (or similar), how different (or similar)? The idea is that the larger the similarity is, the smaller the distance is as well. A good way to understand the idea of similarity is to consider how many operations you need to perform to change one text into the other. The more “replace” options you have to carry out, the more different the text. As for the distances, it is best to consider the texts as having positions on a Cartesian plane (with positions based on their word counts). The distance between these two points (either Euclidean, Manhattan or other) is then the distance between the texts.</p>
-<p>Let’s start with a look at these similarities (note again that there are many different methods to calculate this):</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="preliminaries.html#cb90-1" aria-hidden="true" tabindex="-1"></a>corpus_similarties <span class="ot">&lt;-</span> <span class="fu">textstat_simil</span>(data_inaugural_dfm, <span class="at">method =</span> <span class="st">&quot;correlation&quot;</span>, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>)</span>
-<span id="cb90-2"><a href="preliminaries.html#cb90-2" aria-hidden="true" tabindex="-1"></a>corpus_similarties <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_similarties)</span></code></pre></div>
-<p>A brief look at these results tells us that the 1981 and 1985 Reagan speeches show the highest degree of similarity, while the
-1945 Roosevelt and 2017 Trump speeches are the most different. Note that while we look here at the documents, we could also look at individual words (set <code>margin="features</code>). For now, let us look at the distances between the documents, choosing the Euclidean distance between the documents as our metric:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="preliminaries.html#cb91-1" aria-hidden="true" tabindex="-1"></a>corpus_distances <span class="ot">&lt;-</span> <span class="fu">textstat_dist</span>(data_inaugural_dfm, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>, <span class="at">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
-<span id="cb91-2"><a href="preliminaries.html#cb91-2" aria-hidden="true" tabindex="-1"></a>corpus_distances_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_distances)</span></code></pre></div>
-<p>Here, we find the 1905 and 1945 Roosevelt speeches (the two different Roosevelts) to be the closest, and the 1909 Taft and 1997 Clinton speeches to be furthest apart. If we want to, we can even convert this data into a dendrogram. We do this by taking the information on the distances out of the <code>corpus_distances</code> object, make them into a triangular matrix, and plot them:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="preliminaries.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(<span class="fu">as.dist</span>(corpus_distances)), <span class="at">hang =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/plot-distances-1.png" width="672" /></p>
-<p>Here, we can see that - amongst others - the 1909 Taft speech is the ‘farthest’ away from all the others. Also, while the 1981 and 1985 Reagan speeches were very close, the 1997 Clinton speech was closer to Nixon’s speeches than his 1993 speech (which was close to the 2009 and 2013 Obama speeches).</p>
-<p>Finally, let us look at the entropy of our texts. The entropy of a document measures the ‘amount’ of information each letter of the text produces. To get an idea of what this means, consider the ‘e’ is an often occurring letter in an English text, while ‘z’ is not. Thus, a word with a ‘z’ in it, it more unique and thus likely to carry unique and interesting information. The ‘higher’ the entropy of a text, the less ‘information’ is in it:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="preliminaries.html#cb93-1" aria-hidden="true" tabindex="-1"></a>corpus_entropy_docs <span class="ot">&lt;-</span> <span class="fu">textstat_entropy</span>(data_inaugural_dfm, <span class="st">&quot;documents&quot;</span>)</span>
-<span id="cb93-2"><a href="preliminaries.html#cb93-2" aria-hidden="true" tabindex="-1"></a>corpus_entropy_docs <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_entropy_docs)</span></code></pre></div>
-<p>As we can see, the Roosevelt speeches had the lowest entropies, while the 1909 Taft and 1925 Coolidge speeches were the highest (in relative terms). While not as common as the other distance metrics, entropy is sometimes used to measure the similarity between texts. Thus, it can be useful if we want to know the importance of certain words. This is because if a certain word is not important, we could consider it to be a stop word:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="preliminaries.html#cb94-1" aria-hidden="true" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> <span class="fu">textstat_entropy</span>(data_inaugural_dfm, <span class="st">&quot;features&quot;</span>)</span>
-<span id="cb94-2"><a href="preliminaries.html#cb94-2" aria-hidden="true" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corpus_entropy_feats)</span>
-<span id="cb94-3"><a href="preliminaries.html#cb94-3" aria-hidden="true" tabindex="-1"></a>corpus_entropy_feats <span class="ot">&lt;-</span> corpus_entropy_feats[<span class="fu">order</span>(<span class="sc">-</span>corpus_entropy_feats<span class="sc">$</span>entropy),]</span>
-<span id="cb94-4"><a href="preliminaries.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corpus_entropy_feats, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##     feature  entropy
-## 164  people 4.766391
-## 488    life 4.747627
-## 385  nation 4.737440
-## 5     great 4.654392
-## 114     can 4.651396
-## 317  future 4.639222
-## 197   world 4.616910
-## 212    time 4.616614
-## 402    must 4.610073
-## 231     god 4.601430</code></pre>
-<p>Looking at the data, we find that ‘people’, ‘life’ and ‘nation’ have pretty high entropies. This indicates that the words added little to the information of the documents, and would-be candidates for removal from our corpus.</p>
-
-</div>
+<div id="preliminaries" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Preliminaries<a href="preliminaries.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>As all the analyses in this book will be carried out using R, this chapter will discuss what R is, how to install it and which packages are required. If you already have a functioning R environment on your system, you can safely skip this chapter, though be sure to check Section <a href="required.html#required">1.3</a> to ensure that you have all the necessary packages.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reliability-validity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dictionary-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="installing-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-},
-"toolbar": {
-"position": "static"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Introduction to Quantitative Text Analysis.pdf", "Introduction to Quantitative Text Analysis.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "toolbar": {
+    "position": "static"
+  }
 });
 });
 </script>
@@ -514,7 +355,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
