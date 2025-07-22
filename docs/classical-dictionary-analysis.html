@@ -297,7 +297,7 @@ div.csl-indent {
 <span id="cb110-8"><a href="classical-dictionary-analysis.html#cb110-8" tabindex="-1"></a>data_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(data_corpus_ukmanifestos)</span>
 <span id="cb110-9"><a href="classical-dictionary-analysis.html#cb110-9" tabindex="-1"></a>data_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_tokens)</span></code></pre></div>
 <p>First, let us have a look at the dictionary:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="classical-dictionary-analysis.html#cb111-1" tabindex="-1"></a>data_dictionary_LaverGarry <span class="co"># Display information about the dictionary object</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="classical-dictionary-analysis.html#cb111-1" tabindex="-1"></a>data_dictionary_LaverGarry  <span class="co"># Display information about the dictionary object</span></span></code></pre></div>
 <pre><code>## Dictionary object with 9 primary key entries and 2 nested levels.
 ## - [CULTURE]:
 ##   - people, war_in_iraq, civil_war
@@ -398,10 +398,11 @@ div.csl-indent {
 ## - [government]:
 ##   - london, commons, downing street, westminster</code></pre>
 <p>If you compare the structure of <code>dic_list</code> and the resulting <code>dic_created</code> object with that of <code>data_dictionary_LaverGarry</code>, you will see that they have a similar structure, defining categories and associated terms. To then apply our created dictionary to the dfm, we use the same `dfm_lookup’ command:</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="classical-dictionary-analysis.html#cb117-1" tabindex="-1"></a><span class="co"># Ensure the dfm used here is preprocessed with tolower = TRUE if the dictionary is lowercased</span></span>
-<span id="cb117-2"><a href="classical-dictionary-analysis.html#cb117-2" tabindex="-1"></a></span>
-<span id="cb117-3"><a href="classical-dictionary-analysis.html#cb117-3" tabindex="-1"></a>dictionary_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(data_dfm, dic_created)</span>
-<span id="cb117-4"><a href="classical-dictionary-analysis.html#cb117-4" tabindex="-1"></a>dictionary_dfm</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="classical-dictionary-analysis.html#cb117-1" tabindex="-1"></a><span class="co"># Ensure the dfm used here is preprocessed with tolower = TRUE if the</span></span>
+<span id="cb117-2"><a href="classical-dictionary-analysis.html#cb117-2" tabindex="-1"></a><span class="co"># dictionary is lowercased</span></span>
+<span id="cb117-3"><a href="classical-dictionary-analysis.html#cb117-3" tabindex="-1"></a></span>
+<span id="cb117-4"><a href="classical-dictionary-analysis.html#cb117-4" tabindex="-1"></a>dictionary_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_lookup</span>(data_dfm, dic_created)</span>
+<span id="cb117-5"><a href="classical-dictionary-analysis.html#cb117-5" tabindex="-1"></a>dictionary_dfm</span></code></pre></div>
 <pre><code>## Document-feature matrix of: 101 documents, 4 features (16.58% sparse) and 6 docvars.
 ##                      features
 ## docs                  economy war diplomacy government
@@ -416,7 +417,7 @@ div.csl-indent {
 <p>To correctly count multi-word expressions defined in a dictionary, we should apply the dictionary <em>before</em> creating the dfm directly to the <code>tokens' object using the</code>tokens_lookup()<code>function. tokens_lookup()</code> preserves the order of the tokens and can therefore match multi-word phrases. The output of <code>tokens_lookup()</code> is a <code>tokens</code> object where the original tokens are replaced by their dictionary categories. We can then convert the resulting token object into a dfm if necessary:</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="classical-dictionary-analysis.html#cb119-1" tabindex="-1"></a><span class="co"># Use tokens_lookup to handle multi-word expressions</span></span>
 <span id="cb119-2"><a href="classical-dictionary-analysis.html#cb119-2" tabindex="-1"></a></span>
-<span id="cb119-3"><a href="classical-dictionary-analysis.html#cb119-3" tabindex="-1"></a>dictionary_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_lookup</span>(data_tokens, dic_created, <span class="at">exclusive =</span> <span class="cn">FALSE</span>) <span class="co"># exclusive=FALSE allows tokens to match multiple categories if applicable</span></span>
+<span id="cb119-3"><a href="classical-dictionary-analysis.html#cb119-3" tabindex="-1"></a>dictionary_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_lookup</span>(data_tokens, dic_created, <span class="at">exclusive =</span> <span class="cn">FALSE</span>)  <span class="co"># exclusive=FALSE allows tokens to match multiple categories if applicable</span></span>
 <span id="cb119-4"><a href="classical-dictionary-analysis.html#cb119-4" tabindex="-1"></a></span>
 <span id="cb119-5"><a href="classical-dictionary-analysis.html#cb119-5" tabindex="-1"></a>dictionary_tokens_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(dictionary_tokens)</span></code></pre></div>
 <p>Comparing <code>dictionary_created_dfm</code> and <code>dictionary_created_dfm_from_tokens</code> shows that the latter correctly identifies and counts the multi-word expressions defined in <code>dic_created</code>. Using <code>tokens_lookup()</code> with <code>exclusive = FALSE</code> means a token can be assigned to multiple categories if it matches entries in more than one. Setting <code>exclusive = TRUE</code> would assign a token to only one category (the first found match). Furthermore, while we can view the resulting dfm by calling it in the console or viewing it in the environment, we can also convert this dfm into a regular data frame for easier manipulation and visualisation. For this, we can use the <code>convert</code> command included in <code>quanteda</code>:</p>

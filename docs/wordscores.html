@@ -289,37 +289,30 @@ div.csl-indent {
 <p>First, we load the necessary libraries and the corpus of UK party manifestos provided in <code>quanteda.corpora</code>. We then subset the corpus to include only the 2001 and 2005 manifestos of the selected parties. We then create a document feature matrix (DFM) following standard preprocessing steps.</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="wordscores.html#cb147-1" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
 <span id="cb147-2"><a href="wordscores.html#cb147-2" tabindex="-1"></a><span class="fu">library</span>(quanteda.corpora)</span>
-<span id="cb147-3"><a href="wordscores.html#cb147-3" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># For data manipulation</span></span>
-<span id="cb147-4"><a href="wordscores.html#cb147-4" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># For string manipulation</span></span>
-<span id="cb147-5"><a href="wordscores.html#cb147-5" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># For plotting</span></span>
+<span id="cb147-3"><a href="wordscores.html#cb147-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)  <span class="co"># For data manipulation</span></span>
+<span id="cb147-4"><a href="wordscores.html#cb147-4" tabindex="-1"></a><span class="fu">library</span>(stringr)  <span class="co"># For string manipulation</span></span>
+<span id="cb147-5"><a href="wordscores.html#cb147-5" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># For plotting</span></span>
 <span id="cb147-6"><a href="wordscores.html#cb147-6" tabindex="-1"></a></span>
 <span id="cb147-7"><a href="wordscores.html#cb147-7" tabindex="-1"></a><span class="co"># Load the UK manifestos corpus</span></span>
 <span id="cb147-8"><a href="wordscores.html#cb147-8" tabindex="-1"></a><span class="fu">data</span>(data_corpus_ukmanifestos)</span>
 <span id="cb147-9"><a href="wordscores.html#cb147-9" tabindex="-1"></a></span>
 <span id="cb147-10"><a href="wordscores.html#cb147-10" tabindex="-1"></a>corpus_manifestos <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(data_corpus_ukmanifestos, Year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2001</span>, <span class="dv">2005</span>))</span>
-<span id="cb147-11"><a href="wordscores.html#cb147-11" tabindex="-1"></a>corpus_manifestos <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(corpus_manifestos, Party <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Lab&quot;</span>, <span class="st">&quot;LD&quot;</span>, <span class="st">&quot;Con&quot;</span>, <span class="st">&quot;SNP&quot;</span>, <span class="st">&quot;PCy&quot;</span>))</span>
-<span id="cb147-12"><a href="wordscores.html#cb147-12" tabindex="-1"></a></span>
-<span id="cb147-13"><a href="wordscores.html#cb147-13" tabindex="-1"></a><span class="co"># Tokenise the corpus with standard preprocessing</span></span>
-<span id="cb147-14"><a href="wordscores.html#cb147-14" tabindex="-1"></a>data_manifestos_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb147-15"><a href="wordscores.html#cb147-15" tabindex="-1"></a>  corpus_manifestos,</span>
-<span id="cb147-16"><a href="wordscores.html#cb147-16" tabindex="-1"></a>  <span class="at">what =</span> <span class="st">&quot;word&quot;</span>,</span>
-<span id="cb147-17"><a href="wordscores.html#cb147-17" tabindex="-1"></a>  <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb147-18"><a href="wordscores.html#cb147-18" tabindex="-1"></a>  <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb147-19"><a href="wordscores.html#cb147-19" tabindex="-1"></a>  <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb147-20"><a href="wordscores.html#cb147-20" tabindex="-1"></a>  <span class="at">remove_url =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb147-21"><a href="wordscores.html#cb147-21" tabindex="-1"></a>  <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb147-22"><a href="wordscores.html#cb147-22" tabindex="-1"></a>  <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb147-23"><a href="wordscores.html#cb147-23" tabindex="-1"></a>  <span class="at">include_docvars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb147-24"><a href="wordscores.html#cb147-24" tabindex="-1"></a>  <span class="at">padding =</span> <span class="cn">FALSE</span></span>
-<span id="cb147-25"><a href="wordscores.html#cb147-25" tabindex="-1"></a>)</span>
-<span id="cb147-26"><a href="wordscores.html#cb147-26" tabindex="-1"></a></span>
-<span id="cb147-27"><a href="wordscores.html#cb147-27" tabindex="-1"></a>data_manifestos_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_manifestos_tokens) </span>
-<span id="cb147-28"><a href="wordscores.html#cb147-28" tabindex="-1"></a>data_manifestos_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_manifestos_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
-<span id="cb147-29"><a href="wordscores.html#cb147-29" tabindex="-1"></a></span>
-<span id="cb147-30"><a href="wordscores.html#cb147-30" tabindex="-1"></a>data_manifestos_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_manifestos_tokens)</span>
-<span id="cb147-31"><a href="wordscores.html#cb147-31" tabindex="-1"></a></span>
-<span id="cb147-32"><a href="wordscores.html#cb147-32" tabindex="-1"></a><span class="co"># Print the document names to verify the order</span></span>
-<span id="cb147-33"><a href="wordscores.html#cb147-33" tabindex="-1"></a>data_manifestos_dfm<span class="sc">@</span>Dimnames<span class="sc">$</span>docs</span></code></pre></div>
+<span id="cb147-11"><a href="wordscores.html#cb147-11" tabindex="-1"></a>corpus_manifestos <span class="ot">&lt;-</span> <span class="fu">corpus_subset</span>(corpus_manifestos, Party <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Lab&quot;</span>, <span class="st">&quot;LD&quot;</span>, <span class="st">&quot;Con&quot;</span>,</span>
+<span id="cb147-12"><a href="wordscores.html#cb147-12" tabindex="-1"></a>    <span class="st">&quot;SNP&quot;</span>, <span class="st">&quot;PCy&quot;</span>))</span>
+<span id="cb147-13"><a href="wordscores.html#cb147-13" tabindex="-1"></a></span>
+<span id="cb147-14"><a href="wordscores.html#cb147-14" tabindex="-1"></a><span class="co"># Tokenise the corpus with standard preprocessing</span></span>
+<span id="cb147-15"><a href="wordscores.html#cb147-15" tabindex="-1"></a>data_manifestos_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(corpus_manifestos, <span class="at">what =</span> <span class="st">&quot;word&quot;</span>, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb147-16"><a href="wordscores.html#cb147-16" tabindex="-1"></a>    <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>, <span class="at">remove_url =</span> <span class="cn">TRUE</span>, <span class="at">remove_separators =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb147-17"><a href="wordscores.html#cb147-17" tabindex="-1"></a>    <span class="at">split_hyphens =</span> <span class="cn">FALSE</span>, <span class="at">include_docvars =</span> <span class="cn">TRUE</span>, <span class="at">padding =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb147-18"><a href="wordscores.html#cb147-18" tabindex="-1"></a></span>
+<span id="cb147-19"><a href="wordscores.html#cb147-19" tabindex="-1"></a>data_manifestos_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_manifestos_tokens)</span>
+<span id="cb147-20"><a href="wordscores.html#cb147-20" tabindex="-1"></a>data_manifestos_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_manifestos_tokens, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>),</span>
+<span id="cb147-21"><a href="wordscores.html#cb147-21" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb147-22"><a href="wordscores.html#cb147-22" tabindex="-1"></a></span>
+<span id="cb147-23"><a href="wordscores.html#cb147-23" tabindex="-1"></a>data_manifestos_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_manifestos_tokens)</span>
+<span id="cb147-24"><a href="wordscores.html#cb147-24" tabindex="-1"></a></span>
+<span id="cb147-25"><a href="wordscores.html#cb147-25" tabindex="-1"></a><span class="co"># Print the document names to verify the order</span></span>
+<span id="cb147-26"><a href="wordscores.html#cb147-26" tabindex="-1"></a>data_manifestos_dfm<span class="sc">@</span>Dimnames<span class="sc">$</span>docs</span></code></pre></div>
 <pre><code>##  [1] &quot;UK_natl_2001_en_Con&quot; &quot;UK_natl_2001_en_Lab&quot; &quot;UK_natl_2001_en_LD&quot; 
 ##  [4] &quot;UK_natl_2001_en_PCy&quot; &quot;UK_natl_2001_en_SNP&quot; &quot;UK_natl_2005_en_Con&quot;
 ##  [7] &quot;UK_natl_2005_en_Lab&quot; &quot;UK_natl_2005_en_LD&quot;  &quot;UK_natl_2005_en_PCy&quot;
@@ -327,7 +320,7 @@ div.csl-indent {
 <p>The order of the documents in the DFM is essential for assigning reference scores. We can check this by looking at the document names. Next, we set the known scores (from the 2002 Chapel Hill Expert Survey) for the reference texts (the 2001 manifestos). We set the score to ‘NA’ for the new texts (the 2005 manifestos). These scores should match the order of the documents in the DFM. Finally, we run the <code>textmodel_wordscores()</code> function, providing it with the DFM and the vector of reference scores:</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="wordscores.html#cb149-1" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)</span>
 <span id="cb149-2"><a href="wordscores.html#cb149-2" tabindex="-1"></a></span>
-<span id="cb149-3"><a href="wordscores.html#cb149-3" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">7.7</span>, <span class="fl">5.2</span>, <span class="fl">3.8</span>, <span class="fl">3.2</span>, <span class="fl">3.0</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb149-3"><a href="wordscores.html#cb149-3" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">7.7</span>, <span class="fl">5.2</span>, <span class="fl">3.8</span>, <span class="fl">3.2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
 <span id="cb149-4"><a href="wordscores.html#cb149-4" tabindex="-1"></a></span>
 <span id="cb149-5"><a href="wordscores.html#cb149-5" tabindex="-1"></a><span class="co"># Run the Wordscores model</span></span>
 <span id="cb149-6"><a href="wordscores.html#cb149-6" tabindex="-1"></a>ws <span class="ot">&lt;-</span> <span class="fu">textmodel_wordscores</span>(data_manifestos_dfm, scores)</span>
@@ -412,15 +405,14 @@ div.csl-indent {
 <pre><code>## The following object is masked from &#39;package:car&#39;:
 ## 
 ##     Recode</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="wordscores.html#cb163-1" tabindex="-1"></a><span class="co"># Create a data frame with original reference scores, and LBG predicted scores for the 2001 manifestos</span></span>
-<span id="cb163-2"><a href="wordscores.html#cb163-2" tabindex="-1"></a><span class="co"># Select the first 5 rows corresponding to the 2001 manifestos based on the dfm order</span></span>
-<span id="cb163-3"><a href="wordscores.html#cb163-3" tabindex="-1"></a></span>
-<span id="cb163-4"><a href="wordscores.html#cb163-4" tabindex="-1"></a>comparison_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb163-5"><a href="wordscores.html#cb163-5" tabindex="-1"></a>  <span class="at">original_scores =</span> scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],</span>
-<span id="cb163-6"><a href="wordscores.html#cb163-6" tabindex="-1"></a>  <span class="at">predicted_lbg =</span> pred_lbg[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb163-7"><a href="wordscores.html#cb163-7" tabindex="-1"></a>)</span>
-<span id="cb163-8"><a href="wordscores.html#cb163-8" tabindex="-1"></a></span>
-<span id="cb163-9"><a href="wordscores.html#cb163-9" tabindex="-1"></a>ccc_result <span class="ot">&lt;-</span> <span class="fu">CCC</span>(comparison_data<span class="sc">$</span>original_scores, comparison_data<span class="sc">$</span>predicted_lbg, <span class="at">ci =</span> <span class="st">&quot;z-transform&quot;</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="wordscores.html#cb163-1" tabindex="-1"></a><span class="co"># Create a data frame with original reference scores, and LBG predicted scores</span></span>
+<span id="cb163-2"><a href="wordscores.html#cb163-2" tabindex="-1"></a><span class="co"># for the 2001 manifestos Select the first 5 rows corresponding to the 2001</span></span>
+<span id="cb163-3"><a href="wordscores.html#cb163-3" tabindex="-1"></a><span class="co"># manifestos based on the dfm order</span></span>
+<span id="cb163-4"><a href="wordscores.html#cb163-4" tabindex="-1"></a></span>
+<span id="cb163-5"><a href="wordscores.html#cb163-5" tabindex="-1"></a>comparison_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">original_scores =</span> scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">predicted_lbg =</span> pred_lbg[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb163-6"><a href="wordscores.html#cb163-6" tabindex="-1"></a></span>
+<span id="cb163-7"><a href="wordscores.html#cb163-7" tabindex="-1"></a>ccc_result <span class="ot">&lt;-</span> <span class="fu">CCC</span>(comparison_data<span class="sc">$</span>original_scores, comparison_data<span class="sc">$</span>predicted_lbg,</span>
+<span id="cb163-8"><a href="wordscores.html#cb163-8" tabindex="-1"></a>    <span class="at">ci =</span> <span class="st">&quot;z-transform&quot;</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>The CCC value indicates the level of agreement. A value closer to 1 indicates greater agreement. The confidence interval provides a range for the true CCC value. We can examine the level of agreement in more detail by plotting the original scores against the predicted scores for the reference texts. Including the 45-degree line (perfect concordance) and a linear regression line (reduced major axis) helps visualise the relationship and identify potential outliers.</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="wordscores.html#cb164-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb164-2"><a href="wordscores.html#cb164-2" tabindex="-1"></a></span>
@@ -446,17 +438,14 @@ div.csl-indent {
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="wordscores.html#cb165-1" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
 <span id="cb165-2"><a href="wordscores.html#cb165-2" tabindex="-1"></a></span>
 <span id="cb165-3"><a href="wordscores.html#cb165-3" tabindex="-1"></a><span class="co"># Plot the distribution of word scores</span></span>
-<span id="cb165-4"><a href="wordscores.html#cb165-4" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(</span>
-<span id="cb165-5"><a href="wordscores.html#cb165-5" tabindex="-1"></a>  ws,</span>
-<span id="cb165-6"><a href="wordscores.html#cb165-6" tabindex="-1"></a>  <span class="at">margin =</span> <span class="st">&quot;features&quot;</span>,</span>
-<span id="cb165-7"><a href="wordscores.html#cb165-7" tabindex="-1"></a>  <span class="at">highlighted =</span> <span class="fu">c</span>(<span class="st">&quot;british&quot;</span>, <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>, <span class="st">&quot;taxes&quot;</span>, <span class="st">&quot;economy&quot;</span>, <span class="st">&quot;immigration&quot;</span>) <span class="co"># Highlight relevant words on the plot</span></span>
-<span id="cb165-8"><a href="wordscores.html#cb165-8" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb165-4"><a href="wordscores.html#cb165-4" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(ws, <span class="at">margin =</span> <span class="st">&quot;features&quot;</span>, <span class="at">highlighted =</span> <span class="fu">c</span>(<span class="st">&quot;british&quot;</span>, <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;europe&quot;</span>,</span>
+<span id="cb165-5"><a href="wordscores.html#cb165-5" tabindex="-1"></a>    <span class="st">&quot;taxes&quot;</span>, <span class="st">&quot;economy&quot;</span>, <span class="st">&quot;immigration&quot;</span>)  <span class="co"># Highlight relevant words on the plot</span></span>
+<span id="cb165-6"><a href="wordscores.html#cb165-6" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/wordscores-textplotscale-features-1.png" width="672" /></p>
 <p>The position of words on the scale indicates their estimated ideological leaning based on the reference texts. Words like ‘taxes’ or ‘economy’ might be expected to fall towards one end (e.g. left). In contrast, words related to national identity or immigration might be closer to the other (e.g. right), depending on the corpus and the reference scores.</p>
 <p>Finally, we can examine the confidence intervals around the estimated text scores, which is particularly important for the virgin texts, as it measures the uncertainty in their estimated positions. The <code>textplot_scale1d()</code> function can also plot document scores with confidence intervals when <code>margin = "documents"</code> is specified, but this requires the standard errors to be available, which is the case for the MV rescaling method (<code>pred_mv</code>):</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="wordscores.html#cb166-1" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(pred_mv,</span>
-<span id="cb166-2"><a href="wordscores.html#cb166-2" tabindex="-1"></a>                 <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span> <span class="co"># Specify that we want to plot document scores</span></span>
-<span id="cb166-3"><a href="wordscores.html#cb166-3" tabindex="-1"></a>                 )</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="wordscores.html#cb166-1" tabindex="-1"></a><span class="fu">textplot_scale1d</span>(pred_mv, <span class="at">margin =</span> <span class="st">&quot;documents&quot;</span>  <span class="co"># Specify that we want to plot document scores</span></span>
+<span id="cb166-2"><a href="wordscores.html#cb166-2" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/wordscores-textplotscale-documents-1.png" width="672" /></p>
 <p>The length of the error bars in this graph indicates the width of the confidence interval. Longer error bars indicate greater uncertainty in the estimated position of the document in question. This uncertainty may be due to various factors, such as the number of dictionary words in the document, variability in the scores of these words and the quantity and quality of the reference texts. We can manually create this document scaling plot using <code>ggplot2</code> and the results from <code>pred_mv</code>. This requires manipulating the data to extract the scores and confidence intervals and document information into a data frame, for which we can use the <code>dplyr</code> package:</p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="wordscores.html#cb167-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>

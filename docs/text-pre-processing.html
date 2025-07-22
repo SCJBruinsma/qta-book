@@ -362,15 +362,13 @@ div.csl-indent {
 <div id="lower-casing" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Lower-casing<a href="text-pre-processing.html#lower-casing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Converting all text to lower-case is a standard normalisation step. It ensures that the same word is not counted as different features simply because of variations in capitalisation (e.g., “Party”, “party”, “PARTY”). This step is crucial for consistent term counting, and we generally recommend it unless your analysis requires preserving case information (e.g., for Named Entity Recognition). <code>quanteda</code> provides the <code>tokens_tolower()</code> function. Note that <code>keep_acronyms=FALSE</code> ensures that acronyms (like NATO) are also lower-cased. Set to <code>TRUE</code> if you want to preserve the capitalisation of detected acronyms:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="text-pre-processing.html#cb46-1" tabindex="-1"></a>data_tokens_lower <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_tokens_cleaned,</span>
-<span id="cb46-2"><a href="text-pre-processing.html#cb46-2" tabindex="-1"></a>                                    <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span></span>
-<span id="cb46-3"><a href="text-pre-processing.html#cb46-3" tabindex="-1"></a>                                    )</span>
-<span id="cb46-4"><a href="text-pre-processing.html#cb46-4" tabindex="-1"></a><span class="fu">head</span>(data_tokens_lower[[<span class="dv">5</span>]], <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="text-pre-processing.html#cb46-1" tabindex="-1"></a>data_tokens_lower <span class="ot">&lt;-</span> <span class="fu">tokens_tolower</span>(data_tokens_cleaned, <span class="at">keep_acronyms =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb46-2"><a href="text-pre-processing.html#cb46-2" tabindex="-1"></a><span class="fu">head</span>(data_tokens_lower[[<span class="dv">5</span>]], <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;manifesto&quot;   &quot;may&quot;         &quot;contents&quot;    &quot;a&quot;           &quot;new&quot;        
 ##  [6] &quot;opportunity&quot; &quot;for&quot;         &quot;peace&quot;       &quot;unionists&quot;   &quot;economy&quot;    
 ## [11] &quot;social&quot;      &quot;justice&quot;     &quot;and&quot;         &quot;economic&quot;    &quot;equality&quot;   
 ## [16] &quot;young&quot;       &quot;people&#39;s&quot;    &quot;rights&quot;      &quot;education&quot;   &quot;and&quot;</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="text-pre-processing.html#cb48-1" tabindex="-1"></a><span class="fu">ntoken</span>(data_tokens_lower) <span class="co"># The number of tokens per document</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="text-pre-processing.html#cb48-1" tabindex="-1"></a><span class="fu">ntoken</span>(data_tokens_lower)  <span class="co"># The number of tokens per document</span></span></code></pre></div>
 <pre><code>##  UK_natl_1997_en_Con  UK_natl_1997_en_Lab   UK_natl_1997_en_LD 
 ##                20796                17456                14080 
 ##  UK_natl_1997_en_PCy   UK_natl_1997_en_SF UK_natl_1997_en_UKIP 
@@ -385,7 +383,7 @@ div.csl-indent {
 ##                 7289                20335                 2585 
 ## UK_natl_2005_en_UKIP  UK_regl_2003_en_PCy 
 ##                 8978                24971</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="text-pre-processing.html#cb50-1" tabindex="-1"></a><span class="fu">ntype</span>(data_tokens_lower) <span class="co"># The number of unique tokens per document</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="text-pre-processing.html#cb50-1" tabindex="-1"></a><span class="fu">ntype</span>(data_tokens_lower)  <span class="co"># The number of unique tokens per document</span></span></code></pre></div>
 <pre><code>##  UK_natl_1997_en_Con  UK_natl_1997_en_Lab   UK_natl_1997_en_LD 
 ##                 3043                 2930                 2404 
 ##  UK_natl_1997_en_PCy   UK_natl_1997_en_SF UK_natl_1997_en_UKIP 
@@ -406,16 +404,13 @@ div.csl-indent {
 <h3><span class="header-section-number">4.2.3</span> Stopword Removal<a href="text-pre-processing.html#stopword-removal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Stopwords are high-frequency words (e.g., “the”, “a”, “is”, “in”) that are generally considered less informative for distinguishing between documents or topics compared to more substantive terms (such as most verbs and nouns). Removing them can reduce the dimensionality of your DFM, allowing you to focus on more meaningful terms. However, stopwords should be eliminated with care, as in some contexts (e.g., authorship attribution, linguistic style analysis), they can be highly informative. Also, domain-specific “stopwords” might be essential concepts in your field and should not be removed (for example, you might not want to remove the word “we” if this word has become important during a political campaign).</p>
 <p><code>quanteda</code> includes built-in lists of stopwords for many languages, accessed via the <code>stopwords()</code> function. You can remove these or your custom lists using <code>tokens_select()</code>:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="text-pre-processing.html#cb52-1" tabindex="-1"></a>data_tokens_nostop <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_tokens_lower,</span>
-<span id="cb52-2"><a href="text-pre-processing.html#cb52-2" tabindex="-1"></a>                                    <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>),</span>
-<span id="cb52-3"><a href="text-pre-processing.html#cb52-3" tabindex="-1"></a>                                    <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span></span>
-<span id="cb52-4"><a href="text-pre-processing.html#cb52-4" tabindex="-1"></a>                                    )</span>
-<span id="cb52-5"><a href="text-pre-processing.html#cb52-5" tabindex="-1"></a><span class="fu">head</span>(data_tokens_nostop[[<span class="dv">5</span>]], <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="text-pre-processing.html#cb52-1" tabindex="-1"></a>data_tokens_nostop <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(data_tokens_lower, <span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb52-2"><a href="text-pre-processing.html#cb52-2" tabindex="-1"></a><span class="fu">head</span>(data_tokens_nostop[[<span class="dv">5</span>]], <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;manifesto&quot;   &quot;may&quot;         &quot;contents&quot;    &quot;new&quot;         &quot;opportunity&quot;
 ##  [6] &quot;peace&quot;       &quot;unionists&quot;   &quot;economy&quot;     &quot;social&quot;      &quot;justice&quot;    
 ## [11] &quot;economic&quot;    &quot;equality&quot;    &quot;young&quot;       &quot;people&#39;s&quot;    &quot;rights&quot;     
 ## [16] &quot;education&quot;   &quot;training&quot;    &quot;farming&quot;     &quot;rural&quot;       &quot;development&quot;</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="text-pre-processing.html#cb54-1" tabindex="-1"></a><span class="fu">ntoken</span>(data_tokens_nostop) <span class="co"># The number of tokens per document</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="text-pre-processing.html#cb54-1" tabindex="-1"></a><span class="fu">ntoken</span>(data_tokens_nostop)  <span class="co"># The number of tokens per document</span></span></code></pre></div>
 <pre><code>##  UK_natl_1997_en_Con  UK_natl_1997_en_Lab   UK_natl_1997_en_LD 
 ##                11358                 9671                 8227 
 ##  UK_natl_1997_en_PCy   UK_natl_1997_en_SF UK_natl_1997_en_UKIP 
@@ -430,7 +425,7 @@ div.csl-indent {
 ##                 4203                12624                 1508 
 ## UK_natl_2005_en_UKIP  UK_regl_2003_en_PCy 
 ##                 5107                13955</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="text-pre-processing.html#cb56-1" tabindex="-1"></a><span class="fu">ntype</span>(data_tokens_nostop) <span class="co"># The number of unique tokens per document</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="text-pre-processing.html#cb56-1" tabindex="-1"></a><span class="fu">ntype</span>(data_tokens_nostop)  <span class="co"># The number of unique tokens per document</span></span></code></pre></div>
 <pre><code>##  UK_natl_1997_en_Con  UK_natl_1997_en_Lab   UK_natl_1997_en_LD 
 ##                 2934                 2827                 2306 
 ##  UK_natl_1997_en_PCy   UK_natl_1997_en_SF UK_natl_1997_en_UKIP 
@@ -480,17 +475,8 @@ div.csl-indent {
 <span id="cb58-32"><a href="text-pre-processing.html#cb58-32" tabindex="-1"></a>  ))</span></code></pre></div>
 <p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/ggplot-stopwords-impact-1.png" width="672" /></p>
 <p>As expected, removing stopwords substantially reduces the total number of tokens across all documents. The number of words removed differs per document but can be substantial, for example, in the case of the 2001 Labour Party manifesto, which was reduced from <span class="math inline">\(28,606\)</span> to <span class="math inline">\(16,386\)</span> words — a reduction of around <span class="math inline">\(42\%\)</span>. Finally, remember that <code>stopwords("english")</code> is nothing more than a character vector of stop words. Therefore, if we wish to remove stop words ourselves, we can do so by simply providing them as such:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="text-pre-processing.html#cb59-1" tabindex="-1"></a>data_tokens_nostop   <span class="ot">&lt;-</span></span>
-<span id="cb59-2"><a href="text-pre-processing.html#cb59-2" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens_select</span>(</span>
-<span id="cb59-3"><a href="text-pre-processing.html#cb59-3" tabindex="-1"></a>    data_tokens_nostop,</span>
-<span id="cb59-4"><a href="text-pre-processing.html#cb59-4" tabindex="-1"></a>    <span class="fu">c</span>(</span>
-<span id="cb59-5"><a href="text-pre-processing.html#cb59-5" tabindex="-1"></a>      <span class="st">&quot;may&quot;</span>,</span>
-<span id="cb59-6"><a href="text-pre-processing.html#cb59-6" tabindex="-1"></a>      <span class="st">&quot;new&quot;</span>,</span>
-<span id="cb59-7"><a href="text-pre-processing.html#cb59-7" tabindex="-1"></a>      <span class="st">&quot;manifesto&quot;</span></span>
-<span id="cb59-8"><a href="text-pre-processing.html#cb59-8" tabindex="-1"></a>    ),</span>
-<span id="cb59-9"><a href="text-pre-processing.html#cb59-9" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>,</span>
-<span id="cb59-10"><a href="text-pre-processing.html#cb59-10" tabindex="-1"></a>    <span class="at">valuetype =</span> <span class="st">&quot;fixed&quot;</span></span>
-<span id="cb59-11"><a href="text-pre-processing.html#cb59-11" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="text-pre-processing.html#cb59-1" tabindex="-1"></a>data_tokens_nostop <span class="ot">&lt;-</span> quanteda<span class="sc">::</span><span class="fu">tokens_select</span>(data_tokens_nostop, <span class="fu">c</span>(<span class="st">&quot;may&quot;</span>, <span class="st">&quot;new&quot;</span>,</span>
+<span id="cb59-2"><a href="text-pre-processing.html#cb59-2" tabindex="-1"></a>    <span class="st">&quot;manifesto&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>, <span class="at">valuetype =</span> <span class="st">&quot;fixed&quot;</span>)</span></code></pre></div>
 </div>
 <div id="n-grams-and-collocations" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> N-grams and Collocations<a href="text-pre-processing.html#n-grams-and-collocations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -502,12 +488,9 @@ div.csl-indent {
 ##  [7] &quot;justice_economic&quot;     &quot;economic_equality&quot;    &quot;equality_young&quot;      
 ## [10] &quot;young_people&#39;s&quot;</code></pre>
 <p>While <code>tokens_ngrams()</code> can generate n-grams, the problem is that it creates <em>all</em> possible numbers of n-grams, many of which are not meaningful or useful (such as ‘opportunity_peace’). Therefore, it is a better idea first to identify <strong>collocations</strong> – n-grams that appear more frequently than we would expect by chance. These often represent meaningful phrases or concepts (for example, given that we are working with UK manifestos, we would expect combinations such as “Prime Minister” or “National Health Service”). We can identify these with the <code>textstat_collocations()</code> function, which calculates various association measures (like likelihood ratio, PMI, and chi-squared) to score potential collocations. Depending on your analysis, you might calculate collocations before stopword removal if you think that stopwords could be part of a collocation you would like to capture (for instance, if you are interested in capturing the term “we the people”). For this example, we will look for collocations after the stopwords are removed. Here, <code># min_count</code> specifies the minimum number of times a collocation must appear to be considered. The standard (<span class="math inline">\(2\)</span>) thus means that a combination appears more than a single time, and is thus not a random combination. Here we set ours at <span class="math inline">\(5\)</span>:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="text-pre-processing.html#cb62-1" tabindex="-1"></a>collocations <span class="ot">&lt;-</span> <span class="fu">textstat_collocations</span>(data_tokens_nostop,</span>
-<span id="cb62-2"><a href="text-pre-processing.html#cb62-2" tabindex="-1"></a>                                      <span class="at">min_count =</span> <span class="dv">5</span>,</span>
-<span id="cb62-3"><a href="text-pre-processing.html#cb62-3" tabindex="-1"></a>                                      <span class="at">size =</span> <span class="dv">2</span></span>
-<span id="cb62-4"><a href="text-pre-processing.html#cb62-4" tabindex="-1"></a>                                      )</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="text-pre-processing.html#cb62-1" tabindex="-1"></a>collocations <span class="ot">&lt;-</span> <span class="fu">textstat_collocations</span>(data_tokens_nostop, <span class="at">min_count =</span> <span class="dv">5</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>Now that we have found all the possible collocations, it is time to decide which ones we want to use. One aspect we can utilise for this is the Wald <span class="math inline">\(z\)</span>-statistic, which calculates the likelihood that the two words would occur together at random. Here, we decide to include only those collocations with a <span class="math inline">\(z&gt;3\)</span>, which means they are three standard errors away from the mean (and thus have a p-value of approximately <span class="math inline">\(0.0027\)</span>) of being likely:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="text-pre-processing.html#cb63-1" tabindex="-1"></a>collocations <span class="ot">&lt;-</span> collocations[collocations<span class="sc">$</span>z <span class="sc">&gt;</span> <span class="dv">3</span>,]</span>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="text-pre-processing.html#cb63-1" tabindex="-1"></a>collocations <span class="ot">&lt;-</span> collocations[collocations<span class="sc">$</span>z <span class="sc">&gt;</span> <span class="dv">3</span>, ]</span>
 <span id="cb63-2"><a href="text-pre-processing.html#cb63-2" tabindex="-1"></a><span class="fu">head</span>(collocations, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##                collocation count count_nested length   lambda        z
 ## 1        local authorities   145            0      2 6.227087 39.79911
@@ -531,11 +514,9 @@ div.csl-indent {
 ## 19         next parliament    49            0      2 5.395004 30.31724
 ## 20           waiting times    39            0      2 8.122568 30.24217</code></pre>
 <p>As we can see, we now capture some relevant combinations such as “european union”, “local authorities”, and “income tax”. We could remove all the terms we do not wish to from the data frame, but we will leave this for now. For now, we will “compound” them using <code>tokens_compound()</code>. This function replaces the sequence of individual tokens that form a collocation with a single, multi-word token (e.g., “national_health_service”). This ensures that the identified phrase is treated as a single feature from now on (as both the tokens object and the DFM will see <code>_</code> as the sign for a compound):</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="text-pre-processing.html#cb65-1" tabindex="-1"></a>data_tokens_compounded <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(data_tokens_nostop,</span>
-<span id="cb65-2"><a href="text-pre-processing.html#cb65-2" tabindex="-1"></a>                                          <span class="at">pattern =</span> collocations,</span>
-<span id="cb65-3"><a href="text-pre-processing.html#cb65-3" tabindex="-1"></a>                                          <span class="at">concatenator =</span> <span class="st">&quot;_&quot;</span></span>
-<span id="cb65-4"><a href="text-pre-processing.html#cb65-4" tabindex="-1"></a>                                          )</span>
-<span id="cb65-5"><a href="text-pre-processing.html#cb65-5" tabindex="-1"></a><span class="fu">head</span>(data_tokens_compounded[[<span class="dv">5</span>]], <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="text-pre-processing.html#cb65-1" tabindex="-1"></a>data_tokens_compounded <span class="ot">&lt;-</span> <span class="fu">tokens_compound</span>(data_tokens_nostop, <span class="at">pattern =</span> collocations,</span>
+<span id="cb65-2"><a href="text-pre-processing.html#cb65-2" tabindex="-1"></a>    <span class="at">concatenator =</span> <span class="st">&quot;_&quot;</span>)</span>
+<span id="cb65-3"><a href="text-pre-processing.html#cb65-3" tabindex="-1"></a><span class="fu">head</span>(data_tokens_compounded[[<span class="dv">5</span>]], <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;contents&quot;       &quot;opportunity&quot;    &quot;peace&quot;          &quot;unionists&quot;     
 ##  [5] &quot;economy&quot;        &quot;social_justice&quot; &quot;economic&quot;       &quot;equality&quot;      
 ##  [9] &quot;young_people&#39;s&quot; &quot;rights&quot;</code></pre>
@@ -596,12 +577,13 @@ div.csl-indent {
 <h3><span class="header-section-number">4.2.6</span> Removing Sparse Features (DFM Trimming)<a href="text-pre-processing.html#removing-sparse-features-dfm-trimming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>After tokenisation and linguistic pre-processing, we can generate our DFM. However, at this point, our DFM might still contain many features (terms) that appear infrequently across the corpus or in only a few documents. These <em>sparse features</em> can increase the dimensionality of our data without adding much useful information and can sometimes be noise (e.g., typos). Removing them can decrease processing time and also the performance of some models. We can use the <code>dfm_trim()</code> function for DFM trimming. We can set thresholds based on minimum term frequency (<code>min_termfreq</code>), maximum term frequency (<code>max_termfreq</code>), minimum document frequency (<code>min_docfreq</code>), or maximum document frequency (<code>max_docfreq</code>), either as absolute counts or percentages:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="text-pre-processing.html#cb70-1" tabindex="-1"></a>data_dfm_untrimmed <span class="ot">&lt;-</span> <span class="fu">dfm</span>(data_tokens_stemmed)</span>
-<span id="cb70-2"><a href="text-pre-processing.html#cb70-2" tabindex="-1"></a>data_dfm_trimmed <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(data_dfm_untrimmed, <span class="at">min_docfreq =</span> <span class="dv">2</span>) <span class="co"># Trim the dfm to remove features that appear in fewer than two documents</span></span>
+<span id="cb70-2"><a href="text-pre-processing.html#cb70-2" tabindex="-1"></a>data_dfm_trimmed <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(data_dfm_untrimmed, <span class="at">min_docfreq =</span> <span class="dv">2</span>)  <span class="co"># Trim the dfm to remove features that appear in fewer than two documents</span></span>
 <span id="cb70-3"><a href="text-pre-processing.html#cb70-3" tabindex="-1"></a></span>
-<span id="cb70-4"><a href="text-pre-processing.html#cb70-4" tabindex="-1"></a><span class="co"># You could also trim by minimum term frequency (total occurrences across the corpus):</span></span>
-<span id="cb70-5"><a href="text-pre-processing.html#cb70-5" tabindex="-1"></a><span class="co"># data_dfm_trimmed_freq &lt;- dfm_trim(data_dfm_untrimmed, min_termfreq = 10)</span></span>
-<span id="cb70-6"><a href="text-pre-processing.html#cb70-6" tabindex="-1"></a></span>
-<span id="cb70-7"><a href="text-pre-processing.html#cb70-7" tabindex="-1"></a>data_dfm_untrimmed</span></code></pre></div>
+<span id="cb70-4"><a href="text-pre-processing.html#cb70-4" tabindex="-1"></a><span class="co"># You could also trim by minimum term frequency (total occurrences across the</span></span>
+<span id="cb70-5"><a href="text-pre-processing.html#cb70-5" tabindex="-1"></a><span class="co"># corpus): data_dfm_trimmed_freq &lt;- dfm_trim(data_dfm_untrimmed, min_termfreq =</span></span>
+<span id="cb70-6"><a href="text-pre-processing.html#cb70-6" tabindex="-1"></a><span class="co"># 10)</span></span>
+<span id="cb70-7"><a href="text-pre-processing.html#cb70-7" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="text-pre-processing.html#cb70-8" tabindex="-1"></a>data_dfm_untrimmed</span></code></pre></div>
 <pre><code>## Document-feature matrix of: 20 documents, 11,789 features (81.37% sparse) and 6 docvars.
 ##                       features
 ## docs                   conserv foreword administr elect sinc among success
@@ -649,7 +631,7 @@ div.csl-indent {
 <p>Now we can use <code>stringr</code> functions like <code>str_replace_all()</code> to clean up the text. <code>str_replace_all()</code> takes a character vector, a pattern to find and a replacement string. We will use regular expressions for the pattern.</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="text-pre-processing.html#cb75-1" tabindex="-1"></a><span class="co"># Remove URLs (http, https, ftp, ftps)</span></span>
 <span id="cb75-2"><a href="text-pre-processing.html#cb75-2" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;http[s]?://[^ ]+&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb75-3"><a href="text-pre-processing.html#cb75-3" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;ftp[s]?://[^ ]+&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="co"># Also include ftp/s</span></span>
+<span id="cb75-3"><a href="text-pre-processing.html#cb75-3" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;ftp[s]?://[^ ]+&quot;</span>, <span class="st">&quot;&quot;</span>)  <span class="co"># Also include ftp/s</span></span>
 <span id="cb75-4"><a href="text-pre-processing.html#cb75-4" tabindex="-1"></a></span>
 <span id="cb75-5"><a href="text-pre-processing.html#cb75-5" tabindex="-1"></a><span class="co"># Remove mentions (@username)</span></span>
 <span id="cb75-6"><a href="text-pre-processing.html#cb75-6" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;@</span><span class="sc">\\</span><span class="st">w+&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
@@ -663,12 +645,12 @@ div.csl-indent {
 <span id="cb75-14"><a href="text-pre-processing.html#cb75-14" tabindex="-1"></a><span class="co"># Remove numbers (optional, depending on analysis)</span></span>
 <span id="cb75-15"><a href="text-pre-processing.html#cb75-15" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;[[:digit:]]&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
 <span id="cb75-16"><a href="text-pre-processing.html#cb75-16" tabindex="-1"></a></span>
-<span id="cb75-17"><a href="text-pre-processing.html#cb75-17" tabindex="-1"></a><span class="co"># Remove retweet indicator &quot;RT&quot; (ensure it&#39;s at the start of a potential tweet)</span></span>
-<span id="cb75-18"><a href="text-pre-processing.html#cb75-18" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;^RT</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="co"># Use ^RT\\s to match RT at the start followed by space</span></span>
+<span id="cb75-17"><a href="text-pre-processing.html#cb75-17" tabindex="-1"></a><span class="co"># Remove retweet indicator &#39;RT&#39; (ensure it&#39;s at the start of a potential tweet)</span></span>
+<span id="cb75-18"><a href="text-pre-processing.html#cb75-18" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;^RT</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>)  <span class="co"># Use ^RT\\s to match RT at the start followed by space</span></span>
 <span id="cb75-19"><a href="text-pre-processing.html#cb75-19" tabindex="-1"></a></span>
 <span id="cb75-20"><a href="text-pre-processing.html#cb75-20" tabindex="-1"></a><span class="co"># Remove extra whitespace (leading, trailing, and multiple spaces)</span></span>
-<span id="cb75-21"><a href="text-pre-processing.html#cb75-21" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_trim</span>(data_corpus_df<span class="sc">$</span>text) <span class="co"># Remove leading/trailing whitespace using str_trim</span></span>
-<span id="cb75-22"><a href="text-pre-processing.html#cb75-22" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;[[:space:]]{2,}&quot;</span>, <span class="st">&quot; &quot;</span>) <span class="co"># Replace multiple spaces with a single space</span></span>
+<span id="cb75-21"><a href="text-pre-processing.html#cb75-21" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_trim</span>(data_corpus_df<span class="sc">$</span>text)  <span class="co"># Remove leading/trailing whitespace using str_trim</span></span>
+<span id="cb75-22"><a href="text-pre-processing.html#cb75-22" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_corpus_df<span class="sc">$</span>text, <span class="st">&quot;[[:space:]]{2,}&quot;</span>, <span class="st">&quot; &quot;</span>)  <span class="co"># Replace multiple spaces with a single space</span></span>
 <span id="cb75-23"><a href="text-pre-processing.html#cb75-23" tabindex="-1"></a></span>
 <span id="cb75-24"><a href="text-pre-processing.html#cb75-24" tabindex="-1"></a><span class="co"># Convert to lower-case (important for dictionary matching)</span></span>
 <span id="cb75-25"><a href="text-pre-processing.html#cb75-25" tabindex="-1"></a>data_corpus_df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">str_to_lower</span>(data_corpus_df<span class="sc">$</span>text)</span></code></pre></div>
@@ -688,28 +670,21 @@ div.csl-indent {
 <span id="cb76-2"><a href="text-pre-processing.html#cb76-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
 <p>First, we run <code>factorial_preprocessing()</code>, which takes a corpus object (or other text formats) and applies a set of default pre-processing pipelines by systematically varying common pre-processing options. After this, we run the main <code>preText</code> command:</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="text-pre-processing.html#cb77-1" tabindex="-1"></a><span class="co"># use_ngrams = TRUE: Also consider including n-grams (sequences of words)</span></span>
-<span id="cb77-2"><a href="text-pre-processing.html#cb77-2" tabindex="-1"></a><span class="co"># infrequent_term_threshold = 0.01: Remove terms that appear in less than 1% of documents</span></span>
-<span id="cb77-3"><a href="text-pre-processing.html#cb77-3" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="text-pre-processing.html#cb77-4" tabindex="-1"></a>preprocessed_documents <span class="ot">&lt;-</span> <span class="fu">factorial_preprocessing</span>(</span>
-<span id="cb77-5"><a href="text-pre-processing.html#cb77-5" tabindex="-1"></a>  data_corpus_ukmanifestos,</span>
-<span id="cb77-6"><a href="text-pre-processing.html#cb77-6" tabindex="-1"></a>  <span class="at">use_ngrams =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb77-7"><a href="text-pre-processing.html#cb77-7" tabindex="-1"></a>  <span class="at">infrequent_term_threshold =</span> <span class="fl">0.01</span>,</span>
-<span id="cb77-8"><a href="text-pre-processing.html#cb77-8" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb77-9"><a href="text-pre-processing.html#cb77-9" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">1</span>,</span>
-<span id="cb77-10"><a href="text-pre-processing.html#cb77-10" tabindex="-1"></a> <span class="at">return_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb77-11"><a href="text-pre-processing.html#cb77-11" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span> <span class="co"># Display progress and information</span></span>
-<span id="cb77-12"><a href="text-pre-processing.html#cb77-12" tabindex="-1"></a>)</span>
-<span id="cb77-13"><a href="text-pre-processing.html#cb77-13" tabindex="-1"></a></span>
-<span id="cb77-14"><a href="text-pre-processing.html#cb77-14" tabindex="-1"></a><span class="co"># Run the preText analysis, which compares the different pre-processed versions</span></span>
-<span id="cb77-15"><a href="text-pre-processing.html#cb77-15" tabindex="-1"></a><span class="co"># distance_method = &quot;cosine&quot;: Method to calculate distance between document representations</span></span>
-<span id="cb77-16"><a href="text-pre-processing.html#cb77-16" tabindex="-1"></a><span class="co"># num_comparisons = 50: Number of random document pairs to compare for robustness</span></span>
-<span id="cb77-17"><a href="text-pre-processing.html#cb77-17" tabindex="-1"></a></span>
-<span id="cb77-18"><a href="text-pre-processing.html#cb77-18" tabindex="-1"></a>preText_results <span class="ot">&lt;-</span> <span class="fu">preText</span>(</span>
-<span id="cb77-19"><a href="text-pre-processing.html#cb77-19" tabindex="-1"></a>    preprocessed_documents,</span>
-<span id="cb77-20"><a href="text-pre-processing.html#cb77-20" tabindex="-1"></a>    <span class="at">dataset_name =</span> <span class="st">&quot;UK Manifestos&quot;</span>,</span>
-<span id="cb77-21"><a href="text-pre-processing.html#cb77-21" tabindex="-1"></a>    <span class="at">distance_method =</span> <span class="st">&quot;cosine&quot;</span>,</span>
-<span id="cb77-22"><a href="text-pre-processing.html#cb77-22" tabindex="-1"></a>    <span class="at">num_comparisons =</span> <span class="dv">50</span>,</span>
-<span id="cb77-23"><a href="text-pre-processing.html#cb77-23" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb77-2"><a href="text-pre-processing.html#cb77-2" tabindex="-1"></a><span class="co"># infrequent_term_threshold = 0.01: Remove terms that appear in less than 1% of</span></span>
+<span id="cb77-3"><a href="text-pre-processing.html#cb77-3" tabindex="-1"></a><span class="co"># documents</span></span>
+<span id="cb77-4"><a href="text-pre-processing.html#cb77-4" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="text-pre-processing.html#cb77-5" tabindex="-1"></a>preprocessed_documents <span class="ot">&lt;-</span> <span class="fu">factorial_preprocessing</span>(data_corpus_ukmanifestos, <span class="at">use_ngrams =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb77-6"><a href="text-pre-processing.html#cb77-6" tabindex="-1"></a>    <span class="at">infrequent_term_threshold =</span> <span class="fl">0.01</span>, <span class="at">parallel =</span> <span class="cn">FALSE</span>, <span class="at">cores =</span> <span class="dv">1</span>, <span class="at">return_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb77-7"><a href="text-pre-processing.html#cb77-7" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">TRUE</span>  <span class="co"># Display progress and information</span></span>
+<span id="cb77-8"><a href="text-pre-processing.html#cb77-8" tabindex="-1"></a>)</span>
+<span id="cb77-9"><a href="text-pre-processing.html#cb77-9" tabindex="-1"></a></span>
+<span id="cb77-10"><a href="text-pre-processing.html#cb77-10" tabindex="-1"></a><span class="co"># Run the preText analysis, which compares the different pre-processed versions</span></span>
+<span id="cb77-11"><a href="text-pre-processing.html#cb77-11" tabindex="-1"></a><span class="co"># distance_method = &#39;cosine&#39;: Method to calculate distance between document</span></span>
+<span id="cb77-12"><a href="text-pre-processing.html#cb77-12" tabindex="-1"></a><span class="co"># representations num_comparisons = 50: Number of random document pairs to</span></span>
+<span id="cb77-13"><a href="text-pre-processing.html#cb77-13" tabindex="-1"></a><span class="co"># compare for robustness</span></span>
+<span id="cb77-14"><a href="text-pre-processing.html#cb77-14" tabindex="-1"></a></span>
+<span id="cb77-15"><a href="text-pre-processing.html#cb77-15" tabindex="-1"></a>preText_results <span class="ot">&lt;-</span> <span class="fu">preText</span>(preprocessed_documents, <span class="at">dataset_name =</span> <span class="st">&quot;UK Manifestos&quot;</span>,</span>
+<span id="cb77-16"><a href="text-pre-processing.html#cb77-16" tabindex="-1"></a>    <span class="at">distance_method =</span> <span class="st">&quot;cosine&quot;</span>, <span class="at">num_comparisons =</span> <span class="dv">50</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>After running <code>preText</code>, we can visualise the results. Two commands are already part of the package and provide a good overview of the results:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="text-pre-processing.html#cb78-1" tabindex="-1"></a><span class="fu">preText_score_plot</span>(preText_results)</span></code></pre></div>
 <p><img src="Introduction-to-Quantitative-Text-Analysis_files/figure-html/pretext-models-1.png" width="672" /></p>

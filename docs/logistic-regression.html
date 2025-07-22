@@ -286,117 +286,114 @@ div.csl-indent {
 <h2><span class="header-section-number">7.2</span> Logistic Regression<a href="logistic-regression.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Logistic Regression is one of the most well-known types of supervised models and is well-suited for classification because <code>textmodel_lr</code> is already built-in, it is practical to use in R. In addition, this implementation includes L2 regularisation by default to prevent overfitting in high-dimensional text feature spaces. For consistency, we will reuse the data loading, sampling, splitting, and preprocessing steps from the SVM example.</p>
 <p>First, ensure the necessary libraries are loaded:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="logistic-regression.html#cb220-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># Set seed for reproducibility</span></span>
-<span id="cb220-2"><a href="logistic-regression.html#cb220-2" tabindex="-1"></a></span>
-<span id="cb220-3"><a href="logistic-regression.html#cb220-3" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb220-4"><a href="logistic-regression.html#cb220-4" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels) <span class="co"># For textmodel_lr</span></span>
-<span id="cb220-5"><a href="logistic-regression.html#cb220-5" tabindex="-1"></a><span class="fu">library</span>(caret)    <span class="co"># For evaluation metrics</span></span>
-<span id="cb220-6"><a href="logistic-regression.html#cb220-6" tabindex="-1"></a><span class="fu">library</span>(pROC)     <span class="co"># For ROC analysis (optional, but good for binary classification)</span></span>
-<span id="cb220-7"><a href="logistic-regression.html#cb220-7" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># For plotting (optional)</span></span>
-<span id="cb220-8"><a href="logistic-regression.html#cb220-8" tabindex="-1"></a></span>
-<span id="cb220-9"><a href="logistic-regression.html#cb220-9" tabindex="-1"></a><span class="co"># Load the movie review corpus and sample a subset (matching the SVM example)</span></span>
-<span id="cb220-10"><a href="logistic-regression.html#cb220-10" tabindex="-1"></a>corpus_reviews_lr <span class="ot">&lt;-</span> <span class="fu">corpus_sample</span>(data_corpus_LMRD, <span class="dv">2000</span>) <span class="co"># Sample 2000 reviews</span></span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logistic-regression.html#cb225-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># Set seed for reproducibility</span></span>
+<span id="cb225-2"><a href="logistic-regression.html#cb225-2" tabindex="-1"></a></span>
+<span id="cb225-3"><a href="logistic-regression.html#cb225-3" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb225-4"><a href="logistic-regression.html#cb225-4" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)  <span class="co"># For textmodel_lr</span></span>
+<span id="cb225-5"><a href="logistic-regression.html#cb225-5" tabindex="-1"></a><span class="fu">library</span>(caret)  <span class="co"># For evaluation metrics</span></span>
+<span id="cb225-6"><a href="logistic-regression.html#cb225-6" tabindex="-1"></a><span class="fu">library</span>(pROC)  <span class="co"># For ROC analysis (optional, but good for binary classification)</span></span>
+<span id="cb225-7"><a href="logistic-regression.html#cb225-7" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># For plotting (optional)</span></span>
+<span id="cb225-8"><a href="logistic-regression.html#cb225-8" tabindex="-1"></a></span>
+<span id="cb225-9"><a href="logistic-regression.html#cb225-9" tabindex="-1"></a><span class="co"># Load the movie review corpus and sample a subset (matching the SVM example)</span></span>
+<span id="cb225-10"><a href="logistic-regression.html#cb225-10" tabindex="-1"></a>corpus_reviews_lr <span class="ot">&lt;-</span> <span class="fu">corpus_sample</span>(data_corpus_LMRD, <span class="dv">2000</span>)  <span class="co"># Sample 2000 reviews</span></span></code></pre></div>
 <p>We will use the same data splitting logic as in the SVM example, ensuring a stratified split based on the <code>polarity</code> variable to maintain the proportion of positive and negative reviews in both the training and test sets.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="logistic-regression.html#cb221-1" tabindex="-1"></a><span class="co"># Extract the polarity label as the target variable and convert it to a factor</span></span>
-<span id="cb221-2"><a href="logistic-regression.html#cb221-2" tabindex="-1"></a><span class="co"># Assuming the polarity variable is binary (&quot;neg&quot;, &quot;pos&quot;) in your corpus object</span></span>
-<span id="cb221-3"><a href="logistic-regression.html#cb221-3" tabindex="-1"></a>polarity_labels_lr <span class="ot">&lt;-</span> <span class="fu">factor</span>(corpus_reviews_lr<span class="sc">$</span>polarity)</span>
-<span id="cb221-4"><a href="logistic-regression.html#cb221-4" tabindex="-1"></a></span>
-<span id="cb221-5"><a href="logistic-regression.html#cb221-5" tabindex="-1"></a><span class="co"># Identify documents with valid polarity labels (not NA)</span></span>
-<span id="cb221-6"><a href="logistic-regression.html#cb221-6" tabindex="-1"></a>valid_docs_index_lr <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(polarity_labels_lr))</span>
-<span id="cb221-7"><a href="logistic-regression.html#cb221-7" tabindex="-1"></a></span>
-<span id="cb221-8"><a href="logistic-regression.html#cb221-8" tabindex="-1"></a><span class="co"># Subset the corpus and polarity labels to only include documents with valid polarity</span></span>
-<span id="cb221-9"><a href="logistic-regression.html#cb221-9" tabindex="-1"></a>corpus_reviews_valid_lr <span class="ot">&lt;-</span> corpus_reviews_lr[valid_docs_index_lr]</span>
-<span id="cb221-10"><a href="logistic-regression.html#cb221-10" tabindex="-1"></a>polarity_valid_lr <span class="ot">&lt;-</span> polarity_labels_lr[valid_docs_index_lr]</span>
-<span id="cb221-11"><a href="logistic-regression.html#cb221-11" tabindex="-1"></a></span>
-<span id="cb221-12"><a href="logistic-regression.html#cb221-12" tabindex="-1"></a><span class="co"># Ensure polarity_valid_lr is a factor with levels &quot;neg&quot;, &quot;pos&quot; in that specific order</span></span>
-<span id="cb221-13"><a href="logistic-regression.html#cb221-13" tabindex="-1"></a>polarity_valid_lr <span class="ot">&lt;-</span> <span class="fu">factor</span>(polarity_valid_lr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;neg&quot;</span>, <span class="st">&quot;pos&quot;</span>))</span>
-<span id="cb221-14"><a href="logistic-regression.html#cb221-14" tabindex="-1"></a></span>
-<span id="cb221-15"><a href="logistic-regression.html#cb221-15" tabindex="-1"></a><span class="co"># Check if both levels (&quot;neg&quot;, &quot;pos&quot;) are present</span></span>
-<span id="cb221-16"><a href="logistic-regression.html#cb221-16" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">c</span>(<span class="st">&quot;neg&quot;</span>, <span class="st">&quot;pos&quot;</span>) <span class="sc">%in%</span> <span class="fu">levels</span>(polarity_valid_lr)) <span class="sc">||</span> <span class="fu">any</span>(<span class="fu">table</span>(polarity_valid_lr) <span class="sc">==</span> <span class="dv">0</span>)) {</span>
-<span id="cb221-17"><a href="logistic-regression.html#cb221-17" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;The sampled corpus subset does not contain both &#39;neg&#39; and &#39;pos&#39; classes after filtering NA polarity. Please increase the sample size or check data.&quot;</span>)</span>
-<span id="cb221-18"><a href="logistic-regression.html#cb221-18" tabindex="-1"></a>}</span>
-<span id="cb221-19"><a href="logistic-regression.html#cb221-19" tabindex="-1"></a></span>
-<span id="cb221-20"><a href="logistic-regression.html#cb221-20" tabindex="-1"></a><span class="co"># Manually create stratified split indices (reusing the logic from the SVM example)</span></span>
-<span id="cb221-21"><a href="logistic-regression.html#cb221-21" tabindex="-1"></a><span class="co"># Get indices for each class</span></span>
-<span id="cb221-22"><a href="logistic-regression.html#cb221-22" tabindex="-1"></a>neg_indices_lr <span class="ot">&lt;-</span> <span class="fu">which</span>(polarity_valid_lr <span class="sc">==</span> <span class="st">&quot;neg&quot;</span>)</span>
-<span id="cb221-23"><a href="logistic-regression.html#cb221-23" tabindex="-1"></a>pos_indices_lr <span class="ot">&lt;-</span> <span class="fu">which</span>(polarity_valid_lr <span class="sc">==</span> <span class="st">&quot;pos&quot;</span>)</span>
-<span id="cb221-24"><a href="logistic-regression.html#cb221-24" tabindex="-1"></a></span>
-<span id="cb221-25"><a href="logistic-regression.html#cb221-25" tabindex="-1"></a><span class="co"># Determine the number of instances for train/test per class (70/30 split)</span></span>
-<span id="cb221-26"><a href="logistic-regression.html#cb221-26" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb221-27"><a href="logistic-regression.html#cb221-27" tabindex="-1"></a>train_size_neg_lr <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">length</span>(neg_indices_lr))</span>
-<span id="cb221-28"><a href="logistic-regression.html#cb221-28" tabindex="-1"></a>train_size_pos_lr <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">length</span>(pos_indices_lr))</span>
-<span id="cb221-29"><a href="logistic-regression.html#cb221-29" tabindex="-1"></a></span>
-<span id="cb221-30"><a href="logistic-regression.html#cb221-30" tabindex="-1"></a><span class="co"># Sample indices for training set from each class</span></span>
-<span id="cb221-31"><a href="logistic-regression.html#cb221-31" tabindex="-1"></a>train_indices_neg_lr <span class="ot">&lt;-</span> <span class="fu">sample</span>(neg_indices_lr, <span class="at">size =</span> train_size_neg_lr, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb221-32"><a href="logistic-regression.html#cb221-32" tabindex="-1"></a>train_indices_pos_lr <span class="ot">&lt;-</span> <span class="fu">sample</span>(pos_indices_lr, <span class="at">size =</span> train_size_pos_lr, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb221-33"><a href="logistic-regression.html#cb221-33" tabindex="-1"></a></span>
-<span id="cb221-34"><a href="logistic-regression.html#cb221-34" tabindex="-1"></a><span class="co"># Combine training indices</span></span>
-<span id="cb221-35"><a href="logistic-regression.html#cb221-35" tabindex="-1"></a>train_index_lr <span class="ot">&lt;-</span> <span class="fu">c</span>(train_indices_neg_lr, train_indices_pos_lr)</span>
-<span id="cb221-36"><a href="logistic-regression.html#cb221-36" tabindex="-1"></a></span>
-<span id="cb221-37"><a href="logistic-regression.html#cb221-37" tabindex="-1"></a><span class="co"># The remaining indices are for the test set</span></span>
-<span id="cb221-38"><a href="logistic-regression.html#cb221-38" tabindex="-1"></a>all_valid_indices_lr <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(polarity_valid_lr)</span>
-<span id="cb221-39"><a href="logistic-regression.html#cb221-39" tabindex="-1"></a>test_index_lr <span class="ot">&lt;-</span> all_valid_indices_lr[<span class="sc">!</span>all_valid_indices_lr <span class="sc">%in%</span> train_index_lr]</span>
-<span id="cb221-40"><a href="logistic-regression.html#cb221-40" tabindex="-1"></a></span>
-<span id="cb221-41"><a href="logistic-regression.html#cb221-41" tabindex="-1"></a><span class="co"># Split the corpus subset and polarity labels into training and testing sets</span></span>
-<span id="cb221-42"><a href="logistic-regression.html#cb221-42" tabindex="-1"></a>corpus_reviews_train_lr <span class="ot">&lt;-</span> corpus_reviews_valid_lr[train_index_lr]</span>
-<span id="cb221-43"><a href="logistic-regression.html#cb221-43" tabindex="-1"></a>corpus_reviews_test_lr <span class="ot">&lt;-</span> corpus_reviews_valid_lr[test_index_lr]</span>
-<span id="cb221-44"><a href="logistic-regression.html#cb221-44" tabindex="-1"></a></span>
-<span id="cb221-45"><a href="logistic-regression.html#cb221-45" tabindex="-1"></a>polarity_train_lr <span class="ot">&lt;-</span> polarity_valid_lr[train_index_lr]</span>
-<span id="cb221-46"><a href="logistic-regression.html#cb221-46" tabindex="-1"></a>polarity_test_lr <span class="ot">&lt;-</span> polarity_valid_lr[test_index_lr]</span>
-<span id="cb221-47"><a href="logistic-regression.html#cb221-47" tabindex="-1"></a></span>
-<span id="cb221-48"><a href="logistic-regression.html#cb221-48" tabindex="-1"></a><span class="co"># Check the distribution of the split</span></span>
-<span id="cb221-49"><a href="logistic-regression.html#cb221-49" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Training set class distribution (LR example):&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="logistic-regression.html#cb226-1" tabindex="-1"></a><span class="co"># Extract the polarity label as the target variable and convert it to a factor</span></span>
+<span id="cb226-2"><a href="logistic-regression.html#cb226-2" tabindex="-1"></a><span class="co"># Assuming the polarity variable is binary (&#39;neg&#39;, &#39;pos&#39;) in your corpus object</span></span>
+<span id="cb226-3"><a href="logistic-regression.html#cb226-3" tabindex="-1"></a>polarity_labels_lr <span class="ot">&lt;-</span> <span class="fu">factor</span>(corpus_reviews_lr<span class="sc">$</span>polarity)</span>
+<span id="cb226-4"><a href="logistic-regression.html#cb226-4" tabindex="-1"></a></span>
+<span id="cb226-5"><a href="logistic-regression.html#cb226-5" tabindex="-1"></a><span class="co"># Identify documents with valid polarity labels (not NA)</span></span>
+<span id="cb226-6"><a href="logistic-regression.html#cb226-6" tabindex="-1"></a>valid_docs_index_lr <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(polarity_labels_lr))</span>
+<span id="cb226-7"><a href="logistic-regression.html#cb226-7" tabindex="-1"></a></span>
+<span id="cb226-8"><a href="logistic-regression.html#cb226-8" tabindex="-1"></a><span class="co"># Subset the corpus and polarity labels to only include documents with valid</span></span>
+<span id="cb226-9"><a href="logistic-regression.html#cb226-9" tabindex="-1"></a><span class="co"># polarity</span></span>
+<span id="cb226-10"><a href="logistic-regression.html#cb226-10" tabindex="-1"></a>corpus_reviews_valid_lr <span class="ot">&lt;-</span> corpus_reviews_lr[valid_docs_index_lr]</span>
+<span id="cb226-11"><a href="logistic-regression.html#cb226-11" tabindex="-1"></a>polarity_valid_lr <span class="ot">&lt;-</span> polarity_labels_lr[valid_docs_index_lr]</span>
+<span id="cb226-12"><a href="logistic-regression.html#cb226-12" tabindex="-1"></a></span>
+<span id="cb226-13"><a href="logistic-regression.html#cb226-13" tabindex="-1"></a><span class="co"># Ensure polarity_valid_lr is a factor with levels &#39;neg&#39;, &#39;pos&#39; in that</span></span>
+<span id="cb226-14"><a href="logistic-regression.html#cb226-14" tabindex="-1"></a><span class="co"># specific order</span></span>
+<span id="cb226-15"><a href="logistic-regression.html#cb226-15" tabindex="-1"></a>polarity_valid_lr <span class="ot">&lt;-</span> <span class="fu">factor</span>(polarity_valid_lr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;neg&quot;</span>, <span class="st">&quot;pos&quot;</span>))</span>
+<span id="cb226-16"><a href="logistic-regression.html#cb226-16" tabindex="-1"></a></span>
+<span id="cb226-17"><a href="logistic-regression.html#cb226-17" tabindex="-1"></a><span class="co"># Check if both levels (&#39;neg&#39;, &#39;pos&#39;) are present</span></span>
+<span id="cb226-18"><a href="logistic-regression.html#cb226-18" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">c</span>(<span class="st">&quot;neg&quot;</span>, <span class="st">&quot;pos&quot;</span>) <span class="sc">%in%</span> <span class="fu">levels</span>(polarity_valid_lr)) <span class="sc">||</span> <span class="fu">any</span>(<span class="fu">table</span>(polarity_valid_lr) <span class="sc">==</span></span>
+<span id="cb226-19"><a href="logistic-regression.html#cb226-19" tabindex="-1"></a>    <span class="dv">0</span>)) {</span>
+<span id="cb226-20"><a href="logistic-regression.html#cb226-20" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;The sampled corpus subset does not contain both &#39;neg&#39; and &#39;pos&#39; classes after filtering NA polarity. Please increase the sample size or check data.&quot;</span>)</span>
+<span id="cb226-21"><a href="logistic-regression.html#cb226-21" tabindex="-1"></a>}</span>
+<span id="cb226-22"><a href="logistic-regression.html#cb226-22" tabindex="-1"></a></span>
+<span id="cb226-23"><a href="logistic-regression.html#cb226-23" tabindex="-1"></a><span class="co"># Manually create stratified split indices (reusing the logic from the SVM</span></span>
+<span id="cb226-24"><a href="logistic-regression.html#cb226-24" tabindex="-1"></a><span class="co"># example) Get indices for each class</span></span>
+<span id="cb226-25"><a href="logistic-regression.html#cb226-25" tabindex="-1"></a>neg_indices_lr <span class="ot">&lt;-</span> <span class="fu">which</span>(polarity_valid_lr <span class="sc">==</span> <span class="st">&quot;neg&quot;</span>)</span>
+<span id="cb226-26"><a href="logistic-regression.html#cb226-26" tabindex="-1"></a>pos_indices_lr <span class="ot">&lt;-</span> <span class="fu">which</span>(polarity_valid_lr <span class="sc">==</span> <span class="st">&quot;pos&quot;</span>)</span>
+<span id="cb226-27"><a href="logistic-regression.html#cb226-27" tabindex="-1"></a></span>
+<span id="cb226-28"><a href="logistic-regression.html#cb226-28" tabindex="-1"></a><span class="co"># Determine the number of instances for train/test per class (70/30 split)</span></span>
+<span id="cb226-29"><a href="logistic-regression.html#cb226-29" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb226-30"><a href="logistic-regression.html#cb226-30" tabindex="-1"></a>train_size_neg_lr <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">length</span>(neg_indices_lr))</span>
+<span id="cb226-31"><a href="logistic-regression.html#cb226-31" tabindex="-1"></a>train_size_pos_lr <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">length</span>(pos_indices_lr))</span>
+<span id="cb226-32"><a href="logistic-regression.html#cb226-32" tabindex="-1"></a></span>
+<span id="cb226-33"><a href="logistic-regression.html#cb226-33" tabindex="-1"></a><span class="co"># Sample indices for training set from each class</span></span>
+<span id="cb226-34"><a href="logistic-regression.html#cb226-34" tabindex="-1"></a>train_indices_neg_lr <span class="ot">&lt;-</span> <span class="fu">sample</span>(neg_indices_lr, <span class="at">size =</span> train_size_neg_lr, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb226-35"><a href="logistic-regression.html#cb226-35" tabindex="-1"></a>train_indices_pos_lr <span class="ot">&lt;-</span> <span class="fu">sample</span>(pos_indices_lr, <span class="at">size =</span> train_size_pos_lr, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb226-36"><a href="logistic-regression.html#cb226-36" tabindex="-1"></a></span>
+<span id="cb226-37"><a href="logistic-regression.html#cb226-37" tabindex="-1"></a><span class="co"># Combine training indices</span></span>
+<span id="cb226-38"><a href="logistic-regression.html#cb226-38" tabindex="-1"></a>train_index_lr <span class="ot">&lt;-</span> <span class="fu">c</span>(train_indices_neg_lr, train_indices_pos_lr)</span>
+<span id="cb226-39"><a href="logistic-regression.html#cb226-39" tabindex="-1"></a></span>
+<span id="cb226-40"><a href="logistic-regression.html#cb226-40" tabindex="-1"></a><span class="co"># The remaining indices are for the test set</span></span>
+<span id="cb226-41"><a href="logistic-regression.html#cb226-41" tabindex="-1"></a>all_valid_indices_lr <span class="ot">&lt;-</span> <span class="fu">seq_along</span>(polarity_valid_lr)</span>
+<span id="cb226-42"><a href="logistic-regression.html#cb226-42" tabindex="-1"></a>test_index_lr <span class="ot">&lt;-</span> all_valid_indices_lr[<span class="sc">!</span>all_valid_indices_lr <span class="sc">%in%</span> train_index_lr]</span>
+<span id="cb226-43"><a href="logistic-regression.html#cb226-43" tabindex="-1"></a></span>
+<span id="cb226-44"><a href="logistic-regression.html#cb226-44" tabindex="-1"></a><span class="co"># Split the corpus subset and polarity labels into training and testing sets</span></span>
+<span id="cb226-45"><a href="logistic-regression.html#cb226-45" tabindex="-1"></a>corpus_reviews_train_lr <span class="ot">&lt;-</span> corpus_reviews_valid_lr[train_index_lr]</span>
+<span id="cb226-46"><a href="logistic-regression.html#cb226-46" tabindex="-1"></a>corpus_reviews_test_lr <span class="ot">&lt;-</span> corpus_reviews_valid_lr[test_index_lr]</span>
+<span id="cb226-47"><a href="logistic-regression.html#cb226-47" tabindex="-1"></a></span>
+<span id="cb226-48"><a href="logistic-regression.html#cb226-48" tabindex="-1"></a>polarity_train_lr <span class="ot">&lt;-</span> polarity_valid_lr[train_index_lr]</span>
+<span id="cb226-49"><a href="logistic-regression.html#cb226-49" tabindex="-1"></a>polarity_test_lr <span class="ot">&lt;-</span> polarity_valid_lr[test_index_lr]</span>
+<span id="cb226-50"><a href="logistic-regression.html#cb226-50" tabindex="-1"></a></span>
+<span id="cb226-51"><a href="logistic-regression.html#cb226-51" tabindex="-1"></a><span class="co"># Check the distribution of the split</span></span>
+<span id="cb226-52"><a href="logistic-regression.html#cb226-52" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Training set class distribution (LR example):&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Training set class distribution (LR example):&quot;</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="logistic-regression.html#cb223-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(polarity_train_lr))</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="logistic-regression.html#cb228-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(polarity_train_lr))</span></code></pre></div>
 <pre><code>## polarity_train_lr
 ## neg pos 
 ## 716 683</code></pre>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="logistic-regression.html#cb225-1" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Testing set class distribution (LR example):&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logistic-regression.html#cb230-1" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Testing set class distribution (LR example):&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Testing set class distribution (LR example):&quot;</code></pre>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="logistic-regression.html#cb227-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(polarity_test_lr))</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="logistic-regression.html#cb232-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(polarity_test_lr))</span></code></pre></div>
 <pre><code>## polarity_test_lr
 ## neg pos 
 ## 307 294</code></pre>
 <p>Next, we preprocess the training and test corpus subsets to create DFMs, applying similar cleaning steps as before and matching the test DFM features to the training DFM.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="logistic-regression.html#cb229-1" tabindex="-1"></a><span class="co"># Tokenise and preprocess the training corpus</span></span>
-<span id="cb229-2"><a href="logistic-regression.html#cb229-2" tabindex="-1"></a>tokens_train_lr <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb229-3"><a href="logistic-regression.html#cb229-3" tabindex="-1"></a>  corpus_reviews_train_lr,</span>
-<span id="cb229-4"><a href="logistic-regression.html#cb229-4" tabindex="-1"></a>  <span class="at">what =</span> <span class="st">&quot;word&quot;</span>, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>, <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb229-5"><a href="logistic-regression.html#cb229-5" tabindex="-1"></a>  <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>, <span class="at">remove_url =</span> <span class="cn">TRUE</span>, <span class="at">remove_separators =</span> <span class="cn">TRUE</span></span>
-<span id="cb229-6"><a href="logistic-regression.html#cb229-6" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb229-7"><a href="logistic-regression.html#cb229-7" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb229-8"><a href="logistic-regression.html#cb229-8" tabindex="-1"></a>  <span class="fu">tokens_select</span>(<span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
-<span id="cb229-9"><a href="logistic-regression.html#cb229-9" tabindex="-1"></a></span>
-<span id="cb229-10"><a href="logistic-regression.html#cb229-10" tabindex="-1"></a><span class="co"># Tokenise and preprocess the test corpus</span></span>
-<span id="cb229-11"><a href="logistic-regression.html#cb229-11" tabindex="-1"></a>tokens_test_lr <span class="ot">&lt;-</span> <span class="fu">tokens</span>(</span>
-<span id="cb229-12"><a href="logistic-regression.html#cb229-12" tabindex="-1"></a>  corpus_reviews_test_lr,</span>
-<span id="cb229-13"><a href="logistic-regression.html#cb229-13" tabindex="-1"></a>  <span class="at">what =</span> <span class="st">&quot;word&quot;</span>, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>, <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb229-14"><a href="logistic-regression.html#cb229-14" tabindex="-1"></a>  <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>, <span class="at">remove_url =</span> <span class="cn">TRUE</span>, <span class="at">remove_separators =</span> <span class="cn">TRUE</span></span>
-<span id="cb229-15"><a href="logistic-regression.html#cb229-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb229-16"><a href="logistic-regression.html#cb229-16" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb229-17"><a href="logistic-regression.html#cb229-17" tabindex="-1"></a>  <span class="fu">tokens_select</span>(<span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
-<span id="cb229-18"><a href="logistic-regression.html#cb229-18" tabindex="-1"></a></span>
-<span id="cb229-19"><a href="logistic-regression.html#cb229-19" tabindex="-1"></a><span class="co"># Create dfms</span></span>
-<span id="cb229-20"><a href="logistic-regression.html#cb229-20" tabindex="-1"></a>dfm_train_lr <span class="ot">&lt;-</span> <span class="fu">dfm</span>(tokens_train_lr)</span>
-<span id="cb229-21"><a href="logistic-regression.html#cb229-21" tabindex="-1"></a>dfm_test_lr <span class="ot">&lt;-</span> <span class="fu">dfm</span>(tokens_test_lr)</span>
-<span id="cb229-22"><a href="logistic-regression.html#cb229-22" tabindex="-1"></a></span>
-<span id="cb229-23"><a href="logistic-regression.html#cb229-23" tabindex="-1"></a><span class="co"># Ensure the test dfm has the same features as the training dfm</span></span>
-<span id="cb229-24"><a href="logistic-regression.html#cb229-24" tabindex="-1"></a>dfm_test_matched_lr <span class="ot">&lt;-</span> <span class="fu">dfm_match</span>(dfm_test_lr, <span class="at">features =</span> <span class="fu">featnames</span>(dfm_train_lr))</span>
-<span id="cb229-25"><a href="logistic-regression.html#cb229-25" tabindex="-1"></a></span>
-<span id="cb229-26"><a href="logistic-regression.html#cb229-26" tabindex="-1"></a><span class="co"># Display DFM dimensions</span></span>
-<span id="cb229-27"><a href="logistic-regression.html#cb229-27" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions of Training DFM (LR example):&quot;</span>, <span class="fu">dim</span>(dfm_train_lr), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="logistic-regression.html#cb234-1" tabindex="-1"></a><span class="co"># Tokenise and preprocess the training corpus</span></span>
+<span id="cb234-2"><a href="logistic-regression.html#cb234-2" tabindex="-1"></a>tokens_train_lr <span class="ot">&lt;-</span> <span class="fu">tokens</span>(corpus_reviews_train_lr, <span class="at">what =</span> <span class="st">&quot;word&quot;</span>, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb234-3"><a href="logistic-regression.html#cb234-3" tabindex="-1"></a>    <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>, <span class="at">remove_url =</span> <span class="cn">TRUE</span>, <span class="at">remove_separators =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb234-4"><a href="logistic-regression.html#cb234-4" tabindex="-1"></a>    <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb234-5"><a href="logistic-regression.html#cb234-5" tabindex="-1"></a>    <span class="fu">tokens_select</span>(<span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb234-6"><a href="logistic-regression.html#cb234-6" tabindex="-1"></a></span>
+<span id="cb234-7"><a href="logistic-regression.html#cb234-7" tabindex="-1"></a><span class="co"># Tokenise and preprocess the test corpus</span></span>
+<span id="cb234-8"><a href="logistic-regression.html#cb234-8" tabindex="-1"></a>tokens_test_lr <span class="ot">&lt;-</span> <span class="fu">tokens</span>(corpus_reviews_test_lr, <span class="at">what =</span> <span class="st">&quot;word&quot;</span>, <span class="at">remove_punct =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb234-9"><a href="logistic-regression.html#cb234-9" tabindex="-1"></a>    <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>, <span class="at">remove_numbers =</span> <span class="cn">TRUE</span>, <span class="at">remove_url =</span> <span class="cn">TRUE</span>, <span class="at">remove_separators =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb234-10"><a href="logistic-regression.html#cb234-10" tabindex="-1"></a>    <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb234-11"><a href="logistic-regression.html#cb234-11" tabindex="-1"></a>    <span class="fu">tokens_select</span>(<span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>)</span>
+<span id="cb234-12"><a href="logistic-regression.html#cb234-12" tabindex="-1"></a></span>
+<span id="cb234-13"><a href="logistic-regression.html#cb234-13" tabindex="-1"></a><span class="co"># Create dfms</span></span>
+<span id="cb234-14"><a href="logistic-regression.html#cb234-14" tabindex="-1"></a>dfm_train_lr <span class="ot">&lt;-</span> <span class="fu">dfm</span>(tokens_train_lr)</span>
+<span id="cb234-15"><a href="logistic-regression.html#cb234-15" tabindex="-1"></a>dfm_test_lr <span class="ot">&lt;-</span> <span class="fu">dfm</span>(tokens_test_lr)</span>
+<span id="cb234-16"><a href="logistic-regression.html#cb234-16" tabindex="-1"></a></span>
+<span id="cb234-17"><a href="logistic-regression.html#cb234-17" tabindex="-1"></a><span class="co"># Ensure the test dfm has the same features as the training dfm</span></span>
+<span id="cb234-18"><a href="logistic-regression.html#cb234-18" tabindex="-1"></a>dfm_test_matched_lr <span class="ot">&lt;-</span> <span class="fu">dfm_match</span>(dfm_test_lr, <span class="at">features =</span> <span class="fu">featnames</span>(dfm_train_lr))</span>
+<span id="cb234-19"><a href="logistic-regression.html#cb234-19" tabindex="-1"></a></span>
+<span id="cb234-20"><a href="logistic-regression.html#cb234-20" tabindex="-1"></a><span class="co"># Display DFM dimensions</span></span>
+<span id="cb234-21"><a href="logistic-regression.html#cb234-21" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions of Training DFM (LR example):&quot;</span>, <span class="fu">dim</span>(dfm_train_lr), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Dimensions of Training DFM (LR example): 1399 23543</code></pre>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="logistic-regression.html#cb231-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions of Matched Test DFM (LR example):&quot;</span>, <span class="fu">dim</span>(dfm_test_matched_lr), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="logistic-regression.html#cb236-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Dimensions of Matched Test DFM (LR example):&quot;</span>, <span class="fu">dim</span>(dfm_test_matched_lr), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Dimensions of Matched Test DFM (LR example): 601 23543</code></pre>
 <p>Now, we train the Regularized Logistic Regression model using <code>textmodel_lr</code>.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="logistic-regression.html#cb233-1" tabindex="-1"></a><span class="co"># Train the textmodel_lr model for binary classification</span></span>
-<span id="cb233-2"><a href="logistic-regression.html#cb233-2" tabindex="-1"></a><span class="co"># The training labels are the polarity labels from the training corpus</span></span>
-<span id="cb233-3"><a href="logistic-regression.html#cb233-3" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)</span>
-<span id="cb233-4"><a href="logistic-regression.html#cb233-4" tabindex="-1"></a></span>
-<span id="cb233-5"><a href="logistic-regression.html#cb233-5" tabindex="-1"></a>model_lr_lmrd <span class="ot">&lt;-</span> <span class="fu">textmodel_lr</span>(dfm_train_lr, polarity_train_lr)</span>
-<span id="cb233-6"><a href="logistic-regression.html#cb233-6" tabindex="-1"></a></span>
-<span id="cb233-7"><a href="logistic-regression.html#cb233-7" tabindex="-1"></a><span class="co"># Print the model summary</span></span>
-<span id="cb233-8"><a href="logistic-regression.html#cb233-8" tabindex="-1"></a><span class="fu">summary</span>(model_lr_lmrd)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="logistic-regression.html#cb238-1" tabindex="-1"></a><span class="co"># Train the textmodel_lr model for binary classification The training labels</span></span>
+<span id="cb238-2"><a href="logistic-regression.html#cb238-2" tabindex="-1"></a><span class="co"># are the polarity labels from the training corpus</span></span>
+<span id="cb238-3"><a href="logistic-regression.html#cb238-3" tabindex="-1"></a><span class="fu">library</span>(quanteda.textmodels)</span>
+<span id="cb238-4"><a href="logistic-regression.html#cb238-4" tabindex="-1"></a></span>
+<span id="cb238-5"><a href="logistic-regression.html#cb238-5" tabindex="-1"></a>model_lr_lmrd <span class="ot">&lt;-</span> <span class="fu">textmodel_lr</span>(dfm_train_lr, polarity_train_lr)</span>
+<span id="cb238-6"><a href="logistic-regression.html#cb238-6" tabindex="-1"></a></span>
+<span id="cb238-7"><a href="logistic-regression.html#cb238-7" tabindex="-1"></a><span class="co"># Print the model summary</span></span>
+<span id="cb238-8"><a href="logistic-regression.html#cb238-8" tabindex="-1"></a><span class="fu">summary</span>(model_lr_lmrd)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## textmodel_lr.dfm(x = dfm_train_lr, y = polarity_train_lr)
@@ -415,26 +412,27 @@ div.csl-indent {
 ##     reputation god-awful anticipated mexican-made mess dubbed english produced
 ## pos          0         0           0            0    0      0       0        0</code></pre>
 <p>We then use the trained model to predict the polarity labels for the documents in the test set.</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="logistic-regression.html#cb235-1" tabindex="-1"></a><span class="co"># Predict the classes for the matched test set</span></span>
-<span id="cb235-2"><a href="logistic-regression.html#cb235-2" tabindex="-1"></a>predictions_lr_lmrd <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_lr_lmrd, <span class="at">newdata =</span> dfm_test_matched_lr)</span>
-<span id="cb235-3"><a href="logistic-regression.html#cb235-3" tabindex="-1"></a></span>
-<span id="cb235-4"><a href="logistic-regression.html#cb235-4" tabindex="-1"></a><span class="co"># Display the first few predictions</span></span>
-<span id="cb235-5"><a href="logistic-regression.html#cb235-5" tabindex="-1"></a><span class="fu">head</span>(predictions_lr_lmrd)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="logistic-regression.html#cb240-1" tabindex="-1"></a><span class="co"># Predict the classes for the matched test set</span></span>
+<span id="cb240-2"><a href="logistic-regression.html#cb240-2" tabindex="-1"></a>predictions_lr_lmrd <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_lr_lmrd, <span class="at">newdata =</span> dfm_test_matched_lr)</span>
+<span id="cb240-3"><a href="logistic-regression.html#cb240-3" tabindex="-1"></a></span>
+<span id="cb240-4"><a href="logistic-regression.html#cb240-4" tabindex="-1"></a><span class="co"># Display the first few predictions</span></span>
+<span id="cb240-5"><a href="logistic-regression.html#cb240-5" tabindex="-1"></a><span class="fu">head</span>(predictions_lr_lmrd)</span></code></pre></div>
 <pre><code>##  test/neg/6932_2.txt train/neg/6580_4.txt  test/pos/1099_7.txt 
 ##                  neg                  pos                  pos 
 ## train/pos/9167_7.txt  test/neg/8064_1.txt  test/neg/4057_4.txt 
 ##                  neg                  neg                  pos 
 ## Levels: neg pos</code></pre>
 <p>Finally, we evaluate the model’s performance on the test set using a confusion matrix. Since this is a binary classification task, we can also compute metrics like ROC AUC, which is similar to the SVM evaluation.</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="logistic-regression.html#cb237-1" tabindex="-1"></a><span class="co"># Get the actual classes from the test corpus</span></span>
-<span id="cb237-2"><a href="logistic-regression.html#cb237-2" tabindex="-1"></a>actual_classes_lmrd <span class="ot">&lt;-</span> polarity_test_lr</span>
-<span id="cb237-3"><a href="logistic-regression.html#cb237-3" tabindex="-1"></a></span>
-<span id="cb237-4"><a href="logistic-regression.html#cb237-4" tabindex="-1"></a><span class="co"># Ensure actual and predicted classes are factors with the same levels for comparison</span></span>
-<span id="cb237-5"><a href="logistic-regression.html#cb237-5" tabindex="-1"></a><span class="co"># The levels should already be consistent (&quot;neg&quot;, &quot;pos&quot;) from the splitting step</span></span>
-<span id="cb237-6"><a href="logistic-regression.html#cb237-6" tabindex="-1"></a>confusion_matrix_lr_lmrd <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(predictions_lr_lmrd, actual_classes_lmrd)</span>
-<span id="cb237-7"><a href="logistic-regression.html#cb237-7" tabindex="-1"></a></span>
-<span id="cb237-8"><a href="logistic-regression.html#cb237-8" tabindex="-1"></a><span class="co"># Print the confusion matrix and performance statistics</span></span>
-<span id="cb237-9"><a href="logistic-regression.html#cb237-9" tabindex="-1"></a><span class="fu">print</span>(confusion_matrix_lr_lmrd)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="logistic-regression.html#cb242-1" tabindex="-1"></a><span class="co"># Get the actual classes from the test corpus</span></span>
+<span id="cb242-2"><a href="logistic-regression.html#cb242-2" tabindex="-1"></a>actual_classes_lmrd <span class="ot">&lt;-</span> polarity_test_lr</span>
+<span id="cb242-3"><a href="logistic-regression.html#cb242-3" tabindex="-1"></a></span>
+<span id="cb242-4"><a href="logistic-regression.html#cb242-4" tabindex="-1"></a><span class="co"># Ensure actual and predicted classes are factors with the same levels for</span></span>
+<span id="cb242-5"><a href="logistic-regression.html#cb242-5" tabindex="-1"></a><span class="co"># comparison The levels should already be consistent (&#39;neg&#39;, &#39;pos&#39;) from the</span></span>
+<span id="cb242-6"><a href="logistic-regression.html#cb242-6" tabindex="-1"></a><span class="co"># splitting step</span></span>
+<span id="cb242-7"><a href="logistic-regression.html#cb242-7" tabindex="-1"></a>confusion_matrix_lr_lmrd <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(predictions_lr_lmrd, actual_classes_lmrd)</span>
+<span id="cb242-8"><a href="logistic-regression.html#cb242-8" tabindex="-1"></a></span>
+<span id="cb242-9"><a href="logistic-regression.html#cb242-9" tabindex="-1"></a><span class="co"># Print the confusion matrix and performance statistics</span></span>
+<span id="cb242-10"><a href="logistic-regression.html#cb242-10" tabindex="-1"></a><span class="fu">print</span>(confusion_matrix_lr_lmrd)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference

@@ -286,23 +286,17 @@ div.csl-indent {
 <h2><span class="header-section-number">3.8</span> Import from Databases<a href="import-from-databases.html#import-from-databases" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If your text data is somewhere in a relational database (like PostgreSQL, MySQL, SQLite, etc.), you can connect directly from R using the <code>DBI</code> (Database Interface) package along with a specific backend package for your database type, such as <code>RPostgres</code>, <code>RMariaDB</code>, <code>RSQLite</code>, <code>odbc</code>. Here, let us try to import a PostgreSQL database file:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="import-from-databases.html#cb35-1" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
-<span id="cb35-2"><a href="import-from-databases.html#cb35-2" tabindex="-1"></a><span class="fu">library</span>(RSQLite) <span class="co"># Load the specific backend</span></span>
+<span id="cb35-2"><a href="import-from-databases.html#cb35-2" tabindex="-1"></a><span class="fu">library</span>(RSQLite)  <span class="co"># Load the specific backend</span></span>
 <span id="cb35-3"><a href="import-from-databases.html#cb35-3" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="import-from-databases.html#cb35-4" tabindex="-1"></a>connection <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
-<span id="cb35-5"><a href="import-from-databases.html#cb35-5" tabindex="-1"></a>  RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
-<span id="cb35-6"><a href="import-from-databases.html#cb35-6" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">&quot;your_db&quot;</span>,</span>
-<span id="cb35-7"><a href="import-from-databases.html#cb35-7" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">&quot;your_host&quot;</span>,</span>
-<span id="cb35-8"><a href="import-from-databases.html#cb35-8" tabindex="-1"></a>  <span class="at">port =</span> <span class="dv">5432</span>,</span>
-<span id="cb35-9"><a href="import-from-databases.html#cb35-9" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">&quot;your_user&quot;</span>,</span>
-<span id="cb35-10"><a href="import-from-databases.html#cb35-10" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">&quot;your_password&quot;</span></span>
-<span id="cb35-11"><a href="import-from-databases.html#cb35-11" tabindex="-1"></a>)</span>
-<span id="cb35-12"><a href="import-from-databases.html#cb35-12" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="import-from-databases.html#cb35-13" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbListTables</span>(connection)) <span class="co"># List available tables</span></span>
-<span id="cb35-14"><a href="import-from-databases.html#cb35-14" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="import-from-databases.html#cb35-15" tabindex="-1"></a>query <span class="ot">&lt;-</span> <span class="st">&quot;SELECT doc_id, text_content FROM documents WHERE year = 2023;&quot;</span> <span class="co"># Query the database using SQL</span></span>
-<span id="cb35-16"><a href="import-from-databases.html#cb35-16" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(connection, query)</span>
-<span id="cb35-17"><a href="import-from-databases.html#cb35-17" tabindex="-1"></a></span>
-<span id="cb35-18"><a href="import-from-databases.html#cb35-18" tabindex="-1"></a><span class="fu">dbDisconnect</span>(connection)</span></code></pre></div>
+<span id="cb35-4"><a href="import-from-databases.html#cb35-4" tabindex="-1"></a>connection <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(), <span class="at">dbname =</span> <span class="st">&quot;your_db&quot;</span>, <span class="at">host =</span> <span class="st">&quot;your_host&quot;</span>,</span>
+<span id="cb35-5"><a href="import-from-databases.html#cb35-5" tabindex="-1"></a>    <span class="at">port =</span> <span class="dv">5432</span>, <span class="at">user =</span> <span class="st">&quot;your_user&quot;</span>, <span class="at">password =</span> <span class="st">&quot;your_password&quot;</span>)</span>
+<span id="cb35-6"><a href="import-from-databases.html#cb35-6" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="import-from-databases.html#cb35-7" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbListTables</span>(connection))  <span class="co"># List available tables</span></span>
+<span id="cb35-8"><a href="import-from-databases.html#cb35-8" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="import-from-databases.html#cb35-9" tabindex="-1"></a>query <span class="ot">&lt;-</span> <span class="st">&quot;SELECT doc_id, text_content FROM documents WHERE year = 2023;&quot;</span>  <span class="co"># Query the database using SQL</span></span>
+<span id="cb35-10"><a href="import-from-databases.html#cb35-10" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(connection, query)</span>
+<span id="cb35-11"><a href="import-from-databases.html#cb35-11" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="import-from-databases.html#cb35-12" tabindex="-1"></a><span class="fu">dbDisconnect</span>(connection)</span></code></pre></div>
 
 </div>
 <!-- </div> -->
